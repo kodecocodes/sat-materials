@@ -56,18 +56,18 @@ struct RollingBallView: View {
   private let bezierCurve: Animation = .timingCurve(0.24, 1.4, 1, -1, duration: 1)
 
   var body: some View {
-    let rollOutOffset = -UIScreen.halfWidth + (pullToRefresh.progress * UIScreen.halfWidth) - ballSize / 2
-    let rollOutRotation = pullToRefresh.progress * .pi * 2
+    let rollInOffset = -UIScreen.halfWidth + (pullToRefresh.progress * UIScreen.halfWidth) - ballSize / 2
+    let rollInRotation = pullToRefresh.progress * .pi * 2
 
     Ball()
       // when the ball rolls in the rotation depends on the user's gesture progress
       // when rolling out the ball makes two full rotations in a second
-      .rotationEffect(Angle(radians: pullToRefresh.animationFinished ? rotation : rollOutRotation), anchor: .center)
+      .rotationEffect(Angle(radians: pullToRefresh.animationFinished ? rotation : rollInRotation), anchor: .center)
       // the ball slightly bounces during the user's swipe
       .animation(bezierCurve, value: pullToRefresh.progress)
       // Moving from the left corner to the center of the screen
       // when the refreshing starts, then moving out of the screen to the right
-      .offset(x: pullToRefresh.animationFinished ? offset : rollOutOffset, y: -ballSize / 2 - spacing)
+      .offset(x: pullToRefresh.animationFinished ? offset : rollInOffset, y: -ballSize / 2 - spacing)
       .onAppear { animate() }
   }
 
@@ -75,8 +75,8 @@ struct RollingBallView: View {
     guard pullToRefresh.animationFinished else {
       return
     }
-    withAnimation(.easeInOut(duration: timeForTheBallToRollOut)) {
-      offset = UIScreen.halfWidth + ballSize / 2
+    withAnimation(.easeIn(duration: timeForTheBallToRollOut)) {
+      offset = UIScreen.main.bounds.width
     }
     withAnimation(.linear(duration: timeForTheBallToRollOut)) {
       rotation = .pi * 4
@@ -87,24 +87,24 @@ struct RollingBallView: View {
 struct JumpingBallView: View {
   @Binding var pullToRefresh: PullToRefresh
   @State private var isAnimating = false
-  @State private var offset: CGFloat = 0
   @State private var rotation: CGFloat = 0
-  @State private var scale: CGFloat = 0
+  @State private var squash: CGFloat = 1
 
-  private let jumpDuration = 0.4
+  private let jumpDuration = 0.35
 
   var body: some View {
     ZStack {
       Ellipse()
         .fill(Color.gray.opacity(pullToRefresh.started ? 0.4 : 0))
-        .frame(width: ballSize, height: ballSize / 1.5)
-        .scaleEffect(isAnimating ? 1 : 0.3, anchor: .center)
+        .frame(width: ballSize, height: ballSize / 2)
+        .scaleEffect(isAnimating ? 1.2 : 0.3, anchor: .center)
         .offset(y: maxOffset - ballSize / 1.5)
         .opacity(isAnimating ? 1 : 0.3)
         .scaleEffect(pullToRefresh.progress)
 
       Ball()
         .rotationEffect(Angle(degrees: rotation), anchor: .center)
+        .scaleEffect(x: 1.0 / squash, y: squash, anchor: .bottom)
         .offset(y: isAnimating && !pullToRefresh.updateFinished ? maxOffset - ballSize : -ballSize / 2 - spacing)
         .animation(.easeInOut(duration: timeForTheBallToReturn), value: pullToRefresh.updateFinished)
         .onAppear { animate() }
@@ -117,6 +117,9 @@ struct JumpingBallView: View {
     }
     withAnimation(.easeInOut(duration: jumpDuration).repeatForever()) {
       isAnimating = true
+    }
+    withAnimation(.easeOut(duration: jumpDuration).repeatForever()) {
+      squash = 0.85
     }
   }
 }

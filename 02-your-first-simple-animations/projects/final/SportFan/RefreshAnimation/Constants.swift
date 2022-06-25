@@ -37,4 +37,4 @@ let maxOffset: CGFloat = 100
 // time for the ball to return to its initial position after updating is completed
 let timeForTheBallToReturn = 0.3
 // time for the ball to roll out of the screen after updating is completed
-let timeForTheBallToRollOut = 1.5
+let timeForTheBallToRollOut = 1.3
