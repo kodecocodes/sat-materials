@@ -32,26 +32,27 @@
 
 import SwiftUI
 
-struct AnimationView: View {
-  var animation: AnimationData
-  @Binding var location: Double
-
+struct ContentView: View {
   var body: some View {
-    GeometryReader { proxy in
-      Group {
-        Text("Animation")
-      }
+    TabView {
+      AnimationCompareView()
+        .tabItem {
+          Text("Animations")
+          Image(systemName: "move.3d")
+        }
+        .tag(0)
+      TransitionCompareView()
+        .tabItem {
+          Text("Transitions")
+          Image(systemName: "viewfinder")
+        }
+        .tag(1)
     }
   }
 }
 
-struct AnimationView_Previews: PreviewProvider {
+struct ContentView_Previews: PreviewProvider {
   static var previews: some View {
-    let animation = AnimationData(type: .linear, length: 1.0, delay: 0.0)
-
-    AnimationView(
-      animation: animation,
-      location: .constant(0.0)
-    )
+    ContentView()
   }
 }

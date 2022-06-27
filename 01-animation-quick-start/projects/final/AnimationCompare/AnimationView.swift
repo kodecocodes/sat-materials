@@ -34,12 +34,22 @@ import SwiftUI
 
 struct AnimationView: View {
   var animation: AnimationData
-  @Binding var location: Double
+  var location: Double
 
   var body: some View {
     GeometryReader { proxy in
       Group {
-        Text("Animation")
+        HStack {
+          Image(systemName: "gear.circle")
+            .rotationEffect(.degrees(360 * location))
+          Image(systemName: "star.fill")
+            .offset(x: proxy.size.width * location * 0.85)
+        }
+        .font(.title)
+        .animation(
+          .linear(duration: animation.length).delay(animation.delay),
+          value: location
+        )
       }
     }
   }
@@ -51,7 +61,7 @@ struct AnimationView_Previews: PreviewProvider {
 
     AnimationView(
       animation: animation,
-      location: .constant(0.0)
+      location: 0
     )
   }
 }

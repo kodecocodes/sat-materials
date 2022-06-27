@@ -32,26 +32,62 @@
 
 import SwiftUI
 
-struct AnimationView: View {
-  var animation: AnimationData
-  @Binding var location: Double
+struct EditAnimation: View {
+  @Binding var animation: AnimationData
+  @State var location = 0.0
+
+  var decimalFormatter: NumberFormatter {
+    let formatter = NumberFormatter()
+    formatter.numberStyle = .decimal
+    formatter.minimumFractionDigits = 1
+    return formatter
+  }
 
   var body: some View {
-    GeometryReader { proxy in
-      Group {
-        Text("Animation")
+    Form {
+      Section(header: Text("Animation Type")) {
+        Picker("Animation Type", selection: $animation.type) {
+          Text("Linear").tag(AnimationType.linear)
+          Text("Ease In").tag(AnimationType.easeIn)
+          Text("Ease Out").tag(AnimationType.easeOut)
+          Text("Ease In Out").tag(AnimationType.easeInOut)
+          Text("Spring").tag(AnimationType.spring)
+          Text("Interpolating Spring").tag(AnimationType.interpolatingSpring)
+        }
       }
+      Section(header: Text("Animation Parameters")) {
+      }
+      Section(header: Text("Description")) {
+        Text(animation.description)
+      }
+      Section(header: Text("Tap to Preview")) {
+        AnimationView(
+          animation: animation,
+          location: location
+        )
+          .contentShape(Rectangle())
+        .onTapGesture {
+          if location == 0.0 {
+            location = 1.0
+          } else {
+            location = 0.0
+          }
+        }
+      }
+      .textFieldStyle(.roundedBorder)
     }
+    .navigationTitle("Edit Animation")
+    .navigationBarTitleDisplayMode(.inline)
   }
 }
 
-struct AnimationView_Previews: PreviewProvider {
+struct CreateAnimation_Previews: PreviewProvider {
   static var previews: some View {
-    let animation = AnimationData(type: .linear, length: 1.0, delay: 0.0)
-
-    AnimationView(
-      animation: animation,
-      location: .constant(0.0)
-    )
+    let data = AnimationData(type: .linear, length: 1.0, delay: 0.0)
+    NavigationView {
+      EditAnimation(
+        animation: .constant(data)
+      )
+    }
   }
 }
