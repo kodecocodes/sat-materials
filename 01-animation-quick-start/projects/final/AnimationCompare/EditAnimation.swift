@@ -56,6 +56,59 @@ struct EditAnimation: View {
         }
       }
       Section(header: Text("Animation Parameters")) {
+        if animation.type == .linear || animation.type == .easeIn ||
+          animation.type == .easeOut || animation.type == .easeInOut {
+          Group {
+            Stepper(
+              "Delay \(animation.delay.formatted()) s",
+              value: $animation.delay,
+              in: 0...10,
+              step: 0.1
+            )
+            Stepper(
+              "Length \(animation.length.formatted()) s",
+              value: $animation.length,
+              in: 0...10,
+              step: 0.1
+            )
+          }
+        } else if animation.type == .spring {
+          Group {
+            Stepper(
+              "Response \(animation.response.formatted())",
+              value: $animation.response,
+              in: 0...10,
+              step: 0.05
+            )
+            Stepper(
+              "Damping Fraction \(animation.dampingFraction.formatted())",
+              value: $animation.dampingFraction,
+              in: 0...10,
+              step: 0.1
+            )
+          }
+        } else if animation.type == .interpolatingSpring {
+          Group {
+            Stepper(
+              "Mass \(animation.mass.formatted())",
+              value: $animation.mass,
+              in: 0...10,
+              step: 0.1
+            )
+            Stepper(
+              "Stiffness \(animation.stiffness.formatted())",
+              value: $animation.stiffness,
+              in: 0...10,
+              step: 0.1
+            )
+            Stepper(
+              "Damping \(animation.damping.formatted())",
+              value: $animation.damping,
+              in: 0...500,
+              step: 10
+            )
+          }
+        }
       }
       Section(header: Text("Description")) {
         Text(animation.description)

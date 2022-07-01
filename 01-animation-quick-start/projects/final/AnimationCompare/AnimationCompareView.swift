@@ -35,6 +35,7 @@ import SwiftUI
 struct AnimationCompareView: View {
   @State var animations: [AnimationData] = []
   @State var location = 0.0
+  @State var slowMotion = false
 
   func deleteAnimations(at offsets: IndexSet) {
     animations.remove(atOffsets: offsets)
@@ -57,6 +58,7 @@ struct AnimationCompareView: View {
         .font(.title)
         .disabled(animations.isEmpty)
         List {
+          Toggle("Slow Animations (¼ speed)", isOn: $slowMotion)
           ForEach($animations) { $animation in
             NavigationLink {
               EditAnimation(animation: $animation)
@@ -66,7 +68,8 @@ struct AnimationCompareView: View {
                   .fixedSize(horizontal: false, vertical: true)
                 AnimationView(
                   animation: animation,
-                  location: location
+                  location: location,
+                  slowMotion: slowMotion
                 )
                 .frame(height: 30)
               }

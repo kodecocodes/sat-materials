@@ -35,6 +35,20 @@ import SwiftUI
 struct AnimationView: View {
   var animation: AnimationData
   var location: Double
+  var slowMotion = false
+
+  var currentAnimation: Animation {
+    switch animation.type {
+    case .easeIn:
+      return Animation.easeIn(duration: animation.length)
+    case .easeOut:
+      return Animation.easeOut(duration: animation.length)
+    case .easeInOut:
+      return Animation.easeInOut(duration: animation.length)
+    default:
+      return Animation.linear(duration: animation.length)
+    }
+  }
 
   var body: some View {
     GeometryReader { proxy in
@@ -47,11 +61,17 @@ struct AnimationView: View {
         }
         .font(.title)
         .animation(
-          .linear(duration: animation.length).delay(animation.delay),
+          currentAnimation
+            .delay(animation.delay)
+            .speed(slowMotion ? 0.25 : 1.0),
           value: location
         )
       }
     }
+  }
+
+  var animationSpeed: Double {
+    slowMotion ? 0.25 : 1.0
   }
 }
 
@@ -61,7 +81,8 @@ struct AnimationView_Previews: PreviewProvider {
 
     AnimationView(
       animation: animation,
-      location: 0
+      location: 0,
+      slowMotion: false
     )
   }
 }
