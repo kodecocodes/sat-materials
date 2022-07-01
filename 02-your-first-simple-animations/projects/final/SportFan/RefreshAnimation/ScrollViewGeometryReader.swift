@@ -38,7 +38,6 @@ struct ScrollViewGeometryReader: View {
 
   @State private var offset: CGFloat = 0
   @State private var startOffset: CGFloat = 0
-  @State var task: Task<Void, any Error>?
 
   var body: some View {
     GeometryReader { proxy -> AnyView in
@@ -54,10 +53,6 @@ struct ScrollViewGeometryReader: View {
   }
 
   private func calculateOffset(from proxy: GeometryProxy) {
-    guard task == nil else {
-      return
-    }
-
     offset = proxy.frame(in: .global).minY
 
     if startOffset == 0 {
@@ -65,16 +60,13 @@ struct ScrollViewGeometryReader: View {
     }
 
     if !pullToRefresh.started {
-      pullToRefresh.progress = (offset - startOffset) / maxOffset // progress of the user's gesture, 0...1
+      pullToRefresh.progress = min(1, (offset - startOffset) / maxOffset) // progress of the user's gesture, 0...1
     }
 
     if offset - startOffset > maxOffset && !pullToRefresh.started {
       pullToRefresh.started = true // the refreshing view is fully expanded
-      pullToRefresh.progress = 1
-    }
-
-    if pullToRefresh.started && task == nil {
-      task = Task {
+      
+      Task {
         await update() // 1. The content got refreshed and new items are added
         pullToRefresh.updateFinished = true // 2. The ball stops jumping and moves along the y axis back to top
         after(timeForTheBallToReturn) {
@@ -99,7 +91,6 @@ struct ScrollViewGeometryReader: View {
   private func reset() {
     pullToRefresh.updateFinished = false
     pullToRefresh.animationFinished = false
-    task = nil
   }
 }
 
