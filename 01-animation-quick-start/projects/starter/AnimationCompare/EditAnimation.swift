@@ -107,6 +107,12 @@ struct EditAnimation: View {
               in: 0...500,
               step: 10
             )
+            Stepper(
+              "Initial Velocity \(animation.initialVelocity.formatted())",
+              value: $animation.initialVelocity,
+              in: 0...1,
+              step: 0.05
+            )
           }
         }
       }

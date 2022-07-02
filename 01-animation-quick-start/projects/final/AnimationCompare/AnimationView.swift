@@ -45,6 +45,18 @@ struct AnimationView: View {
       return Animation.easeOut(duration: animation.length)
     case .easeInOut:
       return Animation.easeInOut(duration: animation.length)
+    case .interpolatingSpring:
+      return Animation.interpolatingSpring(
+        mass: animation.mass,
+        stiffness: animation.stiffness,
+        damping: animation.damping,
+        initialVelocity: animation.initialVelocity
+      )
+    case .spring:
+      return Animation.spring(
+        response: animation.response,
+        dampingFraction: animation.dampingFraction
+      )
     default:
       return Animation.linear(duration: animation.length)
     }

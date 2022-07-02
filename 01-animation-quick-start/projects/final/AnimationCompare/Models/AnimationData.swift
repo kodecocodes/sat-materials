@@ -50,8 +50,9 @@ struct AnimationData: Identifiable {
   var delay: Double = 0.0
   // Spring
   var mass: Double = 1.0
-  var stiffness: Double = 2.0
-  var damping: Double = 200.0
+  var stiffness: Double = 100.0
+  var damping: Double = 10.0
+  var initialVelocity: Double = 0.0
   // Interpolating Spring
   var response: Double = 0.55
   var dampingFraction: Double = 0.82
