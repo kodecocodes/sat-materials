@@ -54,21 +54,29 @@ struct RollingBallView: View {
   @State private var rotation: CGFloat = 0
 
   private let bezierCurve: Animation = .timingCurve(0.24, 1.4, 1, -1, duration: 1)
+  
+  private let shadowHeight: CGFloat = 5
 
   var body: some View {
     let rollInOffset = -UIScreen.halfWidth + (pullToRefresh.progress * UIScreen.halfWidth) - ballSize / 2
-    let rollInRotation = pullToRefresh.progress * .pi * 2
-
-    Ball()
+    let rollInRotation = pullToRefresh.progress * .pi * 4
+    ZStack {
+      Ellipse()
+        .fill(Color.gray.opacity(pullToRefresh.animationFinished || !pullToRefresh.started ? 0.4 : 0))
+        .frame(width: ballSize * 0.8, height: shadowHeight)
+        .offset(x: pullToRefresh.animationFinished ? offset : rollInOffset, y: -spacing - shadowHeight / 2)
+      
+      Ball()
       // when the ball rolls in the rotation depends on the user's gesture progress
       // when rolling out the ball makes two full rotations in a second
-      .rotationEffect(Angle(radians: pullToRefresh.animationFinished ? rotation : rollInRotation), anchor: .center)
-      // the ball slightly bounces during the user's swipe
-      .animation(bezierCurve, value: pullToRefresh.progress)
+        .rotationEffect(Angle(radians: pullToRefresh.animationFinished ? rotation : rollInRotation), anchor: .center)
       // Moving from the left corner to the center of the screen
       // when the refreshing starts, then moving out of the screen to the right
-      .offset(x: pullToRefresh.animationFinished ? offset : rollInOffset, y: -ballSize / 2 - spacing)
-      .onAppear { animate() }
+        .offset(x: pullToRefresh.animationFinished ? offset : rollInOffset, y: -ballSize / 2 - spacing)
+        .onAppear { animate() }
+    }
+    // the ball slightly bounces during the user's swipe
+    .animation(bezierCurve, value: pullToRefresh.progress)
   }
 
   private func animate() {
@@ -138,4 +146,4 @@ extension UIScreen {
   }
 }
 
-private let spacing: CGFloat = 4
+private let spacing: CGFloat = 8
