@@ -36,15 +36,14 @@ struct ScrollViewGeometryReader: View {
   @Binding var pullToRefresh: PullToRefresh
   let update: () async -> Void
 
-  @State private var offset: CGFloat = 0
   @State private var startOffset: CGFloat = 0
 
   var body: some View {
-    GeometryReader { proxy -> AnyView in
+    GeometryReader<Color> { proxy in
       DispatchQueue.main.async {
         calculateOffset(from: proxy)
       }
-      return AnyView(Color.clear)
+      return Color.clear
     }.onAppear {
       Task {
         await update()
@@ -53,17 +52,17 @@ struct ScrollViewGeometryReader: View {
   }
 
   private func calculateOffset(from proxy: GeometryProxy) {
-    offset = proxy.frame(in: .global).minY
+    let currentOffset = proxy.frame(in: .global).minY
 
     if startOffset == 0 {
-      startOffset = offset
+      startOffset = currentOffset
     }
 
     if !pullToRefresh.started {
-      pullToRefresh.progress = min(1, (offset - startOffset) / maxOffset) // progress of the user's gesture, 0...1
+      pullToRefresh.progress = min(1, (currentOffset - startOffset) / maxOffset) // progress of the user's gesture, 0...1
     }
 
-    if offset - startOffset > maxOffset && !pullToRefresh.started {
+    if pullToRefresh.progress == 1 && !pullToRefresh.started {
       pullToRefresh.started = true // the refreshing view is fully expanded
       
       Task {
