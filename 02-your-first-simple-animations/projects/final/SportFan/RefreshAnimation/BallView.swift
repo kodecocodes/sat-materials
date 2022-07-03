@@ -34,16 +34,14 @@ import SwiftUI
 
 struct BallView: View {
   @Binding var pullToRefresh: PullToRefresh
-
+  
   var body: some View {
-    ZStack {
-      if pullToRefresh.started && !pullToRefresh.animationFinished {
-        JumpingBallView(pullToRefresh: $pullToRefresh)
-      } else if pullToRefresh.animationFinished || pullToRefresh.progress > 0 {
-        RollingBallView(pullToRefresh: $pullToRefresh)
-      } else {
-        EmptyView()
-      }
+    if pullToRefresh.started && !pullToRefresh.animationFinished {
+      JumpingBallView(pullToRefresh: $pullToRefresh)
+    } else if pullToRefresh.animationFinished || pullToRefresh.progress > 0 {
+      RollingBallView(pullToRefresh: $pullToRefresh)
+    } else {
+      EmptyView()
     }
   }
 }
@@ -58,13 +56,15 @@ struct RollingBallView: View {
   private let shadowHeight: CGFloat = 5
 
   var body: some View {
-    let rollInOffset = -UIScreen.halfWidth + (pullToRefresh.progress * UIScreen.halfWidth)
+    let initialOffset = -UIScreen.halfWidth - ballSize / 2
+    let finalOffset = -initialOffset
+    let rollInOffset = initialOffset + (pullToRefresh.progress * finalOffset)
     let rollInRotation = pullToRefresh.progress * .pi * 4
     ZStack {
       Ellipse()
         .fill(Color.gray.opacity(pullToRefresh.animationFinished || !pullToRefresh.started ? 0.4 : 0))
         .frame(width: ballSize * 0.8, height: shadowHeight)
-        .offset(x: pullToRefresh.animationFinished ? offset : rollInOffset, y: -spacing - shadowHeight / 2)
+        .offset(x: pullToRefresh.animationFinished ? offset : rollInOffset, y: -ballSpacing - shadowHeight / 2)
       
       Ball()
       // when the ball rolls in the rotation depends on the user's gesture progress
@@ -72,7 +72,7 @@ struct RollingBallView: View {
         .rotationEffect(Angle(radians: pullToRefresh.animationFinished ? rotation : rollInRotation), anchor: .center)
       // Moving from the left corner to the center of the screen
       // when the refreshing starts, then moving out of the screen to the right
-        .offset(x: pullToRefresh.animationFinished ? offset : rollInOffset, y: -ballSize / 2 - spacing)
+        .offset(x: pullToRefresh.animationFinished ? offset : rollInOffset, y: -ballSize / 2 - ballSpacing)
         .onAppear { animate() }
     }
     // the ball slightly bounces during the user's swipe
@@ -96,7 +96,7 @@ struct JumpingBallView: View {
   @Binding var pullToRefresh: PullToRefresh
   @State private var isAnimating = false
   @State private var rotation: CGFloat = 0
-  @State private var squash: CGFloat = 1
+  @State private var scale: CGFloat = 1
 
   private let jumpDuration = 0.35
   private let shadowHeight = ballSize / 2
@@ -107,14 +107,13 @@ struct JumpingBallView: View {
         .fill(Color.gray.opacity(pullToRefresh.started ? 0.4 : 0))
         .frame(width: ballSize, height: shadowHeight)
         .scaleEffect(isAnimating ? 1.2 : 0.3, anchor: .center)
-        .offset(y: maxOffset - shadowHeight / 2 - spacing)
+        .offset(y: maxOffset - shadowHeight / 2 - ballSpacing)
         .opacity(isAnimating ? 1 : 0.3)
-        .scaleEffect(pullToRefresh.progress)
 
       Ball()
         .rotationEffect(Angle(degrees: rotation), anchor: .center)
-        .scaleEffect(x: 1.0 / squash, y: squash, anchor: .bottom)
-        .offset(y: isAnimating && !pullToRefresh.updateFinished ? maxOffset - ballSize / 2 - spacing : -ballSize / 2 - spacing)
+        .scaleEffect(x: 1.0 / scale, y: scale, anchor: .bottom)
+        .offset(y: isAnimating && !pullToRefresh.updateFinished ? maxOffset - ballSize / 2 - ballSpacing : -ballSize / 2 - ballSpacing)
         .animation(.easeInOut(duration: timeForTheBallToReturn), value: pullToRefresh.updateFinished)
         .onAppear { animate() }
     }
@@ -128,7 +127,7 @@ struct JumpingBallView: View {
       isAnimating = true
     }
     withAnimation(.easeOut(duration: jumpDuration).repeatForever()) {
-      squash = 0.85
+      scale = 0.85
     }
   }
 }
@@ -147,4 +146,4 @@ extension UIScreen {
   }
 }
 
-private let spacing: CGFloat = 8
+private let ballSpacing: CGFloat = 8
