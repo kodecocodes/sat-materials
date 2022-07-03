@@ -99,21 +99,22 @@ struct JumpingBallView: View {
   @State private var squash: CGFloat = 1
 
   private let jumpDuration = 0.35
+  private let shadowHeight = ballSize / 2
 
   var body: some View {
     ZStack {
       Ellipse()
         .fill(Color.gray.opacity(pullToRefresh.started ? 0.4 : 0))
-        .frame(width: ballSize, height: ballSize / 2)
+        .frame(width: ballSize, height: shadowHeight)
         .scaleEffect(isAnimating ? 1.2 : 0.3, anchor: .center)
-        .offset(y: maxOffset - ballSize / 1.5)
+        .offset(y: maxOffset - shadowHeight / 2 - spacing)
         .opacity(isAnimating ? 1 : 0.3)
         .scaleEffect(pullToRefresh.progress)
 
       Ball()
         .rotationEffect(Angle(degrees: rotation), anchor: .center)
         .scaleEffect(x: 1.0 / squash, y: squash, anchor: .bottom)
-        .offset(y: isAnimating && !pullToRefresh.updateFinished ? maxOffset - ballSize : -ballSize / 2 - spacing)
+        .offset(y: isAnimating && !pullToRefresh.updateFinished ? maxOffset - ballSize / 2 - spacing : -ballSize / 2 - spacing)
         .animation(.easeInOut(duration: timeForTheBallToReturn), value: pullToRefresh.updateFinished)
         .onAppear { animate() }
     }
