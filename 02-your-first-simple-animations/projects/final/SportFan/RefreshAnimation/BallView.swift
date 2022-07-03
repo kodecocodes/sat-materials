@@ -58,7 +58,7 @@ struct RollingBallView: View {
   private let shadowHeight: CGFloat = 5
 
   var body: some View {
-    let rollInOffset = -UIScreen.halfWidth + (pullToRefresh.progress * UIScreen.halfWidth) - ballSize / 2
+    let rollInOffset = -UIScreen.halfWidth + (pullToRefresh.progress * UIScreen.halfWidth)
     let rollInRotation = pullToRefresh.progress * .pi * 4
     ZStack {
       Ellipse()
