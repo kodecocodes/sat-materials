@@ -32,83 +32,34 @@
 
 import SwiftUI
 
-enum TransitionType {
-  case slide
-  case scale
-  case move
-  case offset
-}
 
 struct TransitionCompareView: View {
   @State var showSquare = true
-  @State var insertTransition = TransitionType.slide
-  @State var removalTransition = TransitionType.slide
-  var demoTransition: AnyTransition {
-    let insert = transitionForType(insertTransition)
-    let removal = transitionForType(removalTransition)
-    return .asymmetric(insertion: insert, removal: removal)
-  }
 
-  func transitionForType(_ transition: TransitionType) -> AnyTransition {
-    switch transition {
-    case .slide:
-      return AnyTransition.slide
-    case .scale:
-      return AnyTransition.scale
-    case .move:
-      return AnyTransition.move(edge: .top)
-    case .offset:
-      return AnyTransition.offset()
-    }
+  // 1
+  var squareTransition: AnyTransition {
+    // 2
+    let insertTransition = AnyTransition.move(edge: .leading)
+    let removeTransition = AnyTransition.scale
+    // 3
+    return AnyTransition.asymmetric(
+      insertion: insertTransition,
+      removal: removeTransition
+    )
   }
 
   var body: some View {
     VStack {
-      HStack {
-        Text("Insertion Transition")
-        Picker("Transition", selection: $insertTransition) {
-          Text("Slide").tag(TransitionType.slide)
-          Text("Scale").tag(TransitionType.scale)
-          Text("Move Leading").tag(TransitionType.move)
-          Text("Scale Top Trailing").tag(TransitionType.scale)
-          Text("Offset").tag(TransitionType.offset)
-        }.pickerStyle(.menu)
-      }
-      HStack {
-        Text("Removal Transition")
-        Picker("Transition", selection: $removalTransition) {
-          Text("Slide").tag(TransitionType.slide)
-          Text("Scale").tag(TransitionType.scale)
-          Text("Move Leading").tag(TransitionType.move)
-          Text("Scale Top Trailing").tag(TransitionType.scale)
-          Text("Offset").tag(TransitionType.offset)
-        }.pickerStyle(.menu)
-      }
-      if showSquare {
-        Button("Hide the Square") {
-          withAnimation {
-            showSquare = false
-          }
-        }.transition(.move(edge: .leading))
-      } else {
-        Button("Show the Square") {
-          withAnimation {
-            showSquare = true
-          }
+      Button(showSquare ? "Hide the Square" : "Show the Square") {
+        withAnimation {
+          showSquare.toggle()
         }
-        .transition(.move(edge: .trailing))
       }
       if showSquare {
         RoundedRectangle(cornerRadius: 15)
-          .transition(demoTransition)
-          .frame(width: 125, height: 125)
+          .frame(width: 150, height: 150)
           .foregroundColor(.red)
-          .frame(height: 150)
-          .onTapGesture {
-            withAnimation {
-              showSquare = false
-            }
-          }
+          .transition(squareTransition)
       }
       Spacer()
     }
