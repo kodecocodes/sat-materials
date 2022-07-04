@@ -53,56 +53,52 @@ struct ScrollViewGeometryReader: View {
 
   private func calculateOffset(from proxy: GeometryProxy) {
     let currentOffset = proxy.frame(in: .global).minY
-
-    if startOffset == 0 {
+    
+    switch pullToRefresh.state {
+    case .idle:
       startOffset = currentOffset
+      pullToRefresh.state = .pulling
+    case .pulling where pullToRefresh.progress < 1:
+      pullToRefresh.progress = min(1, (currentOffset - startOffset) / maxOffset)
+    case .pulling:
+      pullToRefresh.state = .ongoing
+      pullToRefresh.progress = 0
+      triggerUpdate()
+    default: return
     }
-
-    if !pullToRefresh.started {
-      pullToRefresh.progress = min(1, (currentOffset - startOffset) / maxOffset) // progress of the user's gesture, 0...1
-    }
-
-    if pullToRefresh.progress == 1 && !pullToRefresh.started {
-      pullToRefresh.started = true // the refreshing view is fully expanded
-      
-      Task {
-        await update() // 1. The content got refreshed and new items are added
-        pullToRefresh.updateFinished = true // 2. The ball stops jumping and moves along the y axis back to top
-        after(timeForTheBallToReturn) {
-          // 3. Scroll view moves along the y axis to initial position
-          // 4. The ball rolls out of the screen
-          complete()
-        }
-        after(timeForTheBallToRollOut) {
-          // 5. The view is reset to its initial positions and the animation can be repeated again
-          reset()
-        }
+  }
+  
+  private func triggerUpdate() {
+    Task {
+      await update()
+      pullToRefresh.state = .preparingToFinish
+      after(timeForTheBallToReturn) {
+        pullToRefresh.state = .finishing
+      }
+      after(timeForTheBallToRollOut) {
+        pullToRefresh.state = .idle
+        startOffset = 0
       }
     }
-  }
-
-  private func complete() {
-    pullToRefresh.progress = 0
-    pullToRefresh.started = false
-    pullToRefresh.animationFinished = true
-  }
-
-  private func reset() {
-    pullToRefresh.updateFinished = false
-    pullToRefresh.animationFinished = false
   }
 }
 
 struct PullToRefresh: Equatable {
-  var started: Bool
   var progress: Double
-  var updateFinished: Bool
-  var animationFinished: Bool
+  var state: AnimationState
+}
+
+enum AnimationState: Int, Comparable {
+  static func < (lhs: AnimationState, rhs: AnimationState) -> Bool {
+    lhs.rawValue < rhs.rawValue
+  }
+  
+  case idle = 0, pulling, ongoing, preparingToFinish, finishing
 }
 
 extension PullToRefresh {
   init() {
-    self.init(started: false, progress: 0, updateFinished: false, animationFinished: false)
+    self.init(progress: 0, state: .idle)
   }
 }
 

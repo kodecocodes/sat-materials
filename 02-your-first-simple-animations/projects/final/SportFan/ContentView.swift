@@ -50,8 +50,8 @@ struct ContentView: View {
             EventView(event: $0)
           }
         }.animation(.easeIn, value: events)
-          .offset(y: pullToRefresh.started ? maxOffset : 0)
-          .animation(pullToRefresh.progress > 0 ? spring : ease, value: pullToRefresh.started)
+          .offset(y: pullToRefresh.state == .ongoing || pullToRefresh.state == .preparingToFinish ? maxOffset : 0)
+          .animation(pullToRefresh.state < .preparingToFinish ? spring : ease, value: pullToRefresh.state)
         BallView(pullToRefresh: $pullToRefresh)
       }
     }

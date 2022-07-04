@@ -36,12 +36,13 @@ struct BallView: View {
   @Binding var pullToRefresh: PullToRefresh
   
   var body: some View {
-    if pullToRefresh.started && !pullToRefresh.animationFinished {
+    switch pullToRefresh.state {
+    case .ongoing, .preparingToFinish:
       JumpingBallView(pullToRefresh: $pullToRefresh)
-    } else if pullToRefresh.animationFinished || pullToRefresh.progress > 0 {
-      RollingBallView(pullToRefresh: $pullToRefresh)
-    } else {
+    case .idle:
       EmptyView()
+    default:
+      RollingBallView(pullToRefresh: $pullToRefresh)
     }
   }
 }
@@ -62,17 +63,17 @@ struct RollingBallView: View {
     let rollInRotation = pullToRefresh.progress * .pi * 4
     ZStack {
       Ellipse()
-        .fill(Color.gray.opacity(pullToRefresh.animationFinished || !pullToRefresh.started ? 0.4 : 0))
+        .fill(Color.gray.opacity(0.4))
         .frame(width: ballSize * 0.8, height: shadowHeight)
-        .offset(x: pullToRefresh.animationFinished ? offset : rollInOffset, y: -ballSpacing - shadowHeight / 2)
+        .offset(x: pullToRefresh.state == .finishing ? offset : rollInOffset, y: -ballSpacing - shadowHeight / 2)
       
       Ball()
       // when the ball rolls in the rotation depends on the user's gesture progress
       // when rolling out the ball makes two full rotations in a second
-        .rotationEffect(Angle(radians: pullToRefresh.animationFinished ? rotation : rollInRotation), anchor: .center)
+        .rotationEffect(Angle(radians: pullToRefresh.state == .finishing ? rotation : rollInRotation), anchor: .center)
       // Moving from the left corner to the center of the screen
       // when the refreshing starts, then moving out of the screen to the right
-        .offset(x: pullToRefresh.animationFinished ? offset : rollInOffset, y: -ballSize / 2 - ballSpacing)
+        .offset(x: pullToRefresh.state == .finishing ? offset : rollInOffset, y: -ballSize / 2 - ballSpacing)
         .onAppear { animate() }
     }
     // the ball slightly bounces during the user's swipe
@@ -80,7 +81,7 @@ struct RollingBallView: View {
   }
 
   private func animate() {
-    guard pullToRefresh.animationFinished else {
+    guard pullToRefresh.state == .finishing else {
       return
     }
     withAnimation(.easeIn(duration: timeForTheBallToRollOut)) {
@@ -104,7 +105,7 @@ struct JumpingBallView: View {
   var body: some View {
     ZStack {
       Ellipse()
-        .fill(Color.gray.opacity(pullToRefresh.started ? 0.4 : 0))
+        .fill(Color.gray.opacity(pullToRefresh.state == .ongoing ? 0.4 : 0))
         .frame(width: ballSize, height: shadowHeight)
         .scaleEffect(isAnimating ? 1.2 : 0.3, anchor: .center)
         .offset(y: maxOffset - shadowHeight / 2 - ballSpacing)
@@ -113,8 +114,8 @@ struct JumpingBallView: View {
       Ball()
         .rotationEffect(Angle(degrees: rotation), anchor: .center)
         .scaleEffect(x: 1.0 / scale, y: scale, anchor: .bottom)
-        .offset(y: isAnimating && !pullToRefresh.updateFinished ? maxOffset - ballSize / 2 - ballSpacing : -ballSize / 2 - ballSpacing)
-        .animation(.easeInOut(duration: timeForTheBallToReturn), value: pullToRefresh.updateFinished)
+        .offset(y: isAnimating && pullToRefresh.state == .ongoing ? maxOffset - ballSize / 2 - ballSpacing : -ballSize / 2 - ballSpacing)
+        .animation(.easeInOut(duration: timeForTheBallToReturn), value: pullToRefresh.state)
         .onAppear { animate() }
     }
   }
