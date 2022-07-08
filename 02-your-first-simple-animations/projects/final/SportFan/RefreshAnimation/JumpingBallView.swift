@@ -30,12 +30,50 @@
 /// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 /// THE SOFTWARE.
 
-import CoreGraphics
+import SwiftUI
 
-let ballSize: CGFloat = 42
-let maxOffset: CGFloat = 100
-let ballSpacing: CGFloat = 8
-// time for the ball to return to its initial position after updating is completed
-let timeForTheBallToReturn = 0.3
-// time for the ball to roll out of the screen after updating is completed
-let timeForTheBallToRollOut = 1.0
+struct JumpingBallView: View {
+  @Binding var pullToRefresh: PullToRefresh
+  @State private var isAnimating = false
+  @State private var rotation: CGFloat = 0
+  @State private var scale: CGFloat = 1
+
+  private let jumpDuration = 0.35
+  private let shadowHeight = ballSize / 2
+
+  var body: some View {
+    ZStack {
+      Ellipse()
+        .fill(Color.gray.opacity(pullToRefresh.state == .ongoing ? 0.4 : 0))
+        .frame(width: ballSize, height: shadowHeight)
+        .scaleEffect(isAnimating ? 1.2 : 0.3, anchor: .center)
+        .offset(y: maxOffset - shadowHeight / 2 - ballSpacing)
+        .opacity(isAnimating ? 1 : 0.3)
+
+      Ball()
+        .rotationEffect(Angle(degrees: rotation), anchor: .center)
+        .scaleEffect(x: 1.0 / scale, y: scale, anchor: .bottom)
+        .offset(y: isAnimating && pullToRefresh.state == .ongoing ? maxOffset - ballSize / 2 - ballSpacing : -ballSize / 2 - ballSpacing)
+        .animation(.easeInOut(duration: timeForTheBallToReturn), value: pullToRefresh.state)
+        .onAppear { animate() }
+    }
+  }
+
+  private func animate() {
+    withAnimation(.linear(duration: jumpDuration * 2).repeatForever(autoreverses: false)) {
+      rotation = 360
+    }
+    withAnimation(.easeInOut(duration: jumpDuration).repeatForever()) {
+      isAnimating = true
+    }
+    withAnimation(.easeOut(duration: jumpDuration).repeatForever()) {
+      scale = 0.85
+    }
+  }
+}
+
+struct JumpingBallView_Previews: PreviewProvider {
+    static var previews: some View {
+      JumpingBallView(pullToRefresh: Binding.constant(PullToRefresh(progress: 0, state: .ongoing))).scaleEffect(4)
+    }
+}

@@ -93,46 +93,6 @@ struct RollingBallView: View {
   }
 }
 
-struct JumpingBallView: View {
-  @Binding var pullToRefresh: PullToRefresh
-  @State private var isAnimating = false
-  @State private var rotation: CGFloat = 0
-  @State private var scale: CGFloat = 1
-
-  private let jumpDuration = 0.35
-  private let shadowHeight = ballSize / 2
-
-  var body: some View {
-    ZStack {
-      Ellipse()
-        .fill(Color.gray.opacity(pullToRefresh.state == .ongoing ? 0.4 : 0))
-        .frame(width: ballSize, height: shadowHeight)
-        .scaleEffect(isAnimating ? 1.2 : 0.3, anchor: .center)
-        .offset(y: maxOffset - shadowHeight / 2 - ballSpacing)
-        .opacity(isAnimating ? 1 : 0.3)
-
-      Ball()
-        .rotationEffect(Angle(degrees: rotation), anchor: .center)
-        .scaleEffect(x: 1.0 / scale, y: scale, anchor: .bottom)
-        .offset(y: isAnimating && pullToRefresh.state == .ongoing ? maxOffset - ballSize / 2 - ballSpacing : -ballSize / 2 - ballSpacing)
-        .animation(.easeInOut(duration: timeForTheBallToReturn), value: pullToRefresh.state)
-        .onAppear { animate() }
-    }
-  }
-
-  private func animate() {
-    withAnimation(.linear(duration: jumpDuration * 2).repeatForever(autoreverses: false)) {
-      rotation = 360
-    }
-    withAnimation(.easeInOut(duration: jumpDuration).repeatForever()) {
-      isAnimating = true
-    }
-    withAnimation(.easeOut(duration: jumpDuration).repeatForever()) {
-      scale = 0.85
-    }
-  }
-}
-
 struct Ball: View {
   var body: some View {
     Image("basketball_ball")
@@ -146,5 +106,3 @@ extension UIScreen {
     main.bounds.width / 2
   }
 }
-
-private let ballSpacing: CGFloat = 8

@@ -40,7 +40,7 @@ struct ScrollViewGeometryReader: View {
 
   var body: some View {
     GeometryReader<Color> { proxy in
-      DispatchQueue.main.async {
+      Task {
         calculateOffset(from: proxy)
       }
       return Color.clear
@@ -74,10 +74,10 @@ struct ScrollViewGeometryReader: View {
       pullToRefresh.state = .preparingToFinish
       after(timeForTheBallToReturn) {
         pullToRefresh.state = .finishing
-      }
-      after(timeForTheBallToRollOut) {
-        pullToRefresh.state = .idle
-        startOffset = 0
+        after(timeForTheBallToRollOut) {
+          pullToRefresh.state = .idle
+          startOffset = 0
+        }
       }
     }
   }
@@ -103,7 +103,11 @@ extension PullToRefresh {
 }
 
 func after(_ seconds: Double, execute: @escaping () -> Void) {
-  DispatchQueue.main.asyncAfter(deadline: .now() + seconds) {
+  Task {
+    let delay = UInt64(seconds * 1_000_000_000)
+    try await Task<Never, Never>.sleep(nanoseconds: delay)
     execute()
   }
 }
+
+
