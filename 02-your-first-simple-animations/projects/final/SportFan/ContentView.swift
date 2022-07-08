@@ -34,7 +34,7 @@ import SwiftUI
 
 struct ContentView: View {
   @State var events: [Event] = []
-  @State var pullToRefresh = PullToRefresh()
+  @State var pullToRefresh = PullToRefresh(progress: 0, state: .idle)
 
   private let spring: Animation = .interpolatingSpring(stiffness: 80, damping: 4)
   private let ease: Animation = .easeInOut(duration: timeForTheBallToReturn)

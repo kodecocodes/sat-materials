@@ -30,61 +30,17 @@
 /// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 /// THE SOFTWARE.
 
-import SwiftUI
+import Foundation
 
-struct ScrollViewGeometryReader: View {
-  @Binding var pullToRefresh: PullToRefresh
-  let update: () async -> Void
-
-  @State private var startOffset: CGFloat = 0
-
-  var body: some View {
-    GeometryReader<Color> { proxy in
-      Task {
-        calculateOffset(from: proxy)
-      }
-      return Color.clear
-    }.onAppear {
-      Task {
-        await update()
-      }
-    }
-  }
-
-  private func calculateOffset(from proxy: GeometryProxy) {
-    let currentOffset = proxy.frame(in: .global).minY
-    
-    switch pullToRefresh.state {
-    case .idle:
-      startOffset = currentOffset
-      pullToRefresh.state = .pulling
-    case .pulling where pullToRefresh.progress < 1:
-      pullToRefresh.progress = min(1, (currentOffset - startOffset) / maxOffset)
-    case .pulling:
-      pullToRefresh.state = .ongoing
-      pullToRefresh.progress = 0
-      Task {
-        await update()
-        pullToRefresh.state = .preparingToFinish
-        after(timeForTheBallToReturn) {
-          pullToRefresh.state = .finishing
-          after(timeForTheBallToRollOut) {
-            pullToRefresh.state = .idle
-            startOffset = 0
-          }
-        }
-      }
-    default: return
-    }
-  }
+struct PullToRefresh: Equatable {
+  var progress: Double
+  var state: AnimationState
 }
 
-func after(_ seconds: Double, execute: @escaping () -> Void) {
-  Task {
-    let delay = UInt64(seconds * 1_000_000_000)
-    try await Task<Never, Never>.sleep(nanoseconds: delay)
-    execute()
+enum AnimationState: Int, Comparable {
+  static func < (lhs: AnimationState, rhs: AnimationState) -> Bool {
+    lhs.rawValue < rhs.rawValue
   }
+  
+  case idle = 0, pulling, ongoing, preparingToFinish, finishing
 }
-
-

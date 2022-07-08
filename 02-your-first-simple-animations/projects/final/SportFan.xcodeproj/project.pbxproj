@@ -19,6 +19,7 @@
 		835C2889286253C00074D7DE /* BallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835C2888286253C00074D7DE /* BallView.swift */; };
 		835C288B2862EF210074D7DE /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835C288A2862EF210074D7DE /* Constants.swift */; };
 		BA97537128782CCC005CD7E2 /* JumpingBallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA97537028782CCC005CD7E2 /* JumpingBallView.swift */; };
+		BA97537328785551005CD7E2 /* PullToRefresh.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA97537228785550005CD7E2 /* PullToRefresh.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		835C2888286253C00074D7DE /* BallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BallView.swift; sourceTree = "<group>"; };
 		835C288A2862EF210074D7DE /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		BA97537028782CCC005CD7E2 /* JumpingBallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JumpingBallView.swift; sourceTree = "<group>"; };
+		BA97537228785550005CD7E2 /* PullToRefresh.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullToRefresh.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +101,7 @@
 				835C2888286253C00074D7DE /* BallView.swift */,
 				835C288A2862EF210074D7DE /* Constants.swift */,
 				BA97537028782CCC005CD7E2 /* JumpingBallView.swift */,
+				BA97537228785550005CD7E2 /* PullToRefresh.swift */,
 			);
 			path = RefreshAnimation;
 			sourceTree = "<group>";
@@ -219,6 +222,7 @@
 				18D775C522AD944300AE281E /* ContentView.swift in Sources */,
 				835C287F28624B010074D7DE /* MockData.swift in Sources */,
 				835C2889286253C00074D7DE /* BallView.swift in Sources */,
+				BA97537328785551005CD7E2 /* PullToRefresh.swift in Sources */,
 				835C2887286253000074D7DE /* ScrollViewGeometryReader.swift in Sources */,
 				BA97537128782CCC005CD7E2 /* JumpingBallView.swift in Sources */,
 				1839F4B025190F2A00BB00F1 /* AppMain.swift in Sources */,
