@@ -30,11 +30,12 @@
 /// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 /// THE SOFTWARE.
 
-import CoreGraphics
+import Foundation
 
-let ballSize: CGFloat = 42
-let maxOffset: CGFloat = 100
-let ballSpacing: CGFloat = 8
+let maxOffset = 100.0
+let ballSize = 42.0
+let ballSpacing = 8.0
+let jumpDuration = 0.35
 // time for the ball to return to its initial position after updating is completed
 let timeForTheBallToReturn = 0.3
 // time for the ball to roll out of the screen after updating is completed

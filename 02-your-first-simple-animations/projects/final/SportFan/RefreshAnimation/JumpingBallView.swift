@@ -38,7 +38,6 @@ struct JumpingBallView: View {
   @State private var rotation: CGFloat = 0
   @State private var scale: CGFloat = 1
 
-  private let jumpDuration = 0.35
   private let shadowHeight = ballSize / 2
 
   var body: some View {
@@ -54,7 +53,7 @@ struct JumpingBallView: View {
         .rotationEffect(Angle(degrees: rotation), anchor: .center)
         .scaleEffect(x: 1.0 / scale, y: scale, anchor: .bottom)
         .offset(y: isAnimating && pullToRefresh.state == .ongoing ? maxOffset - ballSize / 2 - ballSpacing : -ballSize / 2 - ballSpacing)
-        .animation(.easeInOut(duration: timeForTheBallToReturn), value: pullToRefresh.state)
+        .animation(.easeInOut(duration: timeForTheBallToReturn), value: pullToRefresh.state == .preparingToFinish)
         .onAppear { animate() }
     }
   }
@@ -74,6 +73,7 @@ struct JumpingBallView: View {
 
 struct JumpingBallView_Previews: PreviewProvider {
     static var previews: some View {
-      JumpingBallView(pullToRefresh: Binding.constant(PullToRefresh(progress: 0, state: .ongoing))).scaleEffect(4)
+      JumpingBallView(pullToRefresh: Binding.constant(PullToRefresh(progress: 0, state: .ongoing)))
+        .scaleEffect(4)
     }
 }

@@ -37,7 +37,7 @@ struct ContentView: View {
   @State var pullToRefresh = PullToRefresh()
 
   private let spring: Animation = .interpolatingSpring(stiffness: 80, damping: 4)
-  private let ease: Animation = .easeInOut(duration: 0.3)
+  private let ease: Animation = .easeInOut(duration: timeForTheBallToReturn)
 
   var body: some View {
     ScrollView {
@@ -45,13 +45,13 @@ struct ContentView: View {
         await update()
       }
       ZStack(alignment: Alignment(horizontal: .center, vertical: .top)) {
-        VStack {
+        LazyVStack {
           ForEach(events) {
             EventView(event: $0)
           }
         }.animation(.easeIn, value: events)
           .offset(y: pullToRefresh.state == .ongoing || pullToRefresh.state == .preparingToFinish ? maxOffset : 0)
-          .animation(pullToRefresh.state < .preparingToFinish ? spring : ease, value: pullToRefresh.state)
+          .animation(pullToRefresh.state < .finishing ? spring : ease, value: pullToRefresh.state)
         BallView(pullToRefresh: $pullToRefresh)
       }
     }
