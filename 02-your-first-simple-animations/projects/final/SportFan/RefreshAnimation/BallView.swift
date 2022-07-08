@@ -53,14 +53,14 @@ struct RollingBallView: View {
   @State private var rollOutRotation: CGFloat = 0
 
   private let bezierCurve: Animation = .timingCurve(0.24, 1.4, 1, -1, duration: 1)
-  
   private let shadowHeight: CGFloat = 5
+  
+  private let initialOffset = -UIScreen.halfWidth - ballSize / 2
 
   var body: some View {
-    let initialOffset = -UIScreen.halfWidth - ballSize / 2
-    let finalOffset = -initialOffset
-    let rollInOffset = initialOffset + (pullToRefresh.progress * finalOffset)
+    let rollInOffset = initialOffset + (pullToRefresh.progress * -initialOffset)
     let rollInRotation = pullToRefresh.progress * .pi * 4
+    
     ZStack {
       Ellipse()
         .fill(Color.gray.opacity(0.4))
