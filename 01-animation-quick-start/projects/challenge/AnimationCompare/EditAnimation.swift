@@ -36,16 +36,9 @@ struct EditAnimation: View {
   @Binding var animation: AnimationData
   @State var location = 0.0
 
-  var decimalFormatter: NumberFormatter {
-    let formatter = NumberFormatter()
-    formatter.numberStyle = .decimal
-    formatter.minimumFractionDigits = 1
-    return formatter
-  }
-
   var body: some View {
     Form {
-      Section(header: Text("Animation Type")) {
+      Section("Animation Type") {
         Picker("Animation Type", selection: $animation.type) {
           Text("Linear").tag(AnimationType.linear)
           Text("Ease In").tag(AnimationType.easeIn)
@@ -55,71 +48,65 @@ struct EditAnimation: View {
           Text("Interpolating Spring").tag(AnimationType.interpolatingSpring)
         }
       }
-      Section(header: Text("Animation Parameters")) {
+      Section("Animation Parameters") {
         if animation.type == .linear || animation.type == .easeIn ||
           animation.type == .easeOut || animation.type == .easeInOut {
-          Group {
-            Stepper(
-              "Delay \(animation.delay.formatted()) s",
-              value: $animation.delay,
-              in: 0...10,
-              step: 0.1
-            )
-            Stepper(
-              "Length \(animation.length.formatted()) s",
-              value: $animation.length,
-              in: 0...10,
-              step: 0.1
-            )
-          }
+          Stepper(
+            "Delay \(animation.delay.formatted()) s",
+            value: $animation.delay,
+            in: 0...10,
+            step: 0.1
+          )
+          Stepper(
+            "Length \(animation.length.formatted()) s",
+            value: $animation.length,
+            in: 0...10,
+            step: 0.1
+          )
         } else if animation.type == .spring {
-          Group {
-            Stepper(
-              "Response \(animation.response.formatted())",
-              value: $animation.response,
-              in: 0...10,
-              step: 0.05
-            )
-            Stepper(
-              "Damping Fraction \(animation.dampingFraction.formatted())",
-              value: $animation.dampingFraction,
-              in: 0...10,
-              step: 0.1
-            )
-          }
+          Stepper(
+            "Response \(animation.response.formatted())",
+            value: $animation.response,
+            in: 0...10,
+            step: 0.05
+          )
+          Stepper(
+            "Damping Fraction \(animation.dampingFraction.formatted())",
+            value: $animation.dampingFraction,
+            in: 0...10,
+            step: 0.1
+          )
         } else if animation.type == .interpolatingSpring {
-          Group {
-            Stepper(
-              "Mass \(animation.mass.formatted())",
-              value: $animation.mass,
-              in: 0...10,
-              step: 0.1
-            )
-            Stepper(
-              "Stiffness \(animation.stiffness.formatted())",
-              value: $animation.stiffness,
-              in: 0...500,
-              step: 5
-            )
-            Stepper(
-              "Damping \(animation.damping.formatted())",
-              value: $animation.damping,
-              in: 0...500,
-              step: 10
-            )
-            Stepper(
-              "Initial Velocity \(animation.initialVelocity.formatted())",
-              value: $animation.initialVelocity,
-              in: 0...1,
-              step: 0.05
-            )
-          }
+          Stepper(
+            "Mass \(animation.mass.formatted())",
+            value: $animation.mass,
+            in: 0...10,
+            step: 0.1
+          )
+          Stepper(
+            "Stiffness \(animation.stiffness.formatted())",
+            value: $animation.stiffness,
+            in: 0...500,
+            step: 5
+          )
+          Stepper(
+            "Damping \(animation.damping.formatted())",
+            value: $animation.damping,
+            in: 0...500,
+            step: 10
+          )
+          Stepper(
+            "Initial Velocity \(animation.initialVelocity.formatted())",
+            value: $animation.initialVelocity,
+            in: 0...1,
+            step: 0.05
+          )
         }
       }
-      Section(header: Text("Description")) {
+      Section("Description") {
         Text(animation.description)
       }
-      Section(header: Text("Tap to Preview")) {
+      Section("Tap to Preview") {
         AnimationView(
           animation: animation,
           location: location

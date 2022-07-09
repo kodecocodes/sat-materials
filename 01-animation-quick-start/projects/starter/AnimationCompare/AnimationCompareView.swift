@@ -45,7 +45,7 @@ struct AnimationCompareView: View {
   }
 
   var body: some View {
-    NavigationView {
+    NavigationStack {
       VStack {
         List {
           ForEach($animations) { $animation in

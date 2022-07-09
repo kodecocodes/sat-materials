@@ -46,7 +46,7 @@ struct AnimationCompareView: View {
   }
 
   var body: some View {
-    NavigationView {
+    NavigationStack {
       VStack {
         Button("Animate!") {
           if location == 0.0 {
