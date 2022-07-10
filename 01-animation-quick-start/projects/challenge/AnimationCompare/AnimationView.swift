@@ -69,7 +69,7 @@ struct AnimationView: View {
           Image(systemName: "gear.circle")
             .rotationEffect(.degrees(360 * location))
           Image(systemName: "star.fill")
-            .offset(x: proxy.size.width * location * 0.85)
+            .offset(x: proxy.size.width * location * 0.8)
         }
         .font(.title)
         .animation(
