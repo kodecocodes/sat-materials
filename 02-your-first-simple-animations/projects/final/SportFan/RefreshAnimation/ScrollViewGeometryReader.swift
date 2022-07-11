@@ -44,10 +44,8 @@ struct ScrollViewGeometryReader: View {
         calculateOffset(from: proxy)
       }
       return Color.clear
-    }.onAppear {
-      Task {
-        await update()
-      }
+    }.task {
+      await update()
     }
   }
 
