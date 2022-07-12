@@ -64,26 +64,23 @@ struct AnimationView: View {
 
   var body: some View {
     GeometryReader { proxy in
-      Group {
-        HStack {
-          Image(systemName: "gear.circle")
-            .rotationEffect(.degrees(360 * location))
-          Image(systemName: "star.fill")
-            .offset(x: proxy.size.width * location * 0.8)
-        }
-        .font(.title)
-        .animation(
-          currentAnimation
-            .delay(animation.delay)
-            .speed(slowMotion ? 0.25 : 1.0),
-          value: location
-        )
+      // 1
+      HStack {
+        Image(systemName: "gear.circle")
+          .rotationEffect(.degrees(360 * location))
+        Image(systemName: "star.fill")
+        // 2
+          .offset(x: proxy.size.width * location * 0.8)
       }
+      .font(.title)
+      // 3
+      .animation(
+        currentAnimation
+          .delay(animation.delay)
+          .speed(slowMotion ? 0.25 : 1.0),
+        value: location
+      )
     }
-  }
-
-  var animationSpeed: Double {
-    slowMotion ? 0.25 : 1.0
   }
 }
 
@@ -93,8 +90,7 @@ struct AnimationView_Previews: PreviewProvider {
 
     AnimationView(
       animation: animation,
-      location: 0,
-      slowMotion: false
+      location: 0
     )
   }
 }
