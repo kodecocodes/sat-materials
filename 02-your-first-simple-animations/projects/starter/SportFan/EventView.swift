@@ -62,7 +62,7 @@ struct EventView: View {
             .foregroundColor(.primary)
             .lineLimit(3)
           HStack {
-            Text(event.date.formatted(date: .complete, time: .omitted).uppercased())
+            Text(event.date.uppercased())
               .font(.caption)
               .foregroundColor(.secondary)
             Spacer()

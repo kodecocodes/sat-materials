@@ -81,12 +81,14 @@ let venues = [
   "BOK Center Parking Lots"
 ]
 
+// swiftlint:disable line_length
 let teams = [
-  Team(name: "Arizona Coyotes", sport: .iceHockey),
-  Team(name: "Cincinnati Cyclones", sport: .iceHockey),
-  Team(name: "Dallas Mavericks", sport: .basketball),
-  Team(name: "Kansas City Mavericks", sport: .iceHockey),
-  Team(name: "Oklahoma City Thunder", sport: .basketball),
-  Team(name: "Cincinnati Bearcats", sport: .football),
-  Team(name: "Tulsa Golden Hurricane", sport: .football)
+  Team(name: "Arizona Coyotes", sport: .iceHockey, description: "The Arizona Coyotes are a professional ice hockey team based in the Phoenix metropolitan area. The Coyotes compete in the National Hockey League as a member of the Central Division in the Western Conference and currently play at the ASU Multi-Purpose Arena in Tempe."),
+  Team(name: "Cincinnati Cyclones", sport: .iceHockey, description: "The Cincinnati Cyclones are a professional ice hockey team based in Cincinnati, Ohio. The team is a member of the ECHL. Originally established in 1990, the team first played their games in the Cincinnati Gardens and now play at Heritage Bank Center."),
+  Team(name: "Dallas Mavericks", sport: .basketball, description: "The Dallas Mavericks are an American professional basketball team based in Dallas. The Mavericks compete in the National Basketball Association as a member of the Western Conference Southwest Division."),
+  Team(name: "Kansas City Mavericks", sport: .iceHockey, description: "The Kansas City Mavericks are an ice hockey team in the ECHL. Founded in 2009 as the Missouri Mavericks of the CHL, the team plays in Independence, Missouri, a suburb of Kansas City, Missouri, at the Cable Dahmer Arena."),
+  Team(name: "Oklahoma City Thunder", sport: .basketball, description: "The Oklahoma City Thunder are an American professional basketball team based in Oklahoma City. The Thunder compete in the National Basketball Association as a member of the league's Western Conference Northwest Division."),
+  Team(name: "Cincinnati Bearcats", sport: .football, description: "The Cincinnati Bearcats football program represents the University of Cincinnati in college football, they compete at the NCAA Division I Football Bowl Subdivision level as members of the American Athletic Conference."),
+  Team(name: "Tulsa Golden Hurricane", sport: .football, description: "The Tulsa Golden Hurricane football program represents the University of Tulsa in college football at the NCAA Division I Football Bowl Subdivision level. Tulsa has competed in the American Athletic Conference since the 2014 season and was previously a member of Conference USA.")
 ]
+// swiftlint:enable line_length

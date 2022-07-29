@@ -32,32 +32,46 @@
 
 import Foundation
 
-struct Event: Equatable, Identifiable {
+struct Event: Equatable, Identifiable, Hashable {
   static func == (lhs: Event, rhs: Event) -> Bool {
     lhs.id == rhs.id
   }
 
+  func hash(into hasher: inout Hasher) {
+    hasher.combine(id)
+  }
+
   let id: Int
   let team: Team
-  let date: Date
+  let date: String
   let location: String
   let ticketsLeft: Int
 }
 
 extension Event {
   init(team: Team, location: String?, ticketsLeft: Int) {
-    self.init(id: .randomId(), team: team, date: .random(), location: location ?? "", ticketsLeft: ticketsLeft)
+    self.init(
+      id: .randomId(),
+      team: team,
+      date: Date.random().formatted(date: .complete, time: .omitted),
+      location: location ?? "",
+      ticketsLeft: ticketsLeft
+    )
   }
 }
 
-enum Sport: Int {
-  case football = 0, basketball, iceHockey
+enum Sport: Int, CaseIterable {
+  case football = 0, basketball, iceHockey, baseball, tennis
   var imageURL: URL? {
     URL(string: sportTypeImages[self.rawValue].appending("?fit=crop&w=600&q=80"))
+  }
+  var string: String {
+    ["Football 🏈", "Basketball 🏀", "Ice Hockey 🏒", "Baseball ⚾", "Tennis 🎾"][self.rawValue]
   }
 }
 
 struct Team {
   let name: String
   let sport: Sport
+  let description: String
 }
