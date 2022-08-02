@@ -50,7 +50,7 @@ struct EditAnimation: View {
       }
       Section("Animation Parameters") {
         if animation.type == .linear || animation.type == .easeIn ||
-            animation.type == .easeOut || animation.type == .easeInOut {
+          animation.type == .easeOut || animation.type == .easeInOut {
           Stepper(
             "Delay \(animation.delay.formatted()) s",
             value: $animation.delay,
@@ -111,7 +111,7 @@ struct EditAnimation: View {
           animation: animation,
           location: location
         )
-          .contentShape(Rectangle())
+        .contentShape(Rectangle())
         .onTapGesture {
           if location == 0.0 {
             location = 1.0
