@@ -130,7 +130,7 @@ struct EditAnimation: View {
 struct CreateAnimation_Previews: PreviewProvider {
   static var previews: some View {
     let data = AnimationData(type: .linear, length: 1.0, delay: 0.0)
-    NavigationView {
+    NavigationStack {
       EditAnimation(
         animation: .constant(data)
       )
