@@ -175,7 +175,7 @@ struct EventDetailsView: View {
               .shadow(radius: 2)
               .frame(width: 110, height: 48)
           }
-          .matchedGeometryEffect(id: "button", in: namespace, properties: .position, isSource: false)
+          .matchedGeometryEffect(id: "button", in: namespace, properties: .position)
       }).padding(36)
     }
   }

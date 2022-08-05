@@ -75,7 +75,7 @@ struct HeaderView: View {
               .font(.title2)
               .fontWeight(.bold)
               .foregroundColor(.white)
-              .matchedGeometryEffect(id: "title", in: namespace, properties: .position, isSource: false)
+              .matchedGeometryEffect(id: "title", in: namespace, properties: .position)
           } else {
             Spacer()
           }
@@ -97,12 +97,12 @@ struct HeaderView: View {
               .frame(height: iconSizeS)
               .foregroundColor(.white)
               .clipped()
-              .matchedGeometryEffect(id: "icon", in: namespace, isSource: false)
+              .matchedGeometryEffect(id: "icon", in: namespace)
 
             Text(event.date)
               .foregroundColor(.white)
               .font(.subheadline)
-              .matchedGeometryEffect(id: "date", in: namespace, properties: .position, isSource: false)
+              .matchedGeometryEffect(id: "date", in: namespace, properties: .position)
           }.padding(.leading, spacingM)
             .padding(.bottom, spacingM)
         }
