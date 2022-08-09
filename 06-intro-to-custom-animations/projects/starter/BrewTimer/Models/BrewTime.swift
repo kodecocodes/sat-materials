@@ -1,4 +1,4 @@
-/// Copyright (c) 2020 Razeware LLC
+/// Copyright (c) 2022 Razeware LLC
 ///
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -30,28 +30,70 @@
 /// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 /// THE SOFTWARE.
 
-import SwiftUI
+import Foundation
 
-struct ContentView: View {
-  @State var timers = BrewTime.defaultTimers
+struct BrewTime: Identifiable {
+  var id = UUID()
+  var timerName: String
+  var amount: Int
+  var temperature: Int
+  var timerLength: Int
 
-  var body: some View {
-    NavigationStack {
-      List(timers) { timer in
-        NavigationLink {
-          TimerView(brewTimer: timer)
-        } label: {
-          Text(timer.timerName)
-        }
-      }
-      .navigationTitle("Brew Timer")
-    }
-    .frame(maxWidth: .infinity, maxHeight: .infinity)
+  static var defaultTimers: [BrewTime] {
+    var timers: [BrewTime] = []
+    timers.append(
+      BrewTime(
+        timerName: "Black Tea",
+        amount: 6,
+        temperature: 200,
+        timerLength: 240
+      )
+    )
+    timers.append(
+      BrewTime(
+        timerName: "Green Tea",
+        amount: 6,
+        temperature: 175,
+        timerLength: 90
+      )
+    )
+    timers.append(
+      BrewTime(
+        timerName: "Herbal Tea",
+        amount: 6,
+        temperature: 208,
+        timerLength: 300
+      )
+    )
+    timers.append(
+      BrewTime(
+        timerName: "Oolong Tea",
+        amount: 6,
+        temperature: 195,
+        timerLength: 150
+      )
+    )
+    timers.append(
+      BrewTime(
+        timerName: "White Tea",
+        amount: 6,
+        temperature: 175,
+        timerLength: 150
+      )
+    )
+    return timers
   }
 }
 
-struct ContentView_Previews: PreviewProvider {
-  static var previews: some View {
-    ContentView()
+extension BrewTime: Hashable {
+  static func == (lhs: BrewTime, rhs: BrewTime) -> Bool {
+    return lhs.timerName == rhs.timerName && lhs.temperature == rhs.temperature && lhs.timerLength == rhs.timerLength
+  }
+
+  func hash(into hasher: inout Hasher) {
+    hasher.combine(id)
+    hasher.combine(timerName)
+    hasher.combine(temperature)
+    hasher.combine(timerLength)
   }
 }
