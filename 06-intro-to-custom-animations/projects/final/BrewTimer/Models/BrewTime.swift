@@ -39,7 +39,7 @@ struct BrewTime: Identifiable {
   var teaAmount: Double
   var temperature: Int
   var timerLength: Int
-  
+
   static var baseTimers: [BrewTime] {
     var timers: [BrewTime] = []
     timers.append(

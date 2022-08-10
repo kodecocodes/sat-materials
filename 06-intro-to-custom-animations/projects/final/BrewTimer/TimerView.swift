@@ -38,6 +38,7 @@ struct TimerView: View {
   @State var showDone: BrewTime?
   @State var amountOfWater = 0.0
   @State var animateTimer = 0.0
+  @State var brewingTemp = 0
 
   var teaToUse: Double {
     let tspPerOz = brewTimer.teaAmount / brewTimer.waterAmount
@@ -82,7 +83,7 @@ struct TimerView: View {
       VStack(alignment: .leading, spacing: 5) {
         Text("Brewing Temperature")
           .modifier(HeadingText())
-        Text("\(brewTimer.temperature) °F")
+        NumberTransitionView(number: brewingTemp, suffix: " °F")
           .modifier(InformationText())
         Text("Water Amount")
           .modifier(HeadingText())
@@ -112,6 +113,9 @@ struct TimerView: View {
     .onAppear {
       timerManager.setTime(length: brewTimer.timerLength)
       amountOfWater = brewTimer.waterAmount
+      withAnimation(.easeOut(duration: 1.0)) {
+        brewingTemp = brewTimer.temperature
+      }
     }
     .navigationTitle("\(brewTimer.timerName) Timer")
     .font(.largeTitle)
