@@ -1,4 +1,4 @@
-/// Copyright (c) 2020 Razeware LLC
+/// Copyright (c) 2022 Razeware LLC
 ///
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -32,25 +32,35 @@
 
 import SwiftUI
 
-struct ContentView: View {
-  @State var timers = BrewTime.baseTimers
+struct CountingTimerView: View {
+  @ObservedObject var timerManager: TimerManager
 
   var body: some View {
-    NavigationStack {
-      List(timers) { timer in
-        NavigationLink {
-          TimerView(brewTimer: timer)
+    VStack(spacing: 15) {
+      Text(timerManager.remaingTimeAsString)
+      HStack {
+        Button {
+          timerManager.stop()
         } label: {
-          Text(timer.timerName)
+          Image(systemName: "stop.fill")
         }
+        .disabled(!timerManager.active)
+        Spacer()
+          .frame(width: 30)
+        Button {
+          timerManager.start()
+        } label: {
+          Image(systemName: "play.fill")
+        }
+        .disabled(timerManager.active)
       }
-      .navigationTitle("Brew Timer")
     }
+    .padding(20)
   }
 }
 
-struct ContentView_Previews: PreviewProvider {
+struct CountingTimerView_Previews: PreviewProvider {
   static var previews: some View {
-    ContentView()
+    CountingTimerView(timerManager: TimerManager(length: 5))
   }
 }

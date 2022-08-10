@@ -35,16 +35,18 @@ import Foundation
 struct BrewTime: Identifiable {
   var id = UUID()
   var timerName: String
-  var amount: Int
+  var waterAmount: Double
+  var teaAmount: Double
   var temperature: Int
   var timerLength: Int
-
-  static var defaultTimers: [BrewTime] {
+  
+  static var baseTimers: [BrewTime] {
     var timers: [BrewTime] = []
     timers.append(
       BrewTime(
         timerName: "Black Tea",
-        amount: 6,
+        waterAmount: 8,
+        teaAmount: 2,
         temperature: 200,
         timerLength: 240
       )
@@ -52,7 +54,8 @@ struct BrewTime: Identifiable {
     timers.append(
       BrewTime(
         timerName: "Green Tea",
-        amount: 6,
+        waterAmount: 8,
+        teaAmount: 2,
         temperature: 175,
         timerLength: 90
       )
@@ -60,7 +63,8 @@ struct BrewTime: Identifiable {
     timers.append(
       BrewTime(
         timerName: "Herbal Tea",
-        amount: 6,
+        waterAmount: 8,
+        teaAmount: 2,
         temperature: 208,
         timerLength: 300
       )
@@ -68,7 +72,8 @@ struct BrewTime: Identifiable {
     timers.append(
       BrewTime(
         timerName: "Oolong Tea",
-        amount: 6,
+        waterAmount: 8,
+        teaAmount: 2,
         temperature: 195,
         timerLength: 150
       )
@@ -76,9 +81,19 @@ struct BrewTime: Identifiable {
     timers.append(
       BrewTime(
         timerName: "White Tea",
-        amount: 6,
+        waterAmount: 8,
+        teaAmount: 2,
         temperature: 175,
         timerLength: 150
+      )
+    )
+    timers.append(
+      BrewTime(
+        timerName: "Test",
+        waterAmount: 8,
+        teaAmount: 2,
+        temperature: 175,
+        timerLength: 5
       )
     )
     return timers
@@ -93,7 +108,21 @@ extension BrewTime: Hashable {
   func hash(into hasher: inout Hasher) {
     hasher.combine(id)
     hasher.combine(timerName)
+    hasher.combine(waterAmount)
+    hasher.combine(teaAmount)
     hasher.combine(temperature)
     hasher.combine(timerLength)
+  }
+}
+
+extension BrewTime {
+  static var previewObject: BrewTime {
+    return BrewTime(
+      timerName: "Test",
+      waterAmount: 6,
+      teaAmount: 2,
+      temperature: 100,
+      timerLength: 5
+    )
   }
 }

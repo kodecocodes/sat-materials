@@ -33,9 +33,11 @@
 import SwiftUI
 
 struct TimerView: View {
+  @ObservedObject var timerManager = TimerManager(length: 0)
   @State var brewTimer: BrewTime
   @State var showDone: BrewTime?
   @State var amountOfWater = 0.0
+
   var teaToUse: Double {
     let tspPerOz = brewTimer.teaAmount / brewTimer.waterAmount
     return tspPerOz * amountOfWater
@@ -45,32 +47,43 @@ struct TimerView: View {
     case .stopped:
       return Color.gray
     case .running:
-      return Color.red
+      return Color.blue
     case .done:
       return Color.green
     }
   }
-  @ObservedObject var timerManager = TimerManager(length: 0)
+
+  struct HeadingText: ViewModifier {
+    func body(content: Content) -> some View {
+      return content
+        .font(.title.bold())
+    }
+  }
+
+  struct InformationText: ViewModifier {
+    func body(content: Content) -> some View {
+      return content
+        .font(.title2)
+        .padding(.bottom, 15)
+    }
+  }
 
   var body: some View {
     NavigationStack {
       VStack(alignment: .leading, spacing: 5) {
         Text("Brewing Temperature")
-          .font(.title.bold())
+          .modifier(HeadingText())
         Text("\(brewTimer.temperature) °F")
-          .font(.title2)
-          .padding(.bottom, 15)
+          .modifier(InformationText())
         Text("Water Amount")
-          .font(.title.bold())
+          .modifier(HeadingText())
         Text("\(amountOfWater.formatted()) ounces")
-          .font(.title2)
-          .padding(.bottom, 15)
+          .modifier(InformationText())
         Slider(value: $amountOfWater, in: 0...24, step: 0.1)
         Text("Amount of Tea to Use")
-          .font(.title.bold())
+          .modifier(HeadingText())
         Text("\(teaToUse.formatted()) teaspoons")
-          .font(.title2)
-          .padding(.bottom, 15)
+          .modifier(InformationText())
       }
       CountingTimerView(timerManager: timerManager)
         .frame(maxWidth: .infinity)
@@ -90,7 +103,6 @@ struct TimerView: View {
     .font(.largeTitle)
     .onChange(of: timerManager.status) { newStatus in
       if newStatus == .done {
-        print(newStatus)
         showDone = brewTimer
       }
     }
@@ -105,32 +117,5 @@ struct TimerView_Previews: PreviewProvider {
     TimerView(
       brewTimer: BrewTime.previewObject
     )
-  }
-}
-
-struct CountingTimerView: View {
-  @ObservedObject var timerManager: TimerManager
-
-  var body: some View {
-    VStack(spacing: 15) {
-      Text(timerManager.remaingTimeAsString)
-      HStack {
-        Button {
-          timerManager.stop()
-        } label: {
-          Image(systemName: "stop.fill")
-        }
-        .disabled(!timerManager.active)
-        Spacer()
-          .frame(width: 30)
-        Button {
-          timerManager.start()
-        } label: {
-          Image(systemName: "play.fill")
-        }
-        .disabled(timerManager.active)
-      }
-    }
-    .padding(20)
   }
 }
