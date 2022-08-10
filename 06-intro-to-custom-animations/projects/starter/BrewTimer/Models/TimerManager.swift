@@ -33,6 +33,12 @@
 import SwiftUI
 import Combine
 
+enum TimerStatus {
+  case stopped
+  case running
+  case done
+}
+
 class TimerManager: ObservableObject {
   public var timerLength: Int
   @Published var startTime: Date?
@@ -40,22 +46,26 @@ class TimerManager: ObservableObject {
   @Published var remaingTime: Date
   @Published var active = false
   @Published var digits: [Int]
+  @Published var status: TimerStatus = .stopped
   private var originalTime: Int?
-
   private var activeTimer: Timer?
-  @objc func fireTimer() {
-    updateTimes()
-  }
+  private let zeroTime = Calendar.current.date(from: DateComponents(second: 0))
 
   func start() {
+    status = .running
     startTime = .now
     activeTimer = Timer.scheduledTimer(withTimeInterval: 0.25, repeats: true) { _ in
       self.updateTimes()
+      if self.remaingTime == self.zeroTime {
+        self.stop()
+        self.status = .done
+      }
     }
     active = true
   }
 
   func stop() {
+    status = .stopped
     startTime = nil
     activeTimer?.invalidate()
     activeTimer = nil

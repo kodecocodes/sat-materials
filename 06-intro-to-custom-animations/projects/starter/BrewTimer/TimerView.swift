@@ -35,8 +35,22 @@ import SwiftUI
 struct TimerView: View {
   @State var brewTimer: BrewTime
   @State var showDone: BrewTime?
+  @State var amountOfWater = 0.0
+  var teaToUse: Double {
+    let tspPerOz = brewTimer.teaAmount / brewTimer.waterAmount
+    return tspPerOz * amountOfWater
+  }
+  var timerBorderColor: Color {
+    switch timerManager.status {
+    case .stopped:
+      return Color.gray
+    case .running:
+      return Color.red
+    case .done:
+      return Color.green
+    }
+  }
   @ObservedObject var timerManager = TimerManager(length: 0)
-  let zeroTime = Calendar.current.date(from: DateComponents(second: 0))
 
   var body: some View {
     NavigationStack {
@@ -45,43 +59,43 @@ struct TimerView: View {
           .font(.title.bold())
         Text("\(brewTimer.temperature) °F")
           .font(.title2)
-        Text("Amount")
+          .padding(.bottom, 15)
+        Text("Water Amount")
           .font(.title.bold())
-        Text("\(brewTimer.amount) ounces")
+        Text("\(amountOfWater.formatted()) ounces")
           .font(.title2)
+          .padding(.bottom, 15)
+        Slider(value: $amountOfWater, in: 0...24, step: 0.1)
+        Text("Amount of Tea to Use")
+          .font(.title.bold())
+        Text("\(teaToUse.formatted()) teaspoons")
+          .font(.title2)
+          .padding(.bottom, 15)
       }
-      VStack {
-        Text(timerManager.remaingTimeAsString)
-        HStack {
-          Button {
-            timerManager.stop()
-          } label: {
-            Image(systemName: "stop.fill")
-          }
-          .disabled(!timerManager.active)
-          Button {
-            timerManager.start()
-          } label: {
-            Image(systemName: "play.fill")
-          }
-          .disabled(timerManager.active)
+      CountingTimerView(timerManager: timerManager)
+        .frame(maxWidth: .infinity)
+        .overlay {
+          RoundedRectangle(cornerRadius: 20)
+            .stroke(timerBorderColor, lineWidth: 5)
         }
-        Spacer()
+        .padding([.leading, .trailing], 5)
+      Spacer()
+    }
+    .padding()
+    .onAppear {
+      timerManager.setTime(length: brewTimer.timerLength)
+      amountOfWater = brewTimer.waterAmount
+    }
+    .navigationTitle("\(brewTimer.timerName) Timer")
+    .font(.largeTitle)
+    .onChange(of: timerManager.status) { newStatus in
+      if newStatus == .done {
+        print(newStatus)
+        showDone = brewTimer
       }
-      .navigationTitle("\(brewTimer.timerName) Timer")
-      .font(.largeTitle)
-      .onAppear {
-        timerManager.setTime(length: brewTimer.timerLength)
-      }
-      .onChange(of: timerManager.remaingTime) { timeLeft in
-        if timeLeft == zeroTime {
-          showDone = brewTimer
-          timerManager.stop()
-        }
-      }
-      .sheet(item: $showDone) { timer in
-        TimerComplete(timer: timer)
-      }
+    }
+    .sheet(item: $showDone) { timer in
+      TimerComplete(timer: timer)
     }
   }
 }
@@ -89,13 +103,34 @@ struct TimerView: View {
 struct TimerView_Previews: PreviewProvider {
   static var previews: some View {
     TimerView(
-      brewTimer:
-        BrewTime(
-          timerName: "Test",
-          amount: 6,
-          temperature: 100,
-          timerLength: 5
-        )
+      brewTimer: BrewTime.previewObject
     )
+  }
+}
+
+struct CountingTimerView: View {
+  @ObservedObject var timerManager: TimerManager
+
+  var body: some View {
+    VStack(spacing: 15) {
+      Text(timerManager.remaingTimeAsString)
+      HStack {
+        Button {
+          timerManager.stop()
+        } label: {
+          Image(systemName: "stop.fill")
+        }
+        .disabled(!timerManager.active)
+        Spacer()
+          .frame(width: 30)
+        Button {
+          timerManager.start()
+        } label: {
+          Image(systemName: "play.fill")
+        }
+        .disabled(timerManager.active)
+      }
+    }
+    .padding(20)
   }
 }

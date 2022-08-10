@@ -33,7 +33,7 @@
 import SwiftUI
 
 struct ContentView: View {
-  @State var timers = BrewTime.defaultTimers
+  @State var timers = BrewTime.baseTimers
 
   var body: some View {
     NavigationStack {
@@ -46,7 +46,6 @@ struct ContentView: View {
       }
       .navigationTitle("Brew Timer")
     }
-    .frame(maxWidth: .infinity, maxHeight: .infinity)
   }
 }
 

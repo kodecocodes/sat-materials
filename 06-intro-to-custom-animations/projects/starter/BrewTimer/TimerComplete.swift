@@ -36,10 +36,10 @@ struct TimerComplete: View {
   var timer: BrewTime
 
   var body: some View {
-    VStack {
-      Text("Timer Complete")
-        .font(.title)
-      Text("Your \(timer.timerName) timer is complete. Enjoy.")
+    VStack(spacing: 10) {
+      Text("Brew Timer Complete")
+        .font(.largeTitle)
+      Text("Your \(timer.timerName) tea should be ready. Enjoy.")
     }
   }
 }
@@ -47,13 +47,7 @@ struct TimerComplete: View {
 struct TimerComplete_Previews: PreviewProvider {
   static var previews: some View {
     TimerComplete(
-      timer:
-        BrewTime(
-          timerName: "Test",
-          amount: 6,
-          temperature: 100,
-          timerLength: 5
-        )
+      timer: BrewTime.previewObject
     )
   }
 }
