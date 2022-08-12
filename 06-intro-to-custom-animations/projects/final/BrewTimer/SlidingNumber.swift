@@ -32,35 +32,51 @@
 
 import SwiftUI
 
-struct CountingTimerView: View {
-  @ObservedObject var timerManager: TimerManager
+struct SlidingNumber: View, Animatable {
+  var number: Double
+  var animatableData: Double {
+    get {
+      number
+    }
+    set {
+      number = newValue
+    }
+  }
 
   var body: some View {
-    VStack(spacing: 15) {
-      TimerDigitsView(digits: timerManager.digits)
-      HStack {
-        Button {
-          timerManager.stop()
-        } label: {
-          Image(systemName: "stop.fill")
-        }
-        .disabled(!timerManager.active)
-        Spacer()
-          .frame(width: 30)
-        Button {
-          timerManager.start()
-        } label: {
-          Image(systemName: "play.fill")
-        }
-        .disabled(timerManager.active)
-      }
+    // 1
+    let digitArray = [number - 1, number, number + 1]
+      // 2
+      .map { Int($0).between(0, and: 10) }
+    let shift = 1 - number.truncatingRemainder(dividingBy: 1)
+
+    // 1
+    VStack {
+      Text(String(digitArray[0]))
+      Text(String(digitArray[1]))
+      Text(String(digitArray[2]))
     }
-    .padding(20)
+    // 2
+    .font(.largeTitle)
+    .fontWeight(.heavy)
+    // 3
+    .frame(width: 30, height: 40)
+    // 4
+    .offset(y: 40 * shift - 40)
+    // 5
+    .overlay {
+      RoundedRectangle(cornerRadius: 5)
+        .stroke(lineWidth: 1)
+    }
+    // 6
+    .clipShape(
+      RoundedRectangle(cornerRadius: 5)
+    )
   }
 }
 
-struct CountingTimerView_Previews: PreviewProvider {
+struct SlidingNumber_Previews: PreviewProvider {
   static var previews: some View {
-    CountingTimerView(timerManager: TimerManager(length: 5))
+    SlidingNumber(number: 3)
   }
 }

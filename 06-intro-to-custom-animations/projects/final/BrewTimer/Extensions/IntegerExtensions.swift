@@ -30,37 +30,18 @@
 /// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 /// THE SOFTWARE.
 
-import SwiftUI
+import Foundation
 
-struct CountingTimerView: View {
-  @ObservedObject var timerManager: TimerManager
-
-  var body: some View {
-    VStack(spacing: 15) {
-      TimerDigitsView(digits: timerManager.digits)
-      HStack {
-        Button {
-          timerManager.stop()
-        } label: {
-          Image(systemName: "stop.fill")
-        }
-        .disabled(!timerManager.active)
-        Spacer()
-          .frame(width: 30)
-        Button {
-          timerManager.start()
-        } label: {
-          Image(systemName: "play.fill")
-        }
-        .disabled(timerManager.active)
-      }
+extension Int {
+  func between(_ low: Int, and high: Int) -> Int {
+    let range = high - low
+    var value = self
+    while value < low {
+      value += range
     }
-    .padding(20)
-  }
-}
-
-struct CountingTimerView_Previews: PreviewProvider {
-  static var previews: some View {
-    CountingTimerView(timerManager: TimerManager(length: 5))
+    while value >= high {
+      value -= range
+    }
+    return value
   }
 }

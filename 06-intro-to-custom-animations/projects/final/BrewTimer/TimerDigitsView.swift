@@ -32,35 +32,32 @@
 
 import SwiftUI
 
-struct CountingTimerView: View {
-  @ObservedObject var timerManager: TimerManager
+struct TimerDigitsView: View {
+  var digits: [Int]
+  var hasMinutes: Bool {
+    return digits[0] != 0 || digits[1] != 0
+  }
 
   var body: some View {
-    VStack(spacing: 15) {
-      TimerDigitsView(digits: timerManager.digits)
-      HStack {
-        Button {
-          timerManager.stop()
-        } label: {
-          Image(systemName: "stop.fill")
+    HStack {
+      if hasMinutes {
+        if digits[0] != 0 {
+          SlidingNumber(number: Double(digits[0]))
         }
-        .disabled(!timerManager.active)
-        Spacer()
-          .frame(width: 30)
-        Button {
-          timerManager.start()
-        } label: {
-          Image(systemName: "play.fill")
-        }
-        .disabled(timerManager.active)
+        SlidingNumber(number: Double(digits[1]))
+        Text("m")
       }
+      if hasMinutes || digits[2] != 0 {
+        SlidingNumber(number: Double(digits[2]))
+      }
+      SlidingNumber(number: Double(digits[3]))
+      Text("s")
     }
-    .padding(20)
   }
 }
 
-struct CountingTimerView_Previews: PreviewProvider {
+struct TimerDigitsView_Previews: PreviewProvider {
   static var previews: some View {
-    CountingTimerView(timerManager: TimerManager(length: 5))
+    TimerDigitsView(digits: [1, 0, 0, 4])
   }
 }
