@@ -34,7 +34,7 @@ import SwiftUI
 
 struct SeatsSelectionView: View {
   var event: Event
-  
+
   var body: some View {
     VStack {
       VStack {
@@ -46,15 +46,14 @@ struct SeatsSelectionView: View {
           .padding([.top, .horizontal])
           .shadow(radius: 2)
           .zIndex(1)
-        
+
         HStack {
-          
           Text(event.date)
             .font(.subheadline)
             .foregroundColor(.white)
-          
+
           Spacer()
-          
+
           Image("cart")
             .renderingMode(.template)
             .resizable()
@@ -65,14 +64,13 @@ struct SeatsSelectionView: View {
         }.padding(.horizontal)
           .shadow(radius: 2)
       }
-      .transition(.move(edge: .top).combined(with: .opacity))
-      
+
       Spacer()
-      
+
       Text("Something is missing here!")
-      
+
       Spacer()
-      
+
       Button(action: {
       }, label: {
         Text("Buy Tickets")

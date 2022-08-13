@@ -65,13 +65,12 @@ struct SeatsSelectionView: View {
         }.padding(.horizontal)
           .shadow(radius: 2)
       }
-      .transition(.move(edge: .top).combined(with: .opacity))
       
       Spacer()
       
       SeatingChartView()
         .aspectRatio(1.0, contentMode: .fit)
-        .zIndex(0)
+        .padding()
       
       Spacer()
       

@@ -9,84 +9,53 @@
 import SwiftUI
 
 struct SeatingChartView: View {
-  @State private var stadiumPathPercentage: CGFloat = .zero
-  @State private var tribunesPercentage: CGFloat = .zero
+  @State private var percentage: CGFloat = .zero
   @State private var zoom = 1.25
-  @State private var rotation = Angle.radians(.pi / 2)
+  @State private var rotation: Angle = .radians(.pi / 2)
   @State private var zoomAnchor = UnitPoint.center
   @State private var selectedTribune: Tribune? = nil
   @State private var field = CGRect.zero
   @State private var tribunes: [Int: [Tribune]] = [:]
   
-  private let maxZoom = 8.0
-  private let minZoom = 1.25
-  
   var body: some View {
     GeometryReader { proxy in
       ZStack {
-        Path {
-          $0.addRect(field)
-        }.trim(from: 0, to: stadiumPathPercentage).fill(.green)
+        Field().path(in: field).trim(from: 0, to: percentage).fill(.green)
+        Field().path(in: field).trim(from: 0, to: percentage).stroke(.white, lineWidth: 2)
         Stadium(field: $field, tribunes: $tribunes)
-          .trim(from: 0, to: stadiumPathPercentage)
-          .stroke(lineWidth: 2)
-          .foregroundColor(.white)
-          .contentShape(Rectangle())
-          .onAppear {
-            
-            withAnimation(.easeInOut(duration: 1)) {
-              self.stadiumPathPercentage = 1
-            }
-          }
-          .shadow(radius: 16)
+          .trim(from: 0, to: percentage)
+          .stroke(.white, lineWidth: 2)
         
         ForEach(tribunes.flatMap { $0.value }, id: \.self) { tribune in
           tribune.path
-            .trim(from: 0, to: tribunesPercentage)
-            .stroke(style: StrokeStyle(lineWidth: 1, lineJoin: .round))
-            .foregroundColor(.white)
+            .trim(from: 0, to: percentage)
+            .stroke(.white, style: StrokeStyle(lineWidth: 1, lineJoin: .round))
             .background(tribune.path
-              .trim(from: 0, to: tribunesPercentage)
+              .trim(from: 0, to: percentage)
               .fill(selectedTribune == tribune ? .white : .blue)
             )
             .onTapGesture(coordinateSpace: .named("stadium")) { tap in
-              let selected = selectedTribune == nil
-              withAnimation(.easeInOut(duration: 0.5)) {
-                selectedTribune = selected ? tribune : nil
-                if selected {
-                  zoomAnchor = UnitPoint(x: tap.x / proxy.size.width, y: tap.y / proxy.size.width)
-                }
-              }
-              withAnimation(.easeInOut(duration: 1)) {
-                if selected {
-                  zoom = maxZoom
-                } else {
-                  zoom = minZoom
-                  zoomAnchor = .center
-                }
-              }
-            }
-            .shadow(radius: 4)
-            .onAppear {
-              after(0.5) {
-                withAnimation(.easeInOut(duration: 1)) {
-                  self.tribunesPercentage = 1
-                }
-              }
+              let unselected = tribune == selectedTribune
+              let anchor = UnitPoint(x: tap.x / proxy.size.width,
+                                     y: tap.y / proxy.size.height)
+                              
+              LinkedAnimation.easeInOut(for: 0.7) {
+                zoom = unselected ? 1.25 : 12
+              }.link(to: .easeInOut(for: 0.3) {
+                selectedTribune = unselected ? nil : tribune
+                zoomAnchor = unselected ? .center : anchor
+              }, reverse: !unselected)
             }
         }
       }
-      .rotationEffect(rotation, anchor: UnitPoint(
-        x: field.midX / proxy.size.width,
-        y: field.midY / proxy.size.height)
-      )
-      .scaleEffect(zoom, anchor: zoomAnchor)
+      .rotationEffect(rotation)
       .coordinateSpace(name: "stadium")
-      .onTapGesture {
-        withAnimation(.easeInOut(duration: 1)) {
-          zoomAnchor = .center
-          zoom = 1.25
-          selectedTribune = nil
+      .scaleEffect(zoom, anchor: zoomAnchor)
+      .onChange(of: tribunes) {
+        if $0.keys.count == sectorsNumber {
+          withAnimation(.easeInOut(duration: 1.0)) {
+            percentage = 1.0
+          }
         }
       }
     }
@@ -98,27 +67,24 @@ struct Stadium: Shape {
   @Binding var field: CGRect
   @Binding var tribunes: [Int: [Tribune]]
   
-  private let widthToHeightRatio = 1.3
-  
   func path(in rect: CGRect) -> Path {
     var path = Path()
     let width = rect.width
     
     var smallestSectorFrame = CGRect.zero
     
-    // Adding the sectors
-    let sectionsNumber = 4
-    let sectionDiff = width / (CGFloat(sectionsNumber) * 2.2)
-    let tribuneHeight = sectionDiff / 3.0
+    let widthToHeightRatio = 1.3
+    let sectorDiff = width / (CGFloat(sectorsNumber) * 2)
+    let tribuneHeight = sectorDiff / 3.0
     let tribuneWidth = tribuneHeight * 1.5
     
-    (0..<sectionsNumber).forEach { i in
-      let sectionWidth = width - sectionDiff * Double(i + 1)
-      let sectionHeight = width / widthToHeightRatio - sectionDiff * Double(i + 1)
+    (0..<sectorsNumber).forEach { sectorIndex in
+      let sectionWidth = width - sectorDiff * Double(sectorIndex)
+      let sectionHeight = width / widthToHeightRatio - sectorDiff * Double(sectorIndex)
       let offsetX = (width - sectionWidth) / 2.0
       let offsetY = (width - sectionHeight) / 2.0
       
-      smallestSectorFrame = CGRect(
+      let sectorRect = CGRect(
         x: offsetX,
         y: offsetY,
         width: sectionWidth,
@@ -127,24 +93,16 @@ struct Stadium: Shape {
       
       path.addPath(Sector(
         tribunes: $tribunes,
-        index: i,
+        index: sectorIndex,
         tribuneHeight: tribuneHeight,
-        tribuneWidth: tribuneWidth - (tribuneWidth / CGFloat(sectionsNumber * 2)) * Double(i),
-        offset: (sectionDiff - tribuneHeight * 2.0) / 4.0 // top and bottom spacings for the top and bottom rows
-      ).path(in: smallestSectorFrame))
+        tribuneWidth: tribuneWidth - (tribuneWidth / CGFloat(sectorsNumber * 2)) * Double(sectorIndex),
+        offset: (sectorDiff / 2 - tribuneHeight) / 2.0
+      ).path(in: sectorRect))
+      
+      smallestSectorFrame = sectorRect
     }
     
     computeField(in: smallestSectorFrame)
-    path.addRect(field)
-    path.move(to: CGPoint(x: field.midX, y: field.minY))
-    path.addLine(to: CGPoint(x: field.midX, y: field.maxY))
-    path.move(to: CGPoint(x: field.midX, y: field.midX))
-    path.addEllipse(in: CGRect(
-      x: field.midX - field.width / 8.0,
-      y: field.midY - field.width / 8.0,
-      width: field.width / 4.0,
-      height: field.width / 4.0)
-    )
 
     return path
   }
@@ -158,6 +116,23 @@ struct Stadium: Shape {
         height: rect.height * 0.5
       )
     }
+  }
+}
+
+struct Field: Shape {
+  func path(in rect: CGRect) -> Path {
+    var path = Path()
+    path.addRect(rect)
+    path.move(to: CGPoint(x: rect.midX, y: rect.minY))
+    path.addLine(to: CGPoint(x: rect.midX, y: rect.maxY))
+    path.move(to: CGPoint(x: rect.midX, y: rect.midX))
+    path.addEllipse(in: CGRect(
+      x: rect.midX - rect.width / 8.0,
+      y: rect.midY - rect.width / 8.0,
+      width: rect.width / 4.0,
+      height: rect.width / 4.0)
+    )
+    return path
   }
 }
 
@@ -227,15 +202,16 @@ struct Sector: Shape {
           y: center.y + radius * sin(previousAngle + spacingAngle)
         )
         let startingInnerPoint = CGPoint(
-          x: center.x + radius * cos(previousAngle + spacingAngle + angle),
-          y: center.y + radius * sin(previousAngle + spacingAngle + angle)
+          x: center.x + innerRadius * cos(previousAngle + spacingAngle + angle),
+          y: center.y + innerRadius * sin(previousAngle + spacingAngle + angle)
         )
         
         tribunes.append(Tribune(path: ArcTribune(
           center: center,
           radius: radius,
           innerRadius: innerRadius,
-          points: [startingPoint, startingInnerPoint],
+          startingPoint: startingPoint,
+          startingInnerPoint: startingInnerPoint,
           startAngle: previousAngle + spacingAngle,
           endAngle: previousAngle + spacingAngle + angle
         ).path(in: CGRect.zero)))
@@ -256,13 +232,13 @@ struct Sector: Shape {
     let spacingV = (segmentHeight - tribuneWidth * CGFloat(tribunesNumberV)) / CGFloat(tribunesNumberV)
     
     var tribunes = [Tribune]()
-    (0..<tribunesNumberH).forEach { i in
-      let x = rect.minX + (tribuneWidth + spacingH) * CGFloat(i) + corner + spacingH / 2
+    (0..<tribunesNumberH).forEach { tribune in
+      let x = rect.minX + (tribuneWidth + spacingH) * CGFloat(tribune) + corner + spacingH / 2
       tribunes.append(makeRectTribuneAt(x: x, y: rect.minY + offset))
       tribunes.append(makeRectTribuneAt(x: x, y: rect.maxY - offset - tribuneHeight))
     }
-    (0..<tribunesNumberV).forEach { i in
-      let y = rect.minY + (tribuneWidth + spacingV) * CGFloat(i) + corner + spacingV / 2
+    (0..<tribunesNumberV).forEach { tribune in
+      let y = rect.minY + (tribuneWidth + spacingV) * CGFloat(tribune) + corner + spacingV / 2
       tribunes.append(makeRectTribuneAt(x: rect.minX + offset, y: y, rotated: true))
       tribunes.append(makeRectTribuneAt(x: rect.maxX - offset - tribuneHeight, y: y, rotated: true))
     }
@@ -271,22 +247,20 @@ struct Sector: Shape {
   }
   
   private func makeRectTribuneAt(x: CGFloat, y: CGFloat, rotated: Bool = false) -> Tribune {
-    return Tribune(path: RectTribune(rect: CGRect(
+    return Tribune(path: RectTribune().path(in: CGRect(
       x: x,
       y: y,
       width: rotated ? tribuneHeight : tribuneWidth,
       height: rotated ? tribuneWidth : tribuneHeight
-    )).path(in: CGRect.zero))
+    )))
   }
 }
 
 struct RectTribune: Shape {
-  var rect: CGRect
   
   func path(in rect: CGRect) -> Path {
     var path = Path()
-    path.move(to: CGPoint(x: self.rect.maxX, y: self.rect.minY))
-    path.addRect(self.rect)
+    path.addRect(rect)
     path.closeSubpath()
     return path
   }
@@ -296,21 +270,14 @@ struct ArcTribune: Shape {
   var center: CGPoint
   var radius: CGFloat
   var innerRadius: CGFloat
-  var points: [CGPoint]
+  var startingPoint: CGPoint
+  var startingInnerPoint: CGPoint
   var startAngle: CGFloat
   var endAngle: CGFloat
   
   func path(in rect: CGRect) -> Path {
     var path = Path()
-    path.move(to: points[1])
-    path.addArc(
-      center: center,
-      radius: innerRadius,
-      startAngle: .radians(endAngle),
-      endAngle: .radians(startAngle),
-      clockwise: true
-    )
-    path.addLine(to: points[0])
+    path.move(to: startingPoint)
     path.addArc(
       center: center,
       radius: radius,
@@ -318,7 +285,14 @@ struct ArcTribune: Shape {
       endAngle: .radians(endAngle),
       clockwise: false
     )
-    path.addLine(to: points[1])
+    path.addLine(to: startingInnerPoint)
+    path.addArc(
+      center: center,
+      radius: innerRadius,
+      startAngle: .radians(endAngle),
+      endAngle: .radians(startAngle),
+      clockwise: true
+    )
     path.closeSubpath()
     
     return path
