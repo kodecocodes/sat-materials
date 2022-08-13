@@ -45,10 +45,10 @@ struct SlidingNumber: View, Animatable {
 
   var body: some View {
     // 1
-    let digitArray = [number - 1, number, number + 1]
+    let digitArray = [number + 1, number, number - 1]
       // 2
       .map { Int($0).between(0, and: 10) }
-    let shift = 1 - number.truncatingRemainder(dividingBy: 1)
+    let shift = number.truncatingRemainder(dividingBy: 1)
 
     // 1
     VStack {
@@ -62,16 +62,16 @@ struct SlidingNumber: View, Animatable {
     // 3
     .frame(width: 30, height: 40)
     // 4
-    .offset(y: 40 * shift - 40)
-    // 5
-    .overlay {
-      RoundedRectangle(cornerRadius: 5)
-        .stroke(lineWidth: 1)
-    }
-    // 6
-    .clipShape(
-      RoundedRectangle(cornerRadius: 5)
-    )
+    .offset(y: 40 * shift)
+    // 1
+    //.overlay {
+    //  RoundedRectangle(cornerRadius: 5)
+    //    .stroke(lineWidth: 1)
+    //}
+    // 2
+    //.clipShape(
+    //  RoundedRectangle(cornerRadius: 5)
+    //)
   }
 }
 
