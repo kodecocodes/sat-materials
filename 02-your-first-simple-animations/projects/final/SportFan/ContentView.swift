@@ -45,14 +45,14 @@ struct ContentView: View {
         await update()
       }
       ZStack(alignment: Alignment(horizontal: .center, vertical: .top)) {
+        BallView(pullToRefresh: $pullToRefresh)
         LazyVStack {
           ForEach(events) {
             EventView(event: $0)
           }
         }.animation(.easeIn, value: events)
           .offset(y: pullToRefresh.state == .ongoing || pullToRefresh.state == .preparingToFinish ? maxOffset : 0)
-          .animation(pullToRefresh.state < .finishing ? spring : ease, value: pullToRefresh.state)
-        BallView(pullToRefresh: $pullToRefresh)
+          .animation(pullToRefresh.state != .finishing ? spring : ease, value: pullToRefresh.state)
       }
     }
   }

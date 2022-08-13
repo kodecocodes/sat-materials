@@ -37,10 +37,6 @@ struct PullToRefresh: Equatable {
   var state: AnimationState
 }
 
-enum AnimationState: Int, Comparable {
-  static func < (lhs: AnimationState, rhs: AnimationState) -> Bool {
-    lhs.rawValue < rhs.rawValue
-  }
-  
+enum AnimationState: Int {
   case idle = 0, pulling, ongoing, preparingToFinish, finishing
 }
