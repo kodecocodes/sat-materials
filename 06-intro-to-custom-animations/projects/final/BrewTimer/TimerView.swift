@@ -127,7 +127,6 @@ struct TimerView: View {
       if newStatus == .running {
         // 2
         withAnimation(
-          // 3
           .linear(duration: 1.0)
           // 4
           .repeatForever(autoreverses: false)
