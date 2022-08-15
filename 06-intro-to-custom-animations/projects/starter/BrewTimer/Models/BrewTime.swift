@@ -87,15 +87,7 @@ struct BrewTime: Identifiable {
         timerLength: 150
       )
     )
-    timers.append(
-      BrewTime(
-        timerName: "Test",
-        waterAmount: 8,
-        teaAmount: 2,
-        temperature: 175,
-        timerLength: 5
-      )
-    )
+
     return timers
   }
 }
