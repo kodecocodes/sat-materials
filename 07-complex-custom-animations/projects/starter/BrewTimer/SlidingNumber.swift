@@ -64,14 +64,14 @@ struct SlidingNumber: View, Animatable {
     // 4
     .offset(y: 40 * shift)
     // 1
-    //.overlay {
-    //  RoundedRectangle(cornerRadius: 5)
-    //    .stroke(lineWidth: 1)
-    //}
+    .overlay {
+      RoundedRectangle(cornerRadius: 5)
+        .stroke(lineWidth: 1)
+    }
     // 2
-    //.clipShape(
-    //  RoundedRectangle(cornerRadius: 5)
-    //)
+    .clipShape(
+      RoundedRectangle(cornerRadius: 5)
+    )
   }
 }
 
