@@ -97,19 +97,19 @@ class TimerManager: ObservableObject {
 
     guard let startTime else {
       let now = Date.now
-      let timerLength = Calendar.current.date(
+      guard let timerLength = Calendar.current.date(
         byAdding: .second,
         value: timerLength,
         to: now
-      )!
+      ) else { return "--" }
       return formatter.string(from: now, to: timerLength) ?? "--"
     }
 
-    let endTime = Calendar.current.date(
+    guard let endTime = Calendar.current.date(
       byAdding: .second,
       value: timerLength,
       to: startTime
-    )!
+    ) else { return "--" }
     return formatter.string(from: .now, to: endTime) ?? "--"
   }
 

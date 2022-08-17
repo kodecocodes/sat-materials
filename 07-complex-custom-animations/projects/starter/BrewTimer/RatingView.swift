@@ -32,39 +32,54 @@
 
 import SwiftUI
 
-struct TimerComplete: View {
-  @Binding var brewResult: BrewResult?
-  @State var rating: Int = 0
-  @Environment(\.presentationMode) var presentationMode
+struct RatingView: View {
+  @Binding var rating: Int
+  @Environment(\.isEnabled) var isEnabled
 
   var body: some View {
-    VStack(spacing: 10) {
-      Text("Brew Timer Complete")
-        .font(.largeTitle)
-      Text("Your \((brewResult?.name ?? "")) tea should be ready. Enjoy.")
-      Text("Rate Your Brew")
-      RatingView(rating: $rating)
-        .tint(.yellow)
-      Button("Save Rating") {
-        guard let brew = brewResult else { return }
-        brewResult = BrewResult(
-          name: brew.name,
-          time: brew.time,
-          temperature: brew.temperature,
-          amountWarer: brew.amountWarer,
-          amountTea: brew.amountTea,
-          rating: rating
-        )
-        presentationMode.wrappedValue.dismiss()
+    HStack {
+      Button {
+        if isEnabled {
+          rating = 1
+        }
+      } label: {
+        Image(systemName: rating >= 1 ? "star.fill" : "star")
+      }
+      Button {
+        if isEnabled {
+          rating = 2
+        }
+      } label: {
+        Image(systemName: rating >= 2 ? "star.fill" : "star")
+      }
+      Button {
+        if isEnabled {
+          rating = 3
+        }
+      } label: {
+        Image(systemName: rating >= 3 ? "star.fill" : "star")
+      }
+      Button {
+        if isEnabled {
+          rating = 4
+        }
+      } label: {
+        Image(systemName: rating >= 4 ? "star.fill" : "star")
+      }
+      Button {
+        if isEnabled {
+          rating = 5
+        }
+      } label: {
+        Image(systemName: rating == 5 ? "star.fill" : "star")
       }
     }
   }
 }
 
-struct TimerComplete_Previews: PreviewProvider {
+struct RatingView_Previews: PreviewProvider {
   static var previews: some View {
-    TimerComplete(
-      brewResult: .constant(BrewResult.sampleResult)
-    )
+    RatingView(rating: .constant(3))
+      .tint(.yellow)
   }
 }

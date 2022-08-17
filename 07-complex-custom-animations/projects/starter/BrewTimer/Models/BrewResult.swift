@@ -30,41 +30,27 @@
 /// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 /// THE SOFTWARE.
 
-import SwiftUI
+import Foundation
 
-struct TimerComplete: View {
-  @Binding var brewResult: BrewResult?
-  @State var rating: Int = 0
-  @Environment(\.presentationMode) var presentationMode
-
-  var body: some View {
-    VStack(spacing: 10) {
-      Text("Brew Timer Complete")
-        .font(.largeTitle)
-      Text("Your \((brewResult?.name ?? "")) tea should be ready. Enjoy.")
-      Text("Rate Your Brew")
-      RatingView(rating: $rating)
-        .tint(.yellow)
-      Button("Save Rating") {
-        guard let brew = brewResult else { return }
-        brewResult = BrewResult(
-          name: brew.name,
-          time: brew.time,
-          temperature: brew.temperature,
-          amountWarer: brew.amountWarer,
-          amountTea: brew.amountTea,
-          rating: rating
-        )
-        presentationMode.wrappedValue.dismiss()
-      }
-    }
-  }
+struct BrewResult: Identifiable {
+  var id = UUID()
+  var name: String
+  var time: Int
+  var temperature: Int
+  var amountWarer: Double
+  var amountTea: Double
+  var rating: Int
 }
 
-struct TimerComplete_Previews: PreviewProvider {
-  static var previews: some View {
-    TimerComplete(
-      brewResult: .constant(BrewResult.sampleResult)
+extension BrewResult {
+  static var sampleResult: BrewResult {
+    BrewResult(
+      name: "Test",
+      time: 120,
+      temperature: 180,
+      amountWarer: 8,
+      amountTea: 2,
+      rating: 2
     )
   }
 }

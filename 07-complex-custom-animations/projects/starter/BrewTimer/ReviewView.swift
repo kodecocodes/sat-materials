@@ -32,39 +32,25 @@
 
 import SwiftUI
 
-struct TimerComplete: View {
-  @Binding var brewResult: BrewResult?
-  @State var rating: Int = 0
-  @Environment(\.presentationMode) var presentationMode
+struct ReviewView: View {
+  var result: BrewResult
 
   var body: some View {
-    VStack(spacing: 10) {
-      Text("Brew Timer Complete")
-        .font(.largeTitle)
-      Text("Your \((brewResult?.name ?? "")) tea should be ready. Enjoy.")
-      Text("Rate Your Brew")
-      RatingView(rating: $rating)
+    HStack {
+      Text(result.name)
+      Text("\(result.temperature)°F")
+      Text(result.time, format: .number)
+      Spacer()
+      RatingView(rating: .constant(result.rating))
         .tint(.yellow)
-      Button("Save Rating") {
-        guard let brew = brewResult else { return }
-        brewResult = BrewResult(
-          name: brew.name,
-          time: brew.time,
-          temperature: brew.temperature,
-          amountWarer: brew.amountWarer,
-          amountTea: brew.amountTea,
-          rating: rating
-        )
-        presentationMode.wrappedValue.dismiss()
-      }
     }
   }
 }
 
-struct TimerComplete_Previews: PreviewProvider {
+struct ReviewView_Previews: PreviewProvider {
   static var previews: some View {
-    TimerComplete(
-      brewResult: .constant(BrewResult.sampleResult)
+    ReviewView(
+      result: BrewResult.sampleResult
     )
   }
 }

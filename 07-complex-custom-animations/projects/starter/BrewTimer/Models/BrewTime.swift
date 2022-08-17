@@ -39,6 +39,7 @@ struct BrewTime: Identifiable {
   var teaAmount: Double
   var temperature: Int
   var timerLength: Int
+  var evaluation: [BrewResult]
 
   static var baseTimers: [BrewTime] {
     var timers: [BrewTime] = []
@@ -48,25 +49,47 @@ struct BrewTime: Identifiable {
         waterAmount: 8,
         teaAmount: 2,
         temperature: 200,
-        timerLength: 240
+        timerLength: 240,
+        evaluation: [BrewResult]()
       )
     )
-    timers.append(
-      BrewTime(
-        timerName: "Green Tea",
-        waterAmount: 8,
-        teaAmount: 2,
+    var brew = BrewTime(
+      timerName: "Green Tea",
+      waterAmount: 8,
+      teaAmount: 2,
+      temperature: 175,
+      timerLength: 90,
+      evaluation: [BrewResult]()
+    )
+    brew.evaluation.append(
+      BrewResult(
+        name: "Green Tea",
+        time: 90,
         temperature: 175,
-        timerLength: 90
+        amountWarer: 8,
+        amountTea: 2,
+        rating: 4
       )
     )
+    brew.evaluation.append(
+      BrewResult(
+        name: "Green Tea",
+        time: 90,
+        temperature: 175,
+        amountWarer: 16,
+        amountTea: 4,
+        rating: 4
+      )
+    )
+    timers.append(brew)
     timers.append(
       BrewTime(
         timerName: "Herbal Tea",
         waterAmount: 8,
         teaAmount: 2,
         temperature: 208,
-        timerLength: 300
+        timerLength: 300,
+        evaluation: [BrewResult]()
       )
     )
     timers.append(
@@ -75,7 +98,8 @@ struct BrewTime: Identifiable {
         waterAmount: 8,
         teaAmount: 2,
         temperature: 195,
-        timerLength: 150
+        timerLength: 150,
+        evaluation: [BrewResult]()
       )
     )
     timers.append(
@@ -84,10 +108,11 @@ struct BrewTime: Identifiable {
         waterAmount: 8,
         teaAmount: 2,
         temperature: 175,
-        timerLength: 150
+        timerLength: 150,
+        evaluation: [BrewResult]()
       )
     )
-    
+
     return timers
   }
 }
@@ -114,7 +139,8 @@ extension BrewTime {
       waterAmount: 6,
       teaAmount: 2,
       temperature: 100,
-      timerLength: 5
+      timerLength: 5,
+      evaluation: [BrewResult]()
     )
   }
 }

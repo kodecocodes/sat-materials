@@ -35,15 +35,18 @@ import SwiftUI
 struct TimerView: View {
   @ObservedObject var timerManager = TimerManager(length: 0)
   @State var brewTimer: BrewTime
-  @State var showDone: BrewTime?
+  @State var showDone = false
   @State var amountOfWater = 0.0
   @State var animateTimer = 0.0
   @State var brewingTemp = 0
+  @State var timerLength = 0.0
+  @State var sheetResult: BrewResult?
 
   var teaToUse: Double {
     let tspPerOz = brewTimer.teaAmount / brewTimer.waterAmount
     return tspPerOz * amountOfWater
   }
+
   var timerBorderColor: Color {
     switch timerManager.status {
     case .stopped:
@@ -107,11 +110,23 @@ struct TimerView: View {
           }
         }
         .padding([.leading, .trailing], 5)
+      Slider(value: $timerLength, in: 0...600, step: 15)
+      if !brewTimer.evaluation.isEmpty {
+        List {
+          Section(header: Text("Ratings").font(.footnote)) {
+            ForEach(brewTimer.evaluation) { evaluation in
+              ReviewView(result: evaluation)
+                .font(.footnote)
+            }
+          }
+        }
+      }
       Spacer()
     }
     .padding()
     .onAppear {
       timerManager.setTime(length: brewTimer.timerLength)
+      timerLength = Double(brewTimer.timerLength)
       amountOfWater = brewTimer.waterAmount
       withAnimation(.easeOut(duration: 1.0)) {
         brewingTemp = brewTimer.temperature
@@ -121,23 +136,38 @@ struct TimerView: View {
     .font(.largeTitle)
     .onChange(of: timerManager.status) { newStatus in
       if newStatus == .done {
-        showDone = brewTimer
+        let newResult = BrewResult(
+          name: brewTimer.timerName,
+          time: Int(timerLength),
+          temperature: brewingTemp,
+          amountWarer: amountOfWater,
+          amountTea: teaToUse,
+          rating: 0
+        )
+        sheetResult = newResult
+        showDone = true
       }
-      // 1
       if newStatus == .running {
-        // 2
         withAnimation(
           .linear(duration: 1.0)
-          // 4
           .repeatForever(autoreverses: false)
         ) {
-          // 5
           animateTimer = 1.0
         }
       }
     }
-    .sheet(item: $showDone) { timer in
-      TimerComplete(timer: timer)
+    .onChange(of: timerLength) { newValue in
+      timerManager.setTime(length: Int(newValue))
+    }
+    .sheet(
+      isPresented: $showDone,
+      onDismiss: {
+        guard let result = sheetResult else { return }
+        brewTimer.evaluation.append(result)
+      }
+    ) {
+      TimerComplete(
+        brewResult: $sheetResult)
     }
   }
 }
