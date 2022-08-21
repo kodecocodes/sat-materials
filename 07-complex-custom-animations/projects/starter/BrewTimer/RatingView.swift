@@ -38,40 +38,14 @@ struct RatingView: View {
 
   var body: some View {
     HStack {
-      Button {
-        if isEnabled {
-          rating = 1
+      ForEach(1..<6, id: \.self) { starNumber in
+        Button {
+          if isEnabled {
+            rating = starNumber
+          }
+        } label: {
+          Image(systemName: rating >= starNumber ? "star.fill" : "star")
         }
-      } label: {
-        Image(systemName: rating >= 1 ? "star.fill" : "star")
-      }
-      Button {
-        if isEnabled {
-          rating = 2
-        }
-      } label: {
-        Image(systemName: rating >= 2 ? "star.fill" : "star")
-      }
-      Button {
-        if isEnabled {
-          rating = 3
-        }
-      } label: {
-        Image(systemName: rating >= 3 ? "star.fill" : "star")
-      }
-      Button {
-        if isEnabled {
-          rating = 4
-        }
-      } label: {
-        Image(systemName: rating >= 4 ? "star.fill" : "star")
-      }
-      Button {
-        if isEnabled {
-          rating = 5
-        }
-      } label: {
-        Image(systemName: rating == 5 ? "star.fill" : "star")
       }
     }
   }
