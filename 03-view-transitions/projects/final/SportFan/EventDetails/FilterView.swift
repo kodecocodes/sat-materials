@@ -108,7 +108,7 @@ struct FilterModifier: ViewModifier {
   func body(content: Content) -> some View {
     content
       .scaleEffect(active ? 0.75 : 1)
-      .rotationEffect(.degrees(active ? .random(in: -45...45) : 0), anchor: .center)
+      .rotationEffect(.degrees(active ? .random(in: -25...25) : 0), anchor: .center)
   }
 }
 

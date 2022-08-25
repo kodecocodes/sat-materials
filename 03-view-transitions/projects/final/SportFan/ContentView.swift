@@ -73,14 +73,8 @@ struct ContentView: View {
           .clipped()
           .contentShape(Rectangle())
           .onTapGesture {
-            if filterShown {
-              withAnimation {
-                filterShown = false
-              }
-            } else {
-              withAnimation(spring.speed(1.5)) {
-                filterShown = true
-              }
+            withAnimation(filterShown ? .easeInOut : .interpolatingSpring(stiffness: 20, damping: 3).speed(2.5)) {
+              filterShown.toggle()
             }
           }
       }
