@@ -45,11 +45,13 @@ struct TimerView: View {
   var timerBorderColor: Color {
     switch timerManager.status {
     case .stopped:
-      return Color.gray
+      return Color.red
     case .running:
       return Color.blue
     case .done:
       return Color.green
+    case .paused:
+      return Color.gray
     }
   }
 
@@ -70,36 +72,50 @@ struct TimerView: View {
 
   var body: some View {
     NavigationStack {
-      VStack(alignment: .leading, spacing: 5) {
-        Text("Brewing Temperature")
-          .modifier(HeadingText())
-        Text("\(brewTimer.temperature) °F")
-          .modifier(InformationText())
-        Text("Water Amount")
-          .modifier(HeadingText())
-        Text("\(amountOfWater.formatted()) ounces")
-          .modifier(InformationText())
-        Slider(value: $amountOfWater, in: 0...24, step: 0.1)
-        Text("Amount of Tea to Use")
-          .modifier(HeadingText())
-        Text("\(teaToUse.formatted()) teaspoons")
-          .modifier(InformationText())
-      }
-      CountingTimerView(timerManager: timerManager)
-        .frame(maxWidth: .infinity)
-        .overlay {
-          RoundedRectangle(cornerRadius: 20)
-            .stroke(timerBorderColor, lineWidth: 5)
+      ZStack {
+        Color("BlackRussian")
+          .ignoresSafeArea()
+        VStack(alignment: .leading, spacing: 5) {
+          Group {
+            Text("Brewing Temperature")
+              .modifier(HeadingText())
+            Text("\(brewTimer.temperature) °F")
+              .modifier(InformationText())
+            Text("Water Amount")
+              .modifier(HeadingText())
+            Text("\(amountOfWater.formatted()) ounces")
+              .modifier(InformationText())
+            Slider(value: $amountOfWater, in: 0...24, step: 0.1)
+            Text("Amount of Tea to Use")
+              .modifier(HeadingText())
+            Text("\(teaToUse.formatted()) teaspoons")
+              .modifier(InformationText())
+          }
+          .foregroundColor(
+            Color("QuarterSpanishWhite")
+          )
+          CountingTimerView(timerManager: timerManager)
+            .frame(maxWidth: .infinity)
+            .overlay {
+              RoundedRectangle(cornerRadius: 20)
+                .stroke(timerBorderColor, lineWidth: 5)
+            }
+            .padding([.leading, .trailing], 5)
+          Spacer()
         }
-        .padding([.leading, .trailing], 5)
-      Spacer()
+        .padding()
+      }
     }
-    .padding()
     .onAppear {
       timerManager.setTime(length: brewTimer.timerLength)
       amountOfWater = brewTimer.waterAmount
     }
     .navigationTitle("\(brewTimer.timerName) Timer")
+    .toolbarColorScheme(.dark, for: .navigationBar)
+    .toolbarBackground(
+      Color("BlackRussian"),
+      for: .navigationBar)
+    .toolbarBackground(.visible, for: .navigationBar)
     .font(.largeTitle)
     .onChange(of: timerManager.status) { newStatus in
       if newStatus == .done {
@@ -114,8 +130,10 @@ struct TimerView: View {
 
 struct TimerView_Previews: PreviewProvider {
   static var previews: some View {
-    TimerView(
-      brewTimer: BrewTime.previewObject
-    )
+    NavigationStack {
+      TimerView(
+        brewTimer: BrewTime.previewObject
+      )
+    }
   }
 }

@@ -37,14 +37,45 @@ struct ContentView: View {
 
   var body: some View {
     NavigationStack {
-      List(timers) { timer in
-        NavigationLink {
-          TimerView(brewTimer: timer)
-        } label: {
-          Text(timer.timerName)
+      ZStack {
+        Color("BlackRussian")
+          .ignoresSafeArea()
+        ScrollView {
+          ForEach(timers) { timer in
+            NavigationLink {
+              TimerView(brewTimer: timer)
+            } label: {
+              Text(timer.timerName)
+                .font(.title2)
+                .frame(maxWidth: .infinity)
+                .frame(height: 100)
+                .background(
+                  RoundedRectangle(cornerRadius: 25.0)
+                    .fill(
+                      LinearGradient(
+                        colors: [
+                          Color("OliveGreen"),
+                          Color("DarkOliveGreen")
+                        ],
+                        startPoint: .init(x: 0.4, y: 0),
+                        endPoint: .init(x: 0.6, y: 1)
+                      )
+                    )
+                )
+                .foregroundColor(
+                  Color("QuarterSpanishWhite")
+                )
+            }
+          }
         }
+        .padding(10)
       }
       .navigationTitle("Brew Timer")
+      .toolbarColorScheme(.dark, for: .navigationBar)
+      .toolbarBackground(
+        Color("BlackRussian"),
+        for: .navigationBar)
+      .toolbarBackground(.visible, for: .navigationBar)
     }
   }
 }

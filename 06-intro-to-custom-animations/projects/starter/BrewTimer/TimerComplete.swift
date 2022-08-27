@@ -36,11 +36,23 @@ struct TimerComplete: View {
   var timer: BrewTime
 
   var body: some View {
-    VStack(spacing: 10) {
-      Text("Brew Timer Complete")
-        .font(.largeTitle)
-      Text("Your \(timer.timerName) tea should be ready. Enjoy.")
+    ZStack {
+      Color("BlackRussian")
+        .ignoresSafeArea()
+      VStack(spacing: 10) {
+        Text("Brew Timer Complete")
+          .font(.largeTitle)
+        Text("Your \(timer.timerName) tea should be ready. Enjoy.")
+      }
     }
+    .foregroundColor(
+      Color("QuarterSpanishWhite")
+    )
+    .background(
+      Color("BlackRussian")
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .ignoresSafeArea()
+    )
   }
 }
 
