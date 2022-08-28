@@ -36,6 +36,7 @@ import Combine
 enum TimerStatus {
   case stopped
   case running
+  case paused
   case done
 }
 
@@ -45,6 +46,7 @@ class TimerManager: ObservableObject {
   @Published var remaingTimeAsString: String
   @Published var remaingTime: Date
   @Published var active = false
+  @Published var paused = false
   @Published var digits: [Int]
   @Published var status: TimerStatus = .stopped
   private var originalTime: Int?
@@ -52,8 +54,16 @@ class TimerManager: ObservableObject {
   private let zeroTime = Calendar.current.date(from: DateComponents(second: 0))
 
   func start() {
+    if status == .paused {
+      let componentsLeft = Calendar.current.dateComponents([.minute, .second], from: remaingTime)
+      let secondsLeft = (componentsLeft.minute ?? 0) * 60 + (componentsLeft.second ?? originalTime ?? 0)
+      let startTimeAgo = (originalTime ?? 0) - secondsLeft
+      startTime = Calendar.current.date(byAdding: .second, value: -startTimeAgo, to: .now)
+    } else {
+      startTime = .now
+    }
+
     status = .running
-    startTime = .now
     activeTimer = Timer.scheduledTimer(withTimeInterval: 0.25, repeats: true) { _ in
       self.updateTimes()
       if self.remaingTime == self.zeroTime {
@@ -62,6 +72,7 @@ class TimerManager: ObservableObject {
       }
     }
     active = true
+    paused = false
   }
 
   func stop() {
@@ -70,10 +81,20 @@ class TimerManager: ObservableObject {
     activeTimer?.invalidate()
     activeTimer = nil
     active = false
+    paused = false
     if let originalTime {
       timerLength = originalTime
       updateTimes()
     }
+  }
+
+  func togglePause() {
+    status = .paused
+    startTime = nil
+    activeTimer?.invalidate()
+    activeTimer = nil
+    active = false
+    paused = true
   }
 
   func setTime(length: Int) {
@@ -89,6 +110,8 @@ class TimerManager: ObservableObject {
       digits = getTimeDigits()
     }
   }
+
+  // swiftlint:disable force_unwrapping
 
   func timeLeftAsString() -> String {
     let formatter = DateComponentsFormatter()

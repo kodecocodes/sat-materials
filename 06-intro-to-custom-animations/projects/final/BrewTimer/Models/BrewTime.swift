@@ -87,7 +87,7 @@ struct BrewTime: Identifiable {
         timerLength: 150
       )
     )
-    
+
     return timers
   }
 }

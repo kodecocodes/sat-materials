@@ -38,19 +38,32 @@ struct CountingTimerView: View {
   var body: some View {
     VStack(spacing: 15) {
       TimerDigitsView(digits: timerManager.digits)
+        .foregroundColor(
+          Color("BlackRussian")
+        )
       HStack {
         Button {
           timerManager.stop()
         } label: {
           Image(systemName: "stop.fill")
+            .tint(.red)
         }
-        .disabled(!timerManager.active)
+        .disabled(!timerManager.active && !timerManager.paused)
+        Spacer()
+          .frame(width: 30)
+        Button {
+          timerManager.togglePause()
+        } label: {
+          Image(systemName: "pause.fill")
+        }
+        .disabled(timerManager.paused || !timerManager.active)
         Spacer()
           .frame(width: 30)
         Button {
           timerManager.start()
         } label: {
           Image(systemName: "play.fill")
+            .tint(.green)
         }
         .disabled(timerManager.active)
       }

@@ -37,29 +37,42 @@ struct TimerView: View {
   @State var brewTimer: BrewTime
   @State var showDone: BrewTime?
   @State var amountOfWater = 0.0
-  @State var animateTimer = 0.0
+  @State var animateTimer = true
+  @State var animatePause = false
   @State var brewingTemp = 0
+
+  let backGroundGradient = LinearGradient(
+    colors: [Color("BlackRussian"), Color("DarkOliveGreen"), Color("OliveGreen")],
+    startPoint: .init(x: 0.75, y: 0),
+    endPoint: .init(x: 0.25, y: 1)
+  )
 
   var teaToUse: Double {
     let tspPerOz = brewTimer.teaAmount / brewTimer.waterAmount
     return tspPerOz * amountOfWater
   }
+
   var timerBorderColor: Color {
     switch timerManager.status {
     case .stopped:
-      return Color.gray
+      return Color.red
     case .running:
       return Color.blue
     case .done:
       return Color.green
+    case .paused:
+      return Color.gray
     }
   }
 
   var animationGradient: AngularGradient {
     AngularGradient(
-      colors: [.blue, Color(red: 0.67, green: 0.85, blue: 0.90), .blue],
+      colors: [
+        Color("BlackRussian"), Color("DarkOliveGreen"), Color("OliveGreen"),
+        Color("DarkOliveGreen"), Color("BlackRussian")
+      ],
       center: .center,
-      angle: .degrees(animateTimer * 360.0)
+      angle: .degrees(animateTimer ? 360 : 0)
     )
   }
 
@@ -80,36 +93,40 @@ struct TimerView: View {
 
   var body: some View {
     NavigationStack {
-      VStack(alignment: .leading, spacing: 5) {
-        Text("Brewing Temperature")
-          .modifier(HeadingText())
-        NumberTransitionView(number: brewingTemp, suffix: " °F")
-          .modifier(InformationText())
-        Text("Water Amount")
-          .modifier(HeadingText())
-        Text("\(amountOfWater.formatted()) ounces")
-          .modifier(InformationText())
-        Slider(value: $amountOfWater, in: 0...24, step: 0.1)
-        Text("Amount of Tea to Use")
-          .modifier(HeadingText())
-        Text("\(teaToUse.formatted()) teaspoons")
-          .modifier(InformationText())
-      }
-      CountingTimerView(timerManager: timerManager)
-        .frame(maxWidth: .infinity)
-        .overlay {
-          if timerManager.status == .running {
-            RoundedRectangle(cornerRadius: 20)
-              .stroke(animationGradient, lineWidth: 10)
-          } else {
-            RoundedRectangle(cornerRadius: 20)
-              .stroke(timerBorderColor, lineWidth: 5)
-          }
+      ZStack {
+        backGroundGradient
+          .ignoresSafeArea()
+        VStack {
+          BrewInfoView(brewTimer: brewTimer, amountOfWater: $amountOfWater)
+          CountingTimerView(timerManager: timerManager)
+            .frame(maxWidth: .infinity)
+            .overlay {
+              if timerManager.status == .running {
+                RoundedRectangle(cornerRadius: 20)
+                  .stroke(animationGradient, lineWidth: 10)
+              } else if timerManager.status == .paused {
+                RoundedRectangle(cornerRadius: 20)
+                  .stroke(.blue, lineWidth: 10)
+                  .opacity(animatePause ? 0.2 : 1.0)
+              } else {
+                RoundedRectangle(cornerRadius: 20)
+                  .stroke(timerBorderColor, lineWidth: 5)
+              }
+            }
+            .padding(15)
+            .background(
+              RoundedRectangle(cornerRadius: 20)
+                .fill(
+                  Color("QuarterSpanishWhite")
+                )
+            )
+            .padding([.leading, .trailing], 5)
+            .padding([.top], 15)
+          Spacer()
         }
-        .padding([.leading, .trailing], 5)
-      Spacer()
+        .padding()
+      }
     }
-    .padding()
     .onAppear {
       timerManager.setTime(length: brewTimer.timerLength)
       amountOfWater = brewTimer.waterAmount
@@ -118,6 +135,8 @@ struct TimerView: View {
       }
     }
     .navigationTitle("\(brewTimer.timerName) Timer")
+    .toolbarColorScheme(.dark, for: .navigationBar)
+    .toolbarBackground(.visible, for: .navigationBar)
     .font(.largeTitle)
     .onChange(of: timerManager.status) { newStatus in
       if newStatus == .done {
@@ -125,27 +144,42 @@ struct TimerView: View {
       }
       // 1
       if newStatus == .running {
+        animatePause = false
         // 2
         withAnimation(
           .linear(duration: 1.0)
           // 4
-          .repeatForever(autoreverses: false)
+            .repeatForever(autoreverses: false)
         ) {
           // 5
-          animateTimer = 1.0
+          animateTimer = true
         }
+      }
+      if newStatus == .paused {
+        animateTimer = false
+        withAnimation(
+          .easeInOut(duration: 0.5)
+          .repeatForever()
+        ) {
+          animatePause = true
+        }
+      } else {
+        animateTimer = false
+        animatePause = false
       }
     }
     .sheet(item: $showDone) { timer in
       TimerComplete(timer: timer)
     }
   }
-}
 
-struct TimerView_Previews: PreviewProvider {
-  static var previews: some View {
-    TimerView(
-      brewTimer: BrewTime.previewObject
-    )
+  struct TimerView_Previews: PreviewProvider {
+    static var previews: some View {
+      NavigationStack {
+        TimerView(
+          brewTimer: BrewTime.previewObject
+        )
+      }
+    }
   }
 }

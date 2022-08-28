@@ -17,6 +17,7 @@
 		A930F94E28A4615D00641DC0 /* NumberTransitionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A930F94D28A4615D00641DC0 /* NumberTransitionView.swift */; };
 		A9311FB128A4139000136D99 /* CountingTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9311FB028A4139000136D99 /* CountingTimerView.swift */; };
 		A9647B2428A6B8F60008B8E6 /* IntegerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9647B2328A6B8F60008B8E6 /* IntegerExtensions.swift */; };
+		A9AA1AEE28BBD634007E216F /* BrewInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9AA1AED28BBD634007E216F /* BrewInfoView.swift */; };
 		A9EA75C828A1D9C100C4857C /* BrewTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EA75C728A1D9C100C4857C /* BrewTime.swift */; };
 		A9EA75CA28A1D9D500C4857C /* TimerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EA75C928A1D9D500C4857C /* TimerManager.swift */; };
 		A9EA75CC28A1DA1C00C4857C /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EA75CB28A1DA1C00C4857C /* TimerView.swift */; };
@@ -36,6 +37,7 @@
 		A930F94D28A4615D00641DC0 /* NumberTransitionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberTransitionView.swift; sourceTree = "<group>"; };
 		A9311FB028A4139000136D99 /* CountingTimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountingTimerView.swift; sourceTree = "<group>"; };
 		A9647B2328A6B8F60008B8E6 /* IntegerExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntegerExtensions.swift; sourceTree = "<group>"; };
+		A9AA1AED28BBD634007E216F /* BrewInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrewInfoView.swift; sourceTree = "<group>"; };
 		A9EA75C728A1D9C100C4857C /* BrewTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrewTime.swift; sourceTree = "<group>"; };
 		A9EA75C928A1D9D500C4857C /* TimerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerManager.swift; sourceTree = "<group>"; };
 		A9EA75CB28A1DA1C00C4857C /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
@@ -79,6 +81,7 @@
 				A915B44928AAFC7900C10EEF /* AppMain.swift */,
 				18D775C422AD944300AE281E /* ContentView.swift */,
 				A9EA75CB28A1DA1C00C4857C /* TimerView.swift */,
+				A9AA1AED28BBD634007E216F /* BrewInfoView.swift */,
 				A930F94D28A4615D00641DC0 /* NumberTransitionView.swift */,
 				A9311FB028A4139000136D99 /* CountingTimerView.swift */,
 				A9EA75CD28A1E06500C4857C /* TimerComplete.swift */,
@@ -213,6 +216,7 @@
 				A91D1B4028A5E71600CE3E5D /* TimerDigitsView.swift in Sources */,
 				A9EA75CC28A1DA1C00C4857C /* TimerView.swift in Sources */,
 				A9EA75C828A1D9C100C4857C /* BrewTime.swift in Sources */,
+				A9AA1AEE28BBD634007E216F /* BrewInfoView.swift in Sources */,
 				A9647B2428A6B8F60008B8E6 /* IntegerExtensions.swift in Sources */,
 				A9EA75CA28A1D9D500C4857C /* TimerManager.swift in Sources */,
 				A9311FB128A4139000136D99 /* CountingTimerView.swift in Sources */,
