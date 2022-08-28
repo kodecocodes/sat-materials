@@ -44,10 +44,6 @@ struct TimerView: View {
     endPoint: .init(x: 0.25, y: 1)
   )
 
-  var teaToUse: Double {
-    let tspPerOz = brewTimer.teaAmount / brewTimer.waterAmount
-    return tspPerOz * amountOfWater
-  }
   var timerBorderColor: Color {
     switch timerManager.status {
     case .stopped:
@@ -61,52 +57,13 @@ struct TimerView: View {
     }
   }
 
-  struct HeadingText: ViewModifier {
-    func body(content: Content) -> some View {
-      return content
-        .font(.title.bold())
-    }
-  }
-
-  struct InformationText: ViewModifier {
-    func body(content: Content) -> some View {
-      return content
-        .font(.title2)
-        .padding(.bottom, 15)
-    }
-  }
-
   var body: some View {
     NavigationStack {
       ZStack {
         backGroundGradient
           .ignoresSafeArea()
         VStack {
-          VStack(alignment: .leading, spacing: 5) {
-            Text("Brewing Temperature")
-              .modifier(HeadingText())
-            Text("\(brewTimer.temperature) °F")
-              .modifier(InformationText())
-            Text("Water Amount")
-              .modifier(HeadingText())
-            Text("\(amountOfWater.formatted()) ounces")
-              .modifier(InformationText())
-            Slider(value: $amountOfWater, in: 0...24, step: 0.1)
-            Text("Amount of Tea to Use")
-              .modifier(HeadingText())
-            Text("\(teaToUse.formatted()) teaspoons")
-              .modifier(InformationText())
-          }
-          .padding()
-          .foregroundColor(
-            Color("BlackRussian")
-          )
-          .background(
-            RoundedRectangle(cornerRadius: 20)
-              .fill(
-                Color("QuarterSpanishWhite")
-              )
-          )
+          BrewInfoView(brewTimer: brewTimer, amountOfWater: $amountOfWater)
           CountingTimerView(timerManager: timerManager)
             .frame(maxWidth: .infinity)
             .overlay {

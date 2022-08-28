@@ -111,6 +111,8 @@ class TimerManager: ObservableObject {
     }
   }
 
+  // swiftlint:disable force_unwrapping
+
   func timeLeftAsString() -> String {
     let formatter = DateComponentsFormatter()
     formatter.unitsStyle = .abbreviated
