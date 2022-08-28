@@ -38,6 +38,12 @@ struct TimerView: View {
   @State var showDone: BrewTime?
   @State var amountOfWater = 0.0
 
+  let backGroundGradient = LinearGradient(
+    colors: [Color("BlackRussian"), Color("DarkOliveGreen"), Color("OliveGreen")],
+    startPoint: .init(x: 0.75, y: 0),
+    endPoint: .init(x: 0.25, y: 1)
+  )
+
   var teaToUse: Double {
     let tspPerOz = brewTimer.teaAmount / brewTimer.waterAmount
     return tspPerOz * amountOfWater
@@ -73,10 +79,10 @@ struct TimerView: View {
   var body: some View {
     NavigationStack {
       ZStack {
-        Color("BlackRussian")
+        backGroundGradient
           .ignoresSafeArea()
-        VStack(alignment: .leading, spacing: 5) {
-          Group {
+        VStack {
+          VStack(alignment: .leading, spacing: 5) {
             Text("Brewing Temperature")
               .modifier(HeadingText())
             Text("\(brewTimer.temperature) °F")
@@ -91,8 +97,15 @@ struct TimerView: View {
             Text("\(teaToUse.formatted()) teaspoons")
               .modifier(InformationText())
           }
+          .padding()
           .foregroundColor(
-            Color("QuarterSpanishWhite")
+            Color("BlackRussian")
+          )
+          .background(
+            RoundedRectangle(cornerRadius: 20)
+              .fill(
+                Color("QuarterSpanishWhite")
+              )
           )
           CountingTimerView(timerManager: timerManager)
             .frame(maxWidth: .infinity)
@@ -100,7 +113,15 @@ struct TimerView: View {
               RoundedRectangle(cornerRadius: 20)
                 .stroke(timerBorderColor, lineWidth: 5)
             }
+            .padding(15)
+            .background(
+              RoundedRectangle(cornerRadius: 20)
+                .fill(
+                  Color("QuarterSpanishWhite")
+                )
+            )
             .padding([.leading, .trailing], 5)
+            .padding([.top], 15)
           Spacer()
         }
         .padding()
@@ -112,9 +133,6 @@ struct TimerView: View {
     }
     .navigationTitle("\(brewTimer.timerName) Timer")
     .toolbarColorScheme(.dark, for: .navigationBar)
-    .toolbarBackground(
-      Color("BlackRussian"),
-      for: .navigationBar)
     .toolbarBackground(.visible, for: .navigationBar)
     .font(.largeTitle)
     .onChange(of: timerManager.status) { newStatus in

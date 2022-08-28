@@ -39,7 +39,7 @@ struct CountingTimerView: View {
     VStack(spacing: 15) {
       Text(timerManager.remaingTimeAsString)
         .foregroundColor(
-          Color("QuarterSpanishWhite")
+          Color("BlackRussian")
         )
       HStack {
         Button {
@@ -56,7 +56,7 @@ struct CountingTimerView: View {
         } label: {
           Image(systemName: "pause.fill")
         }
-        .disabled(timerManager.paused)
+        .disabled(timerManager.paused || !timerManager.active)
         Spacer()
           .frame(width: 30)
         Button {

@@ -35,10 +35,16 @@ import SwiftUI
 struct ContentView: View {
   @State var timers = BrewTime.baseTimers
 
+  let backGroundGradient = LinearGradient(
+    colors: [Color("BlackRussian"), Color("DarkOliveGreen"), Color("OliveGreen")],
+    startPoint: .init(x: 0.75, y: 0),
+    endPoint: .init(x: 0.25, y: 1)
+  )
+
   var body: some View {
     NavigationStack {
       ZStack {
-        Color("BlackRussian")
+        backGroundGradient
           .ignoresSafeArea()
         ScrollView {
           ForEach(timers) { timer in
@@ -52,18 +58,11 @@ struct ContentView: View {
                 .background(
                   RoundedRectangle(cornerRadius: 25.0)
                     .fill(
-                      LinearGradient(
-                        colors: [
-                          Color("OliveGreen"),
-                          Color("DarkOliveGreen")
-                        ],
-                        startPoint: .init(x: 0.4, y: 0),
-                        endPoint: .init(x: 0.6, y: 1)
-                      )
+                      Color("QuarterSpanishWhite")
                     )
                 )
                 .foregroundColor(
-                  Color("QuarterSpanishWhite")
+                  Color("BlackRussian")
                 )
             }
           }
@@ -72,9 +71,6 @@ struct ContentView: View {
       }
       .navigationTitle("Brew Timer")
       .toolbarColorScheme(.dark, for: .navigationBar)
-      .toolbarBackground(
-        Color("BlackRussian"),
-        for: .navigationBar)
       .toolbarBackground(.visible, for: .navigationBar)
     }
   }
