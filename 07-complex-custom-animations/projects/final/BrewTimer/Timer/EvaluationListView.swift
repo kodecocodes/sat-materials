@@ -32,39 +32,30 @@
 
 import SwiftUI
 
-struct TimerComplete: View {
-  @Binding var brewResult: BrewResult?
-  @State var rating: Int = 0
-  @Environment(\.presentationMode) var presentationMode
+struct EvaluationListView: View {
+  var result: [BrewResult]
+  @State var brew: BrewResult?
 
   var body: some View {
-    VStack(spacing: 10) {
-      Text("Brew Timer Complete")
-        .font(.largeTitle)
-      Text("Your \((brewResult?.name ?? "")) tea should be ready. Enjoy.")
-      Text("Rate Your Brew")
-      RatingView(rating: $rating)
-        .tint(.yellow)
-      Button("Save Rating") {
-        guard let brew = brewResult else { return }
-        brewResult = BrewResult(
-          name: brew.name,
-          time: brew.time,
-          temperature: brew.temperature,
-          amountWarer: brew.amountWarer,
-          amountTea: brew.amountTea,
-          rating: rating
-        )
-        presentationMode.wrappedValue.dismiss()
+    List {
+      Section(header: Text("Ratings").font(.footnote)) {
+        ForEach(result) { evaluation in
+          ReviewView(result: evaluation)
+            .onTapGesture {
+              brew = evaluation
+            }
+            .font(.footnote)
+            .sheet(item: $brew) { result in
+              ShowResultView(result: result)
+            }
+        }
       }
     }
   }
 }
 
-struct TimerComplete_Previews: PreviewProvider {
+struct EvaluationListView_Previews: PreviewProvider {
   static var previews: some View {
-    TimerComplete(
-      brewResult: .constant(BrewResult.sampleResult)
-    )
+    EvaluationListView(result: [BrewResult.sampleResult])
   }
 }

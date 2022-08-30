@@ -53,7 +53,7 @@ struct WebLineView: View {
     ZStack {
       ForEach(0..<5) { line in
         let angle = 360.0 / Double(data.count)
-        
+
         Path { path in
           var xZero = 0.0
           var yZero = 0.0
@@ -79,15 +79,15 @@ struct WebLineView: View {
 }
 
 struct WebLineView_Previews: PreviewProvider {
-    static var previews: some View {
-      let data = [
-        GraphDataPoint(id: 0, value: 5, maxValue: 25, color: .red),
-        GraphDataPoint(id: 1, value: 10, maxValue: 25, color: .blue),
-        GraphDataPoint(id: 2, value: 15, maxValue: 25, color: .orange),
-        GraphDataPoint(id: 3, value: 20, maxValue: 25, color: .green),
-        GraphDataPoint(id: 4, value: 20, maxValue: 25, color: .yellow)
-      ]
+  static var previews: some View {
+    let data = [
+      GraphDataPoint(id: 0, value: 5, maxValue: 25, color: .red),
+      GraphDataPoint(id: 1, value: 10, maxValue: 25, color: .blue),
+      GraphDataPoint(id: 2, value: 15, maxValue: 25, color: .orange),
+      GraphDataPoint(id: 3, value: 20, maxValue: 25, color: .green),
+      GraphDataPoint(id: 4, value: 20, maxValue: 25, color: .yellow)
+    ]
 
-      WebLineView(data: data, width: 200, height: 200)
-    }
+    WebLineView(data: data, width: 200, height: 200)
+  }
 }

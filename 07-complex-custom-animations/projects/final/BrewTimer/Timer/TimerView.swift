@@ -37,10 +37,17 @@ struct TimerView: View {
   @State var brewTimer: BrewTime
   @State var showDone = false
   @State var amountOfWater = 0.0
-  @State var animateTimer = 0.0
+  @State var animateTimer = true
+  @State var animatePause = false
   @State var brewingTemp = 0
   @State var timerLength = 0.0
   @State var sheetResult: BrewResult?
+
+  let backGroundGradient = LinearGradient(
+    colors: [Color("BlackRussian"), Color("DarkOliveGreen"), Color("OliveGreen")],
+    startPoint: .init(x: 0.75, y: 0),
+    endPoint: .init(x: 0.25, y: 1)
+  )
 
   var teaToUse: Double {
     let tspPerOz = brewTimer.teaAmount / brewTimer.waterAmount
@@ -50,19 +57,24 @@ struct TimerView: View {
   var timerBorderColor: Color {
     switch timerManager.status {
     case .stopped:
-      return Color.gray
+      return Color.red
     case .running:
       return Color.blue
     case .done:
       return Color.green
+    case .paused:
+      return Color.gray
     }
   }
 
   var animationGradient: AngularGradient {
     AngularGradient(
-      colors: [.blue, Color(red: 0.67, green: 0.85, blue: 0.90), .blue],
+      colors: [
+        Color("BlackRussian"), Color("DarkOliveGreen"), Color("OliveGreen"),
+        Color("DarkOliveGreen"), Color("BlackRussian")
+      ],
       center: .center,
-      angle: .degrees(animateTimer * 360.0)
+      angle: .degrees(animateTimer ? 360.0 : 0.0)
     )
   }
 
@@ -81,42 +93,53 @@ struct TimerView: View {
     }
   }
 
+  func sheetDismissed() {
+    guard let result = sheetResult else { return }
+    brewTimer.evaluation.append(result)
+  }
+
   var body: some View {
     NavigationStack {
-      VStack(alignment: .leading, spacing: 5) {
-        Text("Brewing Temperature")
-          .modifier(HeadingText())
-        NumberTransitionView(number: brewingTemp, suffix: " °F")
-          .modifier(InformationText())
-        Text("Water Amount")
-          .modifier(HeadingText())
-        Text("\(amountOfWater.formatted()) ounces")
-          .modifier(InformationText())
-        Slider(value: $amountOfWater, in: 0...24, step: 0.1)
-        Text("Amount of Tea to Use")
-          .modifier(HeadingText())
-        Text("\(teaToUse.formatted()) teaspoons")
-          .modifier(InformationText())
-      }
-      CountingTimerView(timerManager: timerManager)
-        .frame(maxWidth: .infinity)
-        .overlay {
-          if timerManager.status == .running {
-            RoundedRectangle(cornerRadius: 20)
-              .stroke(animationGradient, lineWidth: 10)
-          } else {
-            RoundedRectangle(cornerRadius: 20)
-              .stroke(timerBorderColor, lineWidth: 5)
+      ZStack {
+        backGroundGradient
+          .ignoresSafeArea()
+        VStack {
+          BrewInfoView(brewTimer: brewTimer, amountOfWater: $amountOfWater)
+          VStack {
+            CountingTimerView(timerManager: timerManager)
+              .frame(maxWidth: .infinity)
+              .overlay {
+                if timerManager.status == .running {
+                  RoundedRectangle(cornerRadius: 20)
+                    .stroke(animationGradient, lineWidth: 10)
+                } else if timerManager.status == .paused {
+                  RoundedRectangle(cornerRadius: 20)
+                    .stroke(.blue, lineWidth: 10)
+                    .opacity(animatePause ? 0.2 : 1.0)
+                } else {
+                  RoundedRectangle(cornerRadius: 20)
+                    .stroke(timerBorderColor, lineWidth: 5)
+                }
+              }
+            Slider(value: $timerLength, in: 0...600, step: 15)
           }
+          .padding(15)
+          .background(
+            RoundedRectangle(cornerRadius: 20)
+              .fill(
+                Color("QuarterSpanishWhite")
+              )
+          )
+          .padding([.leading, .trailing], 5)
+          .padding([.top], 15)
+          if !brewTimer.evaluation.isEmpty {
+            EvaluationListView(result: brewTimer.evaluation)
+          }
+          Spacer()
         }
-        .padding([.leading, .trailing], 5)
-      Slider(value: $timerLength, in: 0...600, step: 15)
-      if !brewTimer.evaluation.isEmpty {
-        ExtractedView(result: brewTimer.evaluation)
+        .padding()
       }
-      Spacer()
     }
-    .padding()
     .onAppear {
       timerManager.setTime(length: brewTimer.timerLength)
       timerLength = Double(brewTimer.timerLength)
@@ -126,6 +149,8 @@ struct TimerView: View {
       }
     }
     .navigationTitle("\(brewTimer.timerName) Timer")
+    .toolbarColorScheme(.dark, for: .navigationBar)
+    .toolbarBackground(.visible, for: .navigationBar)
     .font(.largeTitle)
     .onChange(of: timerManager.status) { newStatus in
       if newStatus == .done {
@@ -141,12 +166,26 @@ struct TimerView: View {
         showDone = true
       }
       if newStatus == .running {
+        animatePause = false
         withAnimation(
           .linear(duration: 1.0)
           .repeatForever(autoreverses: false)
         ) {
-          animateTimer = 1.0
+          // 5
+          animateTimer = true
         }
+      }
+      if newStatus == .paused {
+        animateTimer = false
+        withAnimation(
+          .easeInOut(duration: 0.5)
+          .repeatForever()
+        ) {
+          animatePause = true
+        }
+      } else {
+        animateTimer = false
+        animatePause = false
       }
     }
     .onChange(of: timerLength) { newValue in
@@ -154,14 +193,10 @@ struct TimerView: View {
     }
     .sheet(
       isPresented: $showDone,
-      onDismiss: {
-        guard let result = sheetResult else { return }
-        brewTimer.evaluation.append(result)
-      }
+      onDismiss: sheetDismissed
     ) {
       TimerComplete(
-        brewResult: $sheetResult
-      )
+        brewResult: $sheetResult)
     }
   }
 }
@@ -171,27 +206,5 @@ struct TimerView_Previews: PreviewProvider {
     TimerView(
       brewTimer: BrewTime.previewObject
     )
-  }
-}
-
-struct ExtractedView: View {
-  var result: [BrewResult]
-  @State var brew: BrewResult?
-  
-  var body: some View {
-    List {
-      Section(header: Text("Ratings").font(.footnote)) {
-        ForEach(result) { evaluation in
-          ReviewView(result: evaluation)
-            .onTapGesture {
-              brew = evaluation
-            }
-            .font(.footnote)
-            .sheet(item: $brew) { result in
-              ShowResultView(result: result)
-            }
-        }
-      }
-    }
   }
 }

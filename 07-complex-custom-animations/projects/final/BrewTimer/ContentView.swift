@@ -35,16 +35,43 @@ import SwiftUI
 struct ContentView: View {
   @State var timers = BrewTime.baseTimers
 
+  let backGroundGradient = LinearGradient(
+    colors: [Color("BlackRussian"), Color("DarkOliveGreen"), Color("OliveGreen")],
+    startPoint: .init(x: 0.75, y: 0),
+    endPoint: .init(x: 0.25, y: 1)
+  )
+
   var body: some View {
     NavigationStack {
-      List(timers) { timer in
-        NavigationLink {
-          TimerView(brewTimer: timer)
-        } label: {
-          Text(timer.timerName)
+      ZStack {
+        backGroundGradient
+          .ignoresSafeArea()
+        ScrollView {
+          ForEach(timers) { timer in
+            NavigationLink {
+              TimerView(brewTimer: timer)
+            } label: {
+              Text(timer.timerName)
+                .font(.title2)
+                .frame(maxWidth: .infinity)
+                .frame(height: 100)
+                .background(
+                  RoundedRectangle(cornerRadius: 25.0)
+                    .fill(
+                      Color("QuarterSpanishWhite")
+                    )
+                )
+                .foregroundColor(
+                  Color("BlackRussian")
+                )
+            }
+          }
         }
+        .padding(10)
       }
       .navigationTitle("Brew Timer")
+      .toolbarColorScheme(.dark, for: .navigationBar)
+      .toolbarBackground(.visible, for: .navigationBar)
     }
   }
 }

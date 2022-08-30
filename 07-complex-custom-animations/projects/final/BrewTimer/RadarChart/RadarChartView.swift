@@ -56,10 +56,10 @@ struct RadarChartView: View {
       ZStack {
         // Web Lines
         WebLineView(data: data, width: fullWidth, height: viewHeight)
-        
+
         // Values Fill
         GraphFillView(data: data, width: fullWidth, height: viewHeight)
-        
+
         // Data Points
         ForEach(data) { dataPoint in
           let ratio = dataPoint.value / dataPoint.maxValue
@@ -71,7 +71,7 @@ struct RadarChartView: View {
           .offset(x: fullWidth, y: viewHeight)
           .stroke(.gray, lineWidth: 1.0)
           .rotationEffect(.degrees(Double(dataPoint.id) * angle - 90))
-          
+
           // Value
           Path { path in
             path.move(to: .zero)

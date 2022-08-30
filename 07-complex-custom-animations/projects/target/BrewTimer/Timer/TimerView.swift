@@ -112,15 +112,8 @@ struct TimerView: View {
         .padding([.leading, .trailing], 5)
       Slider(value: $timerLength, in: 0...600, step: 15)
       if !brewTimer.evaluation.isEmpty {
-        List {
-          Section(header: Text("Ratings").font(.footnote)) {
-            ForEach(brewTimer.evaluation) { evaluation in
-              ReviewView(result: evaluation)
-                .font(.footnote)
-            }
-          }
-        }
-      }
+`        ExtractedView(result: brewTimer.evaluation)
+`      }
       Spacer()
     }
     .padding()
@@ -167,7 +160,8 @@ struct TimerView: View {
       }
     ) {
       TimerComplete(
-        brewResult: $sheetResult)
+        brewResult: $sheetResult
+      )
     }
   }
 }
@@ -177,5 +171,27 @@ struct TimerView_Previews: PreviewProvider {
     TimerView(
       brewTimer: BrewTime.previewObject
     )
+  }
+}
+
+struct ExtractedView: View {
+  var result: [BrewResult]
+  @State var brew: BrewResult?
+  
+  var body: some View {
+    List {
+      Section(header: Text("Ratings").font(.footnote)) {
+        ForEach(result) { evaluation in
+          ReviewView(result: evaluation)
+            .onTapGesture {
+              brew = evaluation
+            }
+            .font(.footnote)
+            .sheet(item: $brew) { result in
+              ShowResultView(result: result)
+            }
+        }
+      }
+    }
   }
 }

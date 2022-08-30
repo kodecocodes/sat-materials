@@ -71,7 +71,7 @@ struct GraphFillView: View {
         for dataPoint in data {
           let ratio = dataPoint.value / dataPoint.maxValue
           let angle = 360.0 / Double(data.count)
-          
+
           let x = sinDeg(Double(dataPoint.id) * -angle + 90) * ratio * width
           let y = cosDeg(Double(dataPoint.id) * -angle + 90) * ratio * width
           if dataPoint.id == 0 {
@@ -92,15 +92,15 @@ struct GraphFillView: View {
 }
 
 struct GraphFillView_Previews: PreviewProvider {
-    static var previews: some View {
-      let data = [
-        GraphDataPoint(id: 0, value: 5, maxValue: 25, color: .red),
-        GraphDataPoint(id: 1, value: 10, maxValue: 25, color: .blue),
-        GraphDataPoint(id: 2, value: 15, maxValue: 25, color: .orange),
-        GraphDataPoint(id: 3, value: 20, maxValue: 25, color: .green),
-        GraphDataPoint(id: 4, value: 20, maxValue: 25, color: .yellow)
-      ]
+  static var previews: some View {
+    let data = [
+      GraphDataPoint(id: 0, value: 5, maxValue: 25, color: .red),
+      GraphDataPoint(id: 1, value: 10, maxValue: 25, color: .blue),
+      GraphDataPoint(id: 2, value: 15, maxValue: 25, color: .orange),
+      GraphDataPoint(id: 3, value: 20, maxValue: 25, color: .green),
+      GraphDataPoint(id: 4, value: 20, maxValue: 25, color: .yellow)
+    ]
 
-      GraphFillView(data: data, width: 200, height: 200)
-    }
+    GraphFillView(data: data, width: 200, height: 200)
+  }
 }

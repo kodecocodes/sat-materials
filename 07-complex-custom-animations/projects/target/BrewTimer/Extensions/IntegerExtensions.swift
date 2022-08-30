@@ -30,41 +30,18 @@
 /// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 /// THE SOFTWARE.
 
-import SwiftUI
+import Foundation
 
-struct GraphDataPoint: Identifiable {
-  var id: Int
-  var value: Double
-  var maxValue: Double
-  var color: Color = .black
-}
-
-extension GraphDataPoint {
-  static func fromBrewResult(result: BrewResult) -> [GraphDataPoint] {
-    var data: [GraphDataPoint] = []
-    
-    data.append(
-      GraphDataPoint(
-        id: 0,
-        value: Double(result.temperature),
-        maxValue: 212.0,
-        color: .red)
-    )
-    data.append(
-      GraphDataPoint(id: 1, value: result.amountWarer, maxValue: 16, color: .blue)
-    )
-    data.append(
-      GraphDataPoint(id: 2, value: result.amountTea, maxValue: 16, color: .green)
-    )
-    data.append(
-      GraphDataPoint(id: 3, value: Double(result.time), maxValue: 600, color: .yellow)
-    )
-    if result.rating != 0 {
-      data.append(
-        GraphDataPoint(id: 4, value: Double(result.rating), maxValue: 5, color: .orange)
-      )
+extension Int {
+  func between(_ low: Int, and high: Int) -> Int {
+    let range = high - low
+    var value = self
+    while value < low {
+      value += range
     }
-    
-    return data
+    while value >= high {
+      value -= range
+    }
+    return value
   }
 }

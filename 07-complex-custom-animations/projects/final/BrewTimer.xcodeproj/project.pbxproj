@@ -19,16 +19,18 @@
 		A97728C328AC609E00AF0DD8 /* BrewResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = A97728C228AC609E00AF0DD8 /* BrewResult.swift */; };
 		A97728C528AC680200AF0DD8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A97728C428AC680200AF0DD8 /* LaunchScreen.storyboard */; };
 		A97728C728AC76F900AF0DD8 /* RatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A97728C628AC76F900AF0DD8 /* RatingView.swift */; };
-		A9A50DE528B1BF9900210610 /* RadarChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9A50DE428B1BF9900210610 /* RadarChartView.swift */; };
-		A9DAB00728B306F90002F023 /* GraphDataPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DAB00628B306F90002F023 /* GraphDataPoint.swift */; };
+		A988856728BD906700770F3E /* BrewInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A988856628BD906700770F3E /* BrewInfoView.swift */; };
+		A9DFD2A028BD9B0F00508DDE /* RadarChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DFD29D28BD9B0F00508DDE /* RadarChartView.swift */; };
+		A9DFD2A128BD9B0F00508DDE /* GraphFillView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DFD29E28BD9B0F00508DDE /* GraphFillView.swift */; };
+		A9DFD2A228BD9B0F00508DDE /* WebLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DFD29F28BD9B0F00508DDE /* WebLineView.swift */; };
+		A9DFD2A428BD9B6700508DDE /* GraphDataPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DFD2A328BD9B6700508DDE /* GraphDataPoint.swift */; };
+		A9DFD2A628BD9C7500508DDE /* ShowResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DFD2A528BD9C7500508DDE /* ShowResultView.swift */; };
+		A9DFD2A828BD9CC600508DDE /* EvaluationListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DFD2A728BD9CC600508DDE /* EvaluationListView.swift */; };
 		A9E9D7E828ADB5DA002F5BCF /* ReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9E9D7E728ADB5DA002F5BCF /* ReviewView.swift */; };
 		A9EA75C828A1D9C100C4857C /* BrewTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EA75C728A1D9C100C4857C /* BrewTime.swift */; };
 		A9EA75CA28A1D9D500C4857C /* TimerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EA75C928A1D9D500C4857C /* TimerManager.swift */; };
 		A9EA75CC28A1DA1C00C4857C /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EA75CB28A1DA1C00C4857C /* TimerView.swift */; };
 		A9EA75CE28A1E06500C4857C /* TimerComplete.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EA75CD28A1E06500C4857C /* TimerComplete.swift */; };
-		A9F56E5328B410F200252817 /* WebLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9F56E5228B410F200252817 /* WebLineView.swift */; };
-		A9F56E5528B4111600252817 /* GraphFillView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9F56E5428B4111600252817 /* GraphFillView.swift */; };
-		A9F56E5728B413F200252817 /* ShowResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9F56E5628B413F200252817 /* ShowResultView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,16 +48,18 @@
 		A97728C228AC609E00AF0DD8 /* BrewResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrewResult.swift; sourceTree = "<group>"; };
 		A97728C428AC680200AF0DD8 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A97728C628AC76F900AF0DD8 /* RatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingView.swift; sourceTree = "<group>"; };
-		A9A50DE428B1BF9900210610 /* RadarChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadarChartView.swift; sourceTree = "<group>"; };
-		A9DAB00628B306F90002F023 /* GraphDataPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphDataPoint.swift; sourceTree = "<group>"; };
+		A988856628BD906700770F3E /* BrewInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrewInfoView.swift; sourceTree = "<group>"; };
+		A9DFD29D28BD9B0F00508DDE /* RadarChartView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RadarChartView.swift; sourceTree = "<group>"; };
+		A9DFD29E28BD9B0F00508DDE /* GraphFillView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphFillView.swift; sourceTree = "<group>"; };
+		A9DFD29F28BD9B0F00508DDE /* WebLineView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebLineView.swift; sourceTree = "<group>"; };
+		A9DFD2A328BD9B6700508DDE /* GraphDataPoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GraphDataPoint.swift; path = ../../../target/BrewTimer/Models/GraphDataPoint.swift; sourceTree = "<group>"; };
+		A9DFD2A528BD9C7500508DDE /* ShowResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowResultView.swift; sourceTree = "<group>"; };
+		A9DFD2A728BD9CC600508DDE /* EvaluationListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvaluationListView.swift; sourceTree = "<group>"; };
 		A9E9D7E728ADB5DA002F5BCF /* ReviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewView.swift; sourceTree = "<group>"; };
 		A9EA75C728A1D9C100C4857C /* BrewTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrewTime.swift; sourceTree = "<group>"; };
 		A9EA75C928A1D9D500C4857C /* TimerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerManager.swift; sourceTree = "<group>"; };
 		A9EA75CB28A1DA1C00C4857C /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
 		A9EA75CD28A1E06500C4857C /* TimerComplete.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerComplete.swift; sourceTree = "<group>"; };
-		A9F56E5228B410F200252817 /* WebLineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebLineView.swift; sourceTree = "<group>"; };
-		A9F56E5428B4111600252817 /* GraphFillView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphFillView.swift; sourceTree = "<group>"; };
-		A9F56E5628B413F200252817 /* ShowResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowResultView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,8 +98,8 @@
 				18D775C422AD944300AE281E /* ContentView.swift */,
 				A9647B2228A6B8E50008B8E6 /* Extensions */,
 				A9EA75C628A1D94700C4857C /* Models */,
-				A9F56E5828B4145900252817 /* Timer */,
-				A9F56E5128B410D900252817 /* RadarChart */,
+				A988856828BD97B000770F3E /* Timer */,
+				A9DFD29C28BD9B0F00508DDE /* RadarChart */,
 				A97728C428AC680200AF0DD8 /* LaunchScreen.storyboard */,
 				18D775C622AD944400AE281E /* Assets.xcassets */,
 				18D775CE22AD944400AE281E /* Info.plist */,
@@ -120,41 +124,43 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		A988856828BD97B000770F3E /* Timer */ = {
+			isa = PBXGroup;
+			children = (
+				A9EA75CB28A1DA1C00C4857C /* TimerView.swift */,
+				A988856628BD906700770F3E /* BrewInfoView.swift */,
+				A9E9D7E728ADB5DA002F5BCF /* ReviewView.swift */,
+				A930F94D28A4615D00641DC0 /* NumberTransitionView.swift */,
+				A9311FB028A4139000136D99 /* CountingTimerView.swift */,
+				A9DFD2A528BD9C7500508DDE /* ShowResultView.swift */,
+				A9EA75CD28A1E06500C4857C /* TimerComplete.swift */,
+				A91D1B3F28A5E71600CE3E5D /* TimerDigitsView.swift */,
+				A91D1B3D28A5E5EF00CE3E5D /* SlidingNumber.swift */,
+				A97728C628AC76F900AF0DD8 /* RatingView.swift */,
+				A9DFD2A728BD9CC600508DDE /* EvaluationListView.swift */,
+			);
+			path = Timer;
+			sourceTree = "<group>";
+		};
+		A9DFD29C28BD9B0F00508DDE /* RadarChart */ = {
+			isa = PBXGroup;
+			children = (
+				A9DFD29D28BD9B0F00508DDE /* RadarChartView.swift */,
+				A9DFD29E28BD9B0F00508DDE /* GraphFillView.swift */,
+				A9DFD29F28BD9B0F00508DDE /* WebLineView.swift */,
+			);
+			path = RadarChart;
+			sourceTree = "<group>";
+		};
 		A9EA75C628A1D94700C4857C /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				A9EA75C728A1D9C100C4857C /* BrewTime.swift */,
 				A9EA75C928A1D9D500C4857C /* TimerManager.swift */,
 				A97728C228AC609E00AF0DD8 /* BrewResult.swift */,
-				A9DAB00628B306F90002F023 /* GraphDataPoint.swift */,
+				A9DFD2A328BD9B6700508DDE /* GraphDataPoint.swift */,
 			);
 			path = Models;
-			sourceTree = "<group>";
-		};
-		A9F56E5128B410D900252817 /* RadarChart */ = {
-			isa = PBXGroup;
-			children = (
-				A9A50DE428B1BF9900210610 /* RadarChartView.swift */,
-				A9F56E5228B410F200252817 /* WebLineView.swift */,
-				A9F56E5428B4111600252817 /* GraphFillView.swift */,
-			);
-			path = RadarChart;
-			sourceTree = "<group>";
-		};
-		A9F56E5828B4145900252817 /* Timer */ = {
-			isa = PBXGroup;
-			children = (
-				A9EA75CB28A1DA1C00C4857C /* TimerView.swift */,
-				A9E9D7E728ADB5DA002F5BCF /* ReviewView.swift */,
-				A930F94D28A4615D00641DC0 /* NumberTransitionView.swift */,
-				A9311FB028A4139000136D99 /* CountingTimerView.swift */,
-				A9F56E5628B413F200252817 /* ShowResultView.swift */,
-				A9EA75CD28A1E06500C4857C /* TimerComplete.swift */,
-				A91D1B3F28A5E71600CE3E5D /* TimerDigitsView.swift */,
-				A91D1B3D28A5E5EF00CE3E5D /* SlidingNumber.swift */,
-				A97728C628AC76F900AF0DD8 /* RatingView.swift */,
-			);
-			path = Timer;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -254,15 +260,17 @@
 				A9EA75CC28A1DA1C00C4857C /* TimerView.swift in Sources */,
 				A9EA75C828A1D9C100C4857C /* BrewTime.swift in Sources */,
 				A9647B2428A6B8F60008B8E6 /* IntegerExtensions.swift in Sources */,
-				A9DAB00728B306F90002F023 /* GraphDataPoint.swift in Sources */,
 				A9EA75CA28A1D9D500C4857C /* TimerManager.swift in Sources */,
+				A9DFD2A628BD9C7500508DDE /* ShowResultView.swift in Sources */,
+				A9DFD2A028BD9B0F00508DDE /* RadarChartView.swift in Sources */,
+				A9DFD2A228BD9B0F00508DDE /* WebLineView.swift in Sources */,
 				A9E9D7E828ADB5DA002F5BCF /* ReviewView.swift in Sources */,
-				A9A50DE528B1BF9900210610 /* RadarChartView.swift in Sources */,
-				A9F56E5328B410F200252817 /* WebLineView.swift in Sources */,
-				A9F56E5728B413F200252817 /* ShowResultView.swift in Sources */,
+				A988856728BD906700770F3E /* BrewInfoView.swift in Sources */,
 				A97728C328AC609E00AF0DD8 /* BrewResult.swift in Sources */,
+				A9DFD2A828BD9CC600508DDE /* EvaluationListView.swift in Sources */,
+				A9DFD2A428BD9B6700508DDE /* GraphDataPoint.swift in Sources */,
+				A9DFD2A128BD9B0F00508DDE /* GraphFillView.swift in Sources */,
 				A97728C728AC76F900AF0DD8 /* RatingView.swift in Sources */,
-				A9F56E5528B4111600252817 /* GraphFillView.swift in Sources */,
 				A9311FB128A4139000136D99 /* CountingTimerView.swift in Sources */,
 				18D775C522AD944300AE281E /* ContentView.swift in Sources */,
 				A9EA75CE28A1E06500C4857C /* TimerComplete.swift in Sources */,
