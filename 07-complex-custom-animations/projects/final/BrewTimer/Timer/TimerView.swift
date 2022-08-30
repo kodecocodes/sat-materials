@@ -104,7 +104,6 @@ struct TimerView: View {
         backGroundGradient
           .ignoresSafeArea()
         VStack {
-          BrewInfoView(brewTimer: brewTimer, amountOfWater: $amountOfWater)
           VStack {
             CountingTimerView(timerManager: timerManager)
               .frame(maxWidth: .infinity)
@@ -131,11 +130,20 @@ struct TimerView: View {
               )
           )
           .padding([.leading, .trailing], 5)
-          .padding([.top], 15)
-          if !brewTimer.evaluation.isEmpty {
-            EvaluationListView(result: brewTimer.evaluation)
+          .padding([.bottom], 15)
+          ScrollView {
+            BrewInfoView(brewTimer: brewTimer, amountOfWater: $amountOfWater)
+            if !brewTimer.evaluation.isEmpty {
+              EvaluationListView(result: brewTimer.evaluation)
+                .padding(10)
+                .background(
+                  RoundedRectangle(cornerRadius: 20)
+                    .fill(
+                      Color("QuarterSpanishWhite")
+                    )
+                )
+            }
           }
-          Spacer()
         }
         .padding()
       }
@@ -171,7 +179,6 @@ struct TimerView: View {
           .linear(duration: 1.0)
           .repeatForever(autoreverses: false)
         ) {
-          // 5
           animateTimer = true
         }
       }

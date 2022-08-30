@@ -34,7 +34,7 @@ import SwiftUI
 
 struct ReviewView: View {
   var result: BrewResult
-
+  
   var body: some View {
     HStack {
       Text(result.name)

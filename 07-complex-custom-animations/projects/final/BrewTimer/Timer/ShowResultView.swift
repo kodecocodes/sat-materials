@@ -35,41 +35,75 @@ import SwiftUI
 struct ShowResultView: View {
   var result: BrewResult
 
+  let backGroundGradient = LinearGradient(
+    colors: [Color("BlackRussian"), Color("DarkOliveGreen"), Color("OliveGreen")],
+    startPoint: .init(x: 0.75, y: 0),
+    endPoint: .init(x: 0.25, y: 1)
+  )
+
   var body: some View {
-    VStack {
-      VStack(alignment: .leading, spacing: 5) {
-        HStack {
-          Text("Name")
-          Spacer()
-          Text(result.name)
+    ZStack {
+      backGroundGradient
+        .ignoresSafeArea()
+      VStack {
+        VStack(alignment: .leading, spacing: 5) {
+          HStack {
+            Text("Name")
+            Spacer()
+            Text(result.name)
+          }
+          HStack {
+            Text("Temperature")
+            Spacer()
+            Text("\(result.temperature)°F")
+          }
+          HStack {
+            Text("Amount of Tea/Water")
+            Spacer()
+            Text("\(result.amountTea.formatted()) oz. / \(result.amountWarer.formatted()) oz.")
+          }
+          HStack {
+            Text("Steeping Time")
+            Spacer()
+            Text(result.time, format: .number) + Text(" s")
+          }
         }
-        HStack {
-          Text("Temperature")
-          Spacer()
-          Text("\(result.temperature)°F")
+        .padding()
+        .frame(maxWidth: .infinity)
+        .background(
+          RoundedRectangle(cornerRadius: 20)
+            .fill(
+              Color("QuarterSpanishWhite")
+            )
+        )
+        VStack {
+          Text("Rating")
+            .font(.title)
+          RatingView(rating: .constant(result.rating))
+            .tint(.yellow)
+          .font(.title2)
         }
-        HStack {
-          Text("Amount of Tea/Water")
-          Spacer()
-          Text("\(result.amountTea.formatted()) oz. / \(result.amountWarer.formatted()) oz.")
-        }
-        HStack {
-          Text("Steeping Time")
-          Spacer()
-          Text(result.time, format: .number) + Text(" s")
-        }
+        .padding()
+        .frame(maxWidth: .infinity)
+        .background(
+          RoundedRectangle(cornerRadius: 20)
+            .fill(
+              Color("QuarterSpanishWhite")
+            )
+        )
+        RadarChartView(data: GraphDataPoint.fromBrewResult(
+          result: result)
+        )
+        .background(
+          RoundedRectangle(cornerRadius: 20)
+            .fill(
+              Color("QuarterSpanishWhite")
+            )
+        )
       }
-      Text("Rating")
-        .font(.title)
-      RatingView(rating: .constant(result.rating))
-        .tint(.yellow)
-        .font(.title2)
-      RadarChartView(data: GraphDataPoint.fromBrewResult(
-        result: result)
-      )
+      .font(.title2)
+      .padding()
     }
-    .font(.title2)
-    .padding()
   }
 }
 

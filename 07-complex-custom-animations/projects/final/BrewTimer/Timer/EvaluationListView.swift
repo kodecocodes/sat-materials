@@ -37,18 +37,21 @@ struct EvaluationListView: View {
   @State var brew: BrewResult?
 
   var body: some View {
-    List {
-      Section(header: Text("Ratings").font(.footnote)) {
-        ForEach(result) { evaluation in
-          ReviewView(result: evaluation)
-            .onTapGesture {
-              brew = evaluation
-            }
-            .font(.footnote)
-            .sheet(item: $brew) { result in
-              ShowResultView(result: result)
-            }
-        }
+    VStack {
+      Text("Ratings")
+        .font(.title2)
+      ForEach(result) { evaluation in
+        ReviewView(result: evaluation)
+          .padding([.top, .bottom], 5)
+          .font(.title3)
+          .contentShape(Rectangle())
+          .onTapGesture {
+            brew = evaluation
+          }
+          .font(.footnote)
+          .sheet(item: $brew) { result in
+            ShowResultView(result: result)
+          }
       }
     }
   }

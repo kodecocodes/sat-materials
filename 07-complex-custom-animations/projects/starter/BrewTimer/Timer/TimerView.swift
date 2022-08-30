@@ -104,7 +104,6 @@ struct TimerView: View {
         backGroundGradient
           .ignoresSafeArea()
         VStack {
-          BrewInfoView(brewTimer: brewTimer, amountOfWater: $amountOfWater)
           VStack {
             CountingTimerView(timerManager: timerManager)
               .frame(maxWidth: .infinity)
@@ -131,18 +130,21 @@ struct TimerView: View {
                 )
             )
             .padding([.leading, .trailing], 5)
-            .padding([.top], 15)
-          if !brewTimer.evaluation.isEmpty {
-            List {
-              Section(header: Text("Ratings").font(.footnote)) {
-                ForEach(brewTimer.evaluation) { evaluation in
-                  ReviewView(result: evaluation)
-                    .font(.footnote)
+            .padding([.bottom], 15)
+          ScrollView {
+            BrewInfoView(brewTimer: brewTimer, amountOfWater: $amountOfWater)
+            if !brewTimer.evaluation.isEmpty {
+              List {
+                Section(header: Text("Ratings").font(.footnote)) {
+                  ForEach(brewTimer.evaluation) { evaluation in
+                    ReviewView(result: evaluation)
+                      .font(.footnote)
+                  }
                 }
               }
             }
+            Spacer()
           }
-          Spacer()
         }
         .padding()
       }
