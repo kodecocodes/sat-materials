@@ -42,7 +42,8 @@ struct BrewTime: Identifiable {
   var evaluation: [BrewResult]
 
   static var baseTimers: [BrewTime] {
-    var timers: [BrewTime] = []
+    var timers: [BrewTime] = .init()
+
     timers.append(
       BrewTime(
         timerName: "Black Tea",
@@ -134,7 +135,7 @@ extension BrewTime: Hashable {
 
 extension BrewTime {
   static var previewObject: BrewTime {
-    var brew = BrewTime(
+    return BrewTime(
       timerName: "Test",
       waterAmount: 6,
       teaAmount: 2,
@@ -142,26 +143,5 @@ extension BrewTime {
       timerLength: 5,
       evaluation: [BrewResult]()
     )
-    
-    let result = BrewResult(
-      name: brew.timerName,
-      time: brew.timerLength,
-      temperature: brew.temperature,
-      amountWarer: brew.waterAmount,
-      amountTea: brew.teaAmount,
-      rating: 4
-    )
-    brew.evaluation.append(result)
-    let result2 = BrewResult(
-      name: brew.timerName,
-      time: brew.timerLength,
-      temperature: brew.temperature,
-      amountWarer: brew.waterAmount + 2,
-      amountTea: brew.teaAmount + 2,
-      rating: 3
-    )
-    brew.evaluation.append(result2)
-
-    return brew
   }
 }

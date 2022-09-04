@@ -32,33 +32,14 @@
 
 import SwiftUI
 
-struct EvaluationListView: View {
-  var result: [BrewResult]
-  @State var brew: BrewResult?
-
-  var body: some View {
-    VStack {
-      Text("Ratings")
-        .font(.title2)
-      ForEach(result) { evaluation in
-        ReviewView(result: evaluation)
-          .padding([.top, .bottom], 5)
-          .font(.title3)
-          .contentShape(Rectangle())
-          .onTapGesture {
-            brew = evaluation
-          }
-          .font(.footnote)
-          .sheet(item: $brew) { result in
-            ShowResultView(result: result)
-          }
-      }
+struct PopupSelectionButton: View {
+    var body: some View {
+        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
     }
-  }
 }
 
-struct EvaluationListView_Previews: PreviewProvider {
-  static var previews: some View {
-    EvaluationListView(result: [BrewResult.sampleResult])
-  }
+struct PopupSelectionButton_Previews: PreviewProvider {
+    static var previews: some View {
+        PopupSelectionButton()
+    }
 }

@@ -143,7 +143,6 @@ struct TimerView: View {
                 }
               }
             }
-            Spacer()
           }
         }
         .padding()

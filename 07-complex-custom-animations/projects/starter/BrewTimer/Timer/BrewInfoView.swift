@@ -35,10 +35,13 @@ import SwiftUI
 struct BrewInfoView: View {
   var brewTimer: BrewTime
   @Binding var amountOfWater: Double
+  @State var waterTeaRatio: Double?
 
   var teaToUse: Double {
-    let tspPerOz = brewTimer.teaAmount / brewTimer.waterAmount
-    return tspPerOz * amountOfWater
+    guard let waterTeaRatio = waterTeaRatio else {
+      return brewTimer.waterAmount / brewTimer.teaAmount
+    }
+    return round(amountOfWater / waterTeaRatio * 100) / 100.0
   }
 
   struct HeadingText: ViewModifier {

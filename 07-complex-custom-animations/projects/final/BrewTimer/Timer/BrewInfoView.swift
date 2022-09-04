@@ -35,10 +35,13 @@ import SwiftUI
 struct BrewInfoView: View {
   var brewTimer: BrewTime
   @Binding var amountOfWater: Double
+  @State var waterTeaRatio: Double?
 
   var teaToUse: Double {
-    let tspPerOz = brewTimer.teaAmount / brewTimer.waterAmount
-    return tspPerOz * amountOfWater
+    guard let waterTeaRatio = waterTeaRatio else {
+      return brewTimer.waterAmount / brewTimer.teaAmount
+    }
+    return round(amountOfWater / waterTeaRatio * 100) / 100.0
   }
 
   struct HeadingText: ViewModifier {
@@ -69,8 +72,15 @@ struct BrewInfoView: View {
       Slider(value: $amountOfWater, in: 0...24, step: 0.1)
       Text("Amount of Tea to Use")
         .modifier(HeadingText())
-      Text("\(teaToUse.formatted()) teaspoons")
-        .modifier(InformationText())
+      HStack(alignment: .bottom) {
+        Text("\(teaToUse.formatted()) teaspoons")
+          .modifier(InformationText())
+        Spacer()
+        PopupSelectionButton(
+          currentValue: $waterTeaRatio,
+          values: [1.0, 1.5, 2.0, 2.5, 3.0, 4.0, 5.0]
+        )
+      }
     }
     .padding()
     .foregroundColor(
@@ -82,6 +92,9 @@ struct BrewInfoView: View {
           Color("QuarterSpanishWhite")
         )
     )
+    .onAppear {
+      waterTeaRatio = brewTimer.waterAmount / brewTimer.teaAmount
+    }
   }
 }
 

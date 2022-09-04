@@ -42,7 +42,8 @@ struct BrewTime: Identifiable {
   var evaluation: [BrewResult]
 
   static var baseTimers: [BrewTime] {
-    var timers: [BrewTime] = []
+    var timers: [BrewTime] = .init()
+
     timers.append(
       BrewTime(
         timerName: "Black Tea",
