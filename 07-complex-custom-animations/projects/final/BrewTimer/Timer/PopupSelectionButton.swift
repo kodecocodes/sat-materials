@@ -33,13 +33,108 @@
 import SwiftUI
 
 struct PopupSelectionButton: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+  @Binding var currentValue: Double?
+  var values: [Double]
+  @State private var showOptions = false
+  @State private var animateOptions = 0.0
+
+  struct CircledText: ViewModifier {
+    // 1
+    var backgroundColor: Color
+
+    func body(content: Content) -> some View {
+      content
+        // 2
+        .contentShape(Circle())
+        .foregroundColor(Color("QuarterSpanishWhite"))
+        .font(.title2)
+        .padding(5)
+        .background {
+          Circle()
+            .fill(backgroundColor)
+            .aspectRatio(contentMode: .fill)
+        }
     }
+  }
+
+  func xOffset(_ index: Int) -> Double {
+    let distance = 180.0
+    // 2
+    let angle = Double(90 + 15 * index) * Double.pi / 180.0
+    // 3
+    return distance * sin(angle) - distance
+  }
+
+  func yOffset(_ index: Int) -> Double {
+    let distance = 180.0
+    let angle = Double(90 + 15 * index) * Double.pi / 180.0
+    return distance * cos(angle) - 40
+  }
+
+  var body: some View {
+    ZStack {
+      Group {
+        if let value = currentValue {
+          Text(value, format: .number)
+            .modifier(CircledText(backgroundColor: Color("Bourbon")))
+        } else {
+          Text("\(Image(systemName: "exclamationmark"))")
+            .modifier(CircledText(backgroundColor: Color(.red)))
+        }
+        // 1
+        if showOptions {
+          // 2
+          ForEach(values.indices, id: \.self) { index in
+            // 3
+            Text(values[index], format: .number)
+              .modifier(CircledText(backgroundColor: Color("OliveGreen")))
+              // 4
+              .offset(
+                x: animateOptions * xOffset(index),
+                y: animateOptions * yOffset(index)
+              )
+              // 5
+              .onTapGesture {
+                currentValue = values[index]
+                withAnimation(.easeOut(duration: 0.25)) {
+                  animateOptions = 0.0
+                }
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
+                  showOptions = false
+                }
+              }
+          }
+        }
+      }
+      .onTapGesture {
+        // 1
+        if showOptions {
+          // 2
+          withAnimation(.easeOut(duration: 0.25)) {
+            animateOptions = 0.0
+          }
+          // 3
+          DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
+            showOptions = false
+          }
+        } else {
+          // 4
+          showOptions = true
+          // 5
+          withAnimation(.easeOut(duration: 0.25)) {
+            animateOptions = 1.0
+          }
+        }
+      }
+    }
+  }
 }
 
 struct PopupSelectionButton_Previews: PreviewProvider {
-    static var previews: some View {
-        PopupSelectionButton()
-    }
+  static var previews: some View {
+    PopupSelectionButton(
+      currentValue: .constant(3),
+      values: [1.0, 1.5, 2.0, 2.5, 3.0, 4.0, 5.0]
+    )
+  }
 }
