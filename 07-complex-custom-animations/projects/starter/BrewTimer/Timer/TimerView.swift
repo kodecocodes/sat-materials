@@ -134,14 +134,7 @@ struct TimerView: View {
           ScrollView {
             BrewInfoView(brewTimer: brewTimer, amountOfWater: $amountOfWater)
             if !brewTimer.evaluation.isEmpty {
-              List {
-                Section(header: Text("Ratings").font(.footnote)) {
-                  ForEach(brewTimer.evaluation) { evaluation in
-                    ReviewView(result: evaluation)
-                      .font(.footnote)
-                  }
-                }
-              }
+              EvaluationListView(result: brewTimer.evaluation)
             }
           }
         }

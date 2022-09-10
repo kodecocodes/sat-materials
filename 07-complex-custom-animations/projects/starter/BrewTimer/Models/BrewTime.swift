@@ -144,4 +144,50 @@ extension BrewTime {
       evaluation: [BrewResult]()
     )
   }
+
+  static var previewObjectEvals: BrewTime {
+    var brew = BrewTime(
+      timerName: "Test",
+      waterAmount: 12,
+      teaAmount: 4,
+      temperature: 200,
+      timerLength: 120,
+      evaluation: [BrewResult]()
+    )
+
+    brew.evaluation.append(
+      BrewResult(
+        name: "Test Tea",
+        time: 90,
+        temperature: 200,
+        amountWarer: 12,
+        amountTea: 4,
+        rating: 3
+      )
+    )
+
+    brew.evaluation.append(
+      BrewResult(
+        name: "Test Tea",
+        time: 120,
+        temperature: 190,
+        amountWarer: 16,
+        amountTea: 6,
+        rating: 5
+      )
+    )
+
+    brew.evaluation.append(
+      BrewResult(
+        name: "Test Tea",
+        time: 120,
+        temperature: 200,
+        amountWarer: 14,
+        amountTea: 6,
+        rating: 4
+      )
+    )
+
+    return brew
+  }
 }

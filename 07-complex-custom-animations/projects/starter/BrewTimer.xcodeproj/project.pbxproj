@@ -13,6 +13,7 @@
 		A915B44A28AAFC7900C10EEF /* AppMain.swift in Sources */ = {isa = PBXBuildFile; fileRef = A915B44928AAFC7900C10EEF /* AppMain.swift */; };
 		A91D1B3E28A5E5EF00CE3E5D /* SlidingNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91D1B3D28A5E5EF00CE3E5D /* SlidingNumber.swift */; };
 		A91D1B4028A5E71600CE3E5D /* TimerDigitsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91D1B3F28A5E71600CE3E5D /* TimerDigitsView.swift */; };
+		A920EBDE28CD576900E0C323 /* EvaluationListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A920EBDD28CD576900E0C323 /* EvaluationListView.swift */; };
 		A930F94E28A4615D00641DC0 /* NumberTransitionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A930F94D28A4615D00641DC0 /* NumberTransitionView.swift */; };
 		A9311FB128A4139000136D99 /* CountingTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9311FB028A4139000136D99 /* CountingTimerView.swift */; };
 		A9647B2428A6B8F60008B8E6 /* IntegerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9647B2328A6B8F60008B8E6 /* IntegerExtensions.swift */; };
@@ -36,6 +37,7 @@
 		A915B44928AAFC7900C10EEF /* AppMain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppMain.swift; sourceTree = "<group>"; };
 		A91D1B3D28A5E5EF00CE3E5D /* SlidingNumber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlidingNumber.swift; sourceTree = "<group>"; };
 		A91D1B3F28A5E71600CE3E5D /* TimerDigitsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerDigitsView.swift; sourceTree = "<group>"; };
+		A920EBDD28CD576900E0C323 /* EvaluationListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvaluationListView.swift; sourceTree = "<group>"; };
 		A930F94D28A4615D00641DC0 /* NumberTransitionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberTransitionView.swift; sourceTree = "<group>"; };
 		A9311FB028A4139000136D99 /* CountingTimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountingTimerView.swift; sourceTree = "<group>"; };
 		A9647B2328A6B8F60008B8E6 /* IntegerExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntegerExtensions.swift; sourceTree = "<group>"; };
@@ -123,6 +125,7 @@
 				A91D1B3F28A5E71600CE3E5D /* TimerDigitsView.swift */,
 				A91D1B3D28A5E5EF00CE3E5D /* SlidingNumber.swift */,
 				A97728C628AC76F900AF0DD8 /* RatingView.swift */,
+				A920EBDD28CD576900E0C323 /* EvaluationListView.swift */,
 			);
 			path = Timer;
 			sourceTree = "<group>";
@@ -231,6 +234,7 @@
 			files = (
 				A930F94E28A4615D00641DC0 /* NumberTransitionView.swift in Sources */,
 				A91D1B4028A5E71600CE3E5D /* TimerDigitsView.swift in Sources */,
+				A920EBDE28CD576900E0C323 /* EvaluationListView.swift in Sources */,
 				A9EA75CC28A1DA1C00C4857C /* TimerView.swift in Sources */,
 				A9EA75C828A1D9C100C4857C /* BrewTime.swift in Sources */,
 				A9647B2428A6B8F60008B8E6 /* IntegerExtensions.swift in Sources */,

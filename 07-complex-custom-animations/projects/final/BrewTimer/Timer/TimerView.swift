@@ -122,26 +122,19 @@ struct TimerView: View {
               }
             Slider(value: $timerLength, in: 0...600, step: 15)
           }
-            .padding(15)
-            .background(
-              RoundedRectangle(cornerRadius: 20)
-                .fill(
-                  Color("QuarterSpanishWhite")
-                )
-            )
-            .padding([.leading, .trailing], 5)
-            .padding([.bottom], 15)
+          .padding(15)
+          .background(
+            RoundedRectangle(cornerRadius: 20)
+              .fill(
+                Color("QuarterSpanishWhite")
+              )
+          )
+          .padding([.leading, .trailing], 5)
+          .padding([.bottom], 15)
           ScrollView {
             BrewInfoView(brewTimer: brewTimer, amountOfWater: $amountOfWater)
             if !brewTimer.evaluation.isEmpty {
-              List {
-                Section(header: Text("Ratings").font(.footnote)) {
-                  ForEach(brewTimer.evaluation) { evaluation in
-                    ReviewView(result: evaluation)
-                      .font(.footnote)
-                  }
-                }
-              }
+              EvaluationListView(result: brewTimer.evaluation)
             }
           }
         }
