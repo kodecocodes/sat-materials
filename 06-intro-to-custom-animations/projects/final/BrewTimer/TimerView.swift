@@ -37,9 +37,8 @@ struct TimerView: View {
   @State var brewTimer: BrewTime
   @State var showDone: BrewTime?
   @State var amountOfWater = 0.0
-  @State var animateTimer = true
+  @State var animateTimer = false
   @State var animatePause = false
-  @State var brewingTemp = 0
 
   let backGroundGradient = LinearGradient(
     colors: [Color("BlackRussian"), Color("DarkOliveGreen"), Color("OliveGreen")],
@@ -104,6 +103,7 @@ struct TimerView: View {
               if timerManager.status == .running {
                 RoundedRectangle(cornerRadius: 20)
                   .stroke(animationGradient, lineWidth: 10)
+              // Pause animation
               } else if timerManager.status == .paused {
                 RoundedRectangle(cornerRadius: 20)
                   .stroke(.blue, lineWidth: 10)
@@ -154,9 +154,10 @@ struct TimerView: View {
           // 5
           animateTimer = true
         }
-      }
-      if newStatus == .paused {
+      } else if newStatus == .paused {
+        // 1
         animateTimer = false
+        // 2
         withAnimation(
           .easeInOut(duration: 0.5)
           .repeatForever()
@@ -164,6 +165,7 @@ struct TimerView: View {
           animatePause = true
         }
       } else {
+        // 3
         animateTimer = false
         animatePause = false
       }
