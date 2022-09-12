@@ -38,24 +38,6 @@ struct PopupSelectionButton: View {
   @State private var showOptions = false
   @State private var animateOptions = false
 
-  struct CircledText: ViewModifier {
-    // 1
-    var backgroundColor: Color
-
-    func body(content: Content) -> some View {
-      content
-        // 2
-        .contentShape(Circle())
-        .foregroundColor(Color("QuarterSpanishWhite"))
-        .font(.title2)
-        .padding(5)
-        .background {
-          Circle()
-            .fill(backgroundColor)
-            .aspectRatio(contentMode: .fill)
-        }
-    }
-  }
 
   func xOffset(_ index: Int) -> Double {
     let distance = 180.0

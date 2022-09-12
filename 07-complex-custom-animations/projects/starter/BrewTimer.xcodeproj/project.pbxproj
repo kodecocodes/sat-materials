@@ -23,6 +23,7 @@
 		A987089928CE4A810069B435 /* TeaRatingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A987089828CE4A810069B435 /* TeaRatingsView.swift */; };
 		A987089B28CE4AB10069B435 /* StaticRatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A987089A28CE4AB10069B435 /* StaticRatingView.swift */; };
 		A988856728BD906700770F3E /* BrewInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A988856628BD906700770F3E /* BrewInfoView.swift */; };
+		A98B2C9528CFABA800CAF4D5 /* ViewModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98B2C9428CFABA800CAF4D5 /* ViewModifiers.swift */; };
 		A9E9D7E828ADB5DA002F5BCF /* ReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9E9D7E728ADB5DA002F5BCF /* ReviewView.swift */; };
 		A9EA75C828A1D9C100C4857C /* BrewTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EA75C728A1D9C100C4857C /* BrewTime.swift */; };
 		A9EA75CA28A1D9D500C4857C /* TimerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EA75C928A1D9D500C4857C /* TimerManager.swift */; };
@@ -49,6 +50,7 @@
 		A987089828CE4A810069B435 /* TeaRatingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeaRatingsView.swift; sourceTree = "<group>"; };
 		A987089A28CE4AB10069B435 /* StaticRatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaticRatingView.swift; sourceTree = "<group>"; };
 		A988856628BD906700770F3E /* BrewInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrewInfoView.swift; sourceTree = "<group>"; };
+		A98B2C9428CFABA800CAF4D5 /* ViewModifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModifiers.swift; sourceTree = "<group>"; };
 		A9E9D7E728ADB5DA002F5BCF /* ReviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewView.swift; sourceTree = "<group>"; };
 		A9EA75C728A1D9C100C4857C /* BrewTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrewTime.swift; sourceTree = "<group>"; };
 		A9EA75C928A1D9D500C4857C /* TimerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerManager.swift; sourceTree = "<group>"; };
@@ -114,6 +116,7 @@
 			isa = PBXGroup;
 			children = (
 				A9647B2328A6B8F60008B8E6 /* IntegerExtensions.swift */,
+				A98B2C9428CFABA800CAF4D5 /* ViewModifiers.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -249,6 +252,7 @@
 				A930F94E28A4615D00641DC0 /* NumberTransitionView.swift in Sources */,
 				A91D1B4028A5E71600CE3E5D /* TimerDigitsView.swift in Sources */,
 				A920EBDE28CD576900E0C323 /* EvaluationListView.swift in Sources */,
+				A98B2C9528CFABA800CAF4D5 /* ViewModifiers.swift in Sources */,
 				A9EA75CC28A1DA1C00C4857C /* TimerView.swift in Sources */,
 				A9EA75C828A1D9C100C4857C /* BrewTime.swift in Sources */,
 				A987089B28CE4AB10069B435 /* StaticRatingView.swift in Sources */,

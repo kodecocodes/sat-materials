@@ -24,6 +24,7 @@
 		A987089B28CE4AB10069B435 /* StaticRatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A987089A28CE4AB10069B435 /* StaticRatingView.swift */; };
 		A987089D28CE4F520069B435 /* AnimatedRadarChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = A987089C28CE4F520069B435 /* AnimatedRadarChart.swift */; };
 		A988856728BD906700770F3E /* BrewInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A988856628BD906700770F3E /* BrewInfoView.swift */; };
+		A98B2C9328CFAB0B00CAF4D5 /* ViewModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98B2C9228CFAB0B00CAF4D5 /* ViewModifiers.swift */; };
 		A9E5BD4328CEBA0C005F70D4 /* PopupSelectionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9E5BD4228CEBA0C005F70D4 /* PopupSelectionButton.swift */; };
 		A9E9D7E828ADB5DA002F5BCF /* ReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9E9D7E728ADB5DA002F5BCF /* ReviewView.swift */; };
 		A9EA75C828A1D9C100C4857C /* BrewTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EA75C728A1D9C100C4857C /* BrewTime.swift */; };
@@ -52,6 +53,7 @@
 		A987089A28CE4AB10069B435 /* StaticRatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaticRatingView.swift; sourceTree = "<group>"; };
 		A987089C28CE4F520069B435 /* AnimatedRadarChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedRadarChart.swift; sourceTree = "<group>"; };
 		A988856628BD906700770F3E /* BrewInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrewInfoView.swift; sourceTree = "<group>"; };
+		A98B2C9228CFAB0B00CAF4D5 /* ViewModifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModifiers.swift; sourceTree = "<group>"; };
 		A9E5BD4228CEBA0C005F70D4 /* PopupSelectionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupSelectionButton.swift; sourceTree = "<group>"; };
 		A9E9D7E728ADB5DA002F5BCF /* ReviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewView.swift; sourceTree = "<group>"; };
 		A9EA75C728A1D9C100C4857C /* BrewTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrewTime.swift; sourceTree = "<group>"; };
@@ -118,6 +120,7 @@
 			isa = PBXGroup;
 			children = (
 				A9647B2328A6B8F60008B8E6 /* IntegerExtensions.swift */,
+				A98B2C9228CFAB0B00CAF4D5 /* ViewModifiers.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -267,6 +270,7 @@
 				A987089928CE4A810069B435 /* TeaRatingsView.swift in Sources */,
 				A97728C328AC609E00AF0DD8 /* BrewResult.swift in Sources */,
 				A97728C728AC76F900AF0DD8 /* RatingView.swift in Sources */,
+				A98B2C9328CFAB0B00CAF4D5 /* ViewModifiers.swift in Sources */,
 				A9311FB128A4139000136D99 /* CountingTimerView.swift in Sources */,
 				18D775C522AD944300AE281E /* ContentView.swift in Sources */,
 				A9EA75CE28A1E06500C4857C /* TimerComplete.swift in Sources */,
