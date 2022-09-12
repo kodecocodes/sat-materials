@@ -32,71 +32,72 @@
 
 import SwiftUI
 
-struct AnimatedRadialChart: View, Animatable {
-  var name: String
+struct AnimatedRadarChart: View, Animatable {
   var time: Double
   var temperature: Double
   var amountWater: Double
   var amountTea: Double
   var rating: Double
 
+  // 1
   var animatableData: AnimatablePair<
+    // 2
     AnimatablePair<Double, Double>,
+    // 3
     AnimatablePair<
-      Double,
-      AnimatablePair<Double, Double>
+      // 4
+      AnimatablePair<Double, Double>,
+      // 5
+      Double
     >
   > {
     get {
+      // 1
       AnimatablePair(
+        AnimatablePair(time, temperature),
         AnimatablePair(
-          time,
-          temperature
-        ),
-        AnimatablePair(
-          amountWater,
-          AnimatablePair(
-            amountTea,
-            rating
-          )
+          AnimatablePair(amountWater, amountTea),
+          rating
         )
       )
     }
     set {
+      // 2
       time = newValue.first.first
       temperature = newValue.first.second
-      amountWater = newValue.second.first
-      amountTea = newValue.second.second.first
-      rating = newValue.second.second.second
+      amountWater = newValue.second.first.first
+      amountTea = newValue.second.first.second
+      rating = newValue.second.second
     }
   }
 
   var values: [Double] {
-    [time, temperature, amountWater, amountTea, rating]
+    [
+      time / 600.0,
+      temperature / 212.0,
+      amountWater / 16.0,
+      amountTea / 16.0,
+      rating / 5.0
+    ]
   }
 
-  var lineColors: [Color] {
-    [.black, .red, .blue, .green, .yellow]
-  }
-
-  var gradientColors: AngularGradient {
-    var loopedColors = Array(lineColors)
-    loopedColors.append(.black)
-    return AngularGradient(
-      colors: loopedColors,
-      center: .center,
-      angle: .degrees(-90)
-    )
-  }
+  let lineColors: [Color] = [.black, .red, .blue, .green, .yellow]
 
   var body: some View {
+    // 1
     ZStack {
+      // 2
       GeometryReader { proxy in
+        // 3
         let graphSize = min(proxy.size.width, proxy.size.height) / 2.0
         let xCenter = proxy.size.width / 2.0
         let yCenter = proxy.size.height / 2.0
+
+        // 1
         ForEach([0.2, 0.4, 0.6, 0.8, 1.0], id: \.self) { val in
+          // 2
           Path { path in
+            // 3
             path.addArc(
               center: .zero,
               radius: graphSize * val,
@@ -105,65 +106,95 @@ struct AnimatedRadialChart: View, Animatable {
               clockwise: true
             )
           }
+          // 4
           .stroke(.gray, lineWidth: 1)
           .offset(x: xCenter, y: yCenter)
         }
+
+        PolygonChartView(
+          values: values,
+          graphSize: graphSize,
+          colorArray: lineColors,
+          xCenter: xCenter,
+          yCenter: yCenter
+        )
+
+        // 4
         ForEach(values.indices, id: \.self) { index in
           Path { path in
-            path.move(to: .init(x: 0, y: 0))
-            path.addLine(to: .init(x: graphSize, y: 0))
+            path.move(to: .zero)
+            path.addLine(to: .init(x: 0, y: -graphSize))
           }
           .stroke(.gray, lineWidth: 1)
           .offset(x: xCenter, y: yCenter)
-          .rotationEffect(.degrees(72.0 * Double(index) - 90.0))
-        }
-        Path { path in
-          var xZero = 0.0
-          var yZero = 0.0
-          for index in values.indices {
-            let value = Double(values[index])
-            let angleRadians = (72.0 * Double(-index) - 180.0) * Double.pi / 180.0
-            let x = sin(angleRadians) * graphSize * value
-            let y = cos(angleRadians) * graphSize * value
-            if index == 0 {
-              xZero = x
-              yZero = y
-              path.move(to: .init(x: x, y: y))
-            } else {
-              path.addLine(to: .init(x: x, y: y))
-            }
-          }
-          path.addLine(to: .init(x: xZero, y: yZero))
-        }
-        .offset(x: xCenter, y: yCenter)
-        .fill(gradientColors)
-        .opacity(0.5)
-        ForEach(values.indices, id: \.self) { index in
+          .rotationEffect(.degrees(72.0 * Double(index)))
           Path { path in
-            path.move(to: .init(x: 0, y: 0))
-            path.addLine(to: .init(x: graphSize * values[index], y: 0))
+            path.move(to: .zero)
+            path.addLine(to: .init(x: 0, y: -graphSize * values[index]))
           }
+          // 5
           .stroke(lineColors[index], lineWidth: 2)
+          // 6
           .offset(x: xCenter, y: yCenter)
-          .rotationEffect(.degrees(72.0 * Double(index) - 90.0))
+          // 7
+          .rotationEffect(.degrees(72.0 * Double(index)))
         }
       }
     }
   }
 }
 
-struct AnimatedRadialChart_Previews: PreviewProvider {
+struct AnimatedRadarChart_Previews: PreviewProvider {
   static var previews: some View {
-    VStack {
-      AnimatedRadialChart(
-        name: BrewResult.sampleResult.name,
-        time: Double(BrewResult.sampleResult.time) / 600.0,
-        temperature: Double(BrewResult.sampleResult.temperature) / 212.0,
-        amountWater: BrewResult.sampleResult.amountWarer / 16.0,
-        amountTea: BrewResult.sampleResult.amountTea / 16.0,
-        rating: Double(BrewResult.sampleResult.rating) / 5.0
-      )
-      .frame(width: 300, height: 300)
+    AnimatedRadarChart(
+      time: Double(BrewResult.sampleResult.time),
+      temperature: Double(BrewResult.sampleResult.temperature),
+      amountWater: BrewResult.sampleResult.amountWater,
+      amountTea: BrewResult.sampleResult.amountTea,
+      rating: Double(BrewResult.sampleResult.rating)
+    )
+  }
+}
+
+struct PolygonChartView: View {
+  var values: [Double]
+  var graphSize: Double
+  var colorArray: [Color]
+  var xCenter: Double
+  var yCenter: Double
+
+  var gradientColors: AngularGradient {
+    var loopedColors = Array(colorArray)
+    loopedColors.append(colorArray.first ?? .black)
+    return AngularGradient(
+      colors: loopedColors,
+      center: .center,
+      angle: .degrees(-90)
+    )
+  }
+
+  var body: some View {
+    Path { path in
+      // 1
+      for index in values.indices {
+        let value = values[index]
+        // 2
+        let angleRadians = 72.0 * Double(index) * Double.pi / 180.0
+        // 3
+        let x = sin(angleRadians) * graphSize * value
+        let y = cos(angleRadians) * -graphSize * value
+        // 4
+        if index == 0 {
+          path.move(to: .init(x: x, y: y))
+        } else {
+          path.addLine(to: .init(x: x, y: y))
+        }
+      }
+      // 5
+      path.closeSubpath()
     }
+    .offset(x: xCenter, y: yCenter)
+    .fill(gradientColors)
+    .opacity(0.5)
   }
 }

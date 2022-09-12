@@ -32,41 +32,21 @@
 
 import SwiftUI
 
-struct EvaluationListView: View {
-  var result: [BrewResult]
-  @State var showResult = false
+struct StaticRatingView: View {
+  var rating: Int
 
   var body: some View {
-    VStack {
-      Text("Ratings")
-        .font(.title2)
-      ForEach(result) { evaluation in
-        ReviewView(result: evaluation)
-          .padding([.top, .bottom], 5)
-          .font(.title3)
-          .contentShape(Rectangle())
-          .font(.footnote)
+    HStack {
+      ForEach(1..<6, id: \.self) { starNumber in
+        Image(systemName: rating >= starNumber ? "star.fill" : "star")
       }
     }
-    .contentShape(Rectangle())
-    .onTapGesture {
-      showResult = true
-    }
-    .sheet(isPresented: $showResult) {
-      TeaRatingsView(ratings: result)
-    }
-    .padding(10)
-    .background(
-      RoundedRectangle(cornerRadius: 20)
-        .fill(
-          Color("QuarterSpanishWhite")
-        )
-    )
   }
 }
 
-struct EvaluationListView_Previews: PreviewProvider {
+struct StaticRatingView_Previews: PreviewProvider {
   static var previews: some View {
-    EvaluationListView(result: BrewTime.previewObjectEvals.evaluation)
+    StaticRatingView(rating: 3)
+      .foregroundColor(.yellow)
   }
 }

@@ -37,7 +37,7 @@ struct BrewResult: Identifiable {
   var name: String
   var time: Int
   var temperature: Int
-  var amountWarer: Double
+  var amountWater: Double
   var amountTea: Double
   var rating: Int
 }
@@ -48,7 +48,7 @@ extension BrewResult {
       name: "Test",
       time: 120,
       temperature: 180,
-      amountWarer: 8,
+      amountWater: 8,
       amountTea: 2,
       rating: 2
     )

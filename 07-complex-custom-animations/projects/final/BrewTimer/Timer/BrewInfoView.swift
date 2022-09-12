@@ -92,9 +92,6 @@ struct BrewInfoView: View {
           Color("QuarterSpanishWhite")
         )
     )
-    .onAppear {
-      waterTeaRatio = brewTimer.waterAmount / brewTimer.teaAmount
-    }
   }
 }
 

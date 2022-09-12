@@ -67,7 +67,7 @@ struct BrewTime: Identifiable {
         name: "Green Tea",
         time: 90,
         temperature: 175,
-        amountWarer: 8,
+        amountWater: 8,
         amountTea: 2,
         rating: 4
       )
@@ -77,7 +77,7 @@ struct BrewTime: Identifiable {
         name: "Green Tea",
         time: 90,
         temperature: 175,
-        amountWarer: 16,
+        amountWater: 16,
         amountTea: 4,
         rating: 4
       )
@@ -93,16 +93,16 @@ struct BrewTime: Identifiable {
         evaluation: [BrewResult]()
       )
     )
-    timers.append(
-      BrewTime(
-        timerName: "Oolong Tea",
-        waterAmount: 8,
-        teaAmount: 2,
-        temperature: 195,
-        timerLength: 150,
-        evaluation: [BrewResult]()
-      )
+    var ooBrew = BrewTime(
+      timerName: "Oolong Tea",
+      waterAmount: 8,
+      teaAmount: 2,
+      temperature: 195,
+      timerLength: 150,
+      evaluation: [BrewResult]()
     )
+    ooBrew.evaluation.append(contentsOf: BrewTime.previewObjectEvals.evaluation)
+    timers.append(ooBrew)
     timers.append(
       BrewTime(
         timerName: "White Tea",
@@ -157,10 +157,10 @@ extension BrewTime {
 
     brew.evaluation.append(
       BrewResult(
-        name: "Test Tea",
+        name: "Oolong Tea",
         time: 90,
         temperature: 200,
-        amountWarer: 12,
+        amountWater: 12,
         amountTea: 4,
         rating: 3
       )
@@ -168,10 +168,10 @@ extension BrewTime {
 
     brew.evaluation.append(
       BrewResult(
-        name: "Test Tea",
+        name: "Oolong Tea",
         time: 120,
         temperature: 190,
-        amountWarer: 16,
+        amountWater: 16,
         amountTea: 6,
         rating: 5
       )
@@ -179,10 +179,10 @@ extension BrewTime {
 
     brew.evaluation.append(
       BrewResult(
-        name: "Test Tea",
+        name: "Oolong Tea",
         time: 120,
         temperature: 200,
-        amountWarer: 14,
+        amountWater: 14,
         amountTea: 6,
         rating: 4
       )

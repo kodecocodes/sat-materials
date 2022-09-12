@@ -41,8 +41,8 @@ struct ReviewView: View {
       Text("\(result.temperature)°F")
       Text(result.time, format: .number)
       Spacer()
-      RatingView(rating: .constant(result.rating))
-        .tint(.yellow)
+      StaticRatingView(rating: result.rating)
+        .foregroundColor(.yellow)
     }
   }
 }

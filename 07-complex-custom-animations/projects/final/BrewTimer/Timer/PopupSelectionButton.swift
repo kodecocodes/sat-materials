@@ -1,15 +1,15 @@
 /// Copyright (c) 2022 Razeware LLC
-/// 
+///
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
 /// in the Software without restriction, including without limitation the rights
 /// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 /// copies of the Software, and to permit persons to whom the Software is
 /// furnished to do so, subject to the following conditions:
-/// 
+///
 /// The above copyright notice and this permission notice shall be included in
 /// all copies or substantial portions of the Software.
-/// 
+///
 /// Notwithstanding the foregoing, you may not use, copy, modify, merge, publish,
 /// distribute, sublicense, create a derivative work, and/or sell copies of the
 /// Software in any work that is designed, intended, or marketed for pedagogical or
@@ -17,7 +17,7 @@
 /// or information technology.  Permission for such use, copying, modification,
 /// merger, publication, distribution, sublicensing, creation of derivative works,
 /// or sale is expressly withheld.
-/// 
+///
 /// This project and source code may use libraries or frameworks that are
 /// released under various Open-Source licenses. Use of those libraries and
 /// frameworks are governed by their own individual licenses.
@@ -36,7 +36,7 @@ struct PopupSelectionButton: View {
   @Binding var currentValue: Double?
   var values: [Double]
   @State private var showOptions = false
-  @State private var animateOptions = 0.0
+  @State private var animateOptions = false
 
   struct CircledText: ViewModifier {
     // 1
@@ -74,35 +74,40 @@ struct PopupSelectionButton: View {
   var body: some View {
     ZStack {
       Group {
-        if let value = currentValue {
-          Text(value, format: .number)
-            .modifier(CircledText(backgroundColor: Color("Bourbon")))
-        } else {
-          Text("\(Image(systemName: "exclamationmark"))")
-            .modifier(CircledText(backgroundColor: Color(.red)))
-        }
         // 1
         if showOptions {
           // 2
           ForEach(values.indices, id: \.self) { index in
             // 3
             Text(values[index], format: .number)
+              .transition(.scale.animation(.easeOut(duration: 0.25)))
               .modifier(CircledText(backgroundColor: Color("OliveGreen")))
               // 4
               .offset(
-                x: animateOptions * xOffset(index),
-                y: animateOptions * yOffset(index)
+                x: animateOptions ? xOffset(index) : 0,
+                y: animateOptions ? yOffset(index) : 0
               )
               // 5
               .onTapGesture {
                 currentValue = values[index]
                 withAnimation(.easeOut(duration: 0.25)) {
-                  animateOptions = 0.0
+                  animateOptions = false
                 }
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
+                withAnimation {
                   showOptions = false
                 }
               }
+          }
+          Text("\(Image(systemName: "xmark.circle"))")
+            .transition(.opacity.animation(.linear(duration: 0.25)))
+            .modifier(CircledText(backgroundColor: Color(.red)))
+        } else {
+          if let value = currentValue {
+            Text(value, format: .number)
+              .modifier(CircledText(backgroundColor: Color("Bourbon")))
+          } else {
+            Text("\(Image(systemName: "exclamationmark"))")
+              .modifier(CircledText(backgroundColor: Color(.red)))
           }
         }
       }
@@ -111,18 +116,20 @@ struct PopupSelectionButton: View {
         if showOptions {
           // 2
           withAnimation(.easeOut(duration: 0.25)) {
-            animateOptions = 0.0
+            animateOptions = false
           }
           // 3
-          DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
+          withAnimation {
             showOptions = false
           }
         } else {
           // 4
-          showOptions = true
+          withAnimation {
+            showOptions = true
+          }
           // 5
           withAnimation(.easeOut(duration: 0.25)) {
-            animateOptions = 1.0
+            animateOptions = true
           }
         }
       }

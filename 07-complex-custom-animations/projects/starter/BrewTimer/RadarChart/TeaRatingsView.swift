@@ -1,15 +1,15 @@
 /// Copyright (c) 2022 Razeware LLC
-/// 
+///
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
 /// in the Software without restriction, including without limitation the rights
 /// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 /// copies of the Software, and to permit persons to whom the Software is
 /// furnished to do so, subject to the following conditions:
-/// 
+///
 /// The above copyright notice and this permission notice shall be included in
 /// all copies or substantial portions of the Software.
-/// 
+///
 /// Notwithstanding the foregoing, you may not use, copy, modify, merge, publish,
 /// distribute, sublicense, create a derivative work, and/or sell copies of the
 /// Software in any work that is designed, intended, or marketed for pedagogical or
@@ -17,7 +17,7 @@
 /// or information technology.  Permission for such use, copying, modification,
 /// merger, publication, distribution, sublicensing, creation of derivative works,
 /// or sale is expressly withheld.
-/// 
+///
 /// This project and source code may use libraries or frameworks that are
 /// released under various Open-Source licenses. Use of those libraries and
 /// frameworks are governed by their own individual licenses.
@@ -55,7 +55,7 @@ struct TeaRatingsView: View {
                 Text("\(ratings[ratingIndex].temperature) °F")
                 Text(ratings[ratingIndex].time, format: .number) + Text(" s")
                 Text("\(ratings[ratingIndex].amountTea.formatted()) tsp.") +
-                Text("/ \(ratings[ratingIndex].amountWarer.formatted()) oz.")
+                Text("/ \(ratings[ratingIndex].amountWater.formatted()) oz.")
                 StaticRatingView(rating: ratings[ratingIndex].rating)
                   .foregroundColor(.yellow)
               }
@@ -85,23 +85,8 @@ struct TeaRatingsView: View {
               Color("QuarterSpanishWhite")
             )
         )
-        AnimatedRadialChart(
-          name: ratings[selectedRating].name,
-          time: Double(ratings[selectedRating].time) / 300.0,
-          temperature: Double(ratings[selectedRating].temperature) / 212.0,
-          amountWater: ratings[selectedRating].amountWarer / 16.0,
-          amountTea: ratings[selectedRating].amountTea / 16.0,
-          rating: Double(ratings[selectedRating].rating) / 5.0
-        )
-        .aspectRatio(contentMode: .fit)
-        .animation(.linear, value: selectedRating)
-        .padding(20)
-        .background(
-          RoundedRectangle(cornerRadius: 20)
-            .fill(
-              Color("QuarterSpanishWhite")
-            )
-        )
+        Spacer()
+        // Add Radar Chart Here
       }
       .font(.body)
       .padding()

@@ -60,7 +60,7 @@ struct TimerComplete: View {
           name: brew.name,
           time: brew.time,
           temperature: brew.temperature,
-          amountWarer: brew.amountWarer,
+          amountWater: brew.amountWater,
           amountTea: brew.amountTea,
           rating: rating
         )

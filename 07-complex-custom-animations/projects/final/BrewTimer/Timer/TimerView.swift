@@ -122,15 +122,15 @@ struct TimerView: View {
               }
             Slider(value: $timerLength, in: 0...600, step: 15)
           }
-          .padding(15)
-          .background(
-            RoundedRectangle(cornerRadius: 20)
-              .fill(
-                Color("QuarterSpanishWhite")
-              )
-          )
-          .padding([.leading, .trailing], 5)
-          .padding([.bottom], 15)
+            .padding(15)
+            .background(
+              RoundedRectangle(cornerRadius: 20)
+                .fill(
+                  Color("QuarterSpanishWhite")
+                )
+            )
+            .padding([.leading, .trailing], 5)
+            .padding([.bottom], 15)
           ScrollView {
             BrewInfoView(brewTimer: brewTimer, amountOfWater: $amountOfWater)
             if !brewTimer.evaluation.isEmpty {
@@ -159,7 +159,7 @@ struct TimerView: View {
           name: brewTimer.timerName,
           time: Int(timerLength),
           temperature: brewingTemp,
-          amountWarer: amountOfWater,
+          amountWater: amountOfWater,
           amountTea: teaToUse,
           rating: 0
         )

@@ -159,7 +159,7 @@ struct TimerView: View {
           name: brewTimer.timerName,
           time: Int(timerLength),
           temperature: brewingTemp,
-          amountWarer: amountOfWater,
+          amountWater: amountOfWater,
           amountTea: teaToUse,
           rating: 0
         )

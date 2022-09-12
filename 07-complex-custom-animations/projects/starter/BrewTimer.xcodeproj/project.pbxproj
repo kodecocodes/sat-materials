@@ -20,6 +20,8 @@
 		A97728C328AC609E00AF0DD8 /* BrewResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = A97728C228AC609E00AF0DD8 /* BrewResult.swift */; };
 		A97728C528AC680200AF0DD8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A97728C428AC680200AF0DD8 /* LaunchScreen.storyboard */; };
 		A97728C728AC76F900AF0DD8 /* RatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A97728C628AC76F900AF0DD8 /* RatingView.swift */; };
+		A987089928CE4A810069B435 /* TeaRatingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A987089828CE4A810069B435 /* TeaRatingsView.swift */; };
+		A987089B28CE4AB10069B435 /* StaticRatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A987089A28CE4AB10069B435 /* StaticRatingView.swift */; };
 		A988856728BD906700770F3E /* BrewInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A988856628BD906700770F3E /* BrewInfoView.swift */; };
 		A9E9D7E828ADB5DA002F5BCF /* ReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9E9D7E728ADB5DA002F5BCF /* ReviewView.swift */; };
 		A9EA75C828A1D9C100C4857C /* BrewTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EA75C728A1D9C100C4857C /* BrewTime.swift */; };
@@ -44,6 +46,8 @@
 		A97728C228AC609E00AF0DD8 /* BrewResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrewResult.swift; sourceTree = "<group>"; };
 		A97728C428AC680200AF0DD8 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A97728C628AC76F900AF0DD8 /* RatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingView.swift; sourceTree = "<group>"; };
+		A987089828CE4A810069B435 /* TeaRatingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeaRatingsView.swift; sourceTree = "<group>"; };
+		A987089A28CE4AB10069B435 /* StaticRatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaticRatingView.swift; sourceTree = "<group>"; };
 		A988856628BD906700770F3E /* BrewInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrewInfoView.swift; sourceTree = "<group>"; };
 		A9E9D7E728ADB5DA002F5BCF /* ReviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewView.swift; sourceTree = "<group>"; };
 		A9EA75C728A1D9C100C4857C /* BrewTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrewTime.swift; sourceTree = "<group>"; };
@@ -89,6 +93,7 @@
 				A9647B2228A6B8E50008B8E6 /* Extensions */,
 				A9EA75C628A1D94700C4857C /* Models */,
 				A988856828BD97B000770F3E /* Timer */,
+				A987089728CE4A560069B435 /* RadarChart */,
 				A97728C428AC680200AF0DD8 /* LaunchScreen.storyboard */,
 				18D775C622AD944400AE281E /* Assets.xcassets */,
 				18D775CE22AD944400AE281E /* Info.plist */,
@@ -111,6 +116,15 @@
 				A9647B2328A6B8F60008B8E6 /* IntegerExtensions.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		A987089728CE4A560069B435 /* RadarChart */ = {
+			isa = PBXGroup;
+			children = (
+				A987089828CE4A810069B435 /* TeaRatingsView.swift */,
+				A987089A28CE4AB10069B435 /* StaticRatingView.swift */,
+			);
+			path = RadarChart;
 			sourceTree = "<group>";
 		};
 		A988856828BD97B000770F3E /* Timer */ = {
@@ -237,10 +251,12 @@
 				A920EBDE28CD576900E0C323 /* EvaluationListView.swift in Sources */,
 				A9EA75CC28A1DA1C00C4857C /* TimerView.swift in Sources */,
 				A9EA75C828A1D9C100C4857C /* BrewTime.swift in Sources */,
+				A987089B28CE4AB10069B435 /* StaticRatingView.swift in Sources */,
 				A9647B2428A6B8F60008B8E6 /* IntegerExtensions.swift in Sources */,
 				A9EA75CA28A1D9D500C4857C /* TimerManager.swift in Sources */,
 				A9E9D7E828ADB5DA002F5BCF /* ReviewView.swift in Sources */,
 				A988856728BD906700770F3E /* BrewInfoView.swift in Sources */,
+				A987089928CE4A810069B435 /* TeaRatingsView.swift in Sources */,
 				A97728C328AC609E00AF0DD8 /* BrewResult.swift in Sources */,
 				A97728C728AC76F900AF0DD8 /* RatingView.swift in Sources */,
 				A9311FB128A4139000136D99 /* CountingTimerView.swift in Sources */,
