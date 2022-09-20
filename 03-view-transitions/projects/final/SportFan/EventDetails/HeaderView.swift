@@ -33,7 +33,7 @@
 import SwiftUI
 
 struct HeaderView: View {
-  @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+  @Environment(\.dismiss) var dismiss
   var namespace: Namespace.ID
   var event: Event
   @Binding var collapsed: Bool
@@ -83,7 +83,7 @@ struct HeaderView: View {
           .padding(.top, UIApplication.safeAreaTopInset + 8.0)
           .contentShape(Rectangle())
           .onTapGesture {
-            presentationMode.wrappedValue.dismiss()
+            dismiss()
           }
 
         Spacer()

@@ -38,7 +38,7 @@ struct EventLocationAndDate: View {
   var body: some View {
     VStack(alignment: .leading) {
       HStack(spacing: spacingS) {
-        Image(uiImage: UIImage(named: "location")!)
+        Image(systemName: "location.circle")
           .resizable()
           .scaledToFit()
           .frame(height: iconSizeL)
@@ -53,7 +53,7 @@ struct EventLocationAndDate: View {
       }
 
       HStack(spacing: spacingS) {
-        Image(uiImage: UIImage(named: "calendar")!)
+        Image(systemName: "calendar")
           .resizable()
           .scaledToFit()
           .frame(height: iconSizeL)
@@ -65,7 +65,8 @@ struct EventLocationAndDate: View {
           .font(.subheadline)
         Spacer()
       }
-    }.padding()
+    }
+    .padding()
   }
 }
 

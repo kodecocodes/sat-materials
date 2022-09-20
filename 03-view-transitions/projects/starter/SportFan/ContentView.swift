@@ -45,8 +45,8 @@ struct ContentView: View {
       }
       ZStack(alignment: Alignment(horizontal: .center, vertical: .top)) {
         LazyVStack {
-          ForEach(events) {
-            EventView(event: $0)
+          ForEach(events) { event in
+            EventView(event: event)
           }
         }.animation(.easeIn, value: events)
           .offset(y: pullToRefresh.state == .ongoing || pullToRefresh.state == .preparingToFinish ? maxOffset : 0)
