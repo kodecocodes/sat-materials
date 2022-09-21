@@ -56,7 +56,7 @@ struct ContentView: View {
               NavigationLink(destination: EventDetailsView(event: event)) {
                 EventView(event: event)
               }
-              .transition(.scale)
+              .transition(.scale.combined(with: .opacity))
             }
           }
         }

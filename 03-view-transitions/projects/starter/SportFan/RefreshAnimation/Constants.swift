@@ -50,3 +50,9 @@ let iconSizeS = 16.0
 let iconSizeL = 24.0
 
 let orange = Color("AccentColor")
+
+let minHeaderOffset = -80.0
+let headerHeight = 220.0
+let minHeaderHeight = 120.0
+
+let floatingButtonWidth = 110.0
