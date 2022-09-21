@@ -49,8 +49,8 @@ struct EventDetailsView: View {
         HeaderView(
           namespace: namespace,
           event: event,
-          collapsed: $collapsed,
-          offset: $offset
+          collapsed: collapsed,
+          offset: offset
         )
         Spacer()
         if collapsed {
@@ -81,7 +81,7 @@ struct EventDetailsView: View {
                 .foregroundColor(.secondary)
                 .padding(.horizontal)
 
-              EventLocationAndDate(collapsed: $collapsed, namespace: namespace, event: event)
+              EventLocationAndDate(collapsed: collapsed, namespace: namespace, event: event)
                 .zIndex(3)
 
               if !collapsed {

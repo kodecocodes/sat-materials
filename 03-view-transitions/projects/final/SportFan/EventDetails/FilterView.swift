@@ -33,8 +33,8 @@
 import SwiftUI
 
 struct FilterView: View {
-  @Binding var selectedSports: [Sport]
-  @Binding var isShown: Bool
+  @Binding var selectedSports: Set<Sport>
+  var isShown: Bool
 
   private let sports = Sport.allCases
   private let filterTransition = AnyTransition.modifier(
@@ -43,8 +43,8 @@ struct FilterView: View {
   )
 
   var body: some View {
-    var width = CGFloat.zero
-    var height = CGFloat.zero
+    var horizontalShift = CGFloat.zero
+    var verticalShift = CGFloat.zero
 
     return ZStack(alignment: .topLeading) {
       if isShown {
@@ -56,20 +56,18 @@ struct FilterView: View {
               onSelected(sport)
             }
             .alignmentGuide(.leading) { dimension in
-              if abs(width - dimension.width) > UIScreen.main.bounds.width {
-                width = 0
-                height -= dimension.height
+              if abs(horizontalShift - dimension.width) > UIScreen.main.bounds.width {
+                horizontalShift = 0
+                verticalShift -= dimension.height
               }
-              defer {
-                width = sport == sports.last ? 0 : width - dimension.width
-              }
-              return width
+              let currentShift = horizontalShift
+              horizontalShift = sport == sports.last ? 0 : horizontalShift - dimension.width
+              return currentShift
             }
             .alignmentGuide(.top) { _ in
-              defer {
-                height = sport == sports.last ? 0 : height
-              }
-              return height
+              let currentShift = verticalShift
+              verticalShift = sport == sports.last ? 0 : verticalShift
+              return currentShift
             }
             .transition(.asymmetric(insertion: filterTransition, removal: .scale.combined(with: .opacity)))
         }
@@ -78,10 +76,10 @@ struct FilterView: View {
   }
 
   private func onSelected(_ sport: Sport) {
-    if let index = selectedSports.firstIndex(of: sport) {
-      selectedSports.remove(at: index)
+    if selectedSports.contains(sport) {
+      selectedSports.remove(sport)
     } else {
-      selectedSports.append(sport)
+      selectedSports.insert(sport)
     }
   }
 
@@ -114,6 +112,6 @@ struct FilterModifier: ViewModifier {
 
 struct FilterView_Previews: PreviewProvider {
   static var previews: some View {
-    FilterView(selectedSports: Binding.constant([]), isShown: Binding.constant(true))
+    FilterView(selectedSports: Binding.constant([]), isShown: true)
   }
 }

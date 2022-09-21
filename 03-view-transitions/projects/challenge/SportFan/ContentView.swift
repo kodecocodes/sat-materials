@@ -37,7 +37,7 @@ struct ContentView: View {
   @State var unfilteredEvents: [Event] = []
   @State var pullToRefresh = PullToRefresh(progress: 0, state: .idle)
   @State var filterShown = false
-  @State var selectedSports: [Sport] = []
+  @State var selectedSports: Set<Sport> = []
 
   private let spring: Animation = .interpolatingSpring(stiffness: 80, damping: 4)
   private let ease: Animation = .easeInOut(duration: timeForTheBallToReturn)
@@ -49,7 +49,7 @@ struct ContentView: View {
       }
       ZStack(alignment: Alignment(horizontal: .center, vertical: .top)) {
         VStack {
-          FilterView(selectedSports: $selectedSports, isShown: $filterShown)
+          FilterView(selectedSports: $selectedSports, isShown: filterShown)
             .padding(.top)
           VStack {
             ForEach(events) { event in
@@ -65,18 +65,22 @@ struct ContentView: View {
         BallView(pullToRefresh: $pullToRefresh)
       }
     }.toolbar {
-      ToolbarItem(placement: .primaryAction) {
-        Image("filter")
-          .resizable()
-          .scaledToFit()
-          .frame(height: 24)
-          .clipped()
-          .contentShape(Rectangle())
-          .onTapGesture {
-            withAnimation(filterShown ? .easeInOut : .interpolatingSpring(stiffness: 20, damping: 3).speed(2.5)) {
-              filterShown.toggle()
-            }
+      ToolbarItem {
+        Button {
+          withAnimation(filterShown ? .easeInOut : .interpolatingSpring(stiffness: 20, damping: 3).speed(2.5)) {
+            filterShown.toggle()
           }
+        } label: {
+          Label("Filter", systemImage: "line.3.horizontal.decrease.circle")
+        }
+      }
+    }
+    .onChange(of: pullToRefresh) {
+      if $0.state == .pulling {
+        // Challenge: Step 6 - Close the filtering view when pull to refresh starts
+        withAnimation {
+          filterShown = false
+        }
       }
     }
     .onChange(of: selectedSports) { _ in

@@ -36,8 +36,8 @@ struct HeaderView: View {
   @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
   var namespace: Namespace.ID
   var event: Event
-  @Binding var collapsed: Bool
-  @Binding var offset: CGFloat
+  var collapsed: Bool
+  var offset: CGFloat
 
   var body: some View {
     ZStack {
@@ -90,7 +90,7 @@ struct HeaderView: View {
 
         if collapsed {
           HStack {
-            Image(uiImage: UIImage(named: "calendar")!)
+            Image(systemName: "location.circle")
               .renderingMode(.template)
               .resizable()
               .scaledToFit()
@@ -110,5 +110,16 @@ struct HeaderView: View {
       .padding(.horizontal)
     }.toolbar(.hidden)
       .frame(height: max(minHeaderHeight, headerHeight + offset))
+  }
+}
+
+struct HeaderView_Previews: PreviewProvider {
+  @Namespace static var namespace
+  static var previews: some View {
+    HeaderView(
+      namespace: namespace,
+      event: Event(team: teams[0], location: "Somewhere", ticketsLeft: 345),
+      collapsed: true, offset: -100
+    )
   }
 }

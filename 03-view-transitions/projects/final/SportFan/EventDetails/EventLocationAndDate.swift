@@ -33,14 +33,14 @@
 import SwiftUI
 
 struct EventLocationAndDate: View {
-  @Binding var collapsed: Bool
+  var collapsed: Bool
   var namespace: Namespace.ID
   var event: Event
 
   var body: some View {
     VStack(alignment: .leading) {
       HStack(spacing: spacingS) {
-        Image(uiImage: UIImage(named: "location")!)
+        Image(systemName: "location.circle")
           .resizable()
           .scaledToFit()
           .frame(height: iconSizeL)
@@ -56,7 +56,7 @@ struct EventLocationAndDate: View {
 
       HStack(spacing: spacingS) {
         if !collapsed {
-          Image(uiImage: UIImage(named: "calendar")!)
+          Image(systemName: "calendar")
             .resizable()
             .scaledToFit()
             .frame(height: iconSizeL)
@@ -78,6 +78,6 @@ struct EventLocationAndDate: View {
 struct EventLocationAndDate_Previews: PreviewProvider {
   @Namespace static var namespace
   static var previews: some View {
-    EventLocationAndDate(collapsed: Binding.constant(false), namespace: namespace, event: makeEvent(for: teams[0]))
+    EventLocationAndDate(collapsed: false, namespace: namespace, event: makeEvent(for: teams[0]))
   }
 }
