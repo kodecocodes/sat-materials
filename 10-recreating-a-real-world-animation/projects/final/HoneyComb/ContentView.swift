@@ -35,7 +35,7 @@ import SwiftUI
 struct ContentView: View {
   @State var hexes: [HexData] = []
   @State var touchedHexagon: HexData?
-  @State var selectedHexes: [HexData] = []
+  @State var selectedHexes: Set<HexData> = []
 
   @GestureState var drag: CGSize = .zero
   @State var dragOffset: CGSize = .zero
@@ -46,7 +46,7 @@ struct ContentView: View {
         .font(.subheadline)
 
       GeometryReader { proxy in
-        ZStack {
+        HoneyCombGrid(hexes: hexes) {
           ForEach(hexes, id: \.self) { hex in
             let hexOrNeighboring = touchedHexagon == hex ||
             touchedHexagon?.hex.neigbouring(hex: hex.hex) == true
@@ -59,12 +59,12 @@ struct ContentView: View {
             ) {
               select(hex: hex)
             }
+            .transition(.scale)
             .scaleEffect(scale)
             .offset(CGSize(
-              width: hex.center.x + measurement.shift.x,
-              height: hex.center.y + measurement.shift.y
+              width: measurement.shift.x,
+              height: measurement.shift.y
             ))
-            .transition(.scale)
           }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -72,6 +72,7 @@ struct ContentView: View {
           width: drag.width + dragOffset.width,
           height: drag.height + dragOffset.height
         ))
+        .animation(.spring(), value: hexes)
         .simultaneousGesture(DragGesture()
           .updating($drag) { value, state, _ in
             withAnimation {
@@ -105,15 +106,15 @@ struct ContentView: View {
   }
 
   private func select(hex: HexData) {
-    withAnimation(.easeInOut(duration: 0.5)) {
-      dragOffset = CGSize(width: -hex.center.x, height: -hex.center.y)
+    if selectedHexes.contains(hex) {
+      selectedHexes.remove(hex)
+    } else {
+      selectedHexes.insert(hex)
+      appendHexesIfNeeded(for: hex)
+    }
 
-      if let index = selectedHexes.firstIndex(of: hex) {
-        selectedHexes.remove(at: index)
-      } else {
-        selectedHexes.append(hex)
-        appendHexesIfNeeded(for: hex)
-      }
+    withAnimation(.spring().delay(0.1)) {
+      dragOffset = CGSize(width: -hex.center.x, height: -hex.center.y)
     }
   }
 

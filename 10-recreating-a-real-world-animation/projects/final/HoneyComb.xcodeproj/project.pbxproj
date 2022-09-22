@@ -14,6 +14,7 @@
 		18D775D822AD963800AE281E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18D775DA22AD963800AE281E /* LaunchScreen.storyboard */; };
 		BA76F97728C4ECDB00E82FD2 /* HexView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA76F97628C4ECDB00E82FD2 /* HexView.swift */; };
 		BA76F97928C4F20100E82FD2 /* HexData.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA76F97828C4F20100E82FD2 /* HexData.swift */; };
+		BAB2C5A528DCB285004C2743 /* HoneyCombGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB2C5A428DCB285004C2743 /* HoneyCombGrid.swift */; };
 		BAB7CEC328C285CD0012DABD /* Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB7CEC228C285CD0012DABD /* Hex.swift */; };
 /* End PBXBuildFile section */
 
@@ -27,6 +28,7 @@
 		18D775DE22AD96B400AE281E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BA76F97628C4ECDB00E82FD2 /* HexView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HexView.swift; sourceTree = "<group>"; };
 		BA76F97828C4F20100E82FD2 /* HexData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HexData.swift; sourceTree = "<group>"; };
+		BAB2C5A428DCB285004C2743 /* HoneyCombGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoneyCombGrid.swift; sourceTree = "<group>"; };
 		BAB7CEC228C285CD0012DABD /* Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hex.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -71,6 +73,7 @@
 				18D775C622AD944400AE281E /* Assets.xcassets */,
 				18D775DA22AD963800AE281E /* LaunchScreen.storyboard */,
 				18D775C822AD944400AE281E /* Preview Content */,
+				BAB2C5A428DCB285004C2743 /* HoneyCombGrid.swift */,
 			);
 			path = HoneyComb;
 			sourceTree = "<group>";
@@ -179,6 +182,7 @@
 			files = (
 				BAB7CEC328C285CD0012DABD /* Hex.swift in Sources */,
 				18D775C522AD944300AE281E /* ContentView.swift in Sources */,
+				BAB2C5A528DCB285004C2743 /* HoneyCombGrid.swift in Sources */,
 				BA76F97928C4F20100E82FD2 /* HexData.swift in Sources */,
 				BA76F97728C4ECDB00E82FD2 /* HexView.swift in Sources */,
 				1839F4B025190F2A00BB00F1 /* AppMain.swift in Sources */,
