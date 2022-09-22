@@ -67,7 +67,6 @@ struct ContentView: View {
             ))
           }
         }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
         .offset(CGSize(
           width: drag.width + dragOffset.width,
           height: drag.height + dragOffset.height
@@ -113,8 +112,10 @@ struct ContentView: View {
       appendHexesIfNeeded(for: hex)
     }
 
-    withAnimation(.spring().delay(0.1)) {
-      dragOffset = CGSize(width: -hex.center.x, height: -hex.center.y)
+    DispatchQueue.main.async {
+      withAnimation(.spring()) {
+        dragOffset = CGSize(width: -hex.center.x, height: -hex.center.y)
+      }
     }
   }
 
