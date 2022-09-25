@@ -61,7 +61,7 @@ struct BrewInfoView: View {
     VStack(alignment: .leading, spacing: 5) {
       Text("Brewing Temperature")
         .modifier(HeadingText())
-      Text("\(brewTimer.temperature) °F")
+      NumberTransitionView(number: brewingTemp, suffix: " °F")
         .modifier(InformationText())
       Text("Water Amount")
         .modifier(HeadingText())

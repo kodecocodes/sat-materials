@@ -35,6 +35,7 @@ import SwiftUI
 struct BrewInfoView: View {
   var brewTimer: BrewTime
   @Binding var amountOfWater: Double
+  @State var brewingTemp = 0
 
   var teaToUse: Double {
     let tspPerOz = brewTimer.teaAmount / brewTimer.waterAmount
@@ -60,7 +61,7 @@ struct BrewInfoView: View {
     VStack(alignment: .leading, spacing: 5) {
       Text("Brewing Temperature")
         .modifier(HeadingText())
-      Text("\(brewTimer.temperature) °F")
+      NumberTransitionView(number: brewingTemp, suffix: " °F")
         .modifier(InformationText())
       Text("Water Amount")
         .modifier(HeadingText())
@@ -71,6 +72,11 @@ struct BrewInfoView: View {
         .modifier(HeadingText())
       Text("\(teaToUse.formatted()) teaspoons")
         .modifier(InformationText())
+    }
+    .onAppear {
+      withAnimation(.easeOut(duration: 0.5)) {
+        brewingTemp = brewTimer.temperature
+      }
     }
     .padding()
     .foregroundColor(

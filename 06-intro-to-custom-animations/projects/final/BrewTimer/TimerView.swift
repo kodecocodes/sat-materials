@@ -130,9 +130,6 @@ struct TimerView: View {
     .onAppear {
       timerManager.setTime(length: brewTimer.timerLength)
       amountOfWater = brewTimer.waterAmount
-      withAnimation(.easeOut(duration: 1.0)) {
-        brewingTemp = brewTimer.temperature
-      }
     }
     .navigationTitle("\(brewTimer.timerName) Timer")
     .toolbarColorScheme(.dark, for: .navigationBar)
