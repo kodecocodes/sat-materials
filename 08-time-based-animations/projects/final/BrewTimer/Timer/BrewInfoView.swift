@@ -32,22 +32,16 @@
 
 import SwiftUI
 
-struct TimerView: View {
-  @State var brewTimer: BrewTime
-  @State var showDone = false
-  @State var amountOfWater = 0.0
-  @State var brewingTemp = 0
-  @State var sheetResult: BrewResult?
-
-  let backGroundGradient = LinearGradient(
-    colors: [Color("BlackRussian"), Color("DarkOliveGreen"), Color("OliveGreen")],
-    startPoint: .init(x: 0.75, y: 0),
-    endPoint: .init(x: 0.25, y: 1)
-  )
+struct BrewInfoView: View {
+  var brewTimer: BrewTime
+  @Binding var amountOfWater: Double
+  @State var waterTeaRatio: Double?
 
   var teaToUse: Double {
-    let tspPerOz = brewTimer.teaAmount / brewTimer.waterAmount
-    return tspPerOz * amountOfWater
+    guard let waterTeaRatio = waterTeaRatio else {
+      return brewTimer.waterAmount / brewTimer.teaAmount
+    }
+    return round(amountOfWater / waterTeaRatio * 100) / 100.0
   }
 
   struct HeadingText: ViewModifier {
@@ -65,61 +59,47 @@ struct TimerView: View {
     }
   }
 
-  func sheetDismissed() {
-    guard let result = sheetResult else { return }
-    brewTimer.evaluation.append(result)
-  }
-
   var body: some View {
-    NavigationStack {
-      ZStack {
-        backGroundGradient
-          .ignoresSafeArea()
-        VStack {
-          AnalogTimerView(
-            timerFinished: $showDone,
-            timer: brewTimer
-          )
-            .background(
-              RoundedRectangle(cornerRadius: 20)
-                .fill(
-                  Color("QuarterSpanishWhite")
-                )
-            )
-          ScrollView {
-            BrewInfoView(brewTimer: brewTimer, amountOfWater: $amountOfWater)
-            if !brewTimer.evaluation.isEmpty {
-              EvaluationListView(result: brewTimer.evaluation)
-            }
-          }
-        }
-        .padding()
+    VStack(alignment: .leading, spacing: 5) {
+      Text("Brewing Temperature")
+        .modifier(HeadingText())
+      Text("\(brewTimer.temperature) °F")
+        .modifier(InformationText())
+      Text("Water Amount")
+        .modifier(HeadingText())
+      Text("\(amountOfWater.formatted()) ounces")
+        .modifier(InformationText())
+      Slider(value: $amountOfWater, in: 0...24, step: 0.1)
+      Text("Amount of Tea to Use")
+        .modifier(HeadingText())
+      HStack(alignment: .bottom) {
+        Text("\(teaToUse.formatted()) teaspoons")
+          .modifier(InformationText())
+        Spacer()
+        PopupSelectionButton(
+          currentValue: $waterTeaRatio,
+          values: [1.0, 1.5, 2.0, 2.5, 3.0, 4.0, 5.0]
+        )
       }
     }
-    .onAppear {
-      amountOfWater = brewTimer.waterAmount
-      withAnimation(.easeOut(duration: 1.0)) {
-        brewingTemp = brewTimer.temperature
-      }
-    }
-    .navigationTitle("\(brewTimer.timerName) Timer")
-    .toolbarColorScheme(.dark, for: .navigationBar)
-    .toolbarBackground(.visible, for: .navigationBar)
-    .font(.largeTitle)
-    .sheet(
-      isPresented: $showDone,
-      onDismiss: sheetDismissed
-    ) {
-      TimerComplete(
-        brewResult: $sheetResult)
-    }
+    .padding()
+    .foregroundColor(
+      Color("BlackRussian")
+    )
+    .background(
+      RoundedRectangle(cornerRadius: 20)
+        .fill(
+          Color("QuarterSpanishWhite")
+        )
+    )
   }
 }
 
-struct TimerView_Previews: PreviewProvider {
+struct BrewInfoView_Previews: PreviewProvider {
   static var previews: some View {
-    TimerView(
-      brewTimer: BrewTime.previewObject
+    BrewInfoView(
+      brewTimer: BrewTime.previewObject,
+      amountOfWater: .constant(4)
     )
   }
 }

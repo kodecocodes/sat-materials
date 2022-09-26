@@ -25,8 +25,8 @@
 		A987089D28CE4F520069B435 /* AnimatedRadarChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = A987089C28CE4F520069B435 /* AnimatedRadarChart.swift */; };
 		A988856728BD906700770F3E /* BrewInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A988856628BD906700770F3E /* BrewInfoView.swift */; };
 		A98B2C9328CFAB0B00CAF4D5 /* ViewModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98B2C9228CFAB0B00CAF4D5 /* ViewModifiers.swift */; };
-		A9BDF3FE28E900CF00B96F64 /* AnalogTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9BDF3FD28E900CF00B96F64 /* AnalogTimerView.swift */; };
-		A9BDF40028E900DB00B96F64 /* TimerControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9BDF3FF28E900DB00B96F64 /* TimerControlView.swift */; };
+		A9BDF3F828E8D01A00B96F64 /* AnalogTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9BDF3F728E8D01A00B96F64 /* AnalogTimerView.swift */; };
+		A9BDF3FB28E8E82200B96F64 /* TimerControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9BDF3FA28E8E82200B96F64 /* TimerControlView.swift */; };
 		A9E5BD4328CEBA0C005F70D4 /* PopupSelectionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9E5BD4228CEBA0C005F70D4 /* PopupSelectionButton.swift */; };
 		A9E9D7E828ADB5DA002F5BCF /* ReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9E9D7E728ADB5DA002F5BCF /* ReviewView.swift */; };
 		A9EA75C828A1D9C100C4857C /* BrewTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EA75C728A1D9C100C4857C /* BrewTime.swift */; };
@@ -56,8 +56,8 @@
 		A987089C28CE4F520069B435 /* AnimatedRadarChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedRadarChart.swift; sourceTree = "<group>"; };
 		A988856628BD906700770F3E /* BrewInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrewInfoView.swift; sourceTree = "<group>"; };
 		A98B2C9228CFAB0B00CAF4D5 /* ViewModifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModifiers.swift; sourceTree = "<group>"; };
-		A9BDF3FD28E900CF00B96F64 /* AnalogTimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalogTimerView.swift; sourceTree = "<group>"; };
-		A9BDF3FF28E900DB00B96F64 /* TimerControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerControlView.swift; sourceTree = "<group>"; };
+		A9BDF3F728E8D01A00B96F64 /* AnalogTimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalogTimerView.swift; sourceTree = "<group>"; };
+		A9BDF3FA28E8E82200B96F64 /* TimerControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerControlView.swift; sourceTree = "<group>"; };
 		A9E5BD4228CEBA0C005F70D4 /* PopupSelectionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupSelectionButton.swift; sourceTree = "<group>"; };
 		A9E9D7E728ADB5DA002F5BCF /* ReviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewView.swift; sourceTree = "<group>"; };
 		A9EA75C728A1D9C100C4857C /* BrewTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrewTime.swift; sourceTree = "<group>"; };
@@ -104,7 +104,7 @@
 				A9EA75C628A1D94700C4857C /* Models */,
 				A988856828BD97B000770F3E /* Timer */,
 				A987089728CE4A560069B435 /* RadarChart */,
-				A9BDF3FC28E900BE00B96F64 /* AnalogTimer */,
+				A9BDF3F928E8E80C00B96F64 /* AnalogTimer */,
 				A97728C428AC680200AF0DD8 /* LaunchScreen.storyboard */,
 				18D775C622AD944400AE281E /* Assets.xcassets */,
 				18D775CE22AD944400AE281E /* Info.plist */,
@@ -158,11 +158,11 @@
 			path = Timer;
 			sourceTree = "<group>";
 		};
-		A9BDF3FC28E900BE00B96F64 /* AnalogTimer */ = {
+		A9BDF3F928E8E80C00B96F64 /* AnalogTimer */ = {
 			isa = PBXGroup;
 			children = (
-				A9BDF3FD28E900CF00B96F64 /* AnalogTimerView.swift */,
-				A9BDF3FF28E900DB00B96F64 /* TimerControlView.swift */,
+				A9BDF3F728E8D01A00B96F64 /* AnalogTimerView.swift */,
+				A9BDF3FA28E8E82200B96F64 /* TimerControlView.swift */,
 			);
 			path = AnalogTimer;
 			sourceTree = "<group>";
@@ -279,16 +279,16 @@
 				A9E5BD4328CEBA0C005F70D4 /* PopupSelectionButton.swift in Sources */,
 				A9EA75CA28A1D9D500C4857C /* TimerManager.swift in Sources */,
 				A9E9D7E828ADB5DA002F5BCF /* ReviewView.swift in Sources */,
+				A9BDF3F828E8D01A00B96F64 /* AnalogTimerView.swift in Sources */,
 				A987089D28CE4F520069B435 /* AnimatedRadarChart.swift in Sources */,
 				A988856728BD906700770F3E /* BrewInfoView.swift in Sources */,
 				A987089928CE4A810069B435 /* TeaRatingsView.swift in Sources */,
-				A9BDF3FE28E900CF00B96F64 /* AnalogTimerView.swift in Sources */,
 				A97728C328AC609E00AF0DD8 /* BrewResult.swift in Sources */,
 				A97728C728AC76F900AF0DD8 /* RatingView.swift in Sources */,
 				A98B2C9328CFAB0B00CAF4D5 /* ViewModifiers.swift in Sources */,
 				A9311FB128A4139000136D99 /* CountingTimerView.swift in Sources */,
 				18D775C522AD944300AE281E /* ContentView.swift in Sources */,
-				A9BDF40028E900DB00B96F64 /* TimerControlView.swift in Sources */,
+				A9BDF3FB28E8E82200B96F64 /* TimerControlView.swift in Sources */,
 				A9EA75CE28A1E06500C4857C /* TimerComplete.swift in Sources */,
 				A915B44A28AAFC7900C10EEF /* AppMain.swift in Sources */,
 				A91D1B3E28A5E5EF00CE3E5D /* SlidingNumber.swift in Sources */,
