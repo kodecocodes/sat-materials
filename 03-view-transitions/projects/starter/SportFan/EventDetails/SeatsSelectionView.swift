@@ -32,7 +32,9 @@
 
 import SwiftUI
 
-struct SeatingChart: View {
+struct SeatsSelectionView: View {
+  let event: Event
+  
   var body: some View {
     VStack {
       Spacer()
@@ -46,6 +48,6 @@ struct SeatingChart: View {
 
 struct SeatingChart_Previews: PreviewProvider {
   static var previews: some View {
-    SeatingChart()
+    SeatsSelectionView(event: makeEvent(for: Team(name: "Dallas Mavericks", sport: .basketball, description: "")))
   }
 }

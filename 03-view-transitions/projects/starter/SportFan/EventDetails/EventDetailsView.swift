@@ -117,7 +117,7 @@ struct EventDetailsView: View {
           }
         }
       }.sheet(isPresented: $seatingChartVisible) {
-        SeatingChart()
+        SeatsSelectionView(event: event)
       }
       .task {
         fetchTicketsAndUpcomingEvents()

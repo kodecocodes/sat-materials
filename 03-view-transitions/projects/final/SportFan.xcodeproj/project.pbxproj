@@ -26,7 +26,7 @@
 		835C2889286253C00074D7DE /* BallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835C2888286253C00074D7DE /* BallView.swift */; };
 		835C288B2862EF210074D7DE /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835C288A2862EF210074D7DE /* Constants.swift */; };
 		BA6E2C752890728800EB0AE7 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6E2C742890728800EB0AE7 /* Extensions.swift */; };
-		BA6F97D52893024500E17E73 /* SeatingChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6F97D42893024500E17E73 /* SeatingChart.swift */; };
+		BA6F97D52893024500E17E73 /* SeatsSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6F97D42893024500E17E73 /* SeatsSelectionView.swift */; };
 		BA6F97D9289321F200E17E73 /* FilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6F97D8289321F200E17E73 /* FilterView.swift */; };
 		BA97537128782CCC005CD7E2 /* JumpingBallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA97537028782CCC005CD7E2 /* JumpingBallView.swift */; };
 		BA97537328785551005CD7E2 /* PullToRefresh.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA97537228785550005CD7E2 /* PullToRefresh.swift */; };
@@ -54,7 +54,7 @@
 		835C2888286253C00074D7DE /* BallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BallView.swift; sourceTree = "<group>"; };
 		835C288A2862EF210074D7DE /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		BA6E2C742890728800EB0AE7 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
-		BA6F97D42893024500E17E73 /* SeatingChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeatingChart.swift; sourceTree = "<group>"; };
+		BA6F97D42893024500E17E73 /* SeatsSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeatsSelectionView.swift; sourceTree = "<group>"; };
 		BA6F97D8289321F200E17E73 /* FilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterView.swift; sourceTree = "<group>"; };
 		BA97537028782CCC005CD7E2 /* JumpingBallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JumpingBallView.swift; sourceTree = "<group>"; };
 		BA97537228785550005CD7E2 /* PullToRefresh.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullToRefresh.swift; sourceTree = "<group>"; };
@@ -126,7 +126,7 @@
 				74CF5BA8288D8F4C0039A5D9 /* EventLocationAndDate.swift */,
 				74CF5BAA288D8FD20039A5D9 /* HeaderView.swift */,
 				BA6E2C742890728800EB0AE7 /* Extensions.swift */,
-				BA6F97D42893024500E17E73 /* SeatingChart.swift */,
+				BA6F97D42893024500E17E73 /* SeatsSelectionView.swift */,
 				BA6F97D8289321F200E17E73 /* FilterView.swift */,
 			);
 			path = EventDetails;
@@ -239,7 +239,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				18D775C522AD944300AE281E /* ContentView.swift in Sources */,
-				BA6F97D52893024500E17E73 /* SeatingChart.swift in Sources */,
+				BA6F97D52893024500E17E73 /* SeatsSelectionView.swift in Sources */,
 				BA6E2C752890728800EB0AE7 /* Extensions.swift in Sources */,
 				74CF5BA9288D8F4C0039A5D9 /* EventLocationAndDate.swift in Sources */,
 				835C287F28624B010074D7DE /* MockData.swift in Sources */,

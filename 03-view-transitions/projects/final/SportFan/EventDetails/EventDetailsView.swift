@@ -122,7 +122,7 @@ struct EventDetailsView: View {
           }
         }
       }.sheet(isPresented: $seatingChartVisible) {
-        SeatingChart()
+        SeatsSelectionView(event: event)
       }
       .onAppear {
         let info = getTicketsInfo(for: event)
