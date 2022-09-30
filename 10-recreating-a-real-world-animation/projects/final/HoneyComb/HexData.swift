@@ -18,17 +18,13 @@ let topics = [
   "Finance", "Fashion"
 ]
 
-struct HexData: Hashable, Equatable {
+struct HexData: Hashable {
   var hex: Hex
   var center: CGPoint
   var topic: String
 
   func hash(into hasher: inout Hasher) {
     hasher.combine(topic)
-  }
-
-  static func == (lhs: HexData, rhs: HexData) -> Bool {
-    return lhs.topic == rhs.topic
   }
 }
 

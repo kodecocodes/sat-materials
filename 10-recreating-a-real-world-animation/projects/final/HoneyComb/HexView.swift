@@ -19,7 +19,7 @@ struct HexView: View {
     ZStack {
       Circle()
         .fill(isSelected ? .green : Color(uiColor: UIColor.purple))
-        .overlay(Circle().fill(touchedHexagon == hex ? .black.opacity(0.45) : .clear))
+        .overlay(Circle().fill(touchedHexagon == hex ? .black.opacity(0.25) : .clear))
         .onTapGesture {
           onTap()
         }

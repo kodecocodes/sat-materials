@@ -42,7 +42,7 @@ struct ContentView: View {
 
   var body: some View {
     VStack {
-      Text("Pick topics you're most interested in:")
+      Text("Pick 5 or more topics you're most interested in:")
         .font(.subheadline)
 
       GeometryReader { proxy in
@@ -51,7 +51,7 @@ struct ContentView: View {
             let hexOrNeighboring = touchedHexagon == hex ||
             touchedHexagon?.hex.neigbouring(hex: hex.hex) == true
             let measurement = measurement(for: hex, proxy)
-            let scale = (hexOrNeighboring ? measurement.size * 0.8 : measurement.size) / diameter
+            let scale = (hexOrNeighboring ? measurement.size * 0.9 : measurement.size) / diameter
             HexView(
               hex: hex,
               isSelected: selectedHexes.contains(hex),
@@ -86,6 +86,16 @@ struct ContentView: View {
           hexes = createHexes(for: topics)
         }
       }
+
+      Text(selectedHexes.count < 5 ? "Pick \(5 - selectedHexes.count) more!" : "You're all set!")
+      ProgressView(
+        value: Double(min(5, selectedHexes.count)),
+        total: 5
+      )
+      .scaleEffect(y: 3)
+      .tint(selectedHexes.count < 5 ? Color(uiColor: .purple) : .green)
+      .padding(24)
+      .animation(.easeInOut, value: selectedHexes.count)
     }
   }
 
@@ -100,7 +110,7 @@ struct ContentView: View {
     var endY = initialOffset.height + state.predictedEndTranslation.height * 1.25
 
     let lastHex = hexes.last!.center
-    let maxDistance = sqrt(pow((lastHex.x), 2) + pow((lastHex.y), 2)) * 0.75
+    let maxDistance = sqrt(pow((lastHex.x), 2) + pow((lastHex.y), 2)) * 0.7
     if abs(endX) > maxDistance {
       endX = endX > 0 ? maxDistance : -maxDistance
     }
