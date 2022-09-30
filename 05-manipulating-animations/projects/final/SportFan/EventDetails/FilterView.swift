@@ -1,15 +1,15 @@
 /// Copyright (c) 2022 Razeware LLC
-/// 
+///
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
 /// in the Software without restriction, including without limitation the rights
 /// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 /// copies of the Software, and to permit persons to whom the Software is
 /// furnished to do so, subject to the following conditions:
-/// 
+///
 /// The above copyright notice and this permission notice shall be included in
 /// all copies or substantial portions of the Software.
-/// 
+///
 /// Notwithstanding the foregoing, you may not use, copy, modify, merge, publish,
 /// distribute, sublicense, create a derivative work, and/or sell copies of the
 /// Software in any work that is designed, intended, or marketed for pedagogical or
@@ -17,7 +17,7 @@
 /// or information technology.  Permission for such use, copying, modification,
 /// merger, publication, distribution, sublicensing, creation of derivative works,
 /// or sale is expressly withheld.
-/// 
+///
 /// This project and source code may use libraries or frameworks that are
 /// released under various Open-Source licenses. Use of those libraries and
 /// frameworks are governed by their own individual licenses.
@@ -33,8 +33,8 @@
 import SwiftUI
 
 struct FilterView: View {
-  @Binding var selectedSports: [Sport]
-  @Binding var isShown: Bool
+  @Binding var selectedSports: Set<Sport>
+  var isShown: Bool
 
   private let sports = Sport.allCases
   private let filterTransition = AnyTransition.modifier(
@@ -43,8 +43,8 @@ struct FilterView: View {
   )
 
   var body: some View {
-    var width = CGFloat.zero
-    var height = CGFloat.zero
+    var horizontalShift = CGFloat.zero
+    var verticalShift = CGFloat.zero
 
     return ZStack(alignment: .topLeading) {
       if isShown {
@@ -56,20 +56,18 @@ struct FilterView: View {
               onSelected(sport)
             }
             .alignmentGuide(.leading) { dimension in
-              if abs(width - dimension.width) > UIScreen.main.bounds.width {
-                width = 0
-                height -= dimension.height
+              if abs(horizontalShift - dimension.width) > UIScreen.main.bounds.width {
+                horizontalShift = 0
+                verticalShift -= dimension.height
               }
-              defer {
-                width = sport == sports.last ? 0 : width - dimension.width
-              }
-              return width
+              let currentShift = horizontalShift
+              horizontalShift = sport == sports.last ? 0 : horizontalShift - dimension.width
+              return currentShift
             }
             .alignmentGuide(.top) { _ in
-              defer {
-                height = sport == sports.last ? 0 : height
-              }
-              return height
+              let currentShift = verticalShift
+              verticalShift = sport == sports.last ? 0 : verticalShift
+              return currentShift
             }
             .transition(.asymmetric(insertion: filterTransition, removal: .scale.combined(with: .opacity)))
         }
@@ -78,10 +76,10 @@ struct FilterView: View {
   }
 
   private func onSelected(_ sport: Sport) {
-    if let index = selectedSports.firstIndex(of: sport) {
-      selectedSports.remove(at: index)
+    if selectedSports.contains(sport) {
+      selectedSports.remove(sport)
     } else {
-      selectedSports.append(sport)
+      selectedSports.insert(sport)
     }
   }
 
@@ -108,12 +106,12 @@ struct FilterModifier: ViewModifier {
   func body(content: Content) -> some View {
     content
       .scaleEffect(active ? 0.75 : 1)
-      .rotationEffect(.degrees(active ? .random(in: -45...45) : 0), anchor: .center)
+      .rotationEffect(.degrees(active ? .random(in: -25...25) : 0), anchor: .center)
   }
 }
 
 struct FilterView_Previews: PreviewProvider {
   static var previews: some View {
-    FilterView(selectedSports: Binding.constant([]), isShown: Binding.constant(true))
+    FilterView(selectedSports: Binding.constant([]), isShown: true)
   }
 }
