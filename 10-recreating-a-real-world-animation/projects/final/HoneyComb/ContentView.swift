@@ -96,10 +96,21 @@ struct ContentView: View {
       height: dragOffset.height + state.translation.height
     )
 
-    withAnimation(.easeInOut(duration: 0.5)) {
+    var endX = initialOffset.width + state.predictedEndTranslation.width * 1.25
+    var endY = initialOffset.height + state.predictedEndTranslation.height * 1.25
+
+    let lastHex = hexes.last!.center
+    let maxDistance = sqrt(pow((lastHex.x), 2) + pow((lastHex.y), 2)) * 0.75
+    if abs(endX) > maxDistance {
+      endX = endX > 0 ? maxDistance : -maxDistance
+    }
+    if abs(endY) > maxDistance {
+      endY = endY > 0 ? maxDistance : -maxDistance
+    }
+    withAnimation(.spring()) {
       dragOffset = CGSize(
-        width: initialOffset.width + state.predictedEndTranslation.width * 1.25,
-        height: initialOffset.height + state.predictedEndTranslation.height * 1.25
+        width: endX,
+        height: endY
       )
     }
   }
