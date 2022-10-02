@@ -1,4 +1,4 @@
-/// Copyright (c) 2022 Razeware LLC
+/// Copyright (c) 2020 Razeware LLC
 ///
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -32,77 +32,52 @@
 
 import SwiftUI
 
-struct BrewInfoView: View {
-  var brewTimer: BrewTime
-  @Binding var amountOfWater: Double
-  @State var waterTeaRatio: Double?
+struct ContentView: View {
+  @State var timers = BrewTime.baseTimers
 
-  var teaToUse: Double {
-    guard let waterTeaRatio = waterTeaRatio else {
-      return brewTimer.waterAmount / brewTimer.teaAmount
-    }
-    return round(amountOfWater / waterTeaRatio * 100) / 100.0
-  }
-
-  struct HeadingText: ViewModifier {
-    func body(content: Content) -> some View {
-      return content
-        .font(.title.bold())
-    }
-  }
-
-  struct InformationText: ViewModifier {
-    func body(content: Content) -> some View {
-      return content
-        .font(.title2)
-        .padding(.bottom, 15)
-    }
-  }
+  let backGroundGradient = LinearGradient(
+    colors: [Color("BlackRussian"), Color("DarkOliveGreen"), Color("OliveGreen")],
+    startPoint: .init(x: 0.75, y: 0),
+    endPoint: .init(x: 0.25, y: 1)
+  )
 
   var body: some View {
-    VStack(alignment: .leading, spacing: 5) {
-      Text("Brewing Temperature")
-        .modifier(HeadingText())
-      Text("\(brewTimer.temperature) °F")
-        .modifier(InformationText())
-      Text("Water Amount")
-        .modifier(HeadingText())
-      Text("\(amountOfWater.formatted()) ounces")
-        .modifier(InformationText())
-      Slider(value: $amountOfWater, in: 0...24, step: 0.1)
-      Text("Amount of Tea to Use")
-        .modifier(HeadingText())
-      HStack(alignment: .bottom) {
-        Text("\(teaToUse.formatted()) teaspoons")
-          .modifier(InformationText())
-        Spacer()
-        PopupSelectionButton(
-          currentValue: $waterTeaRatio,
-          values: [1.0, 1.5, 2.0, 2.5, 3.0, 4.0, 5.0]
-        )
+    NavigationStack {
+      ZStack {
+        backGroundGradient
+          .ignoresSafeArea()
+        ScrollView {
+          ForEach(timers) { timer in
+            NavigationLink {
+              TimerView(brewTimer: timer)
+            } label: {
+              Text(timer.timerName)
+                .font(.title2)
+                .frame(maxWidth: .infinity)
+                .frame(height: 100)
+                .background(
+                  RoundedRectangle(cornerRadius: 25.0)
+                    .fill(
+                      Color("QuarterSpanishWhite")
+                    )
+                )
+                .foregroundColor(
+                  Color("BlackRussian")
+                )
+            }
+          }
+        }
+        .padding(10)
       }
+      .navigationTitle("Brew Timer")
+      .toolbarColorScheme(.dark, for: .navigationBar)
+      .toolbarBackground(.visible, for: .navigationBar)
     }
-    .onAppear {
-      waterTeaRatio = amountOfWater
-    }
-    .padding()
-    .foregroundColor(
-      Color("BlackRussian")
-    )
-    .background(
-      RoundedRectangle(cornerRadius: 20)
-        .fill(
-          Color("QuarterSpanishWhite")
-        )
-    )
   }
 }
 
-struct BrewInfoView_Previews: PreviewProvider {
+struct ContentView_Previews: PreviewProvider {
   static var previews: some View {
-    BrewInfoView(
-      brewTimer: BrewTime.previewObject,
-      amountOfWater: .constant(4)
-    )
+    ContentView()
   }
 }

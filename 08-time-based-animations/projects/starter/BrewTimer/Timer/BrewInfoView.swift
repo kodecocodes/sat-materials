@@ -82,6 +82,9 @@ struct BrewInfoView: View {
         )
       }
     }
+    .onAppear {
+      waterTeaRatio = amountOfWater
+    }
     .padding()
     .foregroundColor(
       Color("BlackRussian")

@@ -32,63 +32,30 @@
 
 import SwiftUI
 
-struct BrewInfoView: View {
-  var brewTimer: BrewTime
-  @Binding var amountOfWater: Double
-  @State var waterTeaRatio: Double?
-
-  var teaToUse: Double {
-    guard let waterTeaRatio = waterTeaRatio else {
-      return brewTimer.waterAmount / brewTimer.teaAmount
-    }
-    return round(amountOfWater / waterTeaRatio * 100) / 100.0
-  }
-
-  struct HeadingText: ViewModifier {
-    func body(content: Content) -> some View {
-      return content
-        .font(.title.bold())
-    }
-  }
-
-  struct InformationText: ViewModifier {
-    func body(content: Content) -> some View {
-      return content
-        .font(.title2)
-        .padding(.bottom, 15)
-    }
-  }
+struct EvaluationListView: View {
+  var result: [BrewResult]
+  @State var showResult = false
 
   var body: some View {
-    VStack(alignment: .leading, spacing: 5) {
-      Text("Brewing Temperature")
-        .modifier(HeadingText())
-      Text("\(brewTimer.temperature) °F")
-        .modifier(InformationText())
-      Text("Water Amount")
-        .modifier(HeadingText())
-      Text("\(amountOfWater.formatted()) ounces")
-        .modifier(InformationText())
-      Slider(value: $amountOfWater, in: 0...24, step: 0.1)
-      Text("Amount of Tea to Use")
-        .modifier(HeadingText())
-      HStack(alignment: .bottom) {
-        Text("\(teaToUse.formatted()) teaspoons")
-          .modifier(InformationText())
-        Spacer()
-        PopupSelectionButton(
-          currentValue: $waterTeaRatio,
-          values: [1.0, 1.5, 2.0, 2.5, 3.0, 4.0, 5.0]
-        )
+    VStack {
+      Text("Ratings")
+        .font(.title2)
+      ForEach(result) { evaluation in
+        ReviewView(result: evaluation)
+          .padding([.top, .bottom], 5)
+          .font(.title3)
+          .contentShape(Rectangle())
+          .font(.footnote)
       }
     }
-    .onAppear {
-      waterTeaRatio = amountOfWater
+    .contentShape(Rectangle())
+    .onTapGesture {
+      showResult = true
     }
-    .padding()
-    .foregroundColor(
-      Color("BlackRussian")
-    )
+    .sheet(isPresented: $showResult) {
+      TeaRatingsView(ratings: result)
+    }
+    .padding(10)
     .background(
       RoundedRectangle(cornerRadius: 20)
         .fill(
@@ -98,11 +65,8 @@ struct BrewInfoView: View {
   }
 }
 
-struct BrewInfoView_Previews: PreviewProvider {
+struct EvaluationListView_Previews: PreviewProvider {
   static var previews: some View {
-    BrewInfoView(
-      brewTimer: BrewTime.previewObject,
-      amountOfWater: .constant(4)
-    )
+    EvaluationListView(result: BrewTime.previewObjectEvals.evaluation)
   }
 }

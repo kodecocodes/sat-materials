@@ -32,77 +32,21 @@
 
 import SwiftUI
 
-struct BrewInfoView: View {
-  var brewTimer: BrewTime
-  @Binding var amountOfWater: Double
-  @State var waterTeaRatio: Double?
-
-  var teaToUse: Double {
-    guard let waterTeaRatio = waterTeaRatio else {
-      return brewTimer.waterAmount / brewTimer.teaAmount
-    }
-    return round(amountOfWater / waterTeaRatio * 100) / 100.0
-  }
-
-  struct HeadingText: ViewModifier {
-    func body(content: Content) -> some View {
-      return content
-        .font(.title.bold())
-    }
-  }
-
-  struct InformationText: ViewModifier {
-    func body(content: Content) -> some View {
-      return content
-        .font(.title2)
-        .padding(.bottom, 15)
-    }
-  }
+struct StaticRatingView: View {
+  var rating: Int
 
   var body: some View {
-    VStack(alignment: .leading, spacing: 5) {
-      Text("Brewing Temperature")
-        .modifier(HeadingText())
-      Text("\(brewTimer.temperature) °F")
-        .modifier(InformationText())
-      Text("Water Amount")
-        .modifier(HeadingText())
-      Text("\(amountOfWater.formatted()) ounces")
-        .modifier(InformationText())
-      Slider(value: $amountOfWater, in: 0...24, step: 0.1)
-      Text("Amount of Tea to Use")
-        .modifier(HeadingText())
-      HStack(alignment: .bottom) {
-        Text("\(teaToUse.formatted()) teaspoons")
-          .modifier(InformationText())
-        Spacer()
-        PopupSelectionButton(
-          currentValue: $waterTeaRatio,
-          values: [1.0, 1.5, 2.0, 2.5, 3.0, 4.0, 5.0]
-        )
+    HStack {
+      ForEach(1..<6, id: \.self) { starNumber in
+        Image(systemName: rating >= starNumber ? "star.fill" : "star")
       }
     }
-    .onAppear {
-      waterTeaRatio = amountOfWater
-    }
-    .padding()
-    .foregroundColor(
-      Color("BlackRussian")
-    )
-    .background(
-      RoundedRectangle(cornerRadius: 20)
-        .fill(
-          Color("QuarterSpanishWhite")
-        )
-    )
   }
 }
 
-struct BrewInfoView_Previews: PreviewProvider {
+struct StaticRatingView_Previews: PreviewProvider {
   static var previews: some View {
-    BrewInfoView(
-      brewTimer: BrewTime.previewObject,
-      amountOfWater: .constant(4)
-    )
+    StaticRatingView(rating: 3)
+      .foregroundColor(.yellow)
   }
 }
