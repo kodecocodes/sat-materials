@@ -31,17 +31,13 @@
 /// THE SOFTWARE.
 
 import Foundation
+import UIKit
 
-extension Int {
-  func between(_ low: Int, and high: Int) -> Int {
-    let range = high - low
-    var value = self
-    while value < low {
-      value += range
-    }
-    while value >= high {
-      value -= range
-    }
-    return value
+extension String {
+  func calculateTextSizeFor(font: UIFont) -> CGSize {
+    let string = (self as NSString)
+    let attributes = [NSAttributedString.Key.font: font]
+    let textSize = string.size(withAttributes: attributes)
+    return textSize
   }
 }

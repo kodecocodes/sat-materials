@@ -61,6 +61,34 @@ struct AnalogTimerView: View {
 //    }
 //  }
 //
+//  func decimalTimeLeftAt(_ current: Date) -> Double {
+//    switch status {
+//    case .stopped:
+//      return timerLength
+//    case .running:
+//      guard let timerEndTime else {
+//        return timerLength
+//      }
+//
+//      let timerDifference = Calendar.current.dateComponents([.second, .nanosecond], from: current, to: timerEndTime)
+//      let seconds = Double(timerDifference.second ?? Int(timerLength))
+//      let nanoSeconds = Double(timerDifference.nanosecond ?? 0) / 1e9
+//      let remainingTime = seconds + nanoSeconds
+//      if remainingTime <= 0 {
+//        DispatchQueue.main.async {
+//          status = .stopped
+//          self.timerEndTime = nil
+//          timerFinished = true
+//        }
+//      }
+//      return remainingTime
+//    case .paused:
+//      return Double(timeLeft ?? Int(timerLength))
+//    case .done:
+//      return 0
+//    }
+//  }
+//
 //  func timeLeftString(_ time: Int) -> String {
 //    let minutes = time / 60
 //    let seconds = time % 60

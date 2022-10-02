@@ -80,12 +80,13 @@ struct TimerView: View {
             timerFinished: $showDone,
             timer: brewTimer
           )
-            .background(
-              RoundedRectangle(cornerRadius: 20)
-                .fill(
-                  Color("QuarterSpanishWhite")
-                )
-            )
+          .padding(8)
+          .background(
+            RoundedRectangle(cornerRadius: 20)
+              .fill(
+                Color("QuarterSpanishWhite")
+              )
+          )
           ScrollView {
             BrewInfoView(brewTimer: brewTimer, amountOfWater: $amountOfWater)
             if !brewTimer.evaluation.isEmpty {

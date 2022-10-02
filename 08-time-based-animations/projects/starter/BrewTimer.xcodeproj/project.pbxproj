@@ -27,6 +27,7 @@
 		A98B2C9328CFAB0B00CAF4D5 /* ViewModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98B2C9228CFAB0B00CAF4D5 /* ViewModifiers.swift */; };
 		A9BDF3FE28E900CF00B96F64 /* AnalogTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9BDF3FD28E900CF00B96F64 /* AnalogTimerView.swift */; };
 		A9BDF40028E900DB00B96F64 /* TimerControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9BDF3FF28E900DB00B96F64 /* TimerControlView.swift */; };
+		A9DB0F3328E9F7C700CB5E6B /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DB0F3228E9F7C700CB5E6B /* StringExtensions.swift */; };
 		A9E5BD4328CEBA0C005F70D4 /* PopupSelectionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9E5BD4228CEBA0C005F70D4 /* PopupSelectionButton.swift */; };
 		A9E9D7E828ADB5DA002F5BCF /* ReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9E9D7E728ADB5DA002F5BCF /* ReviewView.swift */; };
 		A9EA75C828A1D9C100C4857C /* BrewTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EA75C728A1D9C100C4857C /* BrewTime.swift */; };
@@ -58,6 +59,7 @@
 		A98B2C9228CFAB0B00CAF4D5 /* ViewModifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModifiers.swift; sourceTree = "<group>"; };
 		A9BDF3FD28E900CF00B96F64 /* AnalogTimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalogTimerView.swift; sourceTree = "<group>"; };
 		A9BDF3FF28E900DB00B96F64 /* TimerControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerControlView.swift; sourceTree = "<group>"; };
+		A9DB0F3228E9F7C700CB5E6B /* StringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
 		A9E5BD4228CEBA0C005F70D4 /* PopupSelectionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupSelectionButton.swift; sourceTree = "<group>"; };
 		A9E9D7E728ADB5DA002F5BCF /* ReviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewView.swift; sourceTree = "<group>"; };
 		A9EA75C728A1D9C100C4857C /* BrewTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrewTime.swift; sourceTree = "<group>"; };
@@ -125,6 +127,7 @@
 			isa = PBXGroup;
 			children = (
 				A9647B2328A6B8F60008B8E6 /* IntegerExtensions.swift */,
+				A9DB0F3228E9F7C700CB5E6B /* StringExtensions.swift */,
 				A98B2C9228CFAB0B00CAF4D5 /* ViewModifiers.swift */,
 			);
 			path = Extensions;
@@ -269,6 +272,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A9DB0F3328E9F7C700CB5E6B /* StringExtensions.swift in Sources */,
 				A930F94E28A4615D00641DC0 /* NumberTransitionView.swift in Sources */,
 				A91D1B4028A5E71600CE3E5D /* TimerDigitsView.swift in Sources */,
 				A920EBDE28CD576900E0C323 /* EvaluationListView.swift in Sources */,
