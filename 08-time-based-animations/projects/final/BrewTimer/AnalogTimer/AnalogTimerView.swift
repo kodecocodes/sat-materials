@@ -127,7 +127,7 @@ struct AnalogTimerView: View {
       var minuteTickPath = Path()
       minuteTickPath.move(to: .init(x: center, y: 0))
       minuteTickPath.addLine(to: .init(x: center * 0.9, y: 0))
-      // 5
+      // 4
       var tickContext = context
       // 6
       tickContext.rotate(by: .degrees(-minuteAngle))
@@ -162,7 +162,13 @@ struct AnalogTimerView: View {
     }
   }
 
-  func createHandPath(length: Double, crossDistance: Double, middleDistance: Double, endDistance: Double, width: Double) -> Path {
+  func createHandPath(
+    length: Double,
+    crossDistance: Double,
+    middleDistance: Double,
+    endDistance: Double,
+    width: Double
+  ) -> Path {
     // 1
     let halfWidth = width / 2.0
 
@@ -289,13 +295,11 @@ struct AnalogTimerView: View {
             let timerSize = Int(min(size.width, size.height))
             gContext.translateBy(x: size.width / 2, y: size.height / 2)
             gContext.rotate(by: .degrees(-90))
-
             let remainingSeconds = decimalTimeLeftAt(timeContext.date)
             drawHands(context: gContext, size: timerSize, remainingTime: remainingSeconds)
           }
         }
       }
-      // 4
       .padding()
     }
     .onAppear {
