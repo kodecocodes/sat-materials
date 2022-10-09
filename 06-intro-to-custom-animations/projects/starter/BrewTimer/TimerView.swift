@@ -33,7 +33,7 @@
 import SwiftUI
 
 struct TimerView: View {
-  @ObservedObject var timerManager = TimerManager(length: 0)
+  @StateObject var timerManager = TimerManager(length: 0)
   @State var brewTimer: BrewTime
   @State var showDone: BrewTime?
   @State var amountOfWater = 0.0
@@ -59,29 +59,29 @@ struct TimerView: View {
 
   var body: some View {
     NavigationStack {
-      ZStack {
+      VStack {
+        BrewInfoView(brewTimer: brewTimer, amountOfWater: $amountOfWater)
+        CountingTimerView(timerManager: timerManager)
+          .frame(maxWidth: .infinity)
+          .overlay {
+            RoundedRectangle(cornerRadius: 20)
+              .stroke(timerBorderColor, lineWidth: 5)
+          }
+          .padding(15)
+          .background(
+            RoundedRectangle(cornerRadius: 20)
+              .fill(
+                Color("QuarterSpanishWhite")
+              )
+          )
+          .padding([.leading, .trailing], 5)
+          .padding([.top], 15)
+        Spacer()
+      }
+      .padding()
+      .background {
         backGroundGradient
           .ignoresSafeArea()
-        VStack {
-          BrewInfoView(brewTimer: brewTimer, amountOfWater: $amountOfWater)
-          CountingTimerView(timerManager: timerManager)
-            .frame(maxWidth: .infinity)
-            .overlay {
-              RoundedRectangle(cornerRadius: 20)
-                .stroke(timerBorderColor, lineWidth: 5)
-            }
-            .padding(15)
-            .background(
-              RoundedRectangle(cornerRadius: 20)
-                .fill(
-                  Color("QuarterSpanishWhite")
-                )
-            )
-            .padding([.leading, .trailing], 5)
-            .padding([.top], 15)
-          Spacer()
-        }
-        .padding()
       }
     }
     .onAppear {

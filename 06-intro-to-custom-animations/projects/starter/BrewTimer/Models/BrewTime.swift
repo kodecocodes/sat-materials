@@ -92,21 +92,6 @@ struct BrewTime: Identifiable {
   }
 }
 
-extension BrewTime: Hashable {
-  static func == (lhs: BrewTime, rhs: BrewTime) -> Bool {
-    return lhs.timerName == rhs.timerName && lhs.temperature == rhs.temperature && lhs.timerLength == rhs.timerLength
-  }
-
-  func hash(into hasher: inout Hasher) {
-    hasher.combine(id)
-    hasher.combine(timerName)
-    hasher.combine(waterAmount)
-    hasher.combine(teaAmount)
-    hasher.combine(temperature)
-    hasher.combine(timerLength)
-  }
-}
-
 extension BrewTime {
   static var previewObject: BrewTime {
     return BrewTime(

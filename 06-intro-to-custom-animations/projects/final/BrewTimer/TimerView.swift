@@ -33,7 +33,7 @@
 import SwiftUI
 
 struct TimerView: View {
-  @ObservedObject var timerManager = TimerManager(length: 0)
+  @StateObject var timerManager = TimerManager(length: 0)
   @State var brewTimer: BrewTime
   @State var showDone: BrewTime?
   @State var amountOfWater = 0.0
@@ -75,56 +75,41 @@ struct TimerView: View {
     )
   }
 
-  struct HeadingText: ViewModifier {
-    func body(content: Content) -> some View {
-      return content
-        .font(.title.bold())
-    }
-  }
-
-  struct InformationText: ViewModifier {
-    func body(content: Content) -> some View {
-      return content
-        .font(.title2)
-        .padding(.bottom, 15)
-    }
-  }
-
   var body: some View {
     NavigationStack {
-      ZStack {
+      VStack {
+        BrewInfoView(brewTimer: brewTimer, amountOfWater: $amountOfWater)
+        CountingTimerView(timerManager: timerManager)
+          .frame(maxWidth: .infinity)
+          .overlay {
+            if timerManager.status == .running {
+              RoundedRectangle(cornerRadius: 20)
+                .stroke(animationGradient, lineWidth: 10)
+            // Pause animation
+            } else if timerManager.status == .paused {
+              RoundedRectangle(cornerRadius: 20)
+                .stroke(.blue, lineWidth: 10)
+                .opacity(animatePause ? 0.2 : 1.0)
+            } else {
+              RoundedRectangle(cornerRadius: 20)
+                .stroke(timerBorderColor, lineWidth: 5)
+            }
+          }
+          .padding(15)
+          .background(
+            RoundedRectangle(cornerRadius: 20)
+              .fill(
+                Color("QuarterSpanishWhite")
+              )
+          )
+          .padding([.leading, .trailing], 5)
+          .padding([.top], 15)
+        Spacer()
+      }
+      .padding()
+      .background {
         backGroundGradient
           .ignoresSafeArea()
-        VStack {
-          BrewInfoView(brewTimer: brewTimer, amountOfWater: $amountOfWater)
-          CountingTimerView(timerManager: timerManager)
-            .frame(maxWidth: .infinity)
-            .overlay {
-              if timerManager.status == .running {
-                RoundedRectangle(cornerRadius: 20)
-                  .stroke(animationGradient, lineWidth: 10)
-              // Pause animation
-              } else if timerManager.status == .paused {
-                RoundedRectangle(cornerRadius: 20)
-                  .stroke(.blue, lineWidth: 10)
-                  .opacity(animatePause ? 0.2 : 1.0)
-              } else {
-                RoundedRectangle(cornerRadius: 20)
-                  .stroke(timerBorderColor, lineWidth: 5)
-              }
-            }
-            .padding(15)
-            .background(
-              RoundedRectangle(cornerRadius: 20)
-                .fill(
-                  Color("QuarterSpanishWhite")
-                )
-            )
-            .padding([.leading, .trailing], 5)
-            .padding([.top], 15)
-          Spacer()
-        }
-        .padding()
       }
     }
     .onAppear {
