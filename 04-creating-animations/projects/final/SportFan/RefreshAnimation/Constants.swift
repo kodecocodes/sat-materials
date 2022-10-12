@@ -54,5 +54,3 @@ let orange = Color("AccentColor")
 let minHeaderOffset = -80.0
 let headerHeight = 220.0
 let minHeaderHeight = 120.0
-
-let sectorsNumber = 4

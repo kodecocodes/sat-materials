@@ -8,6 +8,8 @@
 
 import SwiftUI
 
+let sectorsNumber = 4
+
 struct SeatingChartView: View {
   @State private var percentage: CGFloat = .zero
   @State private var zoom = 1.25
