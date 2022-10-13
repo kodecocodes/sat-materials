@@ -11,7 +11,6 @@
 		18D775C522AD944300AE281E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D775C422AD944300AE281E /* ContentView.swift */; };
 		18D775C722AD944400AE281E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 18D775C622AD944400AE281E /* Assets.xcassets */; };
 		18D775CA22AD944400AE281E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 18D775C922AD944400AE281E /* Preview Assets.xcassets */; };
-		A915B43D28AAF9D800C10EEF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A915B43B28AAF9D800C10EEF /* LaunchScreen.storyboard */; };
 		A915B44628AAFBBD00C10EEF /* AppMain.swift in Sources */ = {isa = PBXBuildFile; fileRef = A915B44528AAFBBD00C10EEF /* AppMain.swift */; };
 		A9311FB328A413CD00136D99 /* CountingTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9311FB228A413CD00136D99 /* CountingTimerView.swift */; };
 		A9647B2728A6C2570008B8E6 /* IntegerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9647B2628A6C2570008B8E6 /* IntegerExtensions.swift */; };
@@ -20,6 +19,7 @@
 		A9EA75CA28A1D9D500C4857C /* TimerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EA75C928A1D9D500C4857C /* TimerManager.swift */; };
 		A9EA75CC28A1DA1C00C4857C /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EA75CB28A1DA1C00C4857C /* TimerView.swift */; };
 		A9EA75CE28A1E06500C4857C /* TimerComplete.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EA75CD28A1E06500C4857C /* TimerComplete.swift */; };
+		A9FCA7F828F78D8B0075F4E2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A9FCA7F728F78D8B0075F4E2 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,7 +29,6 @@
 		18D775C622AD944400AE281E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		18D775C922AD944400AE281E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		18D775CE22AD944400AE281E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A915B43C28AAF9D800C10EEF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "../../../../07-complex-custom-animations/projects/chapter-1-final/AnimationCompare/Base.lproj/LaunchScreen.storyboard"; sourceTree = "<group>"; };
 		A915B44528AAFBBD00C10EEF /* AppMain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppMain.swift; sourceTree = "<group>"; };
 		A9311FB228A413CD00136D99 /* CountingTimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountingTimerView.swift; sourceTree = "<group>"; };
 		A9647B2628A6C2570008B8E6 /* IntegerExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntegerExtensions.swift; sourceTree = "<group>"; };
@@ -38,6 +37,7 @@
 		A9EA75C928A1D9D500C4857C /* TimerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerManager.swift; sourceTree = "<group>"; };
 		A9EA75CB28A1DA1C00C4857C /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
 		A9EA75CD28A1E06500C4857C /* TimerComplete.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerComplete.swift; sourceTree = "<group>"; };
+		A9FCA7F728F78D8B0075F4E2 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,7 +82,7 @@
 				A9311FB228A413CD00136D99 /* CountingTimerView.swift */,
 				A9EA75CD28A1E06500C4857C /* TimerComplete.swift */,
 				18D775C622AD944400AE281E /* Assets.xcassets */,
-				A915B43B28AAF9D800C10EEF /* LaunchScreen.storyboard */,
+				A9FCA7F728F78D8B0075F4E2 /* LaunchScreen.storyboard */,
 				18D775CE22AD944400AE281E /* Info.plist */,
 				18D775C822AD944400AE281E /* Preview Content */,
 			);
@@ -173,7 +173,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A915B43D28AAF9D800C10EEF /* LaunchScreen.storyboard in Resources */,
+				A9FCA7F828F78D8B0075F4E2 /* LaunchScreen.storyboard in Resources */,
 				18D775CA22AD944400AE281E /* Preview Assets.xcassets in Resources */,
 				18D775C722AD944400AE281E /* Assets.xcassets in Resources */,
 			);
@@ -220,17 +220,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXVariantGroup section */
-		A915B43B28AAF9D800C10EEF /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				A915B43C28AAF9D800C10EEF /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		18D775CF22AD944400AE281E /* Debug */ = {
