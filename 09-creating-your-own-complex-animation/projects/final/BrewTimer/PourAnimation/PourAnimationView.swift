@@ -36,6 +36,7 @@ struct PourAnimationView: View {
   @State var shapeTop = 900.0
   @State var wavePhase = 90.0
   @State var wavePhase2 = 0.0
+  @State var showPour = true
 
   let fillColor = Color(red: 0.180, green: 0.533, blue: 0.78)
   let waveColor2 = Color(red: 0.129, green: 0.345, blue: 0.659)
@@ -46,7 +47,7 @@ struct PourAnimationView: View {
 
   var body: some View {
     ZStack {
-      if shapeTop > 0 {
+      if showPour {
         PourSceneView()
       }
       WaveShape(
@@ -55,6 +56,7 @@ struct PourAnimationView: View {
         wavelength: 5,
         phase: wavePhase2
       )
+      .fill(waveColor2)
       WaveShape(
         waveTop: shapeTop,
         amplitude: waveHeight,
@@ -62,24 +64,27 @@ struct PourAnimationView: View {
         phase: wavePhase
       )
       .fill(fillColor)
-      .onAppear {
-        withAnimation(
-          .easeInOut(duration: 0.5)
-          .repeatCount(10)
-        ) {
-          wavePhase = 0.0
+    }
+    .onAppear {
+      withAnimation(
+        .easeInOut(duration: 0.5)
+        .repeatForever()
+      ) {
+        wavePhase = -90.0
+      }
+      withAnimation(
+        .easeInOut(duration: 0.3)
+        .repeatForever()
+      ) {
+        wavePhase2 = 270.0
+      }
+      DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+        withAnimation(.linear(duration: 6.0)) {
+          shapeTop = 0.0
         }
-        withAnimation(
-          .easeInOut(duration: 0.3)
-          .repeatCount(17)
-        ) {
-          wavePhase2 = 180.0
-        }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-          withAnimation(.linear(duration: 4.0)) {
-            shapeTop = 0.0
-          }
-        }
+      }
+      DispatchQueue.main.asyncAfter(deadline: .now() + 7.0) {
+        showPour = false
       }
     }
   }

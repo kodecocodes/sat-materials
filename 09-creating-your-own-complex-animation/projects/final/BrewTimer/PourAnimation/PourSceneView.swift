@@ -42,7 +42,9 @@ class PouringLiquidScene: SKScene {
     self.backgroundColor = .clear
     // 2
     if let dropEmitter {
-      self.addChild(dropEmitter)
+      if !self.children.contains(dropEmitter) {
+        self.addChild(dropEmitter)
+      }
     }
 
     // 3
