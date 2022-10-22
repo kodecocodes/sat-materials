@@ -71,6 +71,9 @@ struct ContentView: View {
           width: drag.width + dragOffset.width,
           height: drag.height + dragOffset.height
         ))
+        .onAppear {
+          hexes = createHexes(for: topics)
+        }            
         .animation(.spring(), value: hexes)
         .simultaneousGesture(DragGesture()
           .updating($drag) { value, state, _ in
@@ -82,9 +85,6 @@ struct ContentView: View {
             onDragEnded(with: state)
           }
         )
-        .onAppear {
-          hexes = createHexes(for: topics)
-        }
       }
 
       Text(selectedHexes.count < 5 ? "Pick \(5 - selectedHexes.count) more!" : "You're all set!")
