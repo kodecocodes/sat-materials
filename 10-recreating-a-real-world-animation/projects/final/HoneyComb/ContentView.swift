@@ -60,7 +60,7 @@ struct ContentView: View {
               select(hex: hex)
             }
             .transition(.scale)
-            .scaleEffect(scale)
+            .scaleEffect(max(0.001, scale))
             .offset(CGSize(
               width: measurement.shift.x,
               height: measurement.shift.y
@@ -82,7 +82,7 @@ struct ContentView: View {
             onDragEnded(with: state)
           }
         )
-        .task {
+        .onAppear {
           hexes = createHexes(for: topics)
         }
       }
