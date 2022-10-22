@@ -78,10 +78,8 @@ struct PourAnimationView: View {
       ) {
         wavePhase2 = 270.0
       }
-      DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-        withAnimation(.linear(duration: 6.0)) {
-          shapeTop = 0.0
-        }
+      withAnimation(.linear(duration: 6.0).delay(1)) {
+        shapeTop = 0.0
       }
       DispatchQueue.main.asyncAfter(deadline: .now() + 7.0) {
         showPour = false
