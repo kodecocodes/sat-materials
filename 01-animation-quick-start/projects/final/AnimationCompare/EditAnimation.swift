@@ -43,7 +43,7 @@ struct EditAnimation: View {
           Text("Linear").tag(AnimationType.linear)
           Text("Ease In").tag(AnimationType.easeIn)
           Text("Ease Out").tag(AnimationType.easeOut)
-          Text("Ease In Out").tag(AnimationType.easeInOut)
+          Text("Ease In-Out").tag(AnimationType.easeInOut)
           Text("Spring").tag(AnimationType.spring)
           Text("Interpolating Spring").tag(AnimationType.interpolatingSpring)
         }
@@ -86,8 +86,8 @@ struct EditAnimation: View {
           Stepper(
             "Stiffness \(animation.stiffness.formatted())",
             value: $animation.stiffness,
-            in: 0...500,
-            step: 5
+            in: 0...10,
+            step: 0.1
           )
           Stepper(
             "Damping \(animation.damping.formatted())",
@@ -107,11 +107,8 @@ struct EditAnimation: View {
         Text(animation.description)
       }
       Section("Tap to Preview") {
-        AnimationView(
-          animation: animation,
-          location: location
-        )
-        .contentShape(Rectangle())
+        AnimationView(animation: animation, location: $location)
+          .contentShape(Rectangle())
         .onTapGesture {
           if location == 0.0 {
             location = 1.0

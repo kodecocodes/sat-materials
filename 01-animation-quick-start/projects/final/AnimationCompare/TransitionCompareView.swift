@@ -32,10 +32,8 @@
 
 import SwiftUI
 
-
 struct TransitionCompareView: View {
   @State var showSquare = true
-
   // 1
   var squareTransition: AnyTransition {
     // 2

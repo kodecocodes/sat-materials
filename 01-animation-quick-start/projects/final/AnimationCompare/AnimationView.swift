@@ -34,9 +34,7 @@ import SwiftUI
 
 struct AnimationView: View {
   var animation: AnimationData
-  var location: Double
-  var slowMotion = false
-
+  @Binding var location: Double
   var currentAnimation: Animation {
     switch animation.type {
     case .easeIn:
@@ -47,9 +45,13 @@ struct AnimationView: View {
       return Animation.easeInOut(duration: animation.length)
     case .interpolatingSpring:
       return Animation.interpolatingSpring(
+        // 1
         mass: animation.mass,
+        // 2
         stiffness: animation.stiffness,
+        // 3
         damping: animation.damping,
+        // 4
         initialVelocity: animation.initialVelocity
       )
     case .spring:
@@ -61,25 +63,28 @@ struct AnimationView: View {
       return Animation.linear(duration: animation.length)
     }
   }
+  var slowMotion = false
 
   var body: some View {
     GeometryReader { proxy in
-      // 1
-      HStack {
-        Image(systemName: "gear.circle")
-          .rotationEffect(.degrees(360 * location))
-        Image(systemName: "star.fill")
-        // 2
-          .offset(x: proxy.size.width * location * 0.8)
+      Group {
+        HStack {
+          // 1
+          Image(systemName: "gear.circle")
+            .rotationEffect(.degrees(360 * location))
+          Image(systemName: "star.fill")
+            // 2
+            .offset(x: proxy.size.width * location * 0.8)
+        }
+        .font(.title)
+        // 3
+        .animation(
+          currentAnimation
+            .delay(animation.delay)
+            .speed(slowMotion ? 0.25 : 1.0),
+          value: location
+        )
       }
-      .font(.title)
-      // 3
-      .animation(
-        currentAnimation
-          .delay(animation.delay)
-          .speed(slowMotion ? 0.25 : 1.0),
-        value: location
-      )
     }
   }
 }
@@ -90,7 +95,7 @@ struct AnimationView_Previews: PreviewProvider {
 
     AnimationView(
       animation: animation,
-      location: 0
+      location: .constant(0.0)
     )
   }
 }

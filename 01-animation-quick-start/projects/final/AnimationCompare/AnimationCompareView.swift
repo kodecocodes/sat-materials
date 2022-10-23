@@ -48,17 +48,17 @@ struct AnimationCompareView: View {
   var body: some View {
     NavigationStack {
       VStack {
+        // 1
         Button("Animate!") {
-          if location == 0.0 {
-            location = 1.0
-          } else {
-            location = 0.0
-          }
+          // 2
+          location = location == 0 ? 1 : 0
         }
         .font(.title)
         .disabled(animations.isEmpty)
+
         List {
           Toggle("Slow Animations (¼ speed)", isOn: $slowMotion)
+          
           ForEach($animations) { $animation in
             NavigationLink {
               EditAnimation(animation: $animation)
@@ -68,7 +68,7 @@ struct AnimationCompareView: View {
                   .fixedSize(horizontal: false, vertical: true)
                 AnimationView(
                   animation: animation,
-                  location: location,
+                  location: $location,
                   slowMotion: slowMotion
                 )
                 .frame(height: 30)
