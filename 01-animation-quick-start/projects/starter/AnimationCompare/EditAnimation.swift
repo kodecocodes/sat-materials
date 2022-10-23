@@ -43,7 +43,7 @@ struct EditAnimation: View {
           Text("Linear").tag(AnimationType.linear)
           Text("Ease In").tag(AnimationType.easeIn)
           Text("Ease Out").tag(AnimationType.easeOut)
-          Text("Ease In Out").tag(AnimationType.easeInOut)
+          Text("Ease In-Out").tag(AnimationType.easeInOut)
           Text("Spring").tag(AnimationType.spring)
           Text("Interpolating Spring").tag(AnimationType.interpolatingSpring)
         }
