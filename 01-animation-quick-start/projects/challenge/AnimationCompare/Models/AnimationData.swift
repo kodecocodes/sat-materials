@@ -33,15 +33,6 @@
 import Foundation
 import SwiftUI
 
-enum AnimationType {
-  case linear
-  case easeIn
-  case easeOut
-  case easeInOut
-  case spring
-  case interpolatingSpring
-}
-
 struct AnimationData: Identifiable {
   var id = UUID()
   var type: AnimationType
@@ -99,4 +90,13 @@ struct AnimationData: Identifiable {
     // interpolating spring
     return "\(typeString) Animation\nMass: \(massString) Stiffness: \(stiffnessString) Damping: \(dampingString)"
   }
+}
+
+enum AnimationType {
+  case linear
+  case easeIn
+  case easeOut
+  case easeInOut
+  case spring
+  case interpolatingSpring
 }
