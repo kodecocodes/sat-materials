@@ -12,14 +12,14 @@
 		18D775C722AD944400AE281E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 18D775C622AD944400AE281E /* Assets.xcassets */; };
 		18D775CA22AD944400AE281E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 18D775C922AD944400AE281E /* Preview Assets.xcassets */; };
 		18D775D822AD963800AE281E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18D775DA22AD963800AE281E /* LaunchScreen.storyboard */; };
+		26F13996290861C2003BF69A /* PullToRefresh.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F13995290861C2003BF69A /* PullToRefresh.swift */; };
+		26F139982908620F003BF69A /* ScrollViewGeometryReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F139972908620F003BF69A /* ScrollViewGeometryReader.swift */; };
+		26F1399C290868A4003BF69A /* BallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F1399B290868A4003BF69A /* BallView.swift */; };
+		26F1399E29086964003BF69A /* JumpingBallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F1399D29086964003BF69A /* JumpingBallView.swift */; };
+		26F139A029086A59003BF69A /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F1399F29086A59003BF69A /* Constants.swift */; };
 		835C287F28624B010074D7DE /* MockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835C287E28624B010074D7DE /* MockData.swift */; };
 		835C288128624B070074D7DE /* EventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835C288028624B070074D7DE /* EventView.swift */; };
 		835C288428624EF70074D7DE /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835C288328624EF70074D7DE /* Event.swift */; };
-		835C2887286253000074D7DE /* ScrollViewGeometryReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835C2886286253000074D7DE /* ScrollViewGeometryReader.swift */; };
-		835C2889286253C00074D7DE /* BallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835C2888286253C00074D7DE /* BallView.swift */; };
-		835C288B2862EF210074D7DE /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835C288A2862EF210074D7DE /* Constants.swift */; };
-		BA97537128782CCC005CD7E2 /* JumpingBallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA97537028782CCC005CD7E2 /* JumpingBallView.swift */; };
-		BA97537328785551005CD7E2 /* PullToRefresh.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA97537228785550005CD7E2 /* PullToRefresh.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,14 +30,14 @@
 		18D775C922AD944400AE281E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		18D775CE22AD944400AE281E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		18D775DE22AD96B400AE281E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		26F13995290861C2003BF69A /* PullToRefresh.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullToRefresh.swift; sourceTree = "<group>"; };
+		26F139972908620F003BF69A /* ScrollViewGeometryReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollViewGeometryReader.swift; sourceTree = "<group>"; };
+		26F1399B290868A4003BF69A /* BallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BallView.swift; sourceTree = "<group>"; };
+		26F1399D29086964003BF69A /* JumpingBallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JumpingBallView.swift; sourceTree = "<group>"; };
+		26F1399F29086A59003BF69A /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		835C287E28624B010074D7DE /* MockData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockData.swift; sourceTree = "<group>"; };
 		835C288028624B070074D7DE /* EventView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventView.swift; sourceTree = "<group>"; };
 		835C288328624EF70074D7DE /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
-		835C2886286253000074D7DE /* ScrollViewGeometryReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollViewGeometryReader.swift; sourceTree = "<group>"; };
-		835C2888286253C00074D7DE /* BallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BallView.swift; sourceTree = "<group>"; };
-		835C288A2862EF210074D7DE /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		BA97537028782CCC005CD7E2 /* JumpingBallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JumpingBallView.swift; sourceTree = "<group>"; };
-		BA97537228785550005CD7E2 /* PullToRefresh.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullToRefresh.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,7 +72,6 @@
 		18D775BF22AD944300AE281E /* SportFan */ = {
 			isa = PBXGroup;
 			children = (
-				835C2885286252960074D7DE /* RefreshAnimation */,
 				18D775CE22AD944400AE281E /* Info.plist */,
 				1839F4AF25190F2A00BB00F1 /* AppMain.swift */,
 				18D775C422AD944300AE281E /* ContentView.swift */,
@@ -82,6 +81,11 @@
 				18D775C622AD944400AE281E /* Assets.xcassets */,
 				18D775DA22AD963800AE281E /* LaunchScreen.storyboard */,
 				18D775C822AD944400AE281E /* Preview Content */,
+				26F13995290861C2003BF69A /* PullToRefresh.swift */,
+				26F139972908620F003BF69A /* ScrollViewGeometryReader.swift */,
+				26F1399B290868A4003BF69A /* BallView.swift */,
+				26F1399D29086964003BF69A /* JumpingBallView.swift */,
+				26F1399F29086A59003BF69A /* Constants.swift */,
 			);
 			path = SportFan;
 			sourceTree = "<group>";
@@ -92,18 +96,6 @@
 				18D775C922AD944400AE281E /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
-			sourceTree = "<group>";
-		};
-		835C2885286252960074D7DE /* RefreshAnimation */ = {
-			isa = PBXGroup;
-			children = (
-				835C2886286253000074D7DE /* ScrollViewGeometryReader.swift */,
-				835C2888286253C00074D7DE /* BallView.swift */,
-				835C288A2862EF210074D7DE /* Constants.swift */,
-				BA97537028782CCC005CD7E2 /* JumpingBallView.swift */,
-				BA97537228785550005CD7E2 /* PullToRefresh.swift */,
-			);
-			path = RefreshAnimation;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -220,15 +212,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				18D775C522AD944300AE281E /* ContentView.swift in Sources */,
+				26F13996290861C2003BF69A /* PullToRefresh.swift in Sources */,
 				835C287F28624B010074D7DE /* MockData.swift in Sources */,
-				835C2889286253C00074D7DE /* BallView.swift in Sources */,
-				BA97537328785551005CD7E2 /* PullToRefresh.swift in Sources */,
-				835C2887286253000074D7DE /* ScrollViewGeometryReader.swift in Sources */,
-				BA97537128782CCC005CD7E2 /* JumpingBallView.swift in Sources */,
 				1839F4B025190F2A00BB00F1 /* AppMain.swift in Sources */,
+				26F1399E29086964003BF69A /* JumpingBallView.swift in Sources */,
+				26F139A029086A59003BF69A /* Constants.swift in Sources */,
 				835C288128624B070074D7DE /* EventView.swift in Sources */,
 				835C288428624EF70074D7DE /* Event.swift in Sources */,
-				835C288B2862EF210074D7DE /* Constants.swift in Sources */,
+				26F139982908620F003BF69A /* ScrollViewGeometryReader.swift in Sources */,
+				26F1399C290868A4003BF69A /* BallView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

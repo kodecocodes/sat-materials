@@ -34,61 +34,15 @@ import SwiftUI
 
 struct BallView: View {
   @Binding var pullToRefresh: PullToRefresh
-  
+
   var body: some View {
     switch pullToRefresh.state {
     case .ongoing, .preparingToFinish:
       JumpingBallView(pullToRefresh: $pullToRefresh)
-    case .idle:
-      EmptyView()
-    default:
+    case .pulling, .finishing:
       RollingBallView(pullToRefresh: $pullToRefresh)
-    }
-  }
-}
-
-struct RollingBallView: View {
-  @Binding var pullToRefresh: PullToRefresh
-  @State private var rollOutOffset: CGFloat = 0
-  @State private var rollOutRotation: CGFloat = 0
-
-  private let bezierCurve: Animation = .timingCurve(0.24, 1.4, 1, -1, duration: 1)
-  private let shadowHeight: CGFloat = 5
-  
-  private let initialOffset = -UIScreen.halfWidth - ballSize / 2
-
-  var body: some View {
-    let rollInOffset = initialOffset + (pullToRefresh.progress * -initialOffset)
-    let rollInRotation = pullToRefresh.progress * .pi * 4
-    
-    ZStack {
-      Ellipse()
-        .fill(Color.gray.opacity(0.4))
-        .frame(width: ballSize * 0.8, height: shadowHeight)
-        .offset(y: -ballSpacing - shadowHeight / 2)
-      
-      Ball()
-      // when the ball rolls in the rotation depends on the user's gesture progress
-      // when rolling out the ball makes two full rotations in a second
-        .rotationEffect(Angle(radians: pullToRefresh.state == .finishing ? rollOutRotation : rollInRotation), anchor: .center)
-      // Moving from the left corner to the center of the screen
-      // when the refreshing starts, then moving out of the screen to the right
-        .offset(y: -ballSize / 2 - ballSpacing)
-        .onAppear { animateRollingOut() }
-    }.offset(x: pullToRefresh.state == .finishing ? rollOutOffset : rollInOffset)
-    // the ball slightly bounces during the user's swipe
-    .animation(bezierCurve, value: pullToRefresh.progress)
-  }
-
-  private func animateRollingOut() {
-    guard pullToRefresh.state == .finishing else {
-      return
-    }
-    withAnimation(.easeIn(duration: timeForTheBallToRollOut)) {
-      rollOutOffset = UIScreen.main.bounds.width
-    }
-    withAnimation(.linear(duration: timeForTheBallToRollOut)) {
-      rollOutRotation = .pi * 4
+    default:
+      EmptyView()
     }
   }
 }
@@ -97,7 +51,77 @@ struct Ball: View {
   var body: some View {
     Image("basketball_ball")
       .resizable()
-      .frame(width: ballSize, height: ballSize)
+      .frame(
+        width: Constants.ballSize,
+        height: Constants.ballSize
+      )
+  }
+}
+
+struct RollingBallView: View {
+  @Binding var pullToRefresh: PullToRefresh
+  private let shadowHeight: CGFloat = 5
+  @State private var rollOutOffset: CGFloat = 0
+  @State private var rollOutRotation: CGFloat = 0
+  private let bezierCurve: Animation = .timingCurve(
+    0.24, 1.4, 1, -1,
+    duration: 1
+  )
+
+  private let initialOffset = -UIScreen.halfWidth
+    - Constants.ballSize / 2 // 1
+
+  var body: some View {
+    let rollInOffset = initialOffset
+      + (pullToRefresh.progress * -initialOffset) // 2
+    let rollInRotation = pullToRefresh.progress * .pi * 4 // 3
+
+    ZStack {
+      Ellipse()
+        .fill(Color.gray.opacity(0.4))
+        .frame(
+          width: Constants.ballSize * 0.8,
+          height: shadowHeight
+        )
+        .offset(y: -Constants.ballSpacing - shadowHeight / 2)
+
+      Ball()
+        .rotationEffect(
+          Angle(
+            radians: pullToRefresh.state == .finishing
+              ? rollOutRotation
+              : rollInRotation
+          ),
+          anchor: .center
+        )
+        .offset(y: -Constants.ballSize / 2 - Constants.ballSpacing)
+    }
+    .animation(
+      bezierCurve,
+      value: pullToRefresh.progress
+    )
+    .offset(x: pullToRefresh.state == .finishing ? rollOutOffset : rollInOffset)
+    .onAppear {
+      animateRollingOut()
+    }
+  }
+
+  private func animateRollingOut() {
+    guard pullToRefresh.state == .finishing else {
+      return
+    }
+
+    withAnimation(
+      .easeIn(duration: Constants.timeForTheBallToRollOut)
+    ) {
+      rollOutOffset = UIScreen.main.bounds.width
+    }
+
+    withAnimation(
+      .linear(duration: Constants.timeForTheBallToRollOut)
+    ) {
+      rollOutRotation = .pi * 4
+    }
   }
 }
 
