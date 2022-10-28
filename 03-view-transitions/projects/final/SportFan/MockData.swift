@@ -74,12 +74,6 @@ let sportTypeImages = [
   "https://images.unsplash.com/photo-1549956847-f77eb7058468"
 ]
 
-let sportTypeIcons = [
-  "🏈",
-  "🏀",
-  "🏒"
-]
-
 let venues = [
   "Intrust Bank Arena",
   "BOK Center",

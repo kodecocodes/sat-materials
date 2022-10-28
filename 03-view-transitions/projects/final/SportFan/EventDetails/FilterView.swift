@@ -37,6 +37,9 @@ struct FilterView: View {
   var isShown: Bool
 
   private let sports = Sport.allCases
+  var horizontalShift = CGFloat.zero
+  var verticalShift = CGFloat.zero
+
   private let filterTransition = AnyTransition.modifier(
     active: FilterModifier(active: true),
     identity: FilterModifier(active: false)
@@ -46,41 +49,43 @@ struct FilterView: View {
     var horizontalShift = CGFloat.zero
     var verticalShift = CGFloat.zero
 
-    return ZStack(alignment: .topLeading) {
+    ZStack(alignment: .topLeading) {
       if isShown {
         ForEach(sports, id: \.self) { sport in
-          item(for: sport)
-            .padding([.horizontal], 4)
-            .padding([.top], 8)
-            .onTapGesture {
-              onSelected(sport)
-            }
-            .alignmentGuide(.leading) { dimension in
-              if abs(horizontalShift - dimension.width) > UIScreen.main.bounds.width {
-                horizontalShift = 0
-                verticalShift -= dimension.height
+          Button {
+            onSelected(sport)
+          } label: {
+            item(for: sport)
+              .padding(.horizontal, 4)
+              .padding(.top, 8)
+              .alignmentGuide(.leading) { dimension in
+                // 2
+                if abs(horizontalShift - dimension.width) > UIScreen.main.bounds.width {
+                  // 3
+                  horizontalShift = 0
+                  verticalShift -= dimension.height
+                }
+                // 4
+                let currentShift = horizontalShift
+                // 5
+                horizontalShift = sport == sports.last ? 0 : horizontalShift - dimension.width
+                return currentShift
               }
-              let currentShift = horizontalShift
-              horizontalShift = sport == sports.last ? 0 : horizontalShift - dimension.width
-              return currentShift
-            }
-            .alignmentGuide(.top) { _ in
-              let currentShift = verticalShift
-              verticalShift = sport == sports.last ? 0 : verticalShift
-              return currentShift
-            }
-            .transition(.asymmetric(insertion: filterTransition, removal: .scale.combined(with: .opacity)))
+              .alignmentGuide(.top) { _ in
+                let currentShift = verticalShift
+                // 2
+                verticalShift = sport == sports.last ? 0 : verticalShift
+                return currentShift
+              }
+          }
+          .transition(.asymmetric(
+            insertion: filterTransition,
+            removal: .scale
+          ))
         }
       }
-    }.padding(.top, isShown ? 24.0 : 0)
-  }
-
-  private func onSelected(_ sport: Sport) {
-    if selectedSports.contains(sport) {
-      selectedSports.remove(sport)
-    } else {
-      selectedSports.insert(sport)
     }
+    .padding(.top, isShown ? 24 : 0)
   }
 
   func item(for sport: Sport) -> some View {
@@ -90,28 +95,44 @@ struct FilterView: View {
       .padding(.horizontal, 36)
       .background {
         ZStack {
-          RoundedRectangle(cornerRadius: cornersRadius)
-            .fill(selectedSports.contains(sport) ? orange : Color(uiColor: UIColor.secondarySystemBackground))
+          RoundedRectangle(cornerRadius: Constants.cornersRadius)
+            .fill(
+              selectedSports.contains(sport)
+              ? Constants.orange
+              : Color(uiColor: UIColor.secondarySystemBackground)
+            )
             .shadow(radius: 2)
-          RoundedRectangle(cornerRadius: cornersRadius)
-            .strokeBorder(orange, lineWidth: 3)
+          RoundedRectangle(cornerRadius: Constants.cornersRadius)
+            .strokeBorder(Constants.orange, lineWidth: 3)
         }
       }
+  }
+
+  private func onSelected(_ sport: Sport) {
+    if selectedSports.contains(sport) {
+      selectedSports.remove(sport)
+    } else {
+      selectedSports.insert(sport)
+    }
   }
 }
 
 struct FilterModifier: ViewModifier {
+  // 1
   var active: Bool
 
+  // 2
   func body(content: Content) -> some View {
     content
+      // 3
       .scaleEffect(active ? 0.75 : 1)
+       // 4
       .rotationEffect(.degrees(active ? .random(in: -25...25) : 0), anchor: .center)
   }
 }
 
 struct FilterView_Previews: PreviewProvider {
   static var previews: some View {
-    FilterView(selectedSports: Binding.constant([]), isShown: true)
+    FilterView(selectedSports: .constant([]), isShown: true)
   }
 }

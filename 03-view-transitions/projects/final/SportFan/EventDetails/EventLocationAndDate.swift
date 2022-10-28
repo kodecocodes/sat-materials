@@ -33,17 +33,17 @@
 import SwiftUI
 
 struct EventLocationAndDate: View {
-  var collapsed: Bool
   var namespace: Namespace.ID
   var event: Event
+  var collapsed: Bool
 
   var body: some View {
     VStack(alignment: .leading) {
-      HStack(spacing: spacingS) {
+      HStack(spacing: Constants.spacingS) {
         Image(systemName: "location.circle")
           .resizable()
           .scaledToFit()
-          .frame(height: iconSizeL)
+          .frame(height: Constants.iconSizeL)
           .clipped()
 
         Text(event.location)
@@ -54,12 +54,12 @@ struct EventLocationAndDate: View {
         Spacer()
       }
 
-      HStack(spacing: spacingS) {
+      HStack(spacing: Constants.spacingS) {
         if !collapsed {
           Image(systemName: "calendar")
             .resizable()
             .scaledToFit()
-            .frame(height: iconSizeL)
+            .frame(height: Constants.iconSizeL)
             .clipped()
             .matchedGeometryEffect(id: "icon", in: namespace)
 
@@ -67,17 +67,27 @@ struct EventLocationAndDate: View {
             .lineLimit(1)
             .fontWeight(.heavy)
             .font(.subheadline)
-            .matchedGeometryEffect(id: "date", in: namespace, properties: .position)
+            .matchedGeometryEffect(
+              id: "date",
+              in: namespace,
+              properties: .position
+            )
         }
+        
         Spacer()
       }
-    }.padding()
+    }
+    .padding()
   }
 }
 
 struct EventLocationAndDate_Previews: PreviewProvider {
   @Namespace static var namespace
   static var previews: some View {
-    EventLocationAndDate(collapsed: false, namespace: namespace, event: makeEvent(for: teams[0]))
+    EventLocationAndDate(
+      namespace: namespace,
+      event: makeEvent(for: teams[0]),
+      collapsed: false
+    )
   }
 }

@@ -36,65 +36,81 @@ struct HeaderView: View {
   @Environment(\.dismiss) var dismiss
   var namespace: Namespace.ID
   var event: Event
-  var collapsed: Bool
   var offset: CGFloat
+  var collapsed: Bool
 
   var body: some View {
     ZStack {
+      // 1
       AsyncImage(
         url: event.team.sport.imageURL,
         content: { image in
           image.resizable()
             .scaledToFill()
             .frame(width: UIScreen.main.bounds.width)
-            .frame(height: max(minHeaderHeight, headerHeight + offset))
+            // 2
+            .frame(height: max(
+              Constants.minHeaderHeight,
+              Constants.headerHeight + offset
+            ))
             .clipped()
-            .cornerRadius(collapsed ? 0 : cornersRadius)
+            .cornerRadius(collapsed ? 0 : Constants.cornersRadius)
             .shadow(radius: 2)
+            .overlay {
+              RoundedRectangle(cornerRadius: collapsed ? 0 : Constants.cornersRadius)
+                .fill(.black.opacity(collapsed ? 0.4 : 0.2))
+            }
         },
         placeholder: {
-          ProgressView().frame(height: headerHeight)
+          ProgressView().frame(height: Constants.headerHeight)
         }
       )
-      .overlay {
-        RoundedRectangle(cornerRadius: collapsed ? 0 : cornersRadius)
-          .fill(.black.opacity(collapsed ? 0.4 : 0.2))
-      }
 
       VStack(alignment: .leading) {
-        HStack {
-          Image(systemName: "chevron.left")
-            .resizable()
-            .scaledToFit()
-            .frame(height: iconSizeS)
-            .clipped()
-            .foregroundColor(.white)
-          if collapsed {
-            Text(event.team.name)
-              .frame(maxWidth: .infinity, alignment: .leading)
-              .font(.title2)
-              .fontWeight(.bold)
+        Button {
+          // 1
+          dismiss()
+        } label: {
+          HStack {
+            Image(systemName: "chevron.left")
+              .resizable()
+              .scaledToFit()
+              .frame(height: Constants.iconSizeS)
+              .clipped()
               .foregroundColor(.white)
-              .matchedGeometryEffect(id: "title", in: namespace, properties: .position)
-          } else {
-            Spacer()
-          }
-        }.frame(height: 36.0)
-          .padding(.top, UIApplication.safeAreaTopInset + 8.0)
-          .contentShape(Rectangle())
-          .onTapGesture {
-            dismiss()
-          }
 
+            // 2
+            if collapsed {
+              Text(event.team.name)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .font(.title2)
+                .fontWeight(.bold)
+                .foregroundColor(.white)
+                .matchedGeometryEffect(
+                  id: "title",
+                  in: namespace,
+                  properties: .position
+                )
+            } else {
+              Spacer()
+            }
+          }
+          .frame(height: 36.0)
+          // 3
+          .padding(.top, UIApplication.safeAreaTopInset + Constants.spacingS)
+        }
+
+        // 1
         Spacer()
 
+        // 2
         if collapsed {
           HStack {
-            Image(systemName: "location.circle")
+            Image(systemName: "calendar")
               .renderingMode(.template)
               .resizable()
               .scaledToFit()
-              .frame(height: iconSizeS)
+              .frame(height: Constants.iconSizeS)
               .foregroundColor(.white)
               .clipped()
               .matchedGeometryEffect(id: "icon", in: namespace)
@@ -102,24 +118,34 @@ struct HeaderView: View {
             Text(event.date)
               .foregroundColor(.white)
               .font(.subheadline)
-              .matchedGeometryEffect(id: "date", in: namespace, properties: .position)
-          }.padding(.leading, spacingM)
-            .padding(.bottom, spacingM)
+              .matchedGeometryEffect(
+                id: "date",
+                in: namespace,
+                properties: .position
+              )
+          }
+          .padding(.leading, Constants.spacingM)
+          .padding(.bottom, Constants.spacingM)
         }
       }
       .padding(.horizontal)
-    }.toolbar(.hidden)
-      .frame(height: max(minHeaderHeight, headerHeight + offset))
+      .frame(height: max(
+        Constants.minHeaderHeight,
+        Constants.headerHeight + offset
+      ))
+    }
   }
 }
 
 struct HeaderView_Previews: PreviewProvider {
-  @Namespace static var namespace
+  @Namespace static var namespace;
+
   static var previews: some View {
     HeaderView(
       namespace: namespace,
       event: Event(team: teams[0], location: "Somewhere", ticketsLeft: 345),
-      collapsed: true, offset: -100
+      offset: -0,
+      collapsed: true
     )
   }
 }

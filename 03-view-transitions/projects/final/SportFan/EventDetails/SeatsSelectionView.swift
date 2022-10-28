@@ -34,7 +34,7 @@ import SwiftUI
 
 struct SeatsSelectionView: View {
   let event: Event
-
+  
   var body: some View {
     VStack {
       Spacer()
@@ -42,7 +42,8 @@ struct SeatsSelectionView: View {
         .frame(maxWidth: .infinity)
         .padding()
       Spacer()
-    }.background(orange, ignoresSafeAreaEdges: .all)
+    }
+    .background(Constants.orange, ignoresSafeAreaEdges: .all)
   }
 }
 
