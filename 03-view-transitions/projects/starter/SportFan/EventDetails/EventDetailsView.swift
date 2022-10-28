@@ -81,12 +81,12 @@ struct EventDetailsView: View {
               .padding(.horizontal)
               .background {
                 RoundedRectangle(cornerRadius: 36)
-                  .fill(orange)
+                  .fill(Constants.orange)
                   .shadow(radius: 2)
                   .frame(height: 48)
               }
           })
-          .padding(.vertical, spacingM)
+          .padding(.vertical, Constants.spacingM)
 
           Text("Available Tickets")
             .frame(maxWidth: .infinity, alignment: .leading)

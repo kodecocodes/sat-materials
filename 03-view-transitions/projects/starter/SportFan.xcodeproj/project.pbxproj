@@ -12,21 +12,21 @@
 		18D775C722AD944400AE281E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 18D775C622AD944400AE281E /* Assets.xcassets */; };
 		18D775CA22AD944400AE281E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 18D775C922AD944400AE281E /* Preview Assets.xcassets */; };
 		18D775D822AD963800AE281E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18D775DA22AD963800AE281E /* LaunchScreen.storyboard */; };
-		748D3F9828818D5400CBDDEA /* EventDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748D3F9728818D5400CBDDEA /* EventDetailsView.swift */; };
-		748D3F9A288317B000CBDDEA /* TicketView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748D3F99288317B000CBDDEA /* TicketView.swift */; };
-		74CF5BA5288D84890039A5D9 /* MockTicketsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74CF5BA4288D84890039A5D9 /* MockTicketsData.swift */; };
-		74CF5BA9288D8F4C0039A5D9 /* EventLocationAndDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74CF5BA8288D8F4C0039A5D9 /* EventLocationAndDate.swift */; };
-		74D6479F288741CE008C2288 /* TicketsInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74D6479E288741CE008C2288 /* TicketsInfo.swift */; };
+		26F139A029086A59003BF69A /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F1399F29086A59003BF69A /* Constants.swift */; };
+		26F4B40A290BF530006FC62A /* PullToRefresh.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F4B3FD290BF530006FC62A /* PullToRefresh.swift */; };
+		26F4B40B290BF530006FC62A /* ScrollViewGeometryReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F4B3FE290BF530006FC62A /* ScrollViewGeometryReader.swift */; };
+		26F4B40C290BF530006FC62A /* JumpingBallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F4B3FF290BF530006FC62A /* JumpingBallView.swift */; };
+		26F4B40D290BF530006FC62A /* BallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F4B400290BF530006FC62A /* BallView.swift */; };
+		26F4B40E290BF530006FC62A /* MockTicketsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F4B402290BF530006FC62A /* MockTicketsData.swift */; };
+		26F4B40F290BF530006FC62A /* EventLocationAndDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F4B403290BF530006FC62A /* EventLocationAndDate.swift */; };
+		26F4B410290BF530006FC62A /* SeatsSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F4B404290BF530006FC62A /* SeatsSelectionView.swift */; };
+		26F4B411290BF530006FC62A /* TicketView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F4B405290BF530006FC62A /* TicketView.swift */; };
+		26F4B412290BF530006FC62A /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F4B406290BF530006FC62A /* Extensions.swift */; };
+		26F4B413290BF530006FC62A /* EventDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F4B407290BF530006FC62A /* EventDetailsView.swift */; };
+		26F4B414290BF530006FC62A /* TicketsInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F4B408290BF530006FC62A /* TicketsInfo.swift */; };
 		835C287F28624B010074D7DE /* MockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835C287E28624B010074D7DE /* MockData.swift */; };
 		835C288128624B070074D7DE /* EventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835C288028624B070074D7DE /* EventView.swift */; };
 		835C288428624EF70074D7DE /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835C288328624EF70074D7DE /* Event.swift */; };
-		835C2887286253000074D7DE /* ScrollViewGeometryReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835C2886286253000074D7DE /* ScrollViewGeometryReader.swift */; };
-		835C2889286253C00074D7DE /* BallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835C2888286253C00074D7DE /* BallView.swift */; };
-		835C288B2862EF210074D7DE /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835C288A2862EF210074D7DE /* Constants.swift */; };
-		BA6E2C752890728800EB0AE7 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6E2C742890728800EB0AE7 /* Extensions.swift */; };
-		BA6F97D52893024500E17E73 /* SeatsSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6F97D42893024500E17E73 /* SeatsSelectionView.swift */; };
-		BA97537128782CCC005CD7E2 /* JumpingBallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA97537028782CCC005CD7E2 /* JumpingBallView.swift */; };
-		BA97537328785551005CD7E2 /* PullToRefresh.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA97537228785550005CD7E2 /* PullToRefresh.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,21 +37,21 @@
 		18D775C922AD944400AE281E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		18D775CE22AD944400AE281E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		18D775DE22AD96B400AE281E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		748D3F9728818D5400CBDDEA /* EventDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailsView.swift; sourceTree = "<group>"; };
-		748D3F99288317B000CBDDEA /* TicketView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketView.swift; sourceTree = "<group>"; };
-		74CF5BA4288D84890039A5D9 /* MockTicketsData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockTicketsData.swift; sourceTree = "<group>"; };
-		74CF5BA8288D8F4C0039A5D9 /* EventLocationAndDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventLocationAndDate.swift; sourceTree = "<group>"; };
-		74D6479E288741CE008C2288 /* TicketsInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketsInfo.swift; sourceTree = "<group>"; };
+		26F1399F29086A59003BF69A /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		26F4B3FD290BF530006FC62A /* PullToRefresh.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PullToRefresh.swift; sourceTree = "<group>"; };
+		26F4B3FE290BF530006FC62A /* ScrollViewGeometryReader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollViewGeometryReader.swift; sourceTree = "<group>"; };
+		26F4B3FF290BF530006FC62A /* JumpingBallView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JumpingBallView.swift; sourceTree = "<group>"; };
+		26F4B400290BF530006FC62A /* BallView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BallView.swift; sourceTree = "<group>"; };
+		26F4B402290BF530006FC62A /* MockTicketsData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockTicketsData.swift; sourceTree = "<group>"; };
+		26F4B403290BF530006FC62A /* EventLocationAndDate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventLocationAndDate.swift; sourceTree = "<group>"; };
+		26F4B404290BF530006FC62A /* SeatsSelectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SeatsSelectionView.swift; sourceTree = "<group>"; };
+		26F4B405290BF530006FC62A /* TicketView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TicketView.swift; sourceTree = "<group>"; };
+		26F4B406290BF530006FC62A /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		26F4B407290BF530006FC62A /* EventDetailsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetailsView.swift; sourceTree = "<group>"; };
+		26F4B408290BF530006FC62A /* TicketsInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TicketsInfo.swift; sourceTree = "<group>"; };
 		835C287E28624B010074D7DE /* MockData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockData.swift; sourceTree = "<group>"; };
 		835C288028624B070074D7DE /* EventView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventView.swift; sourceTree = "<group>"; };
 		835C288328624EF70074D7DE /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
-		835C2886286253000074D7DE /* ScrollViewGeometryReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollViewGeometryReader.swift; sourceTree = "<group>"; };
-		835C2888286253C00074D7DE /* BallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BallView.swift; sourceTree = "<group>"; };
-		835C288A2862EF210074D7DE /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		BA6E2C742890728800EB0AE7 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
-		BA6F97D42893024500E17E73 /* SeatsSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeatsSelectionView.swift; sourceTree = "<group>"; };
-		BA97537028782CCC005CD7E2 /* JumpingBallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JumpingBallView.swift; sourceTree = "<group>"; };
-		BA97537228785550005CD7E2 /* PullToRefresh.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullToRefresh.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,8 +86,6 @@
 		18D775BF22AD944300AE281E /* SportFan */ = {
 			isa = PBXGroup;
 			children = (
-				748D3F9628818D3C00CBDDEA /* EventDetails */,
-				835C2885286252960074D7DE /* RefreshAnimation */,
 				18D775CE22AD944400AE281E /* Info.plist */,
 				1839F4AF25190F2A00BB00F1 /* AppMain.swift */,
 				18D775C422AD944300AE281E /* ContentView.swift */,
@@ -97,6 +95,9 @@
 				18D775C622AD944400AE281E /* Assets.xcassets */,
 				18D775DA22AD963800AE281E /* LaunchScreen.storyboard */,
 				18D775C822AD944400AE281E /* Preview Content */,
+				26F1399F29086A59003BF69A /* Constants.swift */,
+				26F4B401290BF530006FC62A /* EventDetails */,
+				26F4B3FB290BF530006FC62A /* RefreshAnimation */,
 			);
 			path = SportFan;
 			sourceTree = "<group>";
@@ -109,30 +110,29 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
-		748D3F9628818D3C00CBDDEA /* EventDetails */ = {
+		26F4B3FB290BF530006FC62A /* RefreshAnimation */ = {
 			isa = PBXGroup;
 			children = (
-				748D3F9728818D5400CBDDEA /* EventDetailsView.swift */,
-				748D3F99288317B000CBDDEA /* TicketView.swift */,
-				74D6479E288741CE008C2288 /* TicketsInfo.swift */,
-				74CF5BA4288D84890039A5D9 /* MockTicketsData.swift */,
-				74CF5BA8288D8F4C0039A5D9 /* EventLocationAndDate.swift */,
-				BA6E2C742890728800EB0AE7 /* Extensions.swift */,
-				BA6F97D42893024500E17E73 /* SeatsSelectionView.swift */,
-			);
-			path = EventDetails;
-			sourceTree = "<group>";
-		};
-		835C2885286252960074D7DE /* RefreshAnimation */ = {
-			isa = PBXGroup;
-			children = (
-				835C2886286253000074D7DE /* ScrollViewGeometryReader.swift */,
-				835C2888286253C00074D7DE /* BallView.swift */,
-				835C288A2862EF210074D7DE /* Constants.swift */,
-				BA97537028782CCC005CD7E2 /* JumpingBallView.swift */,
-				BA97537228785550005CD7E2 /* PullToRefresh.swift */,
+				26F4B3FD290BF530006FC62A /* PullToRefresh.swift */,
+				26F4B3FE290BF530006FC62A /* ScrollViewGeometryReader.swift */,
+				26F4B3FF290BF530006FC62A /* JumpingBallView.swift */,
+				26F4B400290BF530006FC62A /* BallView.swift */,
 			);
 			path = RefreshAnimation;
+			sourceTree = "<group>";
+		};
+		26F4B401290BF530006FC62A /* EventDetails */ = {
+			isa = PBXGroup;
+			children = (
+				26F4B402290BF530006FC62A /* MockTicketsData.swift */,
+				26F4B403290BF530006FC62A /* EventLocationAndDate.swift */,
+				26F4B404290BF530006FC62A /* SeatsSelectionView.swift */,
+				26F4B405290BF530006FC62A /* TicketView.swift */,
+				26F4B406290BF530006FC62A /* Extensions.swift */,
+				26F4B407290BF530006FC62A /* EventDetailsView.swift */,
+				26F4B408290BF530006FC62A /* TicketsInfo.swift */,
+			);
+			path = EventDetails;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -146,6 +146,7 @@
 				18D775B922AD944300AE281E /* Sources */,
 				18D775BA22AD944300AE281E /* Frameworks */,
 				18D775BB22AD944300AE281E /* Resources */,
+				835C287D286248080074D7DE /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -222,6 +223,24 @@
 			shellPath = /bin/sh;
 			shellScript = "PATH=/opt/homebrew/bin:$PATH\nif [ -f ~/com.raywenderlich.swiftlint.yml ]; then\n  if which swiftlint >/dev/null; then\n    swiftlint --no-cache --config ~/com.raywenderlich.swiftlint.yml\n  fi\nfi\n";
 		};
+		835C287D286248080074D7DE /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\n  swiftlint lint --config com.raywenderlich.swiftlint.yml\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -230,22 +249,22 @@
 			buildActionMask = 2147483647;
 			files = (
 				18D775C522AD944300AE281E /* ContentView.swift in Sources */,
-				BA6F97D52893024500E17E73 /* SeatsSelectionView.swift in Sources */,
-				BA6E2C752890728800EB0AE7 /* Extensions.swift in Sources */,
-				74CF5BA9288D8F4C0039A5D9 /* EventLocationAndDate.swift in Sources */,
 				835C287F28624B010074D7DE /* MockData.swift in Sources */,
-				835C2889286253C00074D7DE /* BallView.swift in Sources */,
-				BA97537328785551005CD7E2 /* PullToRefresh.swift in Sources */,
-				835C2887286253000074D7DE /* ScrollViewGeometryReader.swift in Sources */,
-				748D3F9A288317B000CBDDEA /* TicketView.swift in Sources */,
-				74D6479F288741CE008C2288 /* TicketsInfo.swift in Sources */,
-				74CF5BA5288D84890039A5D9 /* MockTicketsData.swift in Sources */,
-				BA97537128782CCC005CD7E2 /* JumpingBallView.swift in Sources */,
+				26F4B413290BF530006FC62A /* EventDetailsView.swift in Sources */,
+				26F4B410290BF530006FC62A /* SeatsSelectionView.swift in Sources */,
 				1839F4B025190F2A00BB00F1 /* AppMain.swift in Sources */,
+				26F4B40E290BF530006FC62A /* MockTicketsData.swift in Sources */,
+				26F139A029086A59003BF69A /* Constants.swift in Sources */,
+				26F4B411290BF530006FC62A /* TicketView.swift in Sources */,
+				26F4B40D290BF530006FC62A /* BallView.swift in Sources */,
+				26F4B40F290BF530006FC62A /* EventLocationAndDate.swift in Sources */,
+				26F4B40C290BF530006FC62A /* JumpingBallView.swift in Sources */,
+				26F4B414290BF530006FC62A /* TicketsInfo.swift in Sources */,
+				26F4B412290BF530006FC62A /* Extensions.swift in Sources */,
+				26F4B40A290BF530006FC62A /* PullToRefresh.swift in Sources */,
 				835C288128624B070074D7DE /* EventView.swift in Sources */,
 				835C288428624EF70074D7DE /* Event.swift in Sources */,
-				748D3F9828818D5400CBDDEA /* EventDetailsView.swift in Sources */,
-				835C288B2862EF210074D7DE /* Constants.swift in Sources */,
+				26F4B40B290BF530006FC62A /* ScrollViewGeometryReader.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -267,7 +286,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -315,7 +333,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -329,7 +347,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -371,7 +388,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -385,7 +402,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "SportFan/Preview\\ Content";
 				DEVELOPMENT_TEAM = 8RK3883DU9;
@@ -397,9 +413,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.raywenderlich.SportFan1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.raywenderlich.SportFan;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -409,7 +424,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "SportFan/Preview\\ Content";
 				DEVELOPMENT_TEAM = 8RK3883DU9;
@@ -421,9 +435,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.raywenderlich.SportFan1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.raywenderlich.SportFan;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

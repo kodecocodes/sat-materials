@@ -42,7 +42,8 @@ struct SeatsSelectionView: View {
         .frame(maxWidth: .infinity)
         .padding()
       Spacer()
-    }.background(orange, ignoresSafeAreaEdges: .all)
+    }
+    .background(Constants.orange, ignoresSafeAreaEdges: .all)
   }
 }
 

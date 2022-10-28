@@ -29,29 +29,39 @@
 /// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 /// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 /// THE SOFTWARE.
+
 import SwiftUI
 
 struct ContentView: View {
   @State var events: [Event] = []
   @State var pullToRefresh = PullToRefresh(progress: 0, state: .idle)
-
-  private let spring: Animation = .interpolatingSpring(stiffness: 80, damping: 4)
-  private let ease: Animation = .easeInOut(duration: timeForTheBallToReturn)
+  private let ease: Animation = .easeInOut(
+    duration: Constants.timeForTheBallToReturn
+  )
+  private let spring: Animation = .interpolatingSpring(
+    stiffness: 80,
+    damping: 4
+  )
 
   var body: some View {
     ScrollView {
       ScrollViewGeometryReader(pullToRefresh: $pullToRefresh) {
         await update()
       }
-      ZStack(alignment: Alignment(horizontal: .center, vertical: .top)) {
-        LazyVStack {
-          ForEach(events) { event in
-            EventView(event: event)
-          }
-        }.animation(.easeIn, value: events)
-          .offset(y: pullToRefresh.state == .ongoing || pullToRefresh.state == .preparingToFinish ? maxOffset : 0)
-          .animation(pullToRefresh.state < .finishing ? spring : ease, value: pullToRefresh.state)
+      ZStack(alignment: .top) {
         BallView(pullToRefresh: $pullToRefresh)
+        LazyVStack {
+          ForEach(events) {
+            EventView(event: $0)
+          }
+        }
+        .offset(y: [.ongoing, .preparingToFinish]
+          .contains(pullToRefresh.state) ? Constants.maxOffset : 0
+        )
+        .animation(
+          pullToRefresh.state != .finishing ? spring : ease,
+          value: pullToRefresh.state
+        )
       }
     }
   }

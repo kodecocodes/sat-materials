@@ -35,39 +35,70 @@ import SwiftUI
 struct JumpingBallView: View {
   @Binding var pullToRefresh: PullToRefresh
   @State private var isAnimating = false
-  @State private var rotation: CGFloat = 0
-  @State private var scale: CGFloat = 1
+  @State private var rotation = 0.0
+  @State private var scale = 1.0
+  private let shadowHeight = Constants.ballSize / 2
 
-  private let shadowHeight = ballSize / 2
+  var currentYOffset: CGFloat {
+    isAnimating && pullToRefresh.state == .ongoing
+    ? Constants.maxOffset - Constants.ballSize / 2 - Constants.ballSpacing
+    : -Constants.ballSize / 2 - Constants.ballSpacing
+  }
 
   var body: some View {
     ZStack {
       Ellipse()
-        .fill(Color.gray.opacity(pullToRefresh.state == .ongoing ? 0.4 : 0))
-        .frame(width: ballSize, height: shadowHeight)
-        .scaleEffect(isAnimating ? 1.2 : 0.3, anchor: .center)
-        .offset(y: maxOffset - shadowHeight / 2 - ballSpacing)
-        .opacity(isAnimating ? 1 : 0.3)
+        .fill(
+          Color.gray.opacity(
+            pullToRefresh.state == .ongoing ? 0.4 : 0
+          )
+        )
+        .frame(
+          width: Constants.ballSize,
+          height: shadowHeight
+        )
+        .scaleEffect(isAnimating ? 1.2 : 0.3, anchor: .center) // 1
+        .offset(y: Constants.maxOffset - shadowHeight / 2 - Constants.ballSpacing) // 2
+        .opacity(isAnimating ? 1 : 0.3) // 3
 
       Ball()
-        .rotationEffect(Angle(degrees: rotation), anchor: .center)
-        .scaleEffect(x: 1.0 / scale, y: scale, anchor: .bottom)
-        .offset(y: isAnimating && pullToRefresh.state == .ongoing ?
-          maxOffset - ballSize / 2 - ballSpacing :
-          -ballSize / 2 - ballSpacing)
-        .animation(.easeInOut(duration: timeForTheBallToReturn), value: pullToRefresh.state == .preparingToFinish)
+        .rotationEffect(
+          Angle(degrees: rotation),
+          anchor: .center
+        )
+        .scaleEffect(
+          x: 1.0 / scale,
+          y: scale,
+          anchor: .bottom
+        )
+        .offset(y: currentYOffset)
+        .animation(
+          .easeInOut(duration: Constants.timeForTheBallToReturn),
+          value: pullToRefresh.state == .preparingToFinish
+        )
         .onAppear { animate() }
     }
   }
 
   private func animate() {
-    withAnimation(.linear(duration: jumpDuration * 2).repeatForever(autoreverses: false)) {
-      rotation = 360
-    }
-    withAnimation(.easeInOut(duration: jumpDuration).repeatForever()) {
+    withAnimation(
+      .easeInOut(duration: Constants.jumpDuration)
+      .repeatForever()
+    ) { // 1
       isAnimating = true
     }
-    withAnimation(.easeOut(duration: jumpDuration).repeatForever()) {
+
+    withAnimation(
+      .linear(duration: Constants.jumpDuration * 2)
+      .repeatForever(autoreverses: false)
+    ) { // 2
+      rotation = 360
+    }
+
+    withAnimation(
+      .easeOut(duration: Constants.jumpDuration)
+      .repeatForever()
+    ) { // 3
       scale = 0.85
     }
   }
@@ -75,7 +106,13 @@ struct JumpingBallView: View {
 
 struct JumpingBallView_Previews: PreviewProvider {
   static var previews: some View {
-    JumpingBallView(pullToRefresh: Binding.constant(PullToRefresh(progress: 0, state: .ongoing)))
-      .scaleEffect(4)
+    JumpingBallView(
+      pullToRefresh: .constant(
+        PullToRefresh(
+          progress: 0,
+          state: .ongoing
+        )
+      )
+    )
   }
 }
