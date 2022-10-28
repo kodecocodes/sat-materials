@@ -12,11 +12,11 @@
 		18D775C722AD944400AE281E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 18D775C622AD944400AE281E /* Assets.xcassets */; };
 		18D775CA22AD944400AE281E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 18D775C922AD944400AE281E /* Preview Assets.xcassets */; };
 		18D775D822AD963800AE281E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18D775DA22AD963800AE281E /* LaunchScreen.storyboard */; };
-		26F13996290861C2003BF69A /* PullToRefresh.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F13995290861C2003BF69A /* PullToRefresh.swift */; };
-		26F139982908620F003BF69A /* ScrollViewGeometryReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F139972908620F003BF69A /* ScrollViewGeometryReader.swift */; };
-		26F1399C290868A4003BF69A /* BallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F1399B290868A4003BF69A /* BallView.swift */; };
-		26F1399E29086964003BF69A /* JumpingBallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F1399D29086964003BF69A /* JumpingBallView.swift */; };
 		26F139A029086A59003BF69A /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F1399F29086A59003BF69A /* Constants.swift */; };
+		26F4B41A290BF692006FC62A /* PullToRefresh.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F4B416290BF692006FC62A /* PullToRefresh.swift */; };
+		26F4B41B290BF692006FC62A /* ScrollViewGeometryReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F4B417290BF692006FC62A /* ScrollViewGeometryReader.swift */; };
+		26F4B41C290BF692006FC62A /* JumpingBallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F4B418290BF692006FC62A /* JumpingBallView.swift */; };
+		26F4B41D290BF692006FC62A /* BallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F4B419290BF692006FC62A /* BallView.swift */; };
 		835C287F28624B010074D7DE /* MockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835C287E28624B010074D7DE /* MockData.swift */; };
 		835C288128624B070074D7DE /* EventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835C288028624B070074D7DE /* EventView.swift */; };
 		835C288428624EF70074D7DE /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835C288328624EF70074D7DE /* Event.swift */; };
@@ -30,11 +30,11 @@
 		18D775C922AD944400AE281E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		18D775CE22AD944400AE281E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		18D775DE22AD96B400AE281E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		26F13995290861C2003BF69A /* PullToRefresh.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullToRefresh.swift; sourceTree = "<group>"; };
-		26F139972908620F003BF69A /* ScrollViewGeometryReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollViewGeometryReader.swift; sourceTree = "<group>"; };
-		26F1399B290868A4003BF69A /* BallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BallView.swift; sourceTree = "<group>"; };
-		26F1399D29086964003BF69A /* JumpingBallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JumpingBallView.swift; sourceTree = "<group>"; };
 		26F1399F29086A59003BF69A /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		26F4B416290BF692006FC62A /* PullToRefresh.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PullToRefresh.swift; sourceTree = "<group>"; };
+		26F4B417290BF692006FC62A /* ScrollViewGeometryReader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollViewGeometryReader.swift; sourceTree = "<group>"; };
+		26F4B418290BF692006FC62A /* JumpingBallView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JumpingBallView.swift; sourceTree = "<group>"; };
+		26F4B419290BF692006FC62A /* BallView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BallView.swift; sourceTree = "<group>"; };
 		835C287E28624B010074D7DE /* MockData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockData.swift; sourceTree = "<group>"; };
 		835C288028624B070074D7DE /* EventView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventView.swift; sourceTree = "<group>"; };
 		835C288328624EF70074D7DE /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
@@ -81,11 +81,8 @@
 				18D775C622AD944400AE281E /* Assets.xcassets */,
 				18D775DA22AD963800AE281E /* LaunchScreen.storyboard */,
 				18D775C822AD944400AE281E /* Preview Content */,
-				26F13995290861C2003BF69A /* PullToRefresh.swift */,
-				26F139972908620F003BF69A /* ScrollViewGeometryReader.swift */,
-				26F1399B290868A4003BF69A /* BallView.swift */,
-				26F1399D29086964003BF69A /* JumpingBallView.swift */,
 				26F1399F29086A59003BF69A /* Constants.swift */,
+				26F4B415290BF692006FC62A /* RefreshAnimation */,
 			);
 			path = SportFan;
 			sourceTree = "<group>";
@@ -96,6 +93,17 @@
 				18D775C922AD944400AE281E /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		26F4B415290BF692006FC62A /* RefreshAnimation */ = {
+			isa = PBXGroup;
+			children = (
+				26F4B416290BF692006FC62A /* PullToRefresh.swift */,
+				26F4B417290BF692006FC62A /* ScrollViewGeometryReader.swift */,
+				26F4B418290BF692006FC62A /* JumpingBallView.swift */,
+				26F4B419290BF692006FC62A /* BallView.swift */,
+			);
+			path = RefreshAnimation;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -212,15 +220,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				18D775C522AD944300AE281E /* ContentView.swift in Sources */,
-				26F13996290861C2003BF69A /* PullToRefresh.swift in Sources */,
+				26F4B41A290BF692006FC62A /* PullToRefresh.swift in Sources */,
+				26F4B41B290BF692006FC62A /* ScrollViewGeometryReader.swift in Sources */,
+				26F4B41D290BF692006FC62A /* BallView.swift in Sources */,
 				835C287F28624B010074D7DE /* MockData.swift in Sources */,
+				26F4B41C290BF692006FC62A /* JumpingBallView.swift in Sources */,
 				1839F4B025190F2A00BB00F1 /* AppMain.swift in Sources */,
-				26F1399E29086964003BF69A /* JumpingBallView.swift in Sources */,
 				26F139A029086A59003BF69A /* Constants.swift in Sources */,
 				835C288128624B070074D7DE /* EventView.swift in Sources */,
 				835C288428624EF70074D7DE /* Event.swift in Sources */,
-				26F139982908620F003BF69A /* ScrollViewGeometryReader.swift in Sources */,
-				26F1399C290868A4003BF69A /* BallView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -364,7 +372,7 @@
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = SportFan/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = SportFan;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -386,7 +394,7 @@
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = SportFan/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = SportFan;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
