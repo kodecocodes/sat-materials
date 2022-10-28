@@ -51,8 +51,8 @@ struct ContentView: View {
       ZStack(alignment: .top) {
         BallView(pullToRefresh: $pullToRefresh)
         LazyVStack {
-          ForEach(events) {
-            EventView(event: $0)
+          ForEach(events) { event in
+            EventView(event: event)
           }
         }
         .offset(y: [.ongoing, .preparingToFinish]
