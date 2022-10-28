@@ -12,6 +12,7 @@
 		18D775C722AD944400AE281E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 18D775C622AD944400AE281E /* Assets.xcassets */; };
 		18D775CA22AD944400AE281E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 18D775C922AD944400AE281E /* Preview Assets.xcassets */; };
 		18D775D822AD963800AE281E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18D775DA22AD963800AE281E /* LaunchScreen.storyboard */; };
+		26B3896E290C61B100044D2D /* SeatsSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26B3896D290C61B100044D2D /* SeatsSelectionView.swift */; };
 		26F139A029086A59003BF69A /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F1399F29086A59003BF69A /* Constants.swift */; };
 		26F4B40A290BF530006FC62A /* PullToRefresh.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F4B3FD290BF530006FC62A /* PullToRefresh.swift */; };
 		26F4B40B290BF530006FC62A /* ScrollViewGeometryReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F4B3FE290BF530006FC62A /* ScrollViewGeometryReader.swift */; };
@@ -19,7 +20,6 @@
 		26F4B40D290BF530006FC62A /* BallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F4B400290BF530006FC62A /* BallView.swift */; };
 		26F4B40E290BF530006FC62A /* MockTicketsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F4B402290BF530006FC62A /* MockTicketsData.swift */; };
 		26F4B40F290BF530006FC62A /* EventLocationAndDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F4B403290BF530006FC62A /* EventLocationAndDate.swift */; };
-		26F4B410290BF530006FC62A /* SeatsSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F4B404290BF530006FC62A /* SeatsSelectionView.swift */; };
 		26F4B411290BF530006FC62A /* TicketView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F4B405290BF530006FC62A /* TicketView.swift */; };
 		26F4B412290BF530006FC62A /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F4B406290BF530006FC62A /* Extensions.swift */; };
 		26F4B413290BF530006FC62A /* EventDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F4B407290BF530006FC62A /* EventDetailsView.swift */; };
@@ -40,6 +40,7 @@
 		18D775C922AD944400AE281E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		18D775CE22AD944400AE281E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		18D775DE22AD96B400AE281E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		26B3896D290C61B100044D2D /* SeatsSelectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SeatsSelectionView.swift; sourceTree = "<group>"; };
 		26F1399F29086A59003BF69A /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		26F4B3FD290BF530006FC62A /* PullToRefresh.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PullToRefresh.swift; sourceTree = "<group>"; };
 		26F4B3FE290BF530006FC62A /* ScrollViewGeometryReader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollViewGeometryReader.swift; sourceTree = "<group>"; };
@@ -47,7 +48,6 @@
 		26F4B400290BF530006FC62A /* BallView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BallView.swift; sourceTree = "<group>"; };
 		26F4B402290BF530006FC62A /* MockTicketsData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockTicketsData.swift; sourceTree = "<group>"; };
 		26F4B403290BF530006FC62A /* EventLocationAndDate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventLocationAndDate.swift; sourceTree = "<group>"; };
-		26F4B404290BF530006FC62A /* SeatsSelectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SeatsSelectionView.swift; sourceTree = "<group>"; };
 		26F4B405290BF530006FC62A /* TicketView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TicketView.swift; sourceTree = "<group>"; };
 		26F4B406290BF530006FC62A /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		26F4B407290BF530006FC62A /* EventDetailsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetailsView.swift; sourceTree = "<group>"; };
@@ -101,6 +101,7 @@
 				835C287E28624B010074D7DE /* MockData.swift */,
 				18D775C622AD944400AE281E /* Assets.xcassets */,
 				18D775DA22AD963800AE281E /* LaunchScreen.storyboard */,
+				26B3896C290C61B100044D2D /* SeatingChart */,
 				18D775C822AD944400AE281E /* Preview Content */,
 				26F1399F29086A59003BF69A /* Constants.swift */,
 				26F4B401290BF530006FC62A /* EventDetails */,
@@ -114,6 +115,14 @@
 				18D775C922AD944400AE281E /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		26B3896C290C61B100044D2D /* SeatingChart */ = {
+			isa = PBXGroup;
+			children = (
+				26B3896D290C61B100044D2D /* SeatsSelectionView.swift */,
+			);
+			path = SeatingChart;
 			sourceTree = "<group>";
 		};
 		26F4B3FB290BF530006FC62A /* RefreshAnimation */ = {
@@ -135,7 +144,6 @@
 				26F4B41E290BF7AD006FC62A /* FilterView.swift */,
 				26F4B420290C0B23006FC62A /* HeaderGeometryReader.swift */,
 				26F4B422290C0D85006FC62A /* HeaderView.swift */,
-				26F4B404290BF530006FC62A /* SeatsSelectionView.swift */,
 				26F4B405290BF530006FC62A /* TicketView.swift */,
 				26F4B406290BF530006FC62A /* Extensions.swift */,
 				26F4B407290BF530006FC62A /* EventDetailsView.swift */,
@@ -260,12 +268,12 @@
 				18D775C522AD944300AE281E /* ContentView.swift in Sources */,
 				835C287F28624B010074D7DE /* MockData.swift in Sources */,
 				26F4B413290BF530006FC62A /* EventDetailsView.swift in Sources */,
-				26F4B410290BF530006FC62A /* SeatsSelectionView.swift in Sources */,
 				26F4B41F290BF7AD006FC62A /* FilterView.swift in Sources */,
 				1839F4B025190F2A00BB00F1 /* AppMain.swift in Sources */,
 				26F4B40E290BF530006FC62A /* MockTicketsData.swift in Sources */,
 				26F139A029086A59003BF69A /* Constants.swift in Sources */,
 				26F4B411290BF530006FC62A /* TicketView.swift in Sources */,
+				26B3896E290C61B100044D2D /* SeatsSelectionView.swift in Sources */,
 				26F4B40D290BF530006FC62A /* BallView.swift in Sources */,
 				26F4B40F290BF530006FC62A /* EventLocationAndDate.swift in Sources */,
 				26F4B40C290BF530006FC62A /* JumpingBallView.swift in Sources */,
