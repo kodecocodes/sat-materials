@@ -1,4 +1,9 @@
-/// Copyright (c) 2022 Razeware LLC
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>FILEHEADER</key>
+	<string>/ Copyright (c) ___YEAR___ Razeware LLC
 /// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -28,29 +33,6 @@
 /// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 /// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 /// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-/// THE SOFTWARE.
-
-import Foundation
-import SwiftUI
-
-let maxOffset = 100.0
-let ballSize = 42.0
-let ballSpacing = 8.0
-let jumpDuration = 0.35
-// time for the ball to return to its initial position after updating is completed
-let timeForTheBallToReturn = 0.3
-// time for the ball to roll out of the screen after updating is completed
-let timeForTheBallToRollOut = 1.0
-
-let spacingS = 8.0
-let spacingM = 16.0
-let spacingL = 24.0
-let cornersRadius = 24.0
-let iconSizeS = 16.0
-let iconSizeL = 24.0
-
-let orange = Color("AccentColor")
-
-let minHeaderOffset = -80.0
-let headerHeight = 220.0
-let minHeaderHeight = 120.0
+/// THE SOFTWARE.</string>
+</dict>
+</plist>
