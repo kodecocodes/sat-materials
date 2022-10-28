@@ -58,7 +58,7 @@ struct SeatsSelectionView: View {
             .renderingMode(.template)
             .resizable()
             .scaledToFit()
-            .frame(height: iconSizeL)
+            .frame(height: Constants.iconSizeL)
             .clipped()
             .foregroundColor(.white)
         }.padding(.horizontal)
@@ -71,22 +71,26 @@ struct SeatsSelectionView: View {
 
       Spacer()
 
-      Button(action: {
-      }, label: {
-        Text("Buy Tickets")
-          .lineLimit(1)
-          .foregroundColor(.black)
-          .frame(maxWidth: .infinity)
-          .frame(height: 48)
-          .background {
-            RoundedRectangle(cornerRadius: 36)
-              .fill(.white)
-              .shadow(radius: 2)
-          }
-          .padding(.horizontal)
-      })
-      .padding(.vertical, spacingM)
-    }.background(orange, ignoresSafeAreaEdges: .all)
+      Button(
+        action: {
+        },
+        label: {
+          Text("Buy Tickets")
+            .lineLimit(1)
+            .foregroundColor(.black)
+            .frame(maxWidth: .infinity)
+            .frame(height: 48)
+            .background {
+              RoundedRectangle(cornerRadius: 36)
+                .fill(.white)
+                .shadow(radius: 2)
+            }
+            .padding(.horizontal)
+        }
+      )
+      .padding(.vertical, Constants.spacingM)
+    }
+    .background(Constants.orange, ignoresSafeAreaEdges: .all)
   }
 }
 

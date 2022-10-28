@@ -42,18 +42,18 @@ struct TicketView: View {
           .font(.title3)
           .fontWeight(.heavy)
           .lineLimit(2)
-          .fontWeight(.medium)
-          .foregroundColor(orange)
+          .foregroundColor(Constants.orange)
 
         Text(info.left > 0 ? "🎫 Tickets left \(info.left)" : "SOLD OUT")
           .font(.caption)
-          .lineLimit(2)
           .fontWeight(.medium)
+          .lineLimit(2)
           .foregroundColor(.primary)
 
         Text("💵 From $\(info.price)")
           .font(.caption)
-      }.padding(.leading, spacingL)
+      }
+      .padding(.leading, Constants.spacingL)
     }
     .frame(height: 100)
     .background(Image("ticket")

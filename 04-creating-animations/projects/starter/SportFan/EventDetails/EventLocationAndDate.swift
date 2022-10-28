@@ -1,15 +1,15 @@
 /// Copyright (c) 2022 Razeware LLC
-///
+/// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
 /// in the Software without restriction, including without limitation the rights
 /// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 /// copies of the Software, and to permit persons to whom the Software is
 /// furnished to do so, subject to the following conditions:
-///
+/// 
 /// The above copyright notice and this permission notice shall be included in
 /// all copies or substantial portions of the Software.
-///
+/// 
 /// Notwithstanding the foregoing, you may not use, copy, modify, merge, publish,
 /// distribute, sublicense, create a derivative work, and/or sell copies of the
 /// Software in any work that is designed, intended, or marketed for pedagogical or
@@ -17,7 +17,7 @@
 /// or information technology.  Permission for such use, copying, modification,
 /// merger, publication, distribution, sublicensing, creation of derivative works,
 /// or sale is expressly withheld.
-///
+/// 
 /// This project and source code may use libraries or frameworks that are
 /// released under various Open-Source licenses. Use of those libraries and
 /// frameworks are governed by their own individual licenses.
@@ -33,17 +33,17 @@
 import SwiftUI
 
 struct EventLocationAndDate: View {
-  var collapsed: Bool
   var namespace: Namespace.ID
   var event: Event
+  var collapsed: Bool
 
   var body: some View {
     VStack(alignment: .leading) {
-      HStack(spacing: spacingS) {
+      HStack(spacing: Constants.spacingS) {
         Image(systemName: "location.circle")
           .resizable()
           .scaledToFit()
-          .frame(height: iconSizeL)
+          .frame(height: Constants.iconSizeL)
           .clipped()
 
         Text(event.location)
@@ -54,12 +54,12 @@ struct EventLocationAndDate: View {
         Spacer()
       }
 
-      HStack(spacing: spacingS) {
+      HStack(spacing: Constants.spacingS) {
         if !collapsed {
           Image(systemName: "calendar")
             .resizable()
             .scaledToFit()
-            .frame(height: iconSizeL)
+            .frame(height: Constants.iconSizeL)
             .clipped()
             .matchedGeometryEffect(id: "icon", in: namespace)
 
@@ -67,17 +67,27 @@ struct EventLocationAndDate: View {
             .lineLimit(1)
             .fontWeight(.heavy)
             .font(.subheadline)
-            .matchedGeometryEffect(id: "date", in: namespace, properties: .position)
+            .matchedGeometryEffect(
+              id: "date",
+              in: namespace,
+              properties: .position
+            )
         }
+        
         Spacer()
       }
-    }.padding()
+    }
+    .padding()
   }
 }
 
 struct EventLocationAndDate_Previews: PreviewProvider {
   @Namespace static var namespace
   static var previews: some View {
-    EventLocationAndDate(collapsed: false, namespace: namespace, event: makeEvent(for: teams[0]))
+    EventLocationAndDate(
+      namespace: namespace,
+      event: makeEvent(for: teams[0]),
+      collapsed: false
+    )
   }
 }
