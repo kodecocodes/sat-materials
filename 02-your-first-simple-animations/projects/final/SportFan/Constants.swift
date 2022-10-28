@@ -31,6 +31,7 @@
 /// THE SOFTWARE.
 
 import Foundation
+import SwiftUI
 
 enum Constants {
   static let maxOffset = 100.0
