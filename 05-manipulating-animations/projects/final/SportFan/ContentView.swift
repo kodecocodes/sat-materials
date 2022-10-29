@@ -34,24 +34,32 @@ import SwiftUI
 
 struct ContentView: View {
   @State var events: [Event] = []
-  @State var unfilteredEvents: [Event] = []
   @State var pullToRefresh = PullToRefresh(progress: 0, state: .idle)
   @State var filterShown = false
   @State var selectedSports: Set<Sport> = []
+  @State var unfilteredEvents: [Event] = []
 
-  private let spring: Animation = .interpolatingSpring(stiffness: 80, damping: 4)
-  private let ease: Animation = .easeInOut(duration: timeForTheBallToReturn)
+  private let ease: Animation = .easeInOut(
+    duration: Constants.timeForTheBallToReturn
+  )
+  private let spring: Animation = .interpolatingSpring(
+    stiffness: 80,
+    damping: 4
+  )
 
   var body: some View {
     ScrollView {
       ScrollViewGeometryReader(pullToRefresh: $pullToRefresh) {
         await update()
       }
-      ZStack(alignment: Alignment(horizontal: .center, vertical: .top)) {
+      ZStack(alignment: .top) {
+        BallView(pullToRefresh: $pullToRefresh)
         VStack {
           FilterView(selectedSports: $selectedSports, isShown: filterShown)
             .padding(.top)
-          VStack {
+            .zIndex(1)
+
+          LazyVStack {
             ForEach(events) { event in
               NavigationLink(destination: EventDetailsView(event: event)) {
                 EventView(event: event)
@@ -60,14 +68,22 @@ struct ContentView: View {
             }
           }
         }
-        .offset(y: pullToRefresh.state == .ongoing || pullToRefresh.state == .preparingToFinish ? maxOffset : 0)
-        .animation(pullToRefresh.state < .finishing ? spring : ease, value: pullToRefresh.state)
-        BallView(pullToRefresh: $pullToRefresh)
+        .offset(y: [.ongoing, .preparingToFinish]
+          .contains(pullToRefresh.state) ? Constants.maxOffset : 0
+        )
+        .animation(
+          pullToRefresh.state != .finishing ? spring : ease,
+          value: pullToRefresh.state
+        )
       }
-    }.toolbar {
+    }
+    .toolbar {
       ToolbarItem {
         Button {
-          withAnimation(filterShown ? .easeInOut : .interpolatingSpring(stiffness: 20, damping: 3).speed(2.5)) {
+          withAnimation(filterShown
+            ? .easeInOut
+            : .interpolatingSpring(stiffness: 20, damping: 3).speed(2.5)
+          ) {
             filterShown.toggle()
           }
         } label: {
@@ -75,9 +91,7 @@ struct ContentView: View {
         }
       }
     }
-    .onChange(of: selectedSports) { _ in
-      filter()
-    }
+    .onChange(of: selectedSports) { _ in filter() }
   }
 
   @MainActor
@@ -87,9 +101,13 @@ struct ContentView: View {
   }
 
   func filter() {
-    withAnimation(.interpolatingSpring(stiffness: 30, damping: 8).speed(1.5)) {
-      events = selectedSports.isEmpty ? unfilteredEvents : unfilteredEvents.filter {
-        selectedSports.contains($0.team.sport)
+    withAnimation(
+      .interpolatingSpring(stiffness: 30, damping: 8)
+      .speed(1.5)
+    ) {
+      events = selectedSports.isEmpty
+        ? unfilteredEvents
+        : unfilteredEvents.filter { selectedSports.contains($0.team.sport)
       }
     }
   }

@@ -43,16 +43,20 @@ struct HeaderGeometryReader: View {
       guard proxy.frame(in: .global).minX >= 0 else {
         return AnyView(EmptyView())
       }
+
       Task {
         offset = proxy.frame(in: .global).minY - startOffset
 
         withAnimation(.easeInOut) {
-          collapsed = offset < minHeaderOffset
+          collapsed = offset < Constants.minHeaderOffset
         }
       }
-      return AnyView(Color.clear.frame(height: 0).task {
-        startOffset = proxy.frame(in: .global).minY
-      })
+
+      return AnyView(Color.clear.frame(height: 0)
+        .task {
+          startOffset = proxy.frame(in: .global).minY
+        }
+      )
     }
   }
 }

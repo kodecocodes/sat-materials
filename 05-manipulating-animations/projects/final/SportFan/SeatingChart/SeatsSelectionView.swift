@@ -33,11 +33,10 @@
 import SwiftUI
 
 struct SeatsSelectionView: View {
+  var event: Event
   @State private var stadiumZoomed = false
   @State private var selectedTicketsNumber: Int = 0
-  @State private var ticketsPurchased = false
-
-  var event: Event
+  @State private var ticketsPurchased: Bool = false
 
   var body: some View {
     VStack {
@@ -51,12 +50,12 @@ struct SeatsSelectionView: View {
             .padding([.top, .horizontal])
             .shadow(radius: 2)
             .zIndex(1)
-
+          
           HStack {
             Text(event.date)
               .font(.subheadline)
               .foregroundColor(.white)
-
+            
             Spacer()
 
             ZStack(alignment: .topLeading) {
@@ -64,7 +63,7 @@ struct SeatsSelectionView: View {
                 .renderingMode(.template)
                 .resizable()
                 .scaledToFit()
-                .frame(height: iconSizeL)
+                .frame(height: Constants.iconSizeL)
                 .clipped()
                 .foregroundColor(.white)
 
@@ -77,52 +76,59 @@ struct SeatsSelectionView: View {
                       .fill(.red)
                       .frame(width: 16, height: 16)
                   }
-                  .alignmentGuide(.leading) { _ in -20 }
+                  .alignmentGuide(.leading) { _ in -20}
                   .alignmentGuide(.top) { _ in 4 }
               }
             }
           }.padding(.horizontal)
             .shadow(radius: 2)
-        }.transition(.move(edge: .top))
+        }
+          .transition(.move(edge: .top))
       }
-
       Spacer()
 
-      SeatingChartView(zoomed: $stadiumZoomed, selectedTicketsNumber: $selectedTicketsNumber)
-        .aspectRatio(1.0, contentMode: .fit)
-        .padding()
+      SeatingChartView(
+        zoomed: $stadiumZoomed,
+        selectedTicketsNumber: $selectedTicketsNumber
+      )
+      .aspectRatio(1.0, contentMode: .fit)
+      .padding()
 
       Spacer()
 
       HStack {
-        Button(action: {
-          if selectedTicketsNumber > 0 {
-            ticketsPurchased = true
-          }
-        }, label: {
-          Text("Buy Tickets")
-            .lineLimit(1)
-            .foregroundColor(.black)
-            .frame(maxWidth: .infinity)
-            .frame(height: 48)
-            .background {
-              RoundedRectangle(cornerRadius: 36)
-                .fill(.white)
-                .shadow(radius: 2)
+        Button(
+          action: {
+            if selectedTicketsNumber > 0 {
+              ticketsPurchased = true
             }
-            .padding(.horizontal)
-        })
+          },
+          label: {
+            Text("Buy Tickets")
+              .lineLimit(1)
+              .foregroundColor(.black)
+              .frame(maxWidth: .infinity)
+              .frame(height: 48)
+              .background {
+                RoundedRectangle(cornerRadius: 36)
+                  .fill(.white)
+                  .shadow(radius: 2)
+              }
+              .padding(.horizontal)
+          }
+        )
+        .padding(.vertical, Constants.spacingM)
 
         if stadiumZoomed {
-          Button(action: {
+          Button {
             withAnimation {
               stadiumZoomed = false
             }
-          }, label: {
+          } label: {
             Image("zoom_out")
               .resizable()
               .scaledToFit()
-              .frame(width: 48, height: iconSizeL)
+              .frame(width: 48, height: Constants.iconSizeL)
               .clipped()
               .background {
                 RoundedRectangle(cornerRadius: 36)
@@ -131,16 +137,22 @@ struct SeatsSelectionView: View {
                   .shadow(radius: 2)
               }
               .padding(.trailing)
-          })
+          }
         }
       }
-      .padding(.vertical, spacingM)
-    }.background(orange, ignoresSafeAreaEdges: .all)
-      .confirmationDialog(
-        "You've bought \(selectedTicketsNumber) tickets.",
-        isPresented: $ticketsPurchased,
-        actions: { Button("Ok") {} },
-        message: { Text("You've bought \(selectedTicketsNumber) tickets. Enjoy your time at the game!") }
-      )
+    }
+    .background(Constants.orange, ignoresSafeAreaEdges: .all)
+    .confirmationDialog(
+      "You've bought \(selectedTicketsNumber) tickets.",
+      isPresented: $ticketsPurchased,
+      actions: { Button("Ok") {} },
+      message: { Text("You've bought \(selectedTicketsNumber) tickets. Enjoy your time at the game!")}
+    )
+  }
+}
+
+struct SeatingChart_Previews: PreviewProvider {
+  static var previews: some View {
+    SeatsSelectionView(event: makeEvent(for: Team(name: "Dallas Mavericks", sport: .basketball, description: "")))
   }
 }

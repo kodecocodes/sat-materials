@@ -41,13 +41,3 @@ extension UIApplication {
       .safeAreaInsets.top ?? 0
   }
 }
-
-extension CGSize {
-  static func + (left: CGSize, right: CGSize) -> CGSize {
-    return CGSize(width: left.width + right.width, height: left.height + right.height)
-  }
-  static func += (left: inout CGSize, right: CGSize) {
-    left.width += right.width
-    left.height += right.height
-  }
-}

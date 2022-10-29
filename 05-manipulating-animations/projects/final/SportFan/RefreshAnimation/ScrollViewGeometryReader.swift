@@ -35,16 +35,14 @@ import SwiftUI
 struct ScrollViewGeometryReader: View {
   @Binding var pullToRefresh: PullToRefresh
   let update: () async -> Void
-
   @State private var startOffset: CGFloat = 0
-
+  
   var body: some View {
     GeometryReader<Color> { proxy in
-      Task {
-        calculateOffset(from: proxy)
-      }
+      Task { calculateOffset(from: proxy) }
       return Color.clear
-    }.task {
+    }
+    .task {
       await update()
     }
   }
@@ -56,31 +54,38 @@ struct ScrollViewGeometryReader: View {
     case .idle:
       startOffset = currentOffset
       pullToRefresh.state = .pulling
+
     case .pulling where pullToRefresh.progress < 1:
-      pullToRefresh.progress = min(1, (currentOffset - startOffset) / maxOffset)
+      pullToRefresh.progress = min(1, (currentOffset - startOffset) / Constants.maxOffset)
+
     case .pulling:
       pullToRefresh.state = .ongoing
       pullToRefresh.progress = 0
       Task {
         await update()
         pullToRefresh.state = .preparingToFinish
-        after(timeForTheBallToReturn) {
+        after(Constants.timeForTheBallToReturn) {
           pullToRefresh.state = .finishing
-          after(timeForTheBallToRollOut) {
+          after(Constants.timeForTheBallToRollOut) {
             pullToRefresh.state = .idle
             startOffset = 0
           }
         }
       }
+
     default: return
     }
   }
 }
 
-func after(_ seconds: Double, execute: @escaping () -> Void) {
+func after(
+  _ seconds: Double,
+  execute: @escaping () -> Void
+) {
   Task {
-    let delay = UInt64(seconds * 1_000_000_000)
-    try await Task<Never, Never>.sleep(nanoseconds: delay)
+    let delay = UInt64(seconds * Double(NSEC_PER_SEC))
+    try await Task<Never, Never>
+      .sleep(nanoseconds: delay)
     execute()
   }
 }
