@@ -57,9 +57,9 @@ struct JumpingBallView: View {
           width: Constants.ballSize,
           height: shadowHeight
         )
-        .scaleEffect(isAnimating ? 1.2 : 0.3, anchor: .center) // 1
-        .offset(y: Constants.maxOffset - shadowHeight / 2 - Constants.ballSpacing) // 2
-        .opacity(isAnimating ? 1 : 0.3) // 3
+        .scaleEffect(isAnimating ? 1.2 : 0.3, anchor: .center)
+        .offset(y: Constants.maxOffset - shadowHeight / 2 - Constants.ballSpacing)
+        .opacity(isAnimating ? 1 : 0.3)
 
       Ball()
         .rotationEffect(
@@ -84,21 +84,21 @@ struct JumpingBallView: View {
     withAnimation(
       .easeInOut(duration: Constants.jumpDuration)
       .repeatForever()
-    ) { // 1
+    ) {
       isAnimating = true
     }
 
     withAnimation(
       .linear(duration: Constants.jumpDuration * 2)
       .repeatForever(autoreverses: false)
-    ) { // 2
+    ) {
       rotation = 360
     }
 
     withAnimation(
       .easeOut(duration: Constants.jumpDuration)
       .repeatForever()
-    ) { // 3
+    ) {
       scale = 0.85
     }
   }

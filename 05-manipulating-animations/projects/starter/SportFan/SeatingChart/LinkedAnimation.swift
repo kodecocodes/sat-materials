@@ -32,7 +32,7 @@
 
 import SwiftUI
 
-struct LinkedAnimation { // 1
+struct LinkedAnimation {
   let type: Animation
   let duration: Double
   let action: () -> Void
@@ -41,16 +41,16 @@ struct LinkedAnimation { // 1
                         action: @escaping () -> Void) -> LinkedAnimation {
     return LinkedAnimation(type: .easeInOut(duration: duration),
                            duration: duration,
-                           action: action) // 2
+                           action: action)
   }
 
   func link(to animation: LinkedAnimation, reverse: Bool) {
     withAnimation(reverse ? animation.type : type) {
-      reverse ? animation.action() : action() // 1
+      reverse ? animation.action() : action()
     }
 
     withAnimation(reverse ? type.delay(animation.duration) :
-                            animation.type.delay(duration)) { // 2
+                            animation.type.delay(duration)) {
       reverse ? action() : animation.action()
     }
   }

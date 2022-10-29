@@ -33,21 +33,16 @@
 import SwiftUI
 
 struct ScrollViewGeometryReader: View {
-  // 1
   @Binding var pullToRefresh: PullToRefresh
-
-  // 2
   let update: () async -> Void
-
-  // 3
   @State private var startOffset: CGFloat = 0
   
   var body: some View {
-    GeometryReader<Color> { proxy in // 1
+    GeometryReader<Color> { proxy in
       Task { calculateOffset(from: proxy) }
-      return Color.clear // 2
+      return Color.clear
     }
-    .task { // 3
+    .task {
       await update()
     }
   }
@@ -57,22 +52,22 @@ struct ScrollViewGeometryReader: View {
 
     switch pullToRefresh.state {
     case .idle:
-      startOffset = currentOffset // 1
-      pullToRefresh.state = .pulling // 2
+      startOffset = currentOffset
+      pullToRefresh.state = .pulling
 
-    case .pulling where pullToRefresh.progress < 1: // 3
+    case .pulling where pullToRefresh.progress < 1:
       pullToRefresh.progress = min(1, (currentOffset - startOffset) / Constants.maxOffset)
 
-    case .pulling: // 4
+    case .pulling:
       pullToRefresh.state = .ongoing
       pullToRefresh.progress = 0
       Task {
         await update()
-        pullToRefresh.state = .preparingToFinish // 1
+        pullToRefresh.state = .preparingToFinish
         after(Constants.timeForTheBallToReturn) {
-          pullToRefresh.state = .finishing // 2
+          pullToRefresh.state = .finishing
           after(Constants.timeForTheBallToRollOut) {
-            pullToRefresh.state = .idle // 3
+            pullToRefresh.state = .idle
             startOffset = 0
           }
         }

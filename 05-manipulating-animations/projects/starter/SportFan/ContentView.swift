@@ -35,9 +35,9 @@ import SwiftUI
 struct ContentView: View {
   @State var events: [Event] = []
   @State var pullToRefresh = PullToRefresh(progress: 0, state: .idle)
-  @State var filterShown = false // 1
-  @State var selectedSports: Set<Sport> = [] // 2
-  @State var unfilteredEvents: [Event] = [] // 3
+  @State var filterShown = false
+  @State var selectedSports: Set<Sport> = []
+  @State var unfilteredEvents: [Event] = []
 
   private let ease: Animation = .easeInOut(
     duration: Constants.timeForTheBallToReturn
@@ -78,10 +78,8 @@ struct ContentView: View {
       }
     }
     .toolbar {
-       // 1
       ToolbarItem {
         Button {
-          // 2
           withAnimation(filterShown
             ? .easeInOut
             : .interpolatingSpring(stiffness: 20, damping: 3).speed(2.5)

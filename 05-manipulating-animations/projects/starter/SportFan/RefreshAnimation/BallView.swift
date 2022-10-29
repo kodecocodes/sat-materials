@@ -69,12 +69,12 @@ struct RollingBallView: View {
   )
 
   private let initialOffset = -UIScreen.halfWidth
-    - Constants.ballSize / 2 // 1
+    - Constants.ballSize / 2
 
   var body: some View {
     let rollInOffset = initialOffset
-      + (pullToRefresh.progress * -initialOffset) // 2
-    let rollInRotation = pullToRefresh.progress * .pi * 4 // 3
+      + (pullToRefresh.progress * -initialOffset)
+    let rollInRotation = pullToRefresh.progress * .pi * 4
 
     ZStack {
       Ellipse()

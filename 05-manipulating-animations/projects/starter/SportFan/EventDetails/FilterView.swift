@@ -59,21 +59,16 @@ struct FilterView: View {
               .padding(.horizontal, 4)
               .padding(.top, 8)
               .alignmentGuide(.leading) { dimension in
-                // 2
                 if abs(horizontalShift - dimension.width) > UIScreen.main.bounds.width {
-                  // 3
                   horizontalShift = 0
                   verticalShift -= dimension.height
                 }
-                // 4
                 let currentShift = horizontalShift
-                // 5
                 horizontalShift = sport == sports.last ? 0 : horizontalShift - dimension.width
                 return currentShift
               }
               .alignmentGuide(.top) { _ in
                 let currentShift = verticalShift
-                // 2
                 verticalShift = sport == sports.last ? 0 : verticalShift
                 return currentShift
               }
@@ -118,15 +113,10 @@ struct FilterView: View {
 }
 
 struct FilterModifier: ViewModifier {
-  // 1
   var active: Bool
-
-  // 2
   func body(content: Content) -> some View {
     content
-      // 3
       .scaleEffect(active ? 0.75 : 1)
-       // 4
       .rotationEffect(.degrees(active ? .random(in: -25...25) : 0), anchor: .center)
   }
 }

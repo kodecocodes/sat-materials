@@ -41,14 +41,12 @@ struct HeaderView: View {
 
   var body: some View {
     ZStack {
-      // 1
       AsyncImage(
         url: event.team.sport.imageURL,
         content: { image in
           image.resizable()
             .scaledToFill()
             .frame(width: UIScreen.main.bounds.width)
-            // 2
             .frame(height: max(
               Constants.minHeaderHeight,
               Constants.headerHeight + offset
@@ -68,7 +66,6 @@ struct HeaderView: View {
 
       VStack(alignment: .leading) {
         Button {
-          // 1
           dismiss()
         } label: {
           HStack {
@@ -78,8 +75,6 @@ struct HeaderView: View {
               .frame(height: Constants.iconSizeS)
               .clipped()
               .foregroundColor(.white)
-
-            // 2
             if collapsed {
               Text(event.team.name)
                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -96,14 +91,9 @@ struct HeaderView: View {
             }
           }
           .frame(height: 36.0)
-          // 3
           .padding(.top, UIApplication.safeAreaTopInset + Constants.spacingS)
         }
-
-        // 1
         Spacer()
-
-        // 2
         if collapsed {
           HStack {
             Image(systemName: "calendar")
