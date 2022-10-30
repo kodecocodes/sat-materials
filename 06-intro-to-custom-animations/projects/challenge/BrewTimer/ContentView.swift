@@ -43,31 +43,31 @@ struct ContentView: View {
 
   var body: some View {
     NavigationStack {
-      ZStack {
-        backGroundGradient
-          .ignoresSafeArea()
-        ScrollView {
-          ForEach(timers) { timer in
-            NavigationLink {
-              TimerView(brewTimer: timer)
-            } label: {
-              Text(timer.timerName)
-                .font(.title2)
-                .frame(maxWidth: .infinity)
-                .frame(height: 100)
-                .background(
-                  RoundedRectangle(cornerRadius: 25.0)
-                    .fill(
-                      Color("QuarterSpanishWhite")
-                    )
-                )
-                .foregroundColor(
-                  Color("BlackRussian")
-                )
-            }
+      ScrollView {
+        ForEach(timers) { timer in
+          NavigationLink {
+            TimerView(brewTimer: timer)
+          } label: {
+            Text(timer.timerName)
+              .font(.title2)
+              .frame(maxWidth: .infinity)
+              .frame(height: 100)
+              .background(
+                RoundedRectangle(cornerRadius: 25.0)
+                  .fill(
+                    Color("QuarterSpanishWhite")
+                  )
+              )
+              .foregroundColor(
+                Color("BlackRussian")
+              )
           }
         }
         .padding(10)
+      }
+      .background {
+        backGroundGradient
+          .ignoresSafeArea()
       }
       .navigationTitle("Brew Timer")
       .toolbarColorScheme(.dark, for: .navigationBar)

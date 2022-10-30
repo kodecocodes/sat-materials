@@ -33,13 +33,12 @@
 import SwiftUI
 
 struct TimerView: View {
-  @ObservedObject var timerManager = TimerManager(length: 0)
+  @StateObject var timerManager = TimerManager(length: 0)
   @State var brewTimer: BrewTime
   @State var showDone: BrewTime?
   @State var amountOfWater = 0.0
   @State var animateTimer = false
   @State var animatePause = false
-  @State var brewingTemp = 0
 
   let backGroundGradient = LinearGradient(
     colors: [Color("BlackRussian"), Color("DarkOliveGreen"), Color("OliveGreen")],
@@ -47,10 +46,6 @@ struct TimerView: View {
     endPoint: .init(x: 0.25, y: 1)
   )
 
-  var teaToUse: Double {
-    let tspPerOz = brewTimer.teaAmount / brewTimer.waterAmount
-    return tspPerOz * amountOfWater
-  }
   var timerBorderColor: Color {
     switch timerManager.status {
     case .stopped:
@@ -75,55 +70,41 @@ struct TimerView: View {
     )
   }
 
-  struct HeadingText: ViewModifier {
-    func body(content: Content) -> some View {
-      return content
-        .font(.title.bold())
-    }
-  }
-
-  struct InformationText: ViewModifier {
-    func body(content: Content) -> some View {
-      return content
-        .font(.title2)
-        .padding(.bottom, 15)
-    }
-  }
-
   var body: some View {
     NavigationStack {
-      ZStack {
+      VStack {
+        BrewInfoView(brewTimer: brewTimer, amountOfWater: $amountOfWater)
+        CountingTimerView(timerManager: timerManager)
+          .frame(maxWidth: .infinity)
+          .overlay {
+            switch timerManager.status {
+            case .running:
+              RoundedRectangle(cornerRadius: 20)
+                .stroke(animationGradient, lineWidth: 10)
+            case .paused:
+              RoundedRectangle(cornerRadius: 20)
+                .stroke(.blue, lineWidth: 10)
+                .opacity(animatePause ? 0.2 : 1.0)
+            default:
+              RoundedRectangle(cornerRadius: 20)
+                .stroke(timerBorderColor, lineWidth: 5)
+            }
+          }
+          .padding(15)
+          .background(
+            RoundedRectangle(cornerRadius: 20)
+              .fill(
+                Color("QuarterSpanishWhite")
+              )
+          )
+          .padding([.leading, .trailing], 5)
+          .padding([.top], 15)
+        Spacer()
+      }
+      .padding()
+      .background {
         backGroundGradient
           .ignoresSafeArea()
-        VStack {
-          BrewInfoView(brewTimer: brewTimer, amountOfWater: $amountOfWater)
-          CountingTimerView(timerManager: timerManager)
-            .frame(maxWidth: .infinity)
-            .overlay {
-              if timerManager.status == .running {
-                RoundedRectangle(cornerRadius: 20)
-                  .stroke(animationGradient, lineWidth: 10)
-              } else if timerManager.status == .paused {
-                RoundedRectangle(cornerRadius: 20)
-                  .stroke(.blue, lineWidth: 10)
-                  .opacity(animatePause ? 0.2 : 1.0)
-              } else {
-                RoundedRectangle(cornerRadius: 20)
-                  .stroke(timerBorderColor, lineWidth: 5)
-              }
-            }
-            .padding(15)
-            .background(
-              RoundedRectangle(cornerRadius: 20)
-                .fill(
-                  Color("QuarterSpanishWhite")
-                )
-            )
-            .padding([.leading, .trailing], 5)
-            .padding([.top], 15)
-          Spacer()
-        }
-        .padding()
       }
     }
     .onAppear {
@@ -135,23 +116,18 @@ struct TimerView: View {
     .toolbarBackground(.visible, for: .navigationBar)
     .font(.largeTitle)
     .onChange(of: timerManager.status) { newStatus in
-      if newStatus == .done {
+      switch newStatus {
+      case .done:
         showDone = brewTimer
-      }
-      // 1
-      if newStatus == .running {
+      case .running:
         animatePause = false
-        // 2
         withAnimation(
           .linear(duration: 1.0)
-          // 4
-          .repeatForever(autoreverses: false)
+            .repeatForever(autoreverses: false)
         ) {
-          // 5
           animateTimer = true
         }
-      }
-      if newStatus == .paused {
+      case .paused:
         animateTimer = false
         withAnimation(
           .easeInOut(duration: 0.5)
@@ -159,20 +135,23 @@ struct TimerView: View {
         ) {
           animatePause = true
         }
+      default:
+        animateTimer = false
+        animatePause = false
       }
     }
     .sheet(item: $showDone) { timer in
       TimerComplete(timer: timer)
     }
   }
+}
 
-  struct TimerView_Previews: PreviewProvider {
-    static var previews: some View {
-      NavigationStack {
-        TimerView(
-          brewTimer: BrewTime.previewObject
-        )
-      }
+struct TimerView_Previews: PreviewProvider {
+  static var previews: some View {
+    NavigationStack {
+      TimerView(
+        brewTimer: BrewTime.previewObject
+      )
     }
   }
 }

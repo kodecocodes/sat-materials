@@ -1,15 +1,15 @@
-/// Copyright (c) 2022 Razeware LLC
-/// 
+/// Copyright (c) 2020 Razeware LLC
+///
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
 /// in the Software without restriction, including without limitation the rights
 /// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 /// copies of the Software, and to permit persons to whom the Software is
 /// furnished to do so, subject to the following conditions:
-/// 
+///
 /// The above copyright notice and this permission notice shall be included in
 /// all copies or substantial portions of the Software.
-/// 
+///
 /// Notwithstanding the foregoing, you may not use, copy, modify, merge, publish,
 /// distribute, sublicense, create a derivative work, and/or sell copies of the
 /// Software in any work that is designed, intended, or marketed for pedagogical or
@@ -17,7 +17,7 @@
 /// or information technology.  Permission for such use, copying, modification,
 /// merger, publication, distribution, sublicensing, creation of derivative works,
 /// or sale is expressly withheld.
-/// 
+///
 /// This project and source code may use libraries or frameworks that are
 /// released under various Open-Source licenses. Use of those libraries and
 /// frameworks are governed by their own individual licenses.
@@ -30,41 +30,23 @@
 /// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 /// THE SOFTWARE.
 
+import UIKit
 import SwiftUI
 
-struct SlidingNumber: View, Animatable {
-  var number: Double
+class SceneDelegate: UIResponder, UIWindowSceneDelegate {
+  var window: UIWindow?
 
-  var animatableData: Double {
-    get { number }
-    set { number = newValue }
-  }
+  func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
+    // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
+    // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
+    // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
 
-  var body: some View {
-    let digitArray = [number - 1, number, number + 1]
-      .map { Int($0).between(0, and: 10) }
-    let shift = 1 - number.truncatingRemainder(dividingBy: 1)
-    VStack {
-      Text(String(digitArray[0]))
-      Text(String(digitArray[1]))
-      Text(String(digitArray[2]))
+    // Use a UIHostingController as window root view controller
+    if let windowScene = scene as? UIWindowScene {
+      let window = UIWindow(windowScene: windowScene)
+      window.rootViewController = UIHostingController(rootView: ContentView())
+      self.window = window
+      window.makeKeyAndVisible()
     }
-    .font(.largeTitle)
-    .fontWeight(.heavy)
-    .frame(width: 30, height: 40)
-    .offset(y: 40 * shift)
-    .overlay {
-      RoundedRectangle(cornerRadius: 5)
-        .stroke(lineWidth: 1)
-    }
-    .clipShape(
-      RoundedRectangle(cornerRadius: 5)
-    )
-  }
-}
-
-struct SlidingNumber_Previews: PreviewProvider {
-  static var previews: some View {
-    SlidingNumber(number: 0)
   }
 }
