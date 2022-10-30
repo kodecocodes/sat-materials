@@ -34,8 +34,9 @@ import SwiftUI
 
 struct TimerDigitsView: View {
   var digits: [Int]
+
   var hasMinutes: Bool {
-    return digits[0] != 0 || digits[1] != 0
+    digits[0] != 0 || digits[1] != 0
   }
 
   var body: some View {

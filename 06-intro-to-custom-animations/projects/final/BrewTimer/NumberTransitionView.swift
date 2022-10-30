@@ -37,12 +37,8 @@ struct NumberTransitionView: View, Animatable {
   var suffix: String
 
   var animatableData: Double {
-    get {
-      Double(number)
-    }
-    set {
-      number = Int(newValue)
-    }
+    get { Double(number) }
+    set { number = Int(newValue) }
   }
 
   var body: some View {

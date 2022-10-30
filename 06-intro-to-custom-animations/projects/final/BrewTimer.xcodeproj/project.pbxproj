@@ -7,41 +7,43 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		18D775C322AD944300AE281E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D775C222AD944300AE281E /* SceneDelegate.swift */; };
 		18D775C522AD944300AE281E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D775C422AD944300AE281E /* ContentView.swift */; };
 		18D775C722AD944400AE281E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 18D775C622AD944400AE281E /* Assets.xcassets */; };
 		18D775CA22AD944400AE281E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 18D775C922AD944400AE281E /* Preview Assets.xcassets */; };
-		A915B44A28AAFC7900C10EEF /* AppMain.swift in Sources */ = {isa = PBXBuildFile; fileRef = A915B44928AAFC7900C10EEF /* AppMain.swift */; };
-		A91D1B3E28A5E5EF00CE3E5D /* SlidingNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91D1B3D28A5E5EF00CE3E5D /* SlidingNumber.swift */; };
-		A91D1B4028A5E71600CE3E5D /* TimerDigitsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91D1B3F28A5E71600CE3E5D /* TimerDigitsView.swift */; };
-		A930F94E28A4615D00641DC0 /* NumberTransitionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A930F94D28A4615D00641DC0 /* NumberTransitionView.swift */; };
-		A9311FB128A4139000136D99 /* CountingTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9311FB028A4139000136D99 /* CountingTimerView.swift */; };
-		A9647B2428A6B8F60008B8E6 /* IntegerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9647B2328A6B8F60008B8E6 /* IntegerExtensions.swift */; };
-		A9AA1AEE28BBD634007E216F /* BrewInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9AA1AED28BBD634007E216F /* BrewInfoView.swift */; };
+		26340DC2290F07D000001059 /* NumberTransitionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26340DC1290F07D000001059 /* NumberTransitionView.swift */; };
+		26340DC4290F0BCD00001059 /* TimerDigitsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26340DC3290F0BCD00001059 /* TimerDigitsView.swift */; };
+		26340DC6290F0D7F00001059 /* SlidingNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26340DC5290F0D7F00001059 /* SlidingNumber.swift */; };
+		A915B44628AAFBBD00C10EEF /* AppMain.swift in Sources */ = {isa = PBXBuildFile; fileRef = A915B44528AAFBBD00C10EEF /* AppMain.swift */; };
+		A9311FB328A413CD00136D99 /* CountingTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9311FB228A413CD00136D99 /* CountingTimerView.swift */; };
+		A9647B2728A6C2570008B8E6 /* IntegerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9647B2628A6C2570008B8E6 /* IntegerExtensions.swift */; };
+		A9AA1AEC28BBD4D2007E216F /* BrewInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9AA1AEB28BBD4D2007E216F /* BrewInfoView.swift */; };
 		A9EA75C828A1D9C100C4857C /* BrewTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EA75C728A1D9C100C4857C /* BrewTime.swift */; };
 		A9EA75CA28A1D9D500C4857C /* TimerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EA75C928A1D9D500C4857C /* TimerManager.swift */; };
 		A9EA75CC28A1DA1C00C4857C /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EA75CB28A1DA1C00C4857C /* TimerView.swift */; };
 		A9EA75CE28A1E06500C4857C /* TimerComplete.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EA75CD28A1E06500C4857C /* TimerComplete.swift */; };
-		A9FCA7FA28F78E1D0075F4E2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A9FCA7F928F78E1D0075F4E2 /* LaunchScreen.storyboard */; };
+		A9FCA7F828F78D8B0075F4E2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A9FCA7F728F78D8B0075F4E2 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		18D775BD22AD944300AE281E /* BrewTimer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BrewTimer.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		18D775C222AD944300AE281E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		18D775C422AD944300AE281E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		18D775C622AD944400AE281E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		18D775C922AD944400AE281E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		18D775CE22AD944400AE281E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A915B44928AAFC7900C10EEF /* AppMain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppMain.swift; sourceTree = "<group>"; };
-		A91D1B3D28A5E5EF00CE3E5D /* SlidingNumber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlidingNumber.swift; sourceTree = "<group>"; };
-		A91D1B3F28A5E71600CE3E5D /* TimerDigitsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerDigitsView.swift; sourceTree = "<group>"; };
-		A930F94D28A4615D00641DC0 /* NumberTransitionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberTransitionView.swift; sourceTree = "<group>"; };
-		A9311FB028A4139000136D99 /* CountingTimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountingTimerView.swift; sourceTree = "<group>"; };
-		A9647B2328A6B8F60008B8E6 /* IntegerExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntegerExtensions.swift; sourceTree = "<group>"; };
-		A9AA1AED28BBD634007E216F /* BrewInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrewInfoView.swift; sourceTree = "<group>"; };
+		26340DC1290F07D000001059 /* NumberTransitionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberTransitionView.swift; sourceTree = "<group>"; };
+		26340DC3290F0BCD00001059 /* TimerDigitsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerDigitsView.swift; sourceTree = "<group>"; };
+		26340DC5290F0D7F00001059 /* SlidingNumber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlidingNumber.swift; sourceTree = "<group>"; };
+		A915B44528AAFBBD00C10EEF /* AppMain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppMain.swift; sourceTree = "<group>"; };
+		A9311FB228A413CD00136D99 /* CountingTimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountingTimerView.swift; sourceTree = "<group>"; };
+		A9647B2628A6C2570008B8E6 /* IntegerExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntegerExtensions.swift; sourceTree = "<group>"; };
+		A9AA1AEB28BBD4D2007E216F /* BrewInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrewInfoView.swift; sourceTree = "<group>"; };
 		A9EA75C728A1D9C100C4857C /* BrewTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrewTime.swift; sourceTree = "<group>"; };
 		A9EA75C928A1D9D500C4857C /* TimerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerManager.swift; sourceTree = "<group>"; };
 		A9EA75CB28A1DA1C00C4857C /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
 		A9EA75CD28A1E06500C4857C /* TimerComplete.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerComplete.swift; sourceTree = "<group>"; };
-		A9FCA7F928F78E1D0075F4E2 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		A9FCA7F728F78D8B0075F4E2 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,21 +78,22 @@
 		18D775BF22AD944300AE281E /* BrewTimer */ = {
 			isa = PBXGroup;
 			children = (
-				A9647B2228A6B8E50008B8E6 /* Extensions */,
+				A9647B2528A6C2450008B8E6 /* Extensions */,
 				A9EA75C628A1D94700C4857C /* Models */,
-				A915B44928AAFC7900C10EEF /* AppMain.swift */,
+				A915B44528AAFBBD00C10EEF /* AppMain.swift */,
+				18D775C222AD944300AE281E /* SceneDelegate.swift */,
 				18D775C422AD944300AE281E /* ContentView.swift */,
 				A9EA75CB28A1DA1C00C4857C /* TimerView.swift */,
-				A9AA1AED28BBD634007E216F /* BrewInfoView.swift */,
-				A930F94D28A4615D00641DC0 /* NumberTransitionView.swift */,
-				A9311FB028A4139000136D99 /* CountingTimerView.swift */,
+				A9AA1AEB28BBD4D2007E216F /* BrewInfoView.swift */,
+				A9311FB228A413CD00136D99 /* CountingTimerView.swift */,
 				A9EA75CD28A1E06500C4857C /* TimerComplete.swift */,
-				A91D1B3F28A5E71600CE3E5D /* TimerDigitsView.swift */,
-				A91D1B3D28A5E5EF00CE3E5D /* SlidingNumber.swift */,
 				18D775C622AD944400AE281E /* Assets.xcassets */,
-				A9FCA7F928F78E1D0075F4E2 /* LaunchScreen.storyboard */,
+				A9FCA7F728F78D8B0075F4E2 /* LaunchScreen.storyboard */,
 				18D775CE22AD944400AE281E /* Info.plist */,
 				18D775C822AD944400AE281E /* Preview Content */,
+				26340DC1290F07D000001059 /* NumberTransitionView.swift */,
+				26340DC3290F0BCD00001059 /* TimerDigitsView.swift */,
+				26340DC5290F0D7F00001059 /* SlidingNumber.swift */,
 			);
 			path = BrewTimer;
 			sourceTree = "<group>";
@@ -103,10 +106,10 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
-		A9647B2228A6B8E50008B8E6 /* Extensions */ = {
+		A9647B2528A6C2450008B8E6 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				A9647B2328A6B8F60008B8E6 /* IntegerExtensions.swift */,
+				A9647B2628A6C2570008B8E6 /* IntegerExtensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -179,7 +182,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A9FCA7FA28F78E1D0075F4E2 /* LaunchScreen.storyboard in Resources */,
+				A9FCA7F828F78D8B0075F4E2 /* LaunchScreen.storyboard in Resources */,
 				18D775CA22AD944400AE281E /* Preview Assets.xcassets in Resources */,
 				18D775C722AD944400AE281E /* Assets.xcassets in Resources */,
 			);
@@ -212,18 +215,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A930F94E28A4615D00641DC0 /* NumberTransitionView.swift in Sources */,
-				A91D1B4028A5E71600CE3E5D /* TimerDigitsView.swift in Sources */,
+				26340DC4290F0BCD00001059 /* TimerDigitsView.swift in Sources */,
 				A9EA75CC28A1DA1C00C4857C /* TimerView.swift in Sources */,
 				A9EA75C828A1D9C100C4857C /* BrewTime.swift in Sources */,
-				A9AA1AEE28BBD634007E216F /* BrewInfoView.swift in Sources */,
-				A9647B2428A6B8F60008B8E6 /* IntegerExtensions.swift in Sources */,
+				26340DC6290F0D7F00001059 /* SlidingNumber.swift in Sources */,
+				A9AA1AEC28BBD4D2007E216F /* BrewInfoView.swift in Sources */,
 				A9EA75CA28A1D9D500C4857C /* TimerManager.swift in Sources */,
-				A9311FB128A4139000136D99 /* CountingTimerView.swift in Sources */,
+				A915B44628AAFBBD00C10EEF /* AppMain.swift in Sources */,
+				18D775C322AD944300AE281E /* SceneDelegate.swift in Sources */,
+				A9311FB328A413CD00136D99 /* CountingTimerView.swift in Sources */,
 				18D775C522AD944300AE281E /* ContentView.swift in Sources */,
+				A9647B2728A6C2570008B8E6 /* IntegerExtensions.swift in Sources */,
+				26340DC2290F07D000001059 /* NumberTransitionView.swift in Sources */,
 				A9EA75CE28A1E06500C4857C /* TimerComplete.swift in Sources */,
-				A915B44A28AAFC7900C10EEF /* AppMain.swift in Sources */,
-				A91D1B3E28A5E5EF00CE3E5D /* SlidingNumber.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

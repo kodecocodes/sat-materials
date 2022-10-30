@@ -46,11 +46,6 @@ struct TimerView: View {
     endPoint: .init(x: 0.25, y: 1)
   )
 
-  var teaToUse: Double {
-    let tspPerOz = brewTimer.teaAmount / brewTimer.waterAmount
-    return tspPerOz * amountOfWater
-  }
-
   var timerBorderColor: Color {
     switch timerManager.status {
     case .stopped:
@@ -82,15 +77,15 @@ struct TimerView: View {
         CountingTimerView(timerManager: timerManager)
           .frame(maxWidth: .infinity)
           .overlay {
-            if timerManager.status == .running {
+            switch timerManager.status {
+            case .running:
               RoundedRectangle(cornerRadius: 20)
                 .stroke(animationGradient, lineWidth: 10)
-            // Pause animation
-            } else if timerManager.status == .paused {
+            case .paused:
               RoundedRectangle(cornerRadius: 20)
                 .stroke(.blue, lineWidth: 10)
                 .opacity(animatePause ? 0.2 : 1.0)
-            } else {
+            default:
               RoundedRectangle(cornerRadius: 20)
                 .stroke(timerBorderColor, lineWidth: 5)
             }
@@ -121,33 +116,26 @@ struct TimerView: View {
     .toolbarBackground(.visible, for: .navigationBar)
     .font(.largeTitle)
     .onChange(of: timerManager.status) { newStatus in
-      if newStatus == .done {
+      switch newStatus {
+      case .done:
         showDone = brewTimer
-      }
-      // 1
-      if newStatus == .running {
+      case .running:
         animatePause = false
-        // 2
         withAnimation(
           .linear(duration: 1.0)
-          // 4
             .repeatForever(autoreverses: false)
         ) {
-          // 5
           animateTimer = true
         }
-      } else if newStatus == .paused {
-        // 1
+      case .paused:
         animateTimer = false
-        // 2
         withAnimation(
           .easeInOut(duration: 0.5)
           .repeatForever()
         ) {
           animatePause = true
         }
-      } else {
-        // 3
+      default:
         animateTimer = false
         animatePause = false
       }
@@ -156,14 +144,14 @@ struct TimerView: View {
       TimerComplete(timer: timer)
     }
   }
+}
 
-  struct TimerView_Previews: PreviewProvider {
-    static var previews: some View {
-      NavigationStack {
-        TimerView(
-          brewTimer: BrewTime.previewObject
-        )
-      }
+struct TimerView_Previews: PreviewProvider {
+  static var previews: some View {
+    NavigationStack {
+      TimerView(
+        brewTimer: BrewTime.previewObject
+      )
     }
   }
 }
