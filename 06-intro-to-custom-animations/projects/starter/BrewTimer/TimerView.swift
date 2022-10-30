@@ -93,8 +93,11 @@ struct TimerView: View {
     .toolbarBackground(.visible, for: .navigationBar)
     .font(.largeTitle)
     .onChange(of: timerManager.status) { newStatus in
-      if newStatus == .done {
+      switch newStatus {
+      case .done:
         showDone = brewTimer
+      default:
+        break
       }
     }
     .sheet(item: $showDone) { timer in
