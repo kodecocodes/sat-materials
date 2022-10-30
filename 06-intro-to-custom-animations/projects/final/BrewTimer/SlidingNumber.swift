@@ -41,7 +41,7 @@ struct SlidingNumber: View, Animatable {
   }
 
   var body: some View {
-    let digitArray = [number - 1, number, number + 1]
+    let digitArray = [number + 1, number, number - 1]
       .map { Int($0).between(0, and: 10) }
     let shift = number.truncatingRemainder(dividingBy: 1)
     VStack {
