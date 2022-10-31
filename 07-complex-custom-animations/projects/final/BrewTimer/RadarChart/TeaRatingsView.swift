@@ -98,9 +98,7 @@ struct TeaRatingsView: View {
         .padding(20)
         .background(
           RoundedRectangle(cornerRadius: 20)
-            .fill(
-              Color("QuarterSpanishWhite")
-            )
+            .fill(Color("QuarterSpanishWhite"))
         )
       }
       .font(.body)

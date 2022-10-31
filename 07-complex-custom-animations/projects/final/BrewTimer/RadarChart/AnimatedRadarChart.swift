@@ -94,10 +94,14 @@ struct AnimatedRadarChart: View, Animatable {
         let yCenter = proxy.size.height / 2.0
 
         // 1
-        ForEach([0.2, 0.4, 0.6, 0.8, 1.0], id: \.self) { val in
+        let chartFraction = Array(stride(
+          from: 0.2,
+          to: 1.0,
+          by: 0.2
+        ))
+        ForEach(chartFraction, id: \.self) { val in
           // 2
           Path { path in
-            // 3
             path.addArc(
               center: .zero,
               radius: graphSize * val,
@@ -106,21 +110,13 @@ struct AnimatedRadarChart: View, Animatable {
               clockwise: true
             )
           }
-          // 4
+          // 3
           .stroke(.gray, lineWidth: 1)
           .offset(x: xCenter, y: yCenter)
         }
 
-        PolygonChartView(
-          values: values,
-          graphSize: graphSize,
-          colorArray: lineColors,
-          xCenter: xCenter,
-          yCenter: yCenter
-        )
-
         // 4
-        ForEach(values.indices, id: \.self) { index in
+        ForEach(0..<5, id: \.self) { index in
           Path { path in
             path.move(to: .zero)
             path.addLine(to: .init(x: 0, y: -graphSize))
@@ -128,6 +124,7 @@ struct AnimatedRadarChart: View, Animatable {
           .stroke(.gray, lineWidth: 1)
           .offset(x: xCenter, y: yCenter)
           .rotationEffect(.degrees(72.0 * Double(index)))
+
           Path { path in
             path.move(to: .zero)
             path.addLine(to: .init(x: 0, y: -graphSize * values[index]))
@@ -139,6 +136,14 @@ struct AnimatedRadarChart: View, Animatable {
           // 7
           .rotationEffect(.degrees(72.0 * Double(index)))
         }
+
+        PolygonChartView(
+          values: values,
+          graphSize: graphSize,
+          colorArray: lineColors,
+          xCenter: xCenter,
+          yCenter: yCenter
+        )
       }
     }
   }
@@ -164,10 +169,8 @@ struct PolygonChartView: View {
   var yCenter: Double
 
   var gradientColors: AngularGradient {
-    var loopedColors = Array(colorArray)
-    loopedColors.append(colorArray.first ?? .black)
-    return AngularGradient(
-      colors: loopedColors,
+    AngularGradient(
+      colors: colorArray + [colorArray.first ?? .black],
       center: .center,
       angle: .degrees(-90)
     )
@@ -179,10 +182,10 @@ struct PolygonChartView: View {
       for index in values.indices {
         let value = values[index]
         // 2
-        let angleRadians = 72.0 * Double(index) * Double.pi / 180.0
+        let radians = Angle(degrees: 72.0 * Double(index)).radians
         // 3
-        let x = sin(angleRadians) * graphSize * value
-        let y = cos(angleRadians) * -graphSize * value
+        let x = sin(radians) * graphSize * value
+        let y = cos(radians) * -graphSize * value
         // 4
         if index == 0 {
           path.move(to: .init(x: x, y: y))

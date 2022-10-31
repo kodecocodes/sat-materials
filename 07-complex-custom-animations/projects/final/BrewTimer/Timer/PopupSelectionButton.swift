@@ -1,15 +1,15 @@
 /// Copyright (c) 2022 Razeware LLC
-///
+/// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
 /// in the Software without restriction, including without limitation the rights
 /// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 /// copies of the Software, and to permit persons to whom the Software is
 /// furnished to do so, subject to the following conditions:
-///
+/// 
 /// The above copyright notice and this permission notice shall be included in
 /// all copies or substantial portions of the Software.
-///
+/// 
 /// Notwithstanding the foregoing, you may not use, copy, modify, merge, publish,
 /// distribute, sublicense, create a derivative work, and/or sell copies of the
 /// Software in any work that is designed, intended, or marketed for pedagogical or
@@ -17,7 +17,7 @@
 /// or information technology.  Permission for such use, copying, modification,
 /// merger, publication, distribution, sublicensing, creation of derivative works,
 /// or sale is expressly withheld.
-///
+/// 
 /// This project and source code may use libraries or frameworks that are
 /// released under various Open-Source licenses. Use of those libraries and
 /// frameworks are governed by their own individual licenses.
@@ -38,25 +38,9 @@ struct PopupSelectionButton: View {
   @State private var showOptions = false
   @State private var animateOptions = false
 
-
-  func xOffset(_ index: Int) -> Double {
-    let distance = 180.0
-    // 2
-    let angle = Double(90 + 15 * index) * Double.pi / 180.0
-    // 3
-    return distance * sin(angle) - distance
-  }
-
-  func yOffset(_ index: Int) -> Double {
-    let distance = 180.0
-    let angle = Double(90 + 15 * index) * Double.pi / 180.0
-    return distance * cos(angle) - 40
-  }
-
   var body: some View {
     ZStack {
       Group {
-        // 1
         if showOptions {
           // 2
           ForEach(values.indices, id: \.self) { index in
@@ -66,8 +50,8 @@ struct PopupSelectionButton: View {
               .modifier(CircledText(backgroundColor: Color("OliveGreen")))
               // 4
               .offset(
-                x: animateOptions ? xOffset(index) : 0,
-                y: animateOptions ? yOffset(index) : 0
+                x: animateOptions ? xOffset(for: index) : 0,
+                y: animateOptions ? yOffset(for: index) : 0
               )
               // 5
               .onTapGesture {
@@ -75,47 +59,46 @@ struct PopupSelectionButton: View {
                 withAnimation(.easeOut(duration: 0.25)) {
                   animateOptions = false
                 }
-                withAnimation {
-                  showOptions = false
-                }
+                withAnimation { showOptions = false }
               }
           }
           Text("\(Image(systemName: "xmark.circle"))")
             .transition(.opacity.animation(.linear(duration: 0.25)))
             .modifier(CircledText(backgroundColor: Color(.red)))
+        }
+
+        if let currentValue {
+          Text(currentValue, format: .number)
+            .modifier(CircledText(backgroundColor: Color("Bourbon")))
         } else {
-          if let value = currentValue {
-            Text(value, format: .number)
-              .modifier(CircledText(backgroundColor: Color("Bourbon")))
-          } else {
-            Text("\(Image(systemName: "exclamationmark"))")
-              .modifier(CircledText(backgroundColor: Color(.red)))
-          }
+          Text("\(Image(systemName: "exclamationmark"))")
+            .modifier(CircledText(backgroundColor: Color(.red)))
         }
       }
       .onTapGesture {
         // 1
-        if showOptions {
-          // 2
-          withAnimation(.easeOut(duration: 0.25)) {
-            animateOptions = false
-          }
-          // 3
-          withAnimation {
-            showOptions = false
-          }
-        } else {
-          // 4
-          withAnimation {
-            showOptions = true
-          }
-          // 5
-          withAnimation(.easeOut(duration: 0.25)) {
-            animateOptions = true
-          }
+        withAnimation(.easeOut(duration: 0.25)) {
+          animateOptions = !showOptions
         }
+        // 2
+        withAnimation { showOptions.toggle() }
       }
     }
+  }
+
+  private func xOffset(for index: Int) -> Double {
+    // 1
+    let distance = 180.0
+    // 2
+    let angle = Angle(degrees: Double(90 + 15 * index)).radians
+    // 3
+    return distance * sin(angle) - distance
+  }
+
+  private func yOffset(for index: Int) -> Double {
+    let distance = 180.0
+    let angle = Angle(degrees: Double(90 + 15 * index)).radians
+    return distance * cos(angle) - 40
   }
 }
 
