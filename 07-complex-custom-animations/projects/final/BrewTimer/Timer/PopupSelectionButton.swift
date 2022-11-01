@@ -64,15 +64,15 @@ struct PopupSelectionButton: View {
           }
           Text("\(Image(systemName: "xmark.circle"))")
             .transition(.opacity.animation(.linear(duration: 0.25)))
-            .modifier(CircledText(backgroundColor: Color(.red)))
+            .modifier(CircledTextToggle(backgroundColor: Color(.red)))
         }
 
         if let currentValue {
           Text(currentValue, format: .number)
-            .modifier(CircledText(backgroundColor: Color("Bourbon")))
+            .modifier(CircledTextToggle(backgroundColor: Color("Bourbon")))
         } else {
           Text("\(Image(systemName: "exclamationmark"))")
-            .modifier(CircledText(backgroundColor: Color(.red)))
+            .modifier(CircledTextToggle(backgroundColor: Color(.red)))
         }
       }
       .onTapGesture {
@@ -98,7 +98,7 @@ struct PopupSelectionButton: View {
   private func yOffset(for index: Int) -> Double {
     let distance = 180.0
     let angle = Angle(degrees: Double(90 + 15 * index)).radians
-    return distance * cos(angle) - 40
+    return distance * cos(angle) - 45
   }
 }
 

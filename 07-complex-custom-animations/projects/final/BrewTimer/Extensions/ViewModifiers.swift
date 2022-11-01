@@ -50,3 +50,13 @@ struct CircledText: ViewModifier {
       }
   }
 }
+
+struct CircledTextToggle: ViewModifier {
+  var backgroundColor: Color
+
+  func body(content: Content) -> some View {
+    content
+      .frame(width: 30, height: 30)
+      .modifier(CircledText(backgroundColor: backgroundColor))
+  }
+}
