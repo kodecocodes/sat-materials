@@ -33,12 +33,12 @@
 import SwiftUI
 
 struct AnalogTimerView: View {
-  @Binding var timerFinished: Bool
-  var timer: BrewTime
   @State var timerLength = 0.0
   @State var timeLeft: Int?
   @State var status: TimerStatus = .stopped
   @State var timerEndTime: Date?
+  @Binding var timerFinished: Bool
+  var timer: BrewTime
 
   func timeLeftAt(_ current: Date) -> Int {
     switch status {
@@ -124,9 +124,11 @@ struct AnalogTimerView: View {
       // 3
       let minuteAngle = Double(minute) / 10 * 360.0
       // 4
-      var minuteTickPath = Path()
-      minuteTickPath.move(to: .init(x: center, y: 0))
-      minuteTickPath.addLine(to: .init(x: center * 0.9, y: 0))
+      let minuteTickPath = Path { path in
+        path.move(to: .init(x: center, y: 0))
+        path.addLine(to: .init(x: center * 0.9, y: 0))
+      }
+
       // 4
       var tickContext = context
       // 6
@@ -143,12 +145,19 @@ struct AnalogTimerView: View {
         font: UIFont.preferredFont(forTextStyle: .title2)
       )
       // 2
-      let textRect = CGRect(origin: .init(x: -textSize.width / 2.0, y: -textSize.height / 2.0), size: .zero)
+      let textRect = CGRect(
+        origin: .init(
+          x: -textSize.width / 2.0,
+          y: -textSize.height / 2.0
+        ),
+        size: .zero
+      )
       // 3
-      let minuteAngleRadians = (minuteAngle - 90) * Double.pi / 180.0
+      let minuteAngleRadians = Angle(degrees: minuteAngle - 90).radians
       // 4
       let xShift = sin(-minuteAngleRadians) * center * 0.8
       let yShift = cos(-minuteAngleRadians) * center * 0.8
+
       // 5
       var stringContext = context
       stringContext.translateBy(x: xShift, y: yShift)
@@ -175,37 +184,46 @@ struct AnalogTimerView: View {
     // 2
     var path = Path()
     path.move(to: .zero)
+
     // 3
+    let crossLength = length * crossDistance
+    let middleLength = length * middleDistance
+    let halfWidthLength = length * halfWidth
+
     path.addCurve(
-      to: .init(x: length * crossDistance, y: 0),
-      control1: .init(x: length * crossDistance, y: length * -halfWidth),
-      control2: .init(x: length * crossDistance, y: length * -halfWidth)
+      to: .init(x: crossLength, y: 0),
+      control1: .init(x: crossLength, y: -halfWidthLength),
+      control2: .init(x: crossLength, y: -halfWidthLength)
     )
     path.addCurve(
       to: .init(x: length * endDistance, y: 0),
-      control1: .init(x: length * middleDistance, y: length * halfWidth),
-      control2: .init(x: length * middleDistance, y: length * halfWidth)
+      control1: .init(x: middleDistance, y: halfWidthLength),
+      control2: .init(x: middleDistance, y: halfWidthLength)
     )
     path.addCurve(
-      to: .init(x: length * crossDistance, y: 0),
-      control1: .init(x: length * middleDistance, y: length * -halfWidth),
-      control2: .init(x: length * middleDistance, y: length * -halfWidth)
+      to: .init(x: crossLength, y: 0),
+      control1: .init(x: middleDistance, y: -halfWidthLength),
+      control2: .init(x: middleDistance, y: -halfWidthLength)
     )
     path.addCurve(
       to: .zero,
-      control1: .init(x: length * crossDistance, y: length * halfWidth),
-      control2: .init(x: length * crossDistance, y: length * halfWidth)
+      control1: .init(x: crossLength, y: halfWidthLength),
+      control2: .init(x: crossLength, y: halfWidthLength)
     )
 
     return path
   }
 
-  func drawHands(context: GraphicsContext, size: Int, remainingTime: Double) {
+  func drawHands(
+    context: GraphicsContext,
+    size: Int,
+    remainingTime: Double
+  ) {
     // 1
     let length = Double(size / 2)
     // 2
-    let secondsLeft = remainingTime.truncatingRemainder(dividingBy: 60.0)
-    let secondAngle = secondsLeft / 60.0 * 360.0
+    let secondsLeft = remainingTime.truncatingRemainder(dividingBy: 60)
+    let secondAngle = secondsLeft / 60 * 360
     // 3
     let minuteColor = Color("DarkOliveGreen")
     let secondColor = Color("BlackRussian")
@@ -218,6 +236,7 @@ struct AnalogTimerView: View {
       endDistance: 0.7,
       width: 0.07
     )
+
     var secondContext = context
     secondContext.rotate(by: .degrees(secondAngle))
     secondContext.fill(
@@ -231,8 +250,8 @@ struct AnalogTimerView: View {
     )
 
     // 1
-    let minutesLeft = remainingTime / 60.0
-    let minuteAngle = minutesLeft / 10.0 * 360.0
+    let minutesLeft = remainingTime / 60
+    let minuteAngle = minutesLeft / 10 * 360
     // 2
     let minuteHandPath = createHandPath(
       length: length,
@@ -268,6 +287,7 @@ struct AnalogTimerView: View {
         timerFinished: $timerFinished
       )
       .font(.title)
+
       // 1
       ZStack {
         // 2
@@ -281,22 +301,38 @@ struct AnalogTimerView: View {
           // 6
           gContext.translateBy(x: xOffset, y: yOffset)
           drawBorder(context: gContext, size: timerSize)
-          gContext.translateBy(x: Double(timerSize / 2), y: Double(timerSize / 2))
+
+          gContext.translateBy(
+            x: Double(timerSize / 2),
+            y: Double(timerSize / 2)
+          )
           gContext.rotate(by: .degrees(-90))
           drawMinutes(context: gContext, size: timerSize)
         }
+
         // 1
         TimelineView(
-          .animation(minimumInterval: 0.1, paused: status != .running)
+          .animation(
+            minimumInterval: 0.1,
+            paused: status != .running
+          )
         ) { timeContext in
           // 2
           Canvas { gContext, size in
             // 3
             let timerSize = Int(min(size.width, size.height))
-            gContext.translateBy(x: size.width / 2, y: size.height / 2)
+            gContext.translateBy(
+              x: size.width / 2,
+              y: size.height / 2
+            )
             gContext.rotate(by: .degrees(-90))
+
             let remainingSeconds = decimalTimeLeftAt(timeContext.date)
-            drawHands(context: gContext, size: timerSize, remainingTime: remainingSeconds)
+            drawHands(
+              context: gContext,
+              size: timerSize,
+              remainingTime: remainingSeconds
+            )
           }
         }
       }
