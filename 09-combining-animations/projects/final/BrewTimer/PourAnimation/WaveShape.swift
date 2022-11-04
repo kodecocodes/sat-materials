@@ -34,6 +34,7 @@ import SwiftUI
 
 struct WaveShape: Shape {
   var waveTop: Double = 0.0
+
   var amplitude = 100.0
   var wavelength = 1.0
   var phase = 0.0
@@ -61,27 +62,31 @@ struct WaveShape: Shape {
 
   func path(in rect: CGRect) -> Path {
     // 1
-    var path = Path()
-
-    // 2
-    for x in 0..<Int(rect.width) {
-      // 3
-      let angle = Double(x) / rect.width * wavelength * 360.0 + phase
-      // 4
-      let y = sin(angle * Double.pi / 180.0) * amplitude
-      // 5
-      if x == 0 {
-        path.move(to: .init(x: Double(x), y: waveTop - y))
-      } else {
-        path.addLine(to: .init(x: Double(x), y: waveTop - y))
+    Path { path in
+      // 2
+      for x in 0 ..< Int(rect.width) {
+        // 3
+        let angle = Double(x) / rect.width * wavelength * 360.0 + phase
+        // 4
+        let y = sin(Angle(degrees: angle).radians) * amplitude
+        // 5
+        if x == 0 {
+          path.move(to: .init(
+            x: Double(x),
+            y: waveTop - y
+          ))
+        } else {
+          path.addLine(to: .init(
+            x: Double(x),
+            y: waveTop - y
+          ))
+        }
       }
+
+      path.addLine(to: .init(x: rect.width, y: rect.height))
+      path.addLine(to: .init(x: 0, y: rect.height))
+      path.closeSubpath()
     }
-
-    path.addLine(to: .init(x: rect.width, y: rect.height))
-    path.addLine(to: .init(x: 0, y: rect.height))
-    path.closeSubpath()
-
-    return path
   }
 }
 

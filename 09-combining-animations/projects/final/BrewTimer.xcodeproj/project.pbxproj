@@ -10,6 +10,11 @@
 		18D775C522AD944300AE281E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D775C422AD944300AE281E /* ContentView.swift */; };
 		18D775C722AD944400AE281E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 18D775C622AD944400AE281E /* Assets.xcassets */; };
 		18D775CA22AD944400AE281E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 18D775C922AD944400AE281E /* Preview Assets.xcassets */; };
+		26DB96EA2915AB710000E025 /* PourAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26DB96E92915AB710000E025 /* PourAnimationView.swift */; };
+		26DB96EC2915ACB40000E025 /* WaveShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26DB96EB2915ACB40000E025 /* WaveShape.swift */; };
+		26DB96EF2915B2A20000E025 /* PourParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = 26DB96ED2915B2A20000E025 /* PourParticle.sks */; };
+		26DB96F02915B2A20000E025 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 26DB96EE2915B2A20000E025 /* Assets.xcassets */; };
+		26DB96F22915B3780000E025 /* PourSceneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26DB96F12915B3780000E025 /* PourSceneView.swift */; };
 		A915B44A28AAFC7900C10EEF /* AppMain.swift in Sources */ = {isa = PBXBuildFile; fileRef = A915B44928AAFC7900C10EEF /* AppMain.swift */; };
 		A91D1B3E28A5E5EF00CE3E5D /* SlidingNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91D1B3D28A5E5EF00CE3E5D /* SlidingNumber.swift */; };
 		A91D1B4028A5E71600CE3E5D /* TimerDigitsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91D1B3F28A5E71600CE3E5D /* TimerDigitsView.swift */; };
@@ -27,11 +32,6 @@
 		A98B2C9328CFAB0B00CAF4D5 /* ViewModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98B2C9228CFAB0B00CAF4D5 /* ViewModifiers.swift */; };
 		A9BDF3F828E8D01A00B96F64 /* AnalogTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9BDF3F728E8D01A00B96F64 /* AnalogTimerView.swift */; };
 		A9BDF3FB28E8E82200B96F64 /* TimerControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9BDF3FA28E8E82200B96F64 /* TimerControlView.swift */; };
-		A9BF7FCA28FDFA6F00A0A3B9 /* PourAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9BF7FC928FDFA6F00A0A3B9 /* PourAnimationView.swift */; };
-		A9BF7FCC28FDFAEE00A0A3B9 /* WaveShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9BF7FCB28FDFAEE00A0A3B9 /* WaveShape.swift */; };
-		A9BF7FCF28FDFE0800A0A3B9 /* PourParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = A9BF7FCD28FDFE0800A0A3B9 /* PourParticle.sks */; };
-		A9BF7FD028FDFE0800A0A3B9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A9BF7FCE28FDFE0800A0A3B9 /* Assets.xcassets */; };
-		A9BF7FD228FDFE7500A0A3B9 /* PourSceneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9BF7FD128FDFE7500A0A3B9 /* PourSceneView.swift */; };
 		A9DB0F3128E9F6A900CB5E6B /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DB0F3028E9F6A900CB5E6B /* StringExtensions.swift */; };
 		A9E5BD4328CEBA0C005F70D4 /* PopupSelectionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9E5BD4228CEBA0C005F70D4 /* PopupSelectionButton.swift */; };
 		A9E9D7E828ADB5DA002F5BCF /* ReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9E9D7E728ADB5DA002F5BCF /* ReviewView.swift */; };
@@ -47,6 +47,11 @@
 		18D775C622AD944400AE281E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		18D775C922AD944400AE281E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		18D775CE22AD944400AE281E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		26DB96E92915AB710000E025 /* PourAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PourAnimationView.swift; sourceTree = "<group>"; };
+		26DB96EB2915ACB40000E025 /* WaveShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaveShape.swift; sourceTree = "<group>"; };
+		26DB96ED2915B2A20000E025 /* PourParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = PourParticle.sks; sourceTree = "<group>"; };
+		26DB96EE2915B2A20000E025 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		26DB96F12915B3780000E025 /* PourSceneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PourSceneView.swift; sourceTree = "<group>"; };
 		A915B44928AAFC7900C10EEF /* AppMain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppMain.swift; sourceTree = "<group>"; };
 		A91D1B3D28A5E5EF00CE3E5D /* SlidingNumber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlidingNumber.swift; sourceTree = "<group>"; };
 		A91D1B3F28A5E71600CE3E5D /* TimerDigitsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerDigitsView.swift; sourceTree = "<group>"; };
@@ -64,11 +69,6 @@
 		A98B2C9228CFAB0B00CAF4D5 /* ViewModifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModifiers.swift; sourceTree = "<group>"; };
 		A9BDF3F728E8D01A00B96F64 /* AnalogTimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalogTimerView.swift; sourceTree = "<group>"; };
 		A9BDF3FA28E8E82200B96F64 /* TimerControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerControlView.swift; sourceTree = "<group>"; };
-		A9BF7FC928FDFA6F00A0A3B9 /* PourAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PourAnimationView.swift; sourceTree = "<group>"; };
-		A9BF7FCB28FDFAEE00A0A3B9 /* WaveShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaveShape.swift; sourceTree = "<group>"; };
-		A9BF7FCD28FDFE0800A0A3B9 /* PourParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = PourParticle.sks; sourceTree = "<group>"; };
-		A9BF7FCE28FDFE0800A0A3B9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		A9BF7FD128FDFE7500A0A3B9 /* PourSceneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PourSceneView.swift; sourceTree = "<group>"; };
 		A9DB0F3028E9F6A900CB5E6B /* StringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
 		A9E5BD4228CEBA0C005F70D4 /* PopupSelectionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupSelectionButton.swift; sourceTree = "<group>"; };
 		A9E9D7E728ADB5DA002F5BCF /* ReviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewView.swift; sourceTree = "<group>"; };
@@ -148,11 +148,11 @@
 			isa = PBXGroup;
 			children = (
 				A9EA75CD28A1E06500C4857C /* TimerComplete.swift */,
-				A9BF7FC928FDFA6F00A0A3B9 /* PourAnimationView.swift */,
-				A9BF7FCB28FDFAEE00A0A3B9 /* WaveShape.swift */,
-				A9BF7FCD28FDFE0800A0A3B9 /* PourParticle.sks */,
-				A9BF7FCE28FDFE0800A0A3B9 /* Assets.xcassets */,
-				A9BF7FD128FDFE7500A0A3B9 /* PourSceneView.swift */,
+				26DB96E92915AB710000E025 /* PourAnimationView.swift */,
+				26DB96EB2915ACB40000E025 /* WaveShape.swift */,
+				26DB96ED2915B2A20000E025 /* PourParticle.sks */,
+				26DB96EE2915B2A20000E025 /* Assets.xcassets */,
+				26DB96F12915B3780000E025 /* PourSceneView.swift */,
 			);
 			path = PourAnimation;
 			sourceTree = "<group>";
@@ -263,10 +263,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				A97728C528AC680200AF0DD8 /* LaunchScreen.storyboard in Resources */,
-				A9BF7FCF28FDFE0800A0A3B9 /* PourParticle.sks in Resources */,
+				26DB96EF2915B2A20000E025 /* PourParticle.sks in Resources */,
 				18D775CA22AD944400AE281E /* Preview Assets.xcassets in Resources */,
 				18D775C722AD944400AE281E /* Assets.xcassets in Resources */,
-				A9BF7FD028FDFE0800A0A3B9 /* Assets.xcassets in Resources */,
+				26DB96F02915B2A20000E025 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -297,9 +297,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A9BF7FCC28FDFAEE00A0A3B9 /* WaveShape.swift in Sources */,
+				26DB96EC2915ACB40000E025 /* WaveShape.swift in Sources */,
 				A9DB0F3128E9F6A900CB5E6B /* StringExtensions.swift in Sources */,
-				A9BF7FD228FDFE7500A0A3B9 /* PourSceneView.swift in Sources */,
+				26DB96F22915B3780000E025 /* PourSceneView.swift in Sources */,
 				A930F94E28A4615D00641DC0 /* NumberTransitionView.swift in Sources */,
 				A91D1B4028A5E71600CE3E5D /* TimerDigitsView.swift in Sources */,
 				A920EBDE28CD576900E0C323 /* EvaluationListView.swift in Sources */,
@@ -322,7 +322,7 @@
 				A9BDF3FB28E8E82200B96F64 /* TimerControlView.swift in Sources */,
 				A9EA75CE28A1E06500C4857C /* TimerComplete.swift in Sources */,
 				A915B44A28AAFC7900C10EEF /* AppMain.swift in Sources */,
-				A9BF7FCA28FDFA6F00A0A3B9 /* PourAnimationView.swift in Sources */,
+				26DB96EA2915AB710000E025 /* PourAnimationView.swift in Sources */,
 				A91D1B3E28A5E5EF00CE3E5D /* SlidingNumber.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

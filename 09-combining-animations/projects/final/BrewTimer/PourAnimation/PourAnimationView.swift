@@ -50,6 +50,7 @@ struct PourAnimationView: View {
       if showPour {
         PourSceneView()
       }
+
       WaveShape(
         waveTop: shapeTop,
         amplitude: waveHeight * 1.2,
@@ -57,6 +58,7 @@ struct PourAnimationView: View {
         phase: wavePhase2
       )
       .fill(waveColor2)
+
       WaveShape(
         waveTop: shapeTop,
         amplitude: waveHeight,
@@ -72,15 +74,21 @@ struct PourAnimationView: View {
       ) {
         wavePhase = -90.0
       }
+
       withAnimation(
         .easeInOut(duration: 0.3)
         .repeatForever()
       ) {
         wavePhase2 = 270.0
       }
-      withAnimation(.linear(duration: 6.0).delay(1)) {
+
+      withAnimation(
+        .linear(duration: 6.0)
+        .delay(1)
+      ) {
         shapeTop = 0.0
       }
+
       DispatchQueue.main.asyncAfter(deadline: .now() + 7.0) {
         showPour = false
       }

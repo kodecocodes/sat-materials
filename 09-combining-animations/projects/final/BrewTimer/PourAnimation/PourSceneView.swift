@@ -34,17 +34,17 @@ import SwiftUI
 import SpriteKit
 
 class PouringLiquidScene: SKScene {
-  static var shared = PouringLiquidScene()
+  static let shared = PouringLiquidScene()
+
   let dropEmitter = SKEmitterNode(fileNamed: "PourParticle")
 
   override func didMove(to view: SKView) {
     // 1
     self.backgroundColor = .clear
     // 2
-    if let dropEmitter {
-      if !self.children.contains(dropEmitter) {
-        self.addChild(dropEmitter)
-      }
+    if let dropEmitter,
+       !self.children.contains(dropEmitter){
+      self.addChild(dropEmitter)
     }
 
     // 3
@@ -65,7 +65,10 @@ struct PourSceneView: View {
   }
 
   var body: some View {
-    SpriteView(scene: pouringScene, options: [.allowsTransparency])
+    SpriteView(
+      scene: pouringScene,
+      options: [.allowsTransparency]
+    )
   }
 }
 
