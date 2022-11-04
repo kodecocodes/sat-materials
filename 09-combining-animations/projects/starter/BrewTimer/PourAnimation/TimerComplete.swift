@@ -47,6 +47,7 @@ struct TimerComplete: View {
     ZStack {
       backGroundGradient
         .ignoresSafeArea()
+
       VStack(spacing: 10) {
         Text("Brew Timer Complete")
           .font(.largeTitle)
