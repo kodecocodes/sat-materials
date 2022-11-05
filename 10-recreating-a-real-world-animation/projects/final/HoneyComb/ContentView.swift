@@ -32,13 +32,22 @@
 
 import SwiftUI
 
+let diameter = 125.0
+
 struct ContentView: View {
   @State var hexes: [HexData] = []
-  @State var touchedHexagon: HexData?
-  @State var selectedHexes: Set<HexData> = []
-
   @GestureState var drag: CGSize = .zero
   @State var dragOffset: CGSize = .zero
+  @State var selectedHexes: Set<HexData> = []
+  @State var touchedHexagon: HexData? = nil
+
+  private let topics = [
+    "Politics", "Science", "Animals",
+    "Plants", "Tech", "Music",
+    "Sports", "Books", "Cooking",
+    "Traveling", "TV-series", "Art",
+    "Finance", "Fashion"
+  ]
 
   var body: some View {
     VStack {
@@ -46,12 +55,16 @@ struct ContentView: View {
         .font(.subheadline)
 
       GeometryReader { proxy in
-        HoneyCombGrid(hexes: hexes) {
+        HoneycombGrid(hexes: hexes) {
           ForEach(hexes, id: \.self) { hex in
-            let hexOrNeighboring = touchedHexagon == hex ||
-            touchedHexagon?.hex.neigbouring(hex: hex.hex) == true
+            let hexOrNeighbor = touchedHexagon == hex ||
+                touchedHexagon?.hex.isNeighbor(of: hex.hex) == true
+
             let measurement = measurement(for: hex, proxy)
-            let scale = (hexOrNeighboring ? measurement.size * 0.9 : measurement.size) / diameter
+            let scale = (hexOrNeighbor
+              ? measurement.size * 0.9
+              : measurement.size) / diameter
+
             HexView(
               hex: hex,
               isSelected: selectedHexes.contains(hex),
@@ -59,35 +72,40 @@ struct ContentView: View {
             ) {
               select(hex: hex)
             }
-            .transition(.scale)
             .scaleEffect(max(0.001, scale))
             .offset(CGSize(
               width: measurement.shift.x,
               height: measurement.shift.y
             ))
+            .transition(.scale)
           }
         }
-        .offset(CGSize(
-          width: drag.width + dragOffset.width,
-          height: drag.height + dragOffset.height
-        ))
+        .offset(
+          CGSize(
+            width: drag.width + dragOffset.width,
+            height: drag.height + dragOffset.height
+          )
+        )
         .onAppear {
-          hexes = createHexes(for: topics)
-        }            
-        .animation(.spring(), value: hexes)
+          hexes = HexData.hexes(for: topics)
+        }
         .simultaneousGesture(DragGesture()
           .updating($drag) { value, state, _ in
-            withAnimation {
-              state = value.translation
-            }
+            state = value.translation
           }
           .onEnded { state in
             onDragEnded(with: state)
           }
         )
+        .animation(.spring(), value: hexes)
       }
 
-      Text(selectedHexes.count < 5 ? "Pick \(5 - selectedHexes.count) more!" : "You're all set!")
+      Text(
+        selectedHexes.count < 5
+          ? "Pick \(5 - selectedHexes.count) more!"
+          : "You're all set!"
+      )
+
       ProgressView(
         value: Double(min(5, selectedHexes.count)),
         total: 5
@@ -99,38 +117,11 @@ struct ContentView: View {
     }
   }
 
-  private func onDragEnded(with state: DragGesture.Value) {
-    let initialOffset = dragOffset
-    dragOffset = CGSize(
-      width: dragOffset.width + state.translation.width,
-      height: dragOffset.height + state.translation.height
-    )
-
-    var endX = initialOffset.width + state.predictedEndTranslation.width * 1.25
-    var endY = initialOffset.height + state.predictedEndTranslation.height * 1.25
-
-    let lastHex = hexes.last!.center
-    let maxDistance = sqrt(pow((lastHex.x), 2) + pow((lastHex.y), 2)) * 0.7
-    if abs(endX) > maxDistance {
-      endX = endX > 0 ? maxDistance : -maxDistance
-    }
-    if abs(endY) > maxDistance {
-      endY = endY > 0 ? maxDistance : -maxDistance
-    }
-    withAnimation(.spring()) {
-      dragOffset = CGSize(
-        width: endX,
-        height: endY
-      )
-    }
-  }
-
   private func select(hex: HexData) {
-    if selectedHexes.contains(hex) {
-      selectedHexes.remove(hex)
-    } else {
-      selectedHexes.insert(hex)
+    if selectedHexes.insert(hex).inserted {
       appendHexesIfNeeded(for: hex)
+    } else {
+      selectedHexes.remove(hex)
     }
 
     DispatchQueue.main.async {
@@ -140,12 +131,44 @@ struct ContentView: View {
     }
   }
 
+  private func onDragEnded(with state: DragGesture.Value) {
+    let initialOffset = dragOffset
+    dragOffset = CGSize(
+      width: dragOffset.width + state.translation.width,
+      height: dragOffset.height + state.translation.height
+    )
+
+    var endX = initialOffset.width +
+               state.predictedEndTranslation.width * 1.25
+    var endY = initialOffset.height +
+               state.predictedEndTranslation.height * 1.25
+
+    let lastHex = hexes.last?.center ?? .zero
+    let maxDistance = sqrt(
+      pow((lastHex.x), 2) +
+      pow((lastHex.y), 2)
+    ) * 0.7
+    if abs(endX) > maxDistance {
+      endX = endX > 0 ? maxDistance : -maxDistance
+    }
+    if abs(endY) > maxDistance {
+      endY = endY > 0 ? maxDistance : -maxDistance
+    }
+
+    withAnimation(.spring()) {
+      dragOffset = CGSize(
+        width: endX,
+        height: endY
+      )
+    }
+  }
+
   private func appendHexesIfNeeded(for hex: HexData) {
-    let shouldAppend = !hex.topic.contains("subtopic")
-    && !hexes.contains { $0.topic.contains("\(hex.topic)'s subtopic") }
+    let shouldAppend = !hex.topic.contains("subtopic") &&
+      !hexes.contains(where: { $0.topic.contains("\(hex.topic)'s subtopic") })
 
     if shouldAppend {
-      hexes.append(contentsOf: createHexes(from: hex.hex, hexes, topics: [
+      hexes.append(contentsOf: HexData.hexes(from: hex.hex, hexes, topics: [
         "\(hex.topic)'s subtopic 1",
         "\(hex.topic)'s subtopic 2",
         "\(hex.topic)'s subtopic 3"
@@ -153,19 +176,27 @@ struct ContentView: View {
     }
   }
 
-  private func measurement(for hex: HexData, _ proxy: GeometryProxy) -> (size: CGFloat, shift: CGPoint) {
+  private func measurement(
+    for hex: HexData,
+    _ proxy: GeometryProxy
+  ) -> (size: CGFloat, shift: CGPoint) {
     let offsetX = hex.center.x + drag.width + dragOffset.width
     let offsetY = hex.center.y + drag.height + dragOffset.height
 
     let frame: CGRect = proxy.frame(in: .global)
     let excessX = abs(offsetX) + diameter - frame.width / 2
     let excessY = abs(offsetY) + diameter - frame.height / 2
+
     let excess = max(0, max(excessX, excessY))
     let size = max(0, diameter - 3.0 * abs(excess) / 4)
 
     let shift = CGPoint(
-      x: offsetX > 0 ? -max(0, excessX) / 3.0 : max(0, excessX) / 3.0,
-      y: offsetY > 0 ? -max(0, excessY) / 3.0 : max(0, excessY) / 3.0
+      x: offsetX > 0
+        ? -max(0, excessX) / 3.0
+        : max(0, excessX) / 3.0,
+      y: offsetY > 0
+        ? -max(0, excessY) / 3.0
+        : max(0, excessY) / 3.0
     )
     return (size, shift)
   }

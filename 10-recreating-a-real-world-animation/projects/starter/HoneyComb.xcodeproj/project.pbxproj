@@ -16,7 +16,7 @@
 
 /* Begin PBXFileReference section */
 		1839F4AF25190F2A00BB00F1 /* AppMain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppMain.swift; sourceTree = "<group>"; };
-		18D775BD22AD944300AE281E /* HoneyComb.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HoneyComb.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		18D775BD22AD944300AE281E /* Honeycomb.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Honeycomb.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		18D775C422AD944300AE281E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		18D775C622AD944400AE281E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		18D775C922AD944400AE281E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -38,7 +38,7 @@
 		18D775B422AD944300AE281E = {
 			isa = PBXGroup;
 			children = (
-				18D775BF22AD944300AE281E /* HoneyComb */,
+				18D775BF22AD944300AE281E /* Honeycomb */,
 				18D775BE22AD944300AE281E /* Products */,
 			);
 			indentWidth = 2;
@@ -48,12 +48,12 @@
 		18D775BE22AD944300AE281E /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				18D775BD22AD944300AE281E /* HoneyComb.app */,
+				18D775BD22AD944300AE281E /* Honeycomb.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		18D775BF22AD944300AE281E /* HoneyComb */ = {
+		18D775BF22AD944300AE281E /* Honeycomb */ = {
 			isa = PBXGroup;
 			children = (
 				18D775CE22AD944400AE281E /* Info.plist */,
@@ -63,7 +63,7 @@
 				18D775DA22AD963800AE281E /* LaunchScreen.storyboard */,
 				18D775C822AD944400AE281E /* Preview Content */,
 			);
-			path = HoneyComb;
+			path = Honeycomb;
 			sourceTree = "<group>";
 		};
 		18D775C822AD944400AE281E /* Preview Content */ = {
@@ -77,9 +77,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		18D775BC22AD944300AE281E /* HoneyComb */ = {
+		18D775BC22AD944300AE281E /* Honeycomb */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 18D775D122AD944400AE281E /* Build configuration list for PBXNativeTarget "HoneyComb" */;
+			buildConfigurationList = 18D775D122AD944400AE281E /* Build configuration list for PBXNativeTarget "Honeycomb" */;
 			buildPhases = (
 				181FE31D248EA6C900A180EA /* SwiftLint */,
 				18D775B922AD944300AE281E /* Sources */,
@@ -91,9 +91,9 @@
 			);
 			dependencies = (
 			);
-			name = HoneyComb;
+			name = Honeycomb;
 			productName = MyRWTutorial;
-			productReference = 18D775BD22AD944300AE281E /* HoneyComb.app */;
+			productReference = 18D775BD22AD944300AE281E /* Honeycomb.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -111,7 +111,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 18D775B822AD944300AE281E /* Build configuration list for PBXProject "HoneyComb" */;
+			buildConfigurationList = 18D775B822AD944300AE281E /* Build configuration list for PBXProject "Honeycomb" */;
 			compatibilityVersion = "Xcode 11.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -124,7 +124,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				18D775BC22AD944300AE281E /* HoneyComb */,
+				18D775BC22AD944300AE281E /* Honeycomb */,
 			);
 		};
 /* End PBXProject section */
@@ -331,17 +331,17 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_ASSET_PATHS = "HoneyComb/Preview\\ Content";
+				DEVELOPMENT_ASSET_PATHS = "Honeycomb/Preview\\ Content";
 				DEVELOPMENT_TEAM = 8RK3883DU9;
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = HoneyComb/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = HoneyComb;
+				INFOPLIST_FILE = Honeycomb/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Honeycomb;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.raywenderlich.HoneyComb;
+				PRODUCT_BUNDLE_IDENTIFIER = com.raywenderlich.Honeycomb;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
@@ -355,17 +355,17 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_ASSET_PATHS = "HoneyComb/Preview\\ Content";
+				DEVELOPMENT_ASSET_PATHS = "Honeycomb/Preview\\ Content";
 				DEVELOPMENT_TEAM = 8RK3883DU9;
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = HoneyComb/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = HoneyComb;
+				INFOPLIST_FILE = Honeycomb/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Honeycomb;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.raywenderlich.HoneyComb;
+				PRODUCT_BUNDLE_IDENTIFIER = com.raywenderlich.Honeycomb;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
@@ -376,7 +376,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		18D775B822AD944300AE281E /* Build configuration list for PBXProject "HoneyComb" */ = {
+		18D775B822AD944300AE281E /* Build configuration list for PBXProject "Honeycomb" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				18D775CF22AD944400AE281E /* Debug */,
@@ -385,7 +385,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		18D775D122AD944400AE281E /* Build configuration list for PBXNativeTarget "HoneyComb" */ = {
+		18D775D122AD944400AE281E /* Build configuration list for PBXNativeTarget "Honeycomb" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				18D775D222AD944400AE281E /* Debug */,

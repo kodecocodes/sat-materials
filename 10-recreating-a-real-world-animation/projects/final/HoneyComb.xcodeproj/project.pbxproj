@@ -12,24 +12,24 @@
 		18D775C722AD944400AE281E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 18D775C622AD944400AE281E /* Assets.xcassets */; };
 		18D775CA22AD944400AE281E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 18D775C922AD944400AE281E /* Preview Assets.xcassets */; };
 		18D775D822AD963800AE281E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18D775DA22AD963800AE281E /* LaunchScreen.storyboard */; };
-		BA76F97728C4ECDB00E82FD2 /* HexView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA76F97628C4ECDB00E82FD2 /* HexView.swift */; };
-		BA76F97928C4F20100E82FD2 /* HexData.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA76F97828C4F20100E82FD2 /* HexData.swift */; };
-		BAB2C5A528DCB285004C2743 /* HoneyCombGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB2C5A428DCB285004C2743 /* HoneyCombGrid.swift */; };
-		BAB7CEC328C285CD0012DABD /* Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB7CEC228C285CD0012DABD /* Hex.swift */; };
+		264D3382291642A60082B28B /* Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264D3381291642A60082B28B /* Hex.swift */; };
+		264D3384291648BF0082B28B /* HexData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264D3383291648BF0082B28B /* HexData.swift */; };
+		264D338629164CCC0082B28B /* HexView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264D338529164CCC0082B28B /* HexView.swift */; };
+		264D338829164E340082B28B /* HoneycombGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264D338729164E340082B28B /* HoneycombGrid.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		1839F4AF25190F2A00BB00F1 /* AppMain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppMain.swift; sourceTree = "<group>"; };
-		18D775BD22AD944300AE281E /* HoneyComb.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HoneyComb.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		18D775BD22AD944300AE281E /* Honeycomb.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Honeycomb.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		18D775C422AD944300AE281E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		18D775C622AD944400AE281E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		18D775C922AD944400AE281E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		18D775CE22AD944400AE281E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		18D775DE22AD96B400AE281E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		BA76F97628C4ECDB00E82FD2 /* HexView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HexView.swift; sourceTree = "<group>"; };
-		BA76F97828C4F20100E82FD2 /* HexData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HexData.swift; sourceTree = "<group>"; };
-		BAB2C5A428DCB285004C2743 /* HoneyCombGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoneyCombGrid.swift; sourceTree = "<group>"; };
-		BAB7CEC228C285CD0012DABD /* Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hex.swift; sourceTree = "<group>"; };
+		264D3381291642A60082B28B /* Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hex.swift; sourceTree = "<group>"; };
+		264D3383291648BF0082B28B /* HexData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HexData.swift; sourceTree = "<group>"; };
+		264D338529164CCC0082B28B /* HexView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HexView.swift; sourceTree = "<group>"; };
+		264D338729164E340082B28B /* HoneycombGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoneycombGrid.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -46,7 +46,7 @@
 		18D775B422AD944300AE281E = {
 			isa = PBXGroup;
 			children = (
-				18D775BF22AD944300AE281E /* HoneyComb */,
+				18D775BF22AD944300AE281E /* Honeycomb */,
 				18D775BE22AD944300AE281E /* Products */,
 			);
 			indentWidth = 2;
@@ -56,26 +56,26 @@
 		18D775BE22AD944300AE281E /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				18D775BD22AD944300AE281E /* HoneyComb.app */,
+				18D775BD22AD944300AE281E /* Honeycomb.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		18D775BF22AD944300AE281E /* HoneyComb */ = {
+		18D775BF22AD944300AE281E /* Honeycomb */ = {
 			isa = PBXGroup;
 			children = (
 				18D775CE22AD944400AE281E /* Info.plist */,
 				1839F4AF25190F2A00BB00F1 /* AppMain.swift */,
 				18D775C422AD944300AE281E /* ContentView.swift */,
-				BAB7CEC228C285CD0012DABD /* Hex.swift */,
-				BA76F97828C4F20100E82FD2 /* HexData.swift */,
-				BA76F97628C4ECDB00E82FD2 /* HexView.swift */,
 				18D775C622AD944400AE281E /* Assets.xcassets */,
 				18D775DA22AD963800AE281E /* LaunchScreen.storyboard */,
 				18D775C822AD944400AE281E /* Preview Content */,
-				BAB2C5A428DCB285004C2743 /* HoneyCombGrid.swift */,
+				264D3381291642A60082B28B /* Hex.swift */,
+				264D3383291648BF0082B28B /* HexData.swift */,
+				264D338529164CCC0082B28B /* HexView.swift */,
+				264D338729164E340082B28B /* HoneycombGrid.swift */,
 			);
-			path = HoneyComb;
+			path = Honeycomb;
 			sourceTree = "<group>";
 		};
 		18D775C822AD944400AE281E /* Preview Content */ = {
@@ -89,22 +89,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		18D775BC22AD944300AE281E /* HoneyComb */ = {
+		18D775BC22AD944300AE281E /* Honeycomb */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 18D775D122AD944400AE281E /* Build configuration list for PBXNativeTarget "HoneyComb" */;
+			buildConfigurationList = 18D775D122AD944400AE281E /* Build configuration list for PBXNativeTarget "Honeycomb" */;
 			buildPhases = (
 				181FE31D248EA6C900A180EA /* SwiftLint */,
 				18D775B922AD944300AE281E /* Sources */,
 				18D775BA22AD944300AE281E /* Frameworks */,
 				18D775BB22AD944300AE281E /* Resources */,
+				835C287D286248080074D7DE /* ShellScript */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = HoneyComb;
+			name = Honeycomb;
 			productName = MyRWTutorial;
-			productReference = 18D775BD22AD944300AE281E /* HoneyComb.app */;
+			productReference = 18D775BD22AD944300AE281E /* Honeycomb.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -122,7 +123,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 18D775B822AD944300AE281E /* Build configuration list for PBXProject "HoneyComb" */;
+			buildConfigurationList = 18D775B822AD944300AE281E /* Build configuration list for PBXProject "Honeycomb" */;
 			compatibilityVersion = "Xcode 11.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -135,7 +136,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				18D775BC22AD944300AE281E /* HoneyComb */,
+				18D775BC22AD944300AE281E /* Honeycomb */,
 			);
 		};
 /* End PBXProject section */
@@ -173,6 +174,25 @@
 			shellPath = /bin/sh;
 			shellScript = "PATH=/opt/homebrew/bin:$PATH\nif [ -f ~/com.raywenderlich.swiftlint.yml ]; then\n  if which swiftlint >/dev/null; then\n    swiftlint --no-cache --config ~/com.raywenderlich.swiftlint.yml\n  fi\nfi\n";
 		};
+		835C287D286248080074D7DE /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "
+";
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -180,12 +200,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BAB7CEC328C285CD0012DABD /* Hex.swift in Sources */,
+				264D3382291642A60082B28B /* Hex.swift in Sources */,
 				18D775C522AD944300AE281E /* ContentView.swift in Sources */,
-				BAB2C5A528DCB285004C2743 /* HoneyCombGrid.swift in Sources */,
-				BA76F97928C4F20100E82FD2 /* HexData.swift in Sources */,
-				BA76F97728C4ECDB00E82FD2 /* HexView.swift in Sources */,
+				264D338829164E340082B28B /* HoneycombGrid.swift in Sources */,
 				1839F4B025190F2A00BB00F1 /* AppMain.swift in Sources */,
+				264D338629164CCC0082B28B /* HexView.swift in Sources */,
+				264D3384291648BF0082B28B /* HexData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -327,17 +347,17 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_ASSET_PATHS = "HoneyComb/Preview\\ Content";
+				DEVELOPMENT_ASSET_PATHS = "Honeycomb/Preview\\ Content";
 				DEVELOPMENT_TEAM = 8RK3883DU9;
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = HoneyComb/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = HoneyComb;
+				INFOPLIST_FILE = Honeycomb/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Honeycomb;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.raywenderlich.HoneyComb;
+				PRODUCT_BUNDLE_IDENTIFIER = com.raywenderlich.Honeycomb;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
@@ -351,17 +371,17 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_ASSET_PATHS = "HoneyComb/Preview\\ Content";
+				DEVELOPMENT_ASSET_PATHS = "Honeycomb/Preview\\ Content";
 				DEVELOPMENT_TEAM = 8RK3883DU9;
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = HoneyComb/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = HoneyComb;
+				INFOPLIST_FILE = Honeycomb/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Honeycomb;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.raywenderlich.HoneyComb;
+				PRODUCT_BUNDLE_IDENTIFIER = com.raywenderlich.Honeycomb;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
@@ -372,7 +392,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		18D775B822AD944300AE281E /* Build configuration list for PBXProject "HoneyComb" */ = {
+		18D775B822AD944300AE281E /* Build configuration list for PBXProject "Honeycomb" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				18D775CF22AD944400AE281E /* Debug */,
@@ -381,7 +401,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		18D775D122AD944400AE281E /* Build configuration list for PBXNativeTarget "HoneyComb" */ = {
+		18D775D122AD944400AE281E /* Build configuration list for PBXNativeTarget "Honeycomb" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				18D775D222AD944400AE281E /* Debug */,

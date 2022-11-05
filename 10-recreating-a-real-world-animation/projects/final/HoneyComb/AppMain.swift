@@ -38,7 +38,7 @@ struct AppMain: App {
     WindowGroup {
       NavigationView {
         ContentView()
-          .navigationTitle("HoneyComb")
+          .navigationTitle("Honeycomb")
       }
     }
   }
