@@ -90,6 +90,7 @@ struct ContentView: View {
           }
         } label: {
           Label("Filter", systemImage: "line.3.horizontal.decrease.circle")
+            .foregroundColor(Constants.orange)
         }
       }
     }
